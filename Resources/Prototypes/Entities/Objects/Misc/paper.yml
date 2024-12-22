@@ -458,3 +458,8 @@
       - !type:EmptyAllContainersBehaviour
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
+
+- type: entity
+  parent: Paper
+  id: TapeRecorderTranscript
+  name: record transcript

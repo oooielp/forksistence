@@ -50,6 +50,12 @@
   recipes:
   - TowelColorWhite
 
+- type: latheRecipePack
+  id: CassetteTape
+  recipes:
+  - CassetteTape
+  - TapeRecorder
+
 ## Dynamic
 
 # Things you'd expect sci salv and engi to make use of
