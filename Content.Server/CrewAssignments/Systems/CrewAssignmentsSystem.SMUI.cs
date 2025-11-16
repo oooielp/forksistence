@@ -39,6 +39,9 @@ public sealed partial class CrewAssignmentSystem
         SubscribeLocalEvent<StationModificationConsoleComponent, StationModificationRemoveAccess>(OnDeleteAccess);
         SubscribeLocalEvent<StationModificationConsoleComponent, StationModificationCreateAssignment>(OnCreateAssignment);
         SubscribeLocalEvent<StationModificationConsoleComponent, StationModificationToggleAssignmentAccess>(OnToggleAccess);
+        SubscribeLocalEvent<StationModificationConsoleComponent, StationModificationToggleClaim>(OnToggleClaim);
+        SubscribeLocalEvent<StationModificationConsoleComponent, StationModificationToggleSpend>(OnToggleSpend);
+        SubscribeLocalEvent<StationModificationConsoleComponent, StationModificationToggleAssign>(OnToggleAssign);
         SubscribeLocalEvent<StationModificationConsoleComponent, StationModificationChangeAssignmentCLevel>(OnChangeCLevel);
         SubscribeLocalEvent<StationModificationConsoleComponent, StationModificationChangeAssignmentWage>(OnChangeWage);
         SubscribeLocalEvent<StationModificationConsoleComponent, StationModificationChangeAssignmentName>(OnChangeAName);
@@ -321,8 +324,77 @@ public sealed partial class CrewAssignmentSystem
         }
         Dirty((EntityUid)station, crewAssignments);
         UpdateOrders(station.Value);
-
     }
+    private void OnToggleAssign(EntityUid uid, StationModificationConsoleComponent component, StationModificationToggleAssign args)
+    {
+        if (args.Actor is not { Valid: true } player)
+            return;
+
+        var station = _station.GetOwningStation(uid);
+        if (station == null) return;
+
+        if (!Validate(uid, component, player, out var stationData)) return;
+        if (!TryComp(station, out CrewAssignmentsComponent? crewAssignments))
+        {
+            ConsolePopup(player, "No CrewAssignment Component!");
+            return;
+        }
+        if (!crewAssignments.CrewAssignments.TryGetValue(args.AccessID, out var crewAssignment))
+        {
+            ConsolePopup(player, "Invalid Assignment!");
+            return;
+        }
+        crewAssignment.CanAssign = !crewAssignment.CanAssign;
+        Dirty((EntityUid)station, crewAssignments);
+        UpdateOrders(station.Value);
+    }
+    private void OnToggleSpend(EntityUid uid, StationModificationConsoleComponent component, StationModificationToggleSpend args)
+    {
+        if (args.Actor is not { Valid: true } player)
+            return;
+
+        var station = _station.GetOwningStation(uid);
+        if (station == null) return;
+
+        if (!Validate(uid, component, player, out var stationData)) return;
+        if (!TryComp(station, out CrewAssignmentsComponent? crewAssignments))
+        {
+            ConsolePopup(player, "No CrewAssignment Component!");
+            return;
+        }
+        if (!crewAssignments.CrewAssignments.TryGetValue(args.AccessID, out var crewAssignment))
+        {
+            ConsolePopup(player, "Invalid Assignment!");
+            return;
+        }
+        crewAssignment.CanSpend = !crewAssignment.CanSpend;
+        Dirty((EntityUid)station, crewAssignments);
+        UpdateOrders(station.Value);
+    }
+    private void OnToggleClaim(EntityUid uid, StationModificationConsoleComponent component, StationModificationToggleClaim args)
+    {
+        if (args.Actor is not { Valid: true } player)
+            return;
+
+        var station = _station.GetOwningStation(uid);
+        if (station == null) return;
+
+        if (!Validate(uid, component, player, out var stationData)) return;
+        if (!TryComp(station, out CrewAssignmentsComponent? crewAssignments))
+        {
+            ConsolePopup(player, "No CrewAssignment Component!");
+            return;
+        }
+        if (!crewAssignments.CrewAssignments.TryGetValue(args.AccessID, out var crewAssignment))
+        {
+            ConsolePopup(player, "Invalid Assignment!");
+            return;
+        }
+        crewAssignment.CanClaim = !crewAssignment.CanClaim;
+        Dirty((EntityUid)station, crewAssignments);
+        UpdateOrders(station.Value);
+    }
+
     private void OnChangeName(EntityUid uid, StationModificationConsoleComponent component, StationModificationChangeName args)
     {
         if (args.Actor is not { Valid: true } player)

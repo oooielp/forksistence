@@ -69,6 +69,9 @@ public sealed class StationModificationConsoleBoundUserInterface : BoundUserInte
         _menu.AssignmentNameConfirm.OnPressed += ChangeAssignmentName;
         _menu.DeleteAssignment.OnPressed += DeleteAssignment;
         _menu.DefaultAccessCreate.OnPressed += DefaultAccessCreate;
+        _menu.ClaimBtn.OnPressed += ToggleClaim;
+        _menu.SpendingBtn.OnPressed += ToggleSpend;
+        _menu.ReassignmentBtn.OnPressed += ToggleAssign;
         _menu.OpenCentered();
     }
 
@@ -156,6 +159,27 @@ public sealed class StationModificationConsoleBoundUserInterface : BoundUserInte
         Button real = (Button)args.Button;
         if(real==null||real.Text==null) return;
         SendMessage(new StationModificationToggleAssignmentAccess(assignment, args.Pressed, real.Text));
+    }
+
+    private void ToggleClaim(ButtonEventArgs args)
+    {
+        if (_menu == null) return;
+        var assignment = _menu.PossibleAssignments.SelectedId;
+        SendMessage(new StationModificationToggleClaim(assignment));
+    }
+
+    private void ToggleSpend(ButtonEventArgs args)
+    {
+        if (_menu == null) return;
+        var assignment = _menu.PossibleAssignments.SelectedId;
+        SendMessage(new StationModificationToggleSpend(assignment));
+    }
+
+    private void ToggleAssign(ButtonEventArgs args)
+    {
+        if (_menu == null) return;
+        var assignment = _menu.PossibleAssignments.SelectedId;
+        SendMessage(new StationModificationToggleAssign(assignment));
     }
 
     private void ChangeCommandLevel(ButtonEventArgs args)

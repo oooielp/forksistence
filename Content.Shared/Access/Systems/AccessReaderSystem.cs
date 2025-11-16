@@ -284,6 +284,8 @@ public sealed class AccessReaderSystem : EntitySystem
         else
         {
             if (reader.AccessNames.Count < 1) return true;
+            var station = _station.GetOwningStation(target);
+            if (station == null) return true;
             string? actorName = null;
             var accessSources = FindPotentialAccessItems(user);
             foreach (var source in accessSources)
@@ -307,8 +309,7 @@ public sealed class AccessReaderSystem : EntitySystem
             }
             if (actorName != null)
             {
-                var station = _station.GetOwningStation(target);
-                if (station == null) return true;
+                
                 if (TryComp(station, out StationDataComponent? sD))
                 {
                     if (sD.Owners.Contains(actorName)) return true;

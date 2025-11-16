@@ -3,6 +3,7 @@ using Content.Server.Chat.Systems;
 using Content.Server.GameTicking;
 using Content.Server.Station.Components;
 using Content.Server.Station.Events;
+using Content.Shared.GridControl.Components;
 using Content.Shared.Station;
 using Content.Shared.Station.Components;
 using JetBrains.Annotations;
@@ -374,6 +375,19 @@ public sealed partial class StationSystem : SharedStationSystem
         _sawmill.Info($"Adding grid {mapGrid} to station {Name(station)} ({station})");
     }
 
+    public void AddGridToPerson(string owner, EntityUid mapGrid, MapGridComponent? gridComponent = null, StationDataComponent? stationData = null, string? name = null)
+    {
+        if (!Resolve(mapGrid, ref gridComponent))
+            throw new ArgumentException("Tried to initialize a station on a non-grid entity!", nameof(mapGrid));
+
+        if (!string.IsNullOrEmpty(name))
+            _metaData.SetEntityName(mapGrid, name);
+
+        var stationMember = EnsureComp<PersonalMemberComponent>(mapGrid);
+        stationMember.OwnerName = owner;
+    }
+
+
     /// <summary>
     /// Removes the given grid from a station.
     /// </summary>
@@ -395,6 +409,14 @@ public sealed partial class StationSystem : SharedStationSystem
 
         RaiseLocalEvent(station, new StationGridRemovedEvent(mapGrid, station), true);
         _sawmill.Info($"Removing grid {mapGrid} from station {Name(station)} ({station})");
+    }
+
+    public void RemoveGridFromPerson(EntityUid mapGrid, MapGridComponent? gridComponent = null, StationDataComponent? stationData = null)
+    {
+        if (!Resolve(mapGrid, ref gridComponent))
+            throw new ArgumentException("Tried to initialize a station on a non-grid entity!", nameof(mapGrid));
+
+        RemComp<PersonalMemberComponent>(mapGrid);
     }
 
     /// <summary>

@@ -56,7 +56,7 @@ public sealed partial class StationJobsSystem
     /// </remarks>
     public Dictionary<NetUserId, (ProtoId<JobPrototype>?, EntityUid)> AssignJobs(Dictionary<NetUserId, HumanoidCharacterProfile> profiles, IReadOnlyList<EntityUid> stations, bool useRoundStartJobs = true)
     {
-        DebugTools.Assert(stations.Count > 0);
+  //      DebugTools.Assert(stations.Count > 0);
 
         InitializeRoundStart();
 

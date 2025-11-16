@@ -56,6 +56,12 @@ public partial class CrewAssignment
     public int Clevel = 0;
     [DataField("_accessids")]
     public List<string> AccessIDs = new();
+    [DataField("_canAssign")]
+    public bool CanAssign = false;
+    [DataField("_canSpend")]
+    public bool CanSpend = false;
+    [DataField("_canClaim")]
+    public bool CanClaim = false;
 
 
     public CrewAssignment(int id, string name, int wage, int clevel)

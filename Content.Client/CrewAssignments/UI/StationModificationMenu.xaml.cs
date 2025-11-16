@@ -122,9 +122,34 @@ namespace Content.Client.CrewAssignments.UI
             if (_assignments == null) return;
             if(_assignments.TryGetValue(id, out var assignment))
             {
+                AssignmentDetails.Visible = true;
                 AssignmentNameField.Text = assignment.Name;
                 WageSpinBox.Value = assignment.Wage;
                 CLevelSpinBox.Value = assignment.Clevel;
+                if(assignment.CanClaim)
+                {
+                    ClaimBtn.Pressed = true;
+                }
+                else
+                {
+                    ClaimBtn.Pressed = false;
+                }
+                if (assignment.CanAssign)
+                {
+                    ReassignmentBtn.Pressed = true;
+                }
+                else
+                {
+                    ReassignmentBtn.Pressed = false;
+                }
+                if (assignment.CanSpend)
+                {
+                    SpendingBtn.Pressed = true;
+                }
+                else
+                {
+                    SpendingBtn.Pressed = false;
+                }
                 foreach (Button button in AssignmentAccessesBC.Children)
                 {
                     if (button.Text == null) continue;
@@ -140,6 +165,7 @@ namespace Content.Client.CrewAssignments.UI
             }
             else
             {
+                AssignmentDetails.Visible = false;
                 AssignmentNameField.Text = "";
                 WageSpinBox.Value = 0;
                 CLevelSpinBox.Value = 0;

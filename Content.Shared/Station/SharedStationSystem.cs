@@ -1,4 +1,5 @@
 using System.Linq;
+using Content.Shared.GridControl.Components;
 using Content.Shared.Station.Components;
 using JetBrains.Annotations;
 using Robust.Shared.Map;
@@ -106,7 +107,7 @@ public abstract partial class SharedStationSystem : EntitySystem
 
         if (HasComp<MapGridComponent>(entity))
         {
-            // We are the station, just check ourselves.
+            // We are the grid, just check ourselves.
             return CompOrNull<StationMemberComponent>(entity)?.Station;
         }
 
@@ -119,6 +120,25 @@ public abstract partial class SharedStationSystem : EntitySystem
         return CompOrNull<StationMemberComponent>(xform.GridUid)?.Station;
     }
 
+    public string? GetOwningStationPersonal(EntityUid entity, TransformComponent? xform = null)
+    {
+        if (!Resolve(entity, ref xform))
+            throw new ArgumentException("Tried to use an abstract entity!", nameof(entity));
+
+        if (HasComp<MapGridComponent>(entity))
+        {
+            // We are the grid, just check ourselves.
+            return CompOrNull<PersonalMemberComponent>(entity)?.OwnerName;
+        }
+
+        if (xform.GridUid == EntityUid.Invalid)
+        {
+            Log.Debug("Unable to get owning station - GridUid invalid.");
+            return null;
+        }
+
+        return CompOrNull<PersonalMemberComponent>(xform.GridUid)?.OwnerName;
+    }
     public List<EntityUid> GetStations()
     {
         var stations = new List<EntityUid>();

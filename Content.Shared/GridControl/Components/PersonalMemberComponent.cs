@@ -1,22 +1,18 @@
 using Robust.Shared.GameStates;
 
-namespace Content.Shared.Station.Components;
+namespace Content.Shared.GridControl.Components;
 
 /// <summary>
 /// Indicates that a grid is a member of the given station.
 /// </summary>
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
-public sealed partial class StationMemberComponent : Component
+public sealed partial class PersonalMemberComponent : Component
 {
     /// <summary>
     /// Station that this grid is a part of.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public EntityUid Station = EntityUid.Invalid;
+    public string OwnerName { get; set; } = string.Empty;
 
-    /// <summary>
-    /// Station that this grid is a part of.
-    /// </summary>
-    [DataField, AutoNetworkedField]
-    public int? StationUID = null;
+
 }

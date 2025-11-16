@@ -1,8 +1,8 @@
 <controls:FancyWindow xmlns="https://spacestation14.io"
                            xmlns:gfx="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
                            xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
-                           SetSize="600 600"
-                           MinSize="600 600">
+                           SetSize="600 630"
+                           MinSize="600 630">
     <BoxContainer Orientation="Vertical" Margin="15 5 15 10">
         <BoxContainer Orientation="Horizontal">
             <Label Name="StationNameLabel"
@@ -98,76 +98,90 @@
                     <OptionButton Name="PossibleAssignments" Access="Public"/>
                 </BoxContainer>
                 <Control MinHeight="30"/>
-                <BoxContainer Orientation="Horizontal">
-                    <Label Text="Assignment Name:"
-                        StyleClasses="LabelKeyText" />
-                    <Control MinWidth="20"/>
-                    <LineEdit Name="AssignmentNameField"
-                        PlaceHolder="Assignment Name"
-                        Access="Public"
-                        HorizontalExpand="True" />
-                    <Button Name="AssignmentNameConfirm" Access="Public"
-                        Text="Save"/>
-                </BoxContainer>
-                <Control MinHeight="15"/>
-                <BoxContainer Orientation="Horizontal">
-                    <Label Text="Wage:"
-                        StyleClasses="LabelKeyText" />
-                    <Control HorizontalExpand="True"/>
-                    <SpinBox Name="WageSpinBox" Access="Public" MinWidth="100" Value="10"/>
-                    <Button Name="AssignmentWageConfirm" Access="Public"
-                        Text="Save"/>
-                </BoxContainer>
-                <Control MinHeight="15"/>
-                <BoxContainer Orientation="Horizontal">
-                    <Label Text="Command Level:"
-                        StyleClasses="LabelKeyText" />
-                    <Control HorizontalExpand="True"/>
-                    <SpinBox Name="CLevelSpinBox" Access="Public" MinWidth="100" Value="10"/>
-                    <Button Name="CommandLevelConfirm" Access="Public"
-                        Text="Save"/>
-                </BoxContainer>
-                <Control MinHeight="15"/>
-                <BoxContainer Orientation="Vertical">
+                <BoxContainer  Name="AssignmentDetails" Orientation="Vertical">
                     <BoxContainer Orientation="Horizontal">
-                        <Label Text="Access:"
+                        <Label Text="Assignment Name:"
                             StyleClasses="LabelKeyText" />
+                        <Control MinWidth="20"/>
+                        <LineEdit Name="AssignmentNameField"
+                            PlaceHolder="Assignment Name"
+                            Access="Public"
+                            HorizontalExpand="True" />
+                        <Button Name="AssignmentNameConfirm" Access="Public"
+                            Text="Save"/>
                     </BoxContainer>
-                    <BoxContainer Orientation="Horizontal" MinHeight="150">
-                        <PanelContainer VerticalExpand="True"
-                                        HorizontalExpand="True"
-                                   SizeFlagsStretchRatio="1"
-                                   Name="AssignmentAccessesPC">
-                            <PanelContainer.PanelOverride>
-                                <gfx:StyleBoxFlat BackgroundColor="#000000" />
-                            </PanelContainer.PanelOverride>
-                            <ScrollContainer VerticalExpand="True" HorizontalExpand="True">
-                                <BoxContainer Orientation="Vertical" Margin="5" MinHeight ="10">
-                                    <WrapContainer Name="AssignmentAccessesBC"
-                                        Access="Public"
-                                        VerticalExpand="True"
-                                        MaxWidth="500">
-                               
-                                    </WrapContainer>
-                                </BoxContainer>
-                            </ScrollContainer>
-                        </PanelContainer>
+                    <Control MinHeight="15"/>
+                    <BoxContainer Orientation="Horizontal">
+                        <Label Text="Wage:"
+                            StyleClasses="LabelKeyText" />
+                        <Control HorizontalExpand="True"/>
+                        <SpinBox Name="WageSpinBox" Access="Public" MinWidth="100" Value="10"/>
+                        <Button Name="AssignmentWageConfirm" Access="Public"
+                            Text="Save"/>
+                    </BoxContainer>
+                    <Control MinHeight="15"/>
+                    <BoxContainer Orientation="Horizontal">
+                        <Label Text="Command Level:"
+                            StyleClasses="LabelKeyText" />
+                        <Control HorizontalExpand="True"/>
+                        <SpinBox Name="CLevelSpinBox" Access="Public" MinWidth="100" Value="10"/>
+                        <Button Name="CommandLevelConfirm" Access="Public"
+                            Text="Save"/>
+                    </BoxContainer>
+                    <Control MinHeight="15"/>
+                    <BoxContainer Orientation="Horizontal">
+                        <Label Text="Core Functions:"
+                            StyleClasses="LabelKeyText" />
+                        <Control HorizontalExpand="True"/>
+                        <Button Name="ReassignmentBtn" Access="Public" Text="REASSIGN" ToggleMode="True"/>
+                        <Button Name="SpendingBtn" Access="Public" Text="SPEND"  ToggleMode="True"/>
+                        <Button Name="ClaimBtn" Access="Public" Text="CLAIM"  ToggleMode="True"/>
+                    </BoxContainer>
+                    <Control MinHeight="15"/>
+                    <BoxContainer Orientation="Vertical">
+                        <BoxContainer Orientation="Horizontal">
+                            <Label Text="Access:"
+                                StyleClasses="LabelKeyText" />
+                        </BoxContainer>
+                        <BoxContainer Orientation="Horizontal" MinHeight="150">
+                            <PanelContainer VerticalExpand="True"
+                                            HorizontalExpand="True"
+                                       SizeFlagsStretchRatio="1"
+                                       Name="AssignmentAccessesPC">
+                                <PanelContainer.PanelOverride>
+                                    <gfx:StyleBoxFlat BackgroundColor="#000000" />
+                                </PanelContainer.PanelOverride>
+                                <ScrollContainer VerticalExpand="True" HorizontalExpand="True">
+                                    <BoxContainer Orientation="Vertical" Margin="5" MinHeight ="10">
+                                        <WrapContainer Name="AssignmentAccessesBC"
+                                            Access="Public"
+                                            VerticalExpand="True"
+                                            MaxWidth="500">
+
+                                        </WrapContainer>
+                                    </BoxContainer>
+                                </ScrollContainer>
+                            </PanelContainer>
+                        </BoxContainer>
                     </BoxContainer>
                 </BoxContainer>
-                <Control VerticalExpand="True"/>
-                <BoxContainer Orientation="Horizontal">
-                    <Control HorizontalExpand="True"/>
-                    <Button Name="DeleteAssignment" Access="Public"
-                        Text="Delete Selected Assignment"/>
-                </BoxContainer>
-                <BoxContainer Orientation="Horizontal">
-                    <LineEdit Name="NewAssignmentNameField" Access="Public"
-                        PlaceHolder="New Assignment Name"
-                        HorizontalExpand="True" />
-                    <Button Name="CreateAssignment" Access="Public"
-                        Text="Create New Assignment"/>
-                </BoxContainer>
+                    <Control VerticalExpand="True"/>
+                    <BoxContainer Name="DeleteContainer" Orientation="Horizontal">
+                        <Control HorizontalExpand="True"/>
+                        <Button Name="DeleteAssignment" Access="Public"
+                            Text="Delete Selected Assignment"/>
+                    </BoxContainer>
+                    <BoxContainer Orientation="Horizontal">
+                        <LineEdit Name="NewAssignmentNameField" Access="Public"
+                            PlaceHolder="New Assignment Name"
+                            HorizontalExpand="True" />
+                        <Button Name="CreateAssignment" Access="Public"
+                            Text="Create New Assignment"/>
+                    </BoxContainer>
+                    
             </BoxContainer>
+                
+                
         </TabContainer>
     </BoxContainer>
 </controls:FancyWindow>
