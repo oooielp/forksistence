@@ -26,7 +26,6 @@ using Serilog.Parsing;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
-using static System.Collections.Specialized.BitVector32;
 
 namespace Content.Shared.Access.Systems;
 
