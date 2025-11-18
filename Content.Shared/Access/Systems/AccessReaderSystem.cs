@@ -26,6 +26,7 @@ using Serilog.Parsing;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
+using static System.Collections.Specialized.BitVector32;
 
 namespace Content.Shared.Access.Systems;
 
@@ -360,6 +361,63 @@ public sealed class AccessReaderSystem : EntitySystem
                 }
                 
                 return false;
+            }
+        }
+        return false;
+    }
+
+    public bool CanSpend(EntityUid user, EntityUid target, AccessReaderComponent? reader = null)
+    {
+        string? actorName = null;
+        var accessSources = FindPotentialAccessItems(user);
+        var station = _station.GetOwningStation(target);
+        foreach (var source in accessSources)
+        {
+            if (TryComp<IdCardComponent>(source, out var idComp))
+            {
+                if (idComp.FullName != null && idComp.FullName.Length > 0)
+                    actorName = idComp.FullName;
+            }
+            else if (TryComp<PdaComponent>(source, out var pdaComp))
+            {
+                if (pdaComp != null && pdaComp.ContainedId != null)
+                {
+                    if (TryComp<IdCardComponent>(pdaComp.ContainedId, out var idComp2))
+                    {
+                        if (idComp2.FullName != null && idComp2.FullName.Length > 0)
+                            actorName = idComp2.FullName;
+                    }
+                }
+            }
+        }
+        if (actorName != null)
+        {
+
+            if (TryComp(station, out StationDataComponent? sD))
+            {
+                if (sD.Owners.Contains(actorName)) return true;
+            }
+
+            if (!TryComp(station, out CrewRecordsComponent? crewRecords))
+            {
+                crewRecords = null;
+                return false;
+            }
+            if (crewRecords == null) return true;
+            crewRecords.TryGetRecord(actorName, out var record);
+
+            if (!TryComp(station, out CrewAssignmentsComponent? stationData))
+            {
+                return false;
+            }
+            if (!TryComp(station, out CrewAccessesComponent? crewAccesses))
+            {
+                return false;
+            }
+            if (stationData != null && record != null)
+            {
+                if (!stationData.TryGetAssignment(record.AssignmentID, out var assignment) || assignment == null) return false;
+                return assignment.CanSpend;
             }
         }
         return false;

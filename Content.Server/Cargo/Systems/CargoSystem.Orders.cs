@@ -141,6 +141,7 @@ namespace Content.Server.Cargo.Systems
 
         #region Interface
 
+
         private void OnApproveOrderMessage(EntityUid uid, CargoOrderConsoleComponent component, CargoConsoleApproveOrderMessage args)
         {
             if (args.Actor is not { Valid: true } player)
@@ -262,7 +263,7 @@ namespace Content.Server.Cargo.Systems
             }
             else
             {
-                if (!_accessReaderSystem.IsAllowed(player, uid))
+                if (!_accessReaderSystem.IsAllowed(player, uid) || !_accessReaderSystem.CanSpend(player, uid))
                 {
                     ConsolePopup(args.Actor, Loc.GetString("cargo-console-order-not-allowed"));
                     PlayDenySound(uid, component);
