@@ -123,7 +123,6 @@
                         <Label Text="This character has the moral alignment of " />
                         <OptionButton Name="AlignmentButton" HorizontalAlignment="Right" />
                     </BoxContainer>
-                    <Control MinHeight="30" />
                     <BoxContainer Orientation="Vertical" >
                         <Label Name="AlignTitleLabel" Text="True Neutral" StyleClasses="LabelHeading" />
                         <RichTextLabel Name="AlignDescLabel" HorizontalAlignment="Left"/>
@@ -133,7 +132,6 @@
                         <Label Text="This character previously lived on a " />
                         <OptionButton Name="BGButton" HorizontalAlignment="Right" />
                     </BoxContainer>
-                    <Control MinHeight="30" />
                     <BoxContainer Orientation="Vertical" >
                         <Label Name="BGTitleLabel" Text="Corporate Space Station" StyleClasses="LabelHeading" />
                         <Control MinHeight="30" />
@@ -144,7 +142,6 @@
                         <Label Text="This character came to the Threshold seeking  " />
                         <OptionButton Name="MotiveButton" HorizontalAlignment="Right" />
                     </BoxContainer>
-                    <Control MinHeight="30" />
                     <BoxContainer Orientation="Vertical" >
                         <Label Name="MotiveTitleLabel" Text="Corporate Space Station" StyleClasses="LabelHeading" />
                         <Control MinHeight="30" />
