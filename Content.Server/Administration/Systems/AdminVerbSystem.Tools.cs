@@ -599,7 +599,7 @@ public sealed partial class AdminVerbSystem
                         var recharger = EnsureComp<BatterySelfRechargerComponent>(ent);
                         var battery = EnsureComp<BatteryComponent>(ent);
 
-                        recharger.AutoRecharge = true;
+                        recharger.AutoRecharge = !recharger.AutoRecharge;
                         recharger.AutoRechargeRate = battery.MaxCharge; // Instant refill.
                         recharger.AutoRechargePause = false; // No delay.
                     }

@@ -48,7 +48,7 @@ public sealed class JobSystem : SharedJobSystem
         if (!MindTryGetJob(mindId, out var prototype))
             return;
 
-        _chat.DispatchServerMessage(session, "You have entered the Threshold as a Colonist.");
+        _chat.DispatchServerMessage(session, "You have entered the Threshold as a Colonist. You have been given a bank account with $50 to get you started.");
 
         if (prototype.RequireAdminNotify)
             _chat.DispatchServerMessage(session, Loc.GetString("job-greet-important-disconnect-admin-notify"));
