@@ -345,7 +345,7 @@ namespace Content.Server.Lathe
         /// </summary>
         private void OnMapInit(EntityUid uid, LatheComponent component, MapInitEvent args)
         {
-            _appearance.SetData(uid, LatheVisuals.IsInserting, false);
+            _appearance.SetData(uid, MaterialStorageVisuals.Inserting, false);
             _appearance.SetData(uid, LatheVisuals.IsRunning, false);
 
             _materialStorage.UpdateMaterialWhitelist(uid);
