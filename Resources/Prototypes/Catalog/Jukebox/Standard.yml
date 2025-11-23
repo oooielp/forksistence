@@ -51,3 +51,15 @@
   name: Dolan Somans - Peace and Tranquility
   path:
     path: /Audio/Jukebox/peaceandtranquility.ogg
+
+- type: jukebox
+  id: smoothivory
+  name: Koollan - Smooth Ivory
+  path:
+    path: /Audio/Jukebox/smoothivory.ogg
+
+- type: jukebox
+  id: resurfaced
+  name: Koollan - Resurfaced
+  path:
+    path: /Audio/Jukebox/resurfaced.ogg
