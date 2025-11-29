@@ -1,9 +1,11 @@
 ﻿using System.Linq;
 using Content.Server.Worldgen.Components;
+using Content.Shared.CCVar;
 using Content.Shared.Ghost;
 using Content.Shared.Mind.Components;
 using JetBrains.Annotations;
 using Robust.Server.GameObjects;
+using Robust.Shared.Configuration;
 using Robust.Shared.Map;
 using Robust.Shared.Timing;
 
@@ -18,6 +20,9 @@ public sealed class WorldControllerSystem : EntitySystem
     [Dependency] private readonly IGameTiming _gameTiming = default!;
     [Dependency] private readonly ILogManager _logManager = default!;
     [Dependency] private readonly MetaDataSystem _metaData = default!;
+
+    [Dependency] private readonly IConfigurationManager _configurationManager = default!;
+
 
     private const int PlayerLoadRadius = 2;
 
@@ -155,13 +160,14 @@ public sealed class WorldControllerSystem : EntitySystem
 
         var loadedEnum = EntityQueryEnumerator<LoadedChunkComponent, WorldChunkComponent>();
         var chunksUnloaded = 0;
+        TimeSpan chunkUnloadDelay = TimeSpan.FromSeconds(_configurationManager.GetCVar(CCVars.WorldChunkUnloadDelay));
 
         // Make sure these chunks get unloaded at the end of the tick.
-        while (loadedEnum.MoveNext(out var uid, out var _, out var chunk))
+        while (loadedEnum.MoveNext(out var uid, out var loadedChunkComp, out var chunk))
         {
             var coords = chunk.Coordinates;
 
-            if (!chunksToLoad[chunk.Map].ContainsKey(coords))
+            if (!chunksToLoad[chunk.Map].ContainsKey(coords) && loadedChunkComp.LoadedOn + chunkUnloadDelay < _gameTiming.CurTime)
             {
                 RemCompDeferred<LoadedChunkComponent>(uid);
                 chunksUnloaded++;
@@ -188,6 +194,7 @@ public sealed class WorldControllerSystem : EntitySystem
                 if (ent is not null && !loadedQuery.TryGetComponent(ent.Value, out c))
                 {
                     c = AddComp<LoadedChunkComponent>(ent.Value);
+                    c.LoadedOn = _gameTiming.CurTime;
                     count += 1;
                 }
 

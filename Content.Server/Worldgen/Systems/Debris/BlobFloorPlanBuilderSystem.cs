@@ -27,6 +27,7 @@ public sealed class BlobFloorPlanBuilderSystem : BaseWorldSystem
         ComponentStartup args)
     {
         PlaceFloorplanTiles(uid, component, Comp<MapGridComponent>(uid));
+        RemCompDeferred<BlobFloorPlanBuilderComponent>(uid);
     }
 
     private void PlaceFloorplanTiles(EntityUid gridUid, BlobFloorPlanBuilderComponent comp, MapGridComponent grid)

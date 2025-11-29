@@ -4,6 +4,8 @@
     - type: WorldController
     - type: BiomeSelection
       biomes:
-        - AsteroidsFallback
-        - Failsafe
-        - AsteroidsStandard
+        - VolcanicZone
+        - AndesiteZone
+        - ChromiteZone
+        - IronZone
+        - BaseBiome

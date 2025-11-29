@@ -1,5 +1,6 @@
 using Content.Server.Construction.Components;
 using Content.Server.Stack;
+using Content.Server.Worldgen.Components.Debris;
 using Content.Shared.Construction;
 using Content.Shared.DoAfter;
 using JetBrains.Annotations;
@@ -34,6 +35,17 @@ namespace Content.Server.Construction
 
             SubscribeLocalEvent<ConstructionComponent, ComponentInit>(OnConstructionInit);
             SubscribeLocalEvent<ConstructionComponent, ComponentStartup>(OnConstructionStartup);
+
+            SubscribeLocalEvent<ConstructionComponent, MapInitEvent>(OnConstructionMapInit);
+        }
+
+        private void OnConstructionMapInit(Entity<ConstructionComponent> ent, ref MapInitEvent args)
+        {
+            if (!TryComp(ent.Owner, out TransformComponent? _))
+                return;
+            var grid = _transformSystem.GetGrid(ent.Owner);
+            if (grid.HasValue)
+                RemComp<OwnedDebrisComponent>(grid.Value);
         }
 
         private void OnConstructionInit(Entity<ConstructionComponent> ent, ref ComponentInit args)

@@ -39,6 +39,25 @@
 - type: noiseChannel
   id: Temperature
   noiseType: Perlin
-  fractalLacunarityByPi: 0.666666666
   remapTo0Through1: true
-  inputMultiplier: 6 # Makes wreck concentration very low noise at scale.
+  fractalType: None
+  frequency: 0.007
+  inputMultiplier: 1 # Makes wreck concentration very low noise at scale.
+
+- type: noiseChannel
+  id: BiomeBase
+  noiseType: Cellular
+  frequency: 0.04
+  remapTo0Through1: true
+  inputMultiplier: 1
+  outputMultiplier: 10
+  fractalType: None
+
+- type: noiseChannel
+  id: BiomeBaseMask
+  noiseType: Cellular
+  frequency: 0.04
+  remapTo0Through1: true
+  inputMultiplier: 1
+  fractalType: None
+  cellularReturnType: Distance2Sub

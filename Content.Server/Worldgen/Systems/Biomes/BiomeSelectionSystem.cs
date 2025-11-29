@@ -22,13 +22,33 @@ public sealed class BiomeSelectionSystem : BaseWorldSystem
         SubscribeLocalEvent<BiomeSelectionComponent, WorldChunkAddedEvent>(OnWorldChunkAdded);
     }
 
+    /// <summary>
+    /// Gets the biome prototype from its ID while inheriting parent's noise ranges.
+    /// </summary>
+    /// <param name="biomeId"></param>
+    /// <returns></returns>
+    private BiomePrototype GetBiomePrototype(string biomeId)
+    {
+        var biome = _proto.Index<BiomePrototype>(biomeId);
+
+        if (biome.Parents != null)
+            foreach (var parentBiomeID in biome.Parents)
+            {
+                var parentBiome = GetBiomePrototype(parentBiomeID);
+                foreach (var noiseRange in parentBiome.NoiseRanges)
+                    biome.NoiseRanges[noiseRange.Key] = noiseRange.Value;
+            }
+        return biome;
+    }
+
     private void OnWorldChunkAdded(EntityUid uid, BiomeSelectionComponent component, ref WorldChunkAddedEvent args)
     {
         var coords = args.Coords;
         foreach (var biomeId in component.Biomes)
         {
-            var biome = _proto.Index<BiomePrototype>(biomeId);
-            if (!CheckBiomeValidity(args.Chunk, biome, coords))
+            var biome = GetBiomePrototype(biomeId);
+
+            if (!CheckBiomeValidity(uid, biome, coords))
                 continue;
 
             biome.Apply(args.Chunk, _ser, EntityManager);
@@ -50,11 +70,11 @@ public sealed class BiomeSelectionSystem : BaseWorldSystem
         component.Biomes = sorted; // my hopes and dreams rely on this being pre-sorted by priority.
     }
 
-    private bool CheckBiomeValidity(EntityUid chunk, BiomePrototype biome, Vector2i coords)
+    private bool CheckBiomeValidity(EntityUid uid, BiomePrototype biome, Vector2i coords)
     {
         foreach (var (noise, ranges) in biome.NoiseRanges)
         {
-            var value = _noiseIdx.Evaluate(chunk, noise, coords);
+            var value = _noiseIdx.Evaluate(uid, noise, coords);
             var anyValid = false;
             foreach (var range in ranges)
             {

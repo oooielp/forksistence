@@ -4,6 +4,7 @@ using Content.Server.CrewRecords.Systems;
 using Content.Server.GameTicking;
 using Content.Server.Station.Components;
 using Content.Server.Station.Events;
+using Content.Server.Worldgen.Components.Debris;
 using Content.Shared.GridControl.Components;
 using Content.Shared.Station;
 using Content.Shared.Station.Components;
@@ -384,6 +385,7 @@ public sealed partial class StationSystem : SharedStationSystem
         RaiseLocalEvent(station, new StationGridAddedEvent(mapGrid, station, false), true);
 
         _sawmill.Info($"Adding grid {mapGrid} to station {Name(station)} ({station})");
+        OnGridClaimed(mapGrid);
     }
 
     public void AddGridToPerson(string owner, EntityUid mapGrid, MapGridComponent? gridComponent = null, StationDataComponent? stationData = null, string? name = null)
@@ -396,6 +398,13 @@ public sealed partial class StationSystem : SharedStationSystem
 
         var stationMember = EnsureComp<PersonalMemberComponent>(mapGrid);
         stationMember.OwnerName = owner;
+
+        OnGridClaimed(mapGrid);
+    }
+
+    private void OnGridClaimed(EntityUid mapGrid)
+    {
+        RemComp<OwnedDebrisComponent>(mapGrid);
     }
 
 
