@@ -161,7 +161,7 @@
 - type: cargoProduct
   id: ChemistryLocker
   icon:
-    sprite: Specific/Chemistry/chem_bag.rsi
+    sprite: Objects/Specific/Chemistry/chem_bag.rsi
     state: icon
   product: LockerChemistryFilled
   cost: 3000

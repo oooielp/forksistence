@@ -171,7 +171,7 @@
 - type: cargoProduct
   id: LockerCE
   icon:
-    sprite: Clothing/Head/Harsuits/engineering-white.rsi
+    sprite: Clothing/Head/Hardsuits/engineering-white.rsi
     state: icon
   product: LockerChiefEngineerFilled
   cost: 12500
