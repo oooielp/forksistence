@@ -173,16 +173,6 @@
   id: BiomassReclaimerMachineCircuitboard
   result: BiomassReclaimerMachineCircuitboard
 
-- type: latheRecipe
-  parent: [ BaseGoldCircuitboardRecipe, BaseMedicalMachineRecipeCategory ]
-  id: MorgueCircuitboard
-  result: MorgueCircuitboard
-
-- type: latheRecipe
-  parent: [ BaseGoldCircuitboardRecipe, BaseMedicalMachineRecipeCategory ]
-  id: CrematoriumCircuitboard
-  result: CrematoriumCircuitboard
-
 # Chemistry
 - type: latheRecipe
   parent: [ BaseCircuitboardRecipe, BaseMedicalMachineRecipeCategory ]
