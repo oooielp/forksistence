@@ -1,5 +1,4 @@
 - type: spaceBiome
-  parent: BaseBiome
   id: VoidBiome
   priority: 0
   noiseRanges: {}
