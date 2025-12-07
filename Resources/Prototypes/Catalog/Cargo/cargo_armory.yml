@@ -80,6 +80,7 @@
 
 - type: cargoProduct
   id: CommsComputerCircuitboard
+  icon:
     sprite: Objects/Misc/module.rsi
     state: cpu_command
   product: CommsComputerCircuitboard
