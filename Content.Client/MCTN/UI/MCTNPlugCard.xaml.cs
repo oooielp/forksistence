@@ -34,6 +34,7 @@ public sealed partial class MCTNPlugCard : PanelContainer
         {
             if (bui == null) return;
             bui.SendMessage(new MCTNTogglePlugMessage(plug.Identifier));
+            BreakerButton.Pressed = plug.Enabled;
         };
 
 

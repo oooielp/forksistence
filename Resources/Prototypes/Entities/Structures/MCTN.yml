@@ -40,6 +40,7 @@
           pipeDirection: All
           pipeLayer: 2
     - type: MCTN
+    - type: AccessReader
 
 - type: entity
   id: MCTNTetherStub

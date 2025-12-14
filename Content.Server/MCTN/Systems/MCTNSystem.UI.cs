@@ -8,12 +8,16 @@ using Content.Shared.Coordinates;
 using Content.Shared.NodeContainer;
 using Content.Shared.MCTN.BUIStates;
 using Robust.Server.GameObjects;
+using Content.Shared.Access.Systems;
+using Content.Server.Popups;
 
 namespace Content.Server.MCTN.Systems;
 
 public sealed partial class MCTNSystem : EntitySystem
 {
     [Dependency] private readonly UserInterfaceSystem _uiSystem = default!;
+    [Dependency] private readonly AccessReaderSystem _access = default!;
+    [Dependency] private readonly PopupSystem _popup = default!;
 
     private void InitializeUI()
     {
@@ -147,17 +151,28 @@ public sealed partial class MCTNSystem : EntitySystem
     private void OnConnectRequest(EntityUid uid, MCTNComponent component, MCTNConnectMessage args)
     {
         if (component.Connection.HasValue) return;
-        Connect(uid, GetEntity(args.Target));
+        if (Validate(uid, args))
+            Connect(uid, GetEntity(args.Target));
     }
 
     private void OnDisconnectRequest(EntityUid uid, MCTNComponent component, MCTNDisconnectMessage args)
     {
         if (!component.Connection.HasValue) return;
-        Disconnect((uid, component));
+        if (Validate(uid, args))
+            Disconnect((uid, component));
     }
 
     private void OnTogglePortRequest(EntityUid uid, MCTNComponent component, MCTNTogglePlugMessage args)
     {
-        TogglePlugState((uid, component), args.Identifier);
+        if (Validate(uid, args))
+            TogglePlugState((uid, component), args.Identifier);
+    }
+
+    private bool Validate(EntityUid uid, BaseBoundUserInterfaceEvent args)
+    {
+        var result = _access.IsAllowed(args.Actor, uid);
+        if (!result)
+            _popup.PopupEntity(Loc.GetString("network-configurator-device-access-denied"), uid, args.Actor);
+        return result;
     }
 }
