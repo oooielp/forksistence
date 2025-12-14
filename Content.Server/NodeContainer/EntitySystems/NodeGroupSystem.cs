@@ -436,7 +436,7 @@ namespace Content.Server.NodeContainer.EntitySystems
             };
         }
 
-        private static Color CalcNodeGroupColor(BaseNodeGroup group)
+        public static Color CalcNodeGroupColor(BaseNodeGroup group)
         {
             return group.GroupId switch
             {

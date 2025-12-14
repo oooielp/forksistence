@@ -55,7 +55,7 @@ public sealed class StationModificationConsoleBoundUserInterface : BoundUserInte
             orderRequester = Identity.Name(localPlayer.Value, EntMan);
         else
             orderRequester = string.Empty;
-        
+
         _menu.OnClose += Close;
         _menu.OnOwnerPressed += RemoveOwner;
         _menu.NewOwnerConfirm.OnPressed += AddOwner;
@@ -118,7 +118,7 @@ public sealed class StationModificationConsoleBoundUserInterface : BoundUserInte
     private void RemoveOwner(ButtonEventArgs args)
     {
         if (args.Button is not StationOwnerButton row)
-            return;            
+            return;
 
         SendMessage(new StationModificationRemoveOwner(row.Owner));
     }
@@ -147,9 +147,9 @@ public sealed class StationModificationConsoleBoundUserInterface : BoundUserInte
     }
     private void DeleteAccess(ButtonEventArgs args)
     {
-        if (_menu == null || Accesses == null) return;
+        if (_menu == null || Accesses == null || Accesses.Count == 0) return;
         var i = _menu.PossibleAccesses.SelectedId;
-        var access = Accesses.ElementAt(i);
+        var access = Accesses.ElementAtOrDefault(i);
 
         SendMessage(new StationModificationRemoveAccess(access.Key));
     }
