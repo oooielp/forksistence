@@ -5,15 +5,15 @@ using Content.Server.NodeContainer.EntitySystems;
 using Content.Server.NodeContainer.NodeGroups;
 using Content.Server.NodeContainer.Nodes;
 using Content.Server.Power.Nodes;
-using Content.Server.UniversalElasticPort.Components;
+using Content.Server.MCTN.Components;
 using Content.Shared.Coordinates;
 using Content.Shared.NodeContainer.NodeGroups;
 using Content.Shared.Physics;
 using Robust.Shared.Utility;
 
-namespace Content.Server.UniversalElasticPort.Systems;
+namespace Content.Server.MCTN.Systems;
 
-public sealed partial class UniversalElasticPortSystem : EntitySystem
+public sealed partial class MCTNSystem : EntitySystem
 {
     /// <summary>
     /// How much will cable/hose joints be offset from the center of each port - currently random based on this value.
@@ -24,11 +24,11 @@ public sealed partial class UniversalElasticPortSystem : EntitySystem
 
     private void InitializeTethers()
     {
-        SubscribeLocalEvent<UEPTetherComponent, ComponentStartup>(OnStartup);
-        SubscribeLocalEvent<UEPTetherComponent, ComponentShutdown>(OnShutdown);
+        SubscribeLocalEvent<MCTNTetherComponent, ComponentStartup>(OnStartup);
+        SubscribeLocalEvent<MCTNTetherComponent, ComponentShutdown>(OnShutdown);
     }
 
-    private void OnStartup(Entity<UEPTetherComponent> ent, ref ComponentStartup args)
+    private void OnStartup(Entity<MCTNTetherComponent> ent, ref ComponentStartup args)
     {
         if (ent.Comp.Connection == default) return; // Initializing
         if (
@@ -44,7 +44,7 @@ public sealed partial class UniversalElasticPortSystem : EntitySystem
         }
     }
 
-    private void OnShutdown(Entity<UEPTetherComponent> ent, ref ComponentShutdown args)
+    private void OnShutdown(Entity<MCTNTetherComponent> ent, ref ComponentShutdown args)
     {
         if (
             _tethersByConnection.ContainsKey(ent.Comp.Connection) &&
@@ -56,13 +56,13 @@ public sealed partial class UniversalElasticPortSystem : EntitySystem
         }
     }
 
-    public void SetupTethering(Entity<UEPConnectionComponent> entity)
+    public void SetupTethering(Entity<MCTNConnectionComponent> entity)
     {
         _tethersByConnection.Add(entity, new());
         UpdateTethering(entity);
     }
 
-    public void BreakdownTethering(Entity<UEPConnectionComponent> entity)
+    public void BreakdownTethering(Entity<MCTNConnectionComponent> entity)
     {
         if (!_tethersByConnection.TryGetValue(entity, out var nodeTethers)) return;
         foreach (var uid in nodeTethers.Values)
@@ -71,19 +71,19 @@ public sealed partial class UniversalElasticPortSystem : EntitySystem
         _tethersByConnection.Remove(entity);
     }
 
-    public void UpdateTethering(Entity<UEPConnectionComponent> entity)
+    public void UpdateTethering(Entity<MCTNConnectionComponent> entity)
     {
         if (!_tethersByConnection.TryGetValue(entity, out var nodeTethers))
             return;
 
-        if (!TryComp<UEPComponent>(entity.Comp.AnchorA, out var uepA)) return;
-        if (!TryComp<UEPComponent>(entity.Comp.AnchorB, out var uepB)) return;
-        Entity<UEPComponent> anchorA = (entity.Comp.AnchorA, uepA);
-        Entity<UEPComponent> anchorB = (entity.Comp.AnchorB, uepB);
+        if (!TryComp<MCTNComponent>(entity.Comp.AnchorA, out var mctnA)) return;
+        if (!TryComp<MCTNComponent>(entity.Comp.AnchorB, out var mctnB)) return;
+        Entity<MCTNComponent> anchorA = (entity.Comp.AnchorA, mctnA);
+        Entity<MCTNComponent> anchorB = (entity.Comp.AnchorB, mctnB);
 
-        foreach (var key in uepA.EnabledPlugs.Keys.Concat(uepB.EnabledPlugs.Keys).Distinct())
+        foreach (var key in mctnA.EnabledPlugs.Keys.Concat(mctnB.EnabledPlugs.Keys).Distinct())
         {
-            if (uepA.EnabledPlugs.TryGetValue(key, out var value1) && uepB.EnabledPlugs.TryGetValue(key, out var value2) && value1 && value2)
+            if (mctnA.EnabledPlugs.TryGetValue(key, out var value1) && mctnB.EnabledPlugs.TryGetValue(key, out var value2) && value1 && value2)
             {
                 EnsureCreateNodeTether(nodeTethers, entity, anchorA, anchorB, key);
             }
@@ -92,21 +92,19 @@ public sealed partial class UniversalElasticPortSystem : EntitySystem
         }
     }
 
-    public void UpdateTethering(Entity<UEPComponent> entity)
+    public void UpdateTethering(Entity<MCTNComponent> entity)
     {
-        if (IsConnected(entity) && TryComp<UEPConnectionComponent>(entity.Comp.Connection, out var conn))
+        if (IsConnected(entity) && TryComp<MCTNConnectionComponent>(entity.Comp.Connection, out var conn))
             UpdateTethering((entity.Comp.Connection.GetValueOrDefault(), conn));
     }
 
-    private void EnsureCreateNodeTether(Dictionary<string, EntityUid> nodeTethers, Entity<UEPConnectionComponent> entity, Entity<UEPComponent> anchorA, Entity<UEPComponent> anchorB, string key)
+    private void EnsureCreateNodeTether(Dictionary<string, EntityUid> nodeTethers, Entity<MCTNConnectionComponent> entity, Entity<MCTNComponent> anchorA, Entity<MCTNComponent> anchorB, string key)
     {
-        // TODO: On UepTetherComponentInit ()
-
         EntityUid tetherUid;
         if (!nodeTethers.TryGetValue(key, out var value))
         {
-            tetherUid = SpawnAttachedTo("UEPTetherStub", anchorA.Owner.ToCoordinates());
-            var tetherComp = EnsureComp<UEPTetherComponent>(tetherUid);
+            tetherUid = SpawnAttachedTo("MCTNTetherStub", anchorA.Owner.ToCoordinates());
+            var tetherComp = EnsureComp<MCTNTetherComponent>(tetherUid);
             tetherComp.Connection = entity;
             tetherComp.NodeIdentifier = key;
             nodeTethers.Add(key, tetherUid);
@@ -162,7 +160,7 @@ public sealed partial class UniversalElasticPortSystem : EntitySystem
         }
     }
 
-    private void EnsureDeleteNodeTether(Dictionary<string, EntityUid> nodeTethers, Entity<UEPConnectionComponent> entity, string key)
+    private void EnsureDeleteNodeTether(Dictionary<string, EntityUid> nodeTethers, Entity<MCTNConnectionComponent> entity, string key)
     {
         if (nodeTethers.TryGetValue(key, out var tetherUid))
         {

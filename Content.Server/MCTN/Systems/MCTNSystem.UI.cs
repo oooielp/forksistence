@@ -3,53 +3,53 @@ using Content.Server.NodeContainer.NodeGroups;
 using Content.Server.NodeContainer.Nodes;
 using Content.Server.Power.NodeGroups;
 using Content.Server.Power.Nodes;
-using Content.Server.UniversalElasticPort.Components;
+using Content.Server.MCTN.Components;
 using Content.Shared.Coordinates;
 using Content.Shared.NodeContainer;
-using Content.Shared.UniversalElasticPort.BUIStates;
+using Content.Shared.MCTN.BUIStates;
 using Robust.Server.GameObjects;
 
-namespace Content.Server.UniversalElasticPort.Systems;
+namespace Content.Server.MCTN.Systems;
 
-public sealed partial class UniversalElasticPortSystem : EntitySystem
+public sealed partial class MCTNSystem : EntitySystem
 {
     [Dependency] private readonly UserInterfaceSystem _uiSystem = default!;
 
     private void InitializeUI()
     {
-        Subs.BuiEvents<UEPComponent>(UEPConsoleUiKey.Key, subs =>
+        Subs.BuiEvents<MCTNComponent>(MCTNConsoleUiKey.Key, subs =>
         {
             subs.Event<BoundUIOpenedEvent>(OnUiOpen);
-            subs.Event<UEPConnectMessage>(OnConnectRequest);
-            subs.Event<UEPDisconnectMessage>(OnDisconnectRequest);
-            subs.Event<UEPTogglePlugMessage>(OnTogglePortRequest);
+            subs.Event<MCTNConnectMessage>(OnConnectRequest);
+            subs.Event<MCTNDisconnectMessage>(OnDisconnectRequest);
+            subs.Event<MCTNTogglePlugMessage>(OnTogglePortRequest);
         });
     }
 
-    private void OnUiOpen(EntityUid uid, UEPComponent component, BoundUIOpenedEvent args)
+    private void OnUiOpen(EntityUid uid, MCTNComponent component, BoundUIOpenedEvent args)
     {
         UpdateUserInterface(uid, component);
     }
 
-    private void UpdateUserInterface(EntityUid uid, UEPComponent component)
+    private void UpdateUserInterface(EntityUid uid, MCTNComponent component)
     {
-        if (_uiSystem.HasUi(uid, UEPConsoleUiKey.Key))
+        if (_uiSystem.HasUi(uid, MCTNConsoleUiKey.Key))
         {
             if (!TryComp<NodeContainerComponent>(uid, out var container))
                 return;
-            var state = GetInterfaceState(new Entity<UEPComponent, NodeContainerComponent>(uid, component, container));
-            _uiSystem.SetUiState(uid, UEPConsoleUiKey.Key, state);
+            var state = GetInterfaceState(new Entity<MCTNComponent, NodeContainerComponent>(uid, component, container));
+            _uiSystem.SetUiState(uid, MCTNConsoleUiKey.Key, state);
         }
     }
 
-    public UEPBoundUserInterfaceState GetInterfaceState(Entity<UEPComponent, NodeContainerComponent> entity)
+    public MCTNBoundUserInterfaceState GetInterfaceState(Entity<MCTNComponent, NodeContainerComponent> entity)
     {
         // container.Nodes.ToDictionary(x => x.Key, x => x.Value.NodeGroup?.Nodes.Count > 1);
         var availableConnections = (entity.Comp1.Connection.GetValueOrDefault() != default ? [] : GetAvailableConnections(entity))
             .Select(x =>
             {
                 _physx.TryGetDistance(entity, x, out float distance);
-                return new UEPAvailableConnection()
+                return new MCTNAvailableConnection()
                 {
                     Entity = GetNetEntity(x),
                     Name = Comp<MetaDataComponent>(x.Owner).EntityName,
@@ -59,12 +59,12 @@ public sealed partial class UniversalElasticPortSystem : EntitySystem
                 };
             });
 
-        UEPCurrentConnection? currentConnectionState = null;
+        MCTNCurrentConnection? currentConnectionState = null;
         var currentConnectionEid = entity.Comp1.Connection.GetValueOrDefault();
-        TryComp<UEPConnectionComponent>(currentConnectionEid, out var connection);
+        TryComp<MCTNConnectionComponent>(currentConnectionEid, out var connection);
 
         var counterpart = connection != null ? GetConnectionCounterpart(entity, connection) : default;
-        TryComp<UEPComponent>(counterpart, out var counterpartUep);
+        TryComp<MCTNComponent>(counterpart, out var otherMctNode);
 
         if (connection != null)
         {
@@ -81,15 +81,15 @@ public sealed partial class UniversalElasticPortSystem : EntitySystem
         }
 
         // Plug states
-        var plugStates = new Dictionary<string, UEPBasePlugState>();
+        var plugStates = new Dictionary<string, MCTNBasePlugState>();
         foreach (var plugEntry in GetPlugNodes(entity.Owner))
         {
             var counterpartNode = counterpart != default ? GetPlugNode(counterpart!, plugEntry.Key) : null;
 
-            UEPBasePlugState portData;
+            MCTNBasePlugState portData;
             if (plugEntry.Value is CableDeviceNode deviceNode)
             {
-                static UEPPowerState FromNet(PowerNet net) =>
+                static MCTNPowerState FromNet(PowerNet net) =>
                     new()
                     {
                         CombinedLoad = net.NetworkNode.LastCombinedLoad,
@@ -97,33 +97,33 @@ public sealed partial class UniversalElasticPortSystem : EntitySystem
                         CombinedMaxSupply = net.NetworkNode.LastCombinedMaxSupply
                     };
 
-                UEPPowerState localState = new();
+                MCTNPowerState localState = new();
                 if (deviceNode.NodeGroup is PowerNet net)
                     localState = FromNet(net);
 
-                UEPPowerState remoteState = new();
+                MCTNPowerState remoteState = new();
                 if (counterpartNode != null && counterpartNode is CableDeviceNode && counterpartNode.NodeGroup is PowerNet remoteNet)
                     remoteState = FromNet(remoteNet);
 
-                portData = new UEPPowerPlugState(localState, remoteState);
+                portData = new MCTNPowerPlugState(localState, remoteState);
             }
             else if (plugEntry.Value is PortPipeNode pipeNode)
             {
-                static UEPPipeState FromNet(PipeNet net) =>
+                static MCTNPipeState FromNet(PipeNet net) =>
                     new()
                     {
                         GasMix = net.Air,
                     };
 
-                UEPPipeState localState = new();
+                MCTNPipeState localState = new();
                 if (pipeNode.NodeGroup is PipeNet net)
                     localState = FromNet(net);
 
-                UEPPipeState remoteState = new();
+                MCTNPipeState remoteState = new();
                 if (counterpartNode != null && counterpartNode is PortPipeNode && counterpartNode.NodeGroup is PipeNet remoteNet)
                     remoteState = FromNet(remoteNet);
 
-                portData = new UEPPipePlugState(localState, remoteState);
+                portData = new MCTNPipePlugState(localState, remoteState);
             }
             else
                 continue;
@@ -131,7 +131,7 @@ public sealed partial class UniversalElasticPortSystem : EntitySystem
             portData.Identifier = plugEntry.Key;
             portData.Enabled = IsPlugEnabled(entity.Comp1, plugEntry.Key);
             portData.IsNetworked = HasNodeNetwork(plugEntry.Value);
-            portData.IsRemoteEnabled = counterpartUep != null && IsPlugEnabled(counterpartUep, plugEntry.Key);
+            portData.IsRemoteEnabled = otherMctNode != null && IsPlugEnabled(otherMctNode, plugEntry.Key);
             plugStates.Add(plugEntry.Key, portData);
         }
 
@@ -144,19 +144,19 @@ public sealed partial class UniversalElasticPortSystem : EntitySystem
         };
     }
 
-    private void OnConnectRequest(EntityUid uid, UEPComponent component, UEPConnectMessage args)
+    private void OnConnectRequest(EntityUid uid, MCTNComponent component, MCTNConnectMessage args)
     {
         if (component.Connection.HasValue) return;
         Connect(uid, GetEntity(args.Target));
     }
 
-    private void OnDisconnectRequest(EntityUid uid, UEPComponent component, UEPDisconnectMessage args)
+    private void OnDisconnectRequest(EntityUid uid, MCTNComponent component, MCTNDisconnectMessage args)
     {
         if (!component.Connection.HasValue) return;
         Disconnect((uid, component));
     }
 
-    private void OnTogglePortRequest(EntityUid uid, UEPComponent component, UEPTogglePlugMessage args)
+    private void OnTogglePortRequest(EntityUid uid, MCTNComponent component, MCTNTogglePlugMessage args)
     {
         TogglePlugState((uid, component), args.Identifier);
     }

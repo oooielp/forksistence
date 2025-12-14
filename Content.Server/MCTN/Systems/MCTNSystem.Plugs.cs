@@ -1,32 +1,32 @@
 using System.Linq;
 using Content.Server.NodeContainer.EntitySystems;
 using Content.Server.NodeContainer.Nodes;
-using Content.Server.UniversalElasticPort.Components;
+using Content.Server.MCTN.Components;
 using Content.Shared.NodeContainer;
 
-namespace Content.Server.UniversalElasticPort.Systems;
+namespace Content.Server.MCTN.Systems;
 
-public sealed partial class UniversalElasticPortSystem : EntitySystem
+public sealed partial class MCTNSystem : EntitySystem
 {
     [Dependency] private readonly NodeGroupSystem _nodeGroup = default!;
     [Dependency] private readonly NodeContainerSystem _nodeContainer = default!;
 
-    public Node? GetRemoteConnectionFor(EntityUid owner, UEPComponent uep, Node thisNode)
+    public Node? GetRemoteConnectionFor(EntityUid owner, MCTNComponent mctNode, Node thisNode)
     {
         // Node is disconnected
-        if (!IsPlugEnabled(uep, thisNode.Name)) return null;
+        if (!IsPlugEnabled(mctNode, thisNode.Name)) return null;
 
-        var remoteConnectionEntity = uep.Connection.GetValueOrDefault();
+        var remoteConnectionEntity = mctNode.Connection.GetValueOrDefault();
 
-        // UEP does not have a connection established.
+        // MCTN does not have a connection established.
         if (remoteConnectionEntity == default) return null;
-        if (!TryComp<UEPConnectionComponent>(remoteConnectionEntity, out var connection)) return null;
+        if (!TryComp<MCTNConnectionComponent>(remoteConnectionEntity, out var connection)) return null;
         var remoteTarget = connection.AnchorA == owner ? connection.AnchorB : connection.AnchorA;
         if (remoteTarget == default) return null;
 
         // Remote Node is disconnected
-        if (!TryComp<UEPComponent>(remoteTarget, out var remoteUep)) return null;
-        if (!IsPlugEnabled(remoteUep, thisNode.Name)) return null;
+        if (!TryComp<MCTNComponent>(remoteTarget, out var remoteMctNode)) return null;
+        if (!IsPlugEnabled(remoteMctNode, thisNode.Name)) return null;
 
         // This really shouldnt happen but just in case..
         if (!TryComp<NodeContainerComponent>(owner, out var container)) return null;
@@ -45,13 +45,13 @@ public sealed partial class UniversalElasticPortSystem : EntitySystem
         return remoteNode;
     }
 
-    public void TogglePlugState(Entity<UEPComponent> ent, string plugIdentifier)
+    public void TogglePlugState(Entity<MCTNComponent> ent, string plugIdentifier)
     {
         var newValue = !IsPlugEnabled(ent.Comp, plugIdentifier);
         SetPlugState(ent, plugIdentifier, newValue);
     }
 
-    public void SetPlugState(Entity<UEPComponent> ent, string plugIdentifier, bool newState)
+    public void SetPlugState(Entity<MCTNComponent> ent, string plugIdentifier, bool newState)
     {
         var node = GetPlugNode(ent, plugIdentifier);
         if (node == null) return;
@@ -89,9 +89,9 @@ public sealed partial class UniversalElasticPortSystem : EntitySystem
     }
 
 
-    public static bool IsPlugEnabled(UEPComponent uep, string plugIdentifier)
+    public static bool IsPlugEnabled(MCTNComponent mctNode, string plugIdentifier)
     {
-        return uep.EnabledPlugs.GetValueOrDefault(plugIdentifier, false);
+        return mctNode.EnabledPlugs.GetValueOrDefault(plugIdentifier, false);
     }
 
     public bool IsPlugNetworked(Entity<NodeContainerComponent> entity, string plugIdentifier)

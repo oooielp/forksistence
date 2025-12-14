@@ -2,10 +2,10 @@ using System.Numerics;
 using Content.Shared.Atmos;
 using Robust.Shared.Serialization;
 
-namespace Content.Shared.UniversalElasticPort.BUIStates;
+namespace Content.Shared.MCTN.BUIStates;
 
 [Serializable, NetSerializable, Virtual]
-public class UEPAvailableConnection
+public class MCTNAvailableConnection
 {
     public NetEntity Entity;
     public string Name = string.Empty;
@@ -15,13 +15,13 @@ public class UEPAvailableConnection
 }
 
 [Serializable, NetSerializable]
-public sealed class UEPCurrentConnection : UEPAvailableConnection
+public sealed class MCTNCurrentConnection : MCTNAvailableConnection
 {
     // Unsure if more information for the current connection will be needed.
 }
 
 [Serializable, NetSerializable]
-public abstract class UEPBasePlugState
+public abstract class MCTNBasePlugState
 {
     public string Identifier { get; set; } = string.Empty;
     public bool Enabled { get; set; } = false;
@@ -30,10 +30,10 @@ public abstract class UEPBasePlugState
 }
 
 [Serializable, NetSerializable]
-public abstract class UEPCounterpartState;
+public abstract class MCTNCounterpartState;
 
 [Serializable, NetSerializable]
-public sealed class UEPPowerState : UEPCounterpartState
+public sealed class MCTNPowerState : MCTNCounterpartState
 {
     // @TODO: Maybe power supply/demand
     public float CombinedLoad { get; set; }
@@ -42,51 +42,51 @@ public sealed class UEPPowerState : UEPCounterpartState
 }
 
 [Serializable, NetSerializable]
-public sealed class UEPPipeState : UEPCounterpartState
+public sealed class MCTNPipeState : MCTNCounterpartState
 {
     public GasMixture GasMix { get; set; } = GasMixture.SpaceGas;
 }
 
 [Serializable, NetSerializable]
-public abstract class UEPPlugStateCounterparts<T>(T local, T remote) : UEPBasePlugState where T : UEPCounterpartState
+public abstract class MCTNPlugStateCounterparts<T>(T local, T remote) : MCTNBasePlugState where T : MCTNCounterpartState
 {
     public T LocalState { get; set; } = local;
     public T RemoteState { get; set; } = remote;
 }
 
 [Serializable, NetSerializable]
-public sealed class UEPPowerPlugState(UEPPowerState local, UEPPowerState remote) : UEPPlugStateCounterparts<UEPPowerState>(local, remote) { }
+public sealed class MCTNPowerPlugState(MCTNPowerState local, MCTNPowerState remote) : MCTNPlugStateCounterparts<MCTNPowerState>(local, remote) { }
 [Serializable, NetSerializable]
-public sealed class UEPPipePlugState(UEPPipeState local, UEPPipeState remote) : UEPPlugStateCounterparts<UEPPipeState>(local, remote) { }
+public sealed class MCTNPipePlugState(MCTNPipeState local, MCTNPipeState remote) : MCTNPlugStateCounterparts<MCTNPipeState>(local, remote) { }
 
 [Serializable, NetSerializable]
-public sealed class UEPBoundUserInterfaceState : BoundUserInterfaceState
+public sealed class MCTNBoundUserInterfaceState : BoundUserInterfaceState
 {
     public float MaxRange;
-    public List<UEPAvailableConnection> AvailableConnections = [];
-    public UEPCurrentConnection? CurrentConnection = null;
-    public Dictionary<string, UEPBasePlugState> PlugStates = new();
+    public List<MCTNAvailableConnection> AvailableConnections = [];
+    public MCTNCurrentConnection? CurrentConnection = null;
+    public Dictionary<string, MCTNBasePlugState> PlugStates = new();
 }
 
 [Serializable, NetSerializable]
-public enum UEPConsoleUiKey : byte
+public enum MCTNConsoleUiKey : byte
 {
     Key
 }
 
 #region Messages
 [Serializable, NetSerializable]
-public sealed class UEPConnectMessage(NetEntity target) : BoundUserInterfaceMessage
+public sealed class MCTNConnectMessage(NetEntity target) : BoundUserInterfaceMessage
 {
     public NetEntity Target = target;
 }
 
 [Serializable, NetSerializable]
-public sealed class UEPDisconnectMessage() : BoundUserInterfaceMessage {}
+public sealed class MCTNDisconnectMessage() : BoundUserInterfaceMessage {}
 
 
 [Serializable, NetSerializable]
-public sealed class UEPTogglePlugMessage(string identifier) : BoundUserInterfaceMessage
+public sealed class MCTNTogglePlugMessage(string identifier) : BoundUserInterfaceMessage
 {
     public string Identifier = identifier;
 }

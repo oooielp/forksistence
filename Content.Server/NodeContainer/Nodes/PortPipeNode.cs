@@ -1,8 +1,8 @@
 using Content.Shared.NodeContainer;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
-using Content.Server.UniversalElasticPort.Components;
-using Content.Server.UniversalElasticPort.Systems;
+using Content.Server.MCTN.Components;
+using Content.Server.MCTN.Systems;
 
 namespace Content.Server.NodeContainer.Nodes
 {
@@ -20,9 +20,9 @@ namespace Content.Server.NodeContainer.Nodes
 
             var gridIndex = grid.TileIndicesFor(xform.Coordinates);
 
-            if (entMan.TryGetComponent<UEPComponent>(Owner, out var uep) && entMan.TrySystem<UniversalElasticPortSystem>(out var uepSys))
+            if (entMan.TryGetComponent<MCTNComponent>(Owner, out var mctNode) && entMan.TrySystem<MCTNSystem>(out var mctnSys))
             {
-                var remoteNode = uepSys.GetRemoteConnectionFor(Owner, uep, this);
+                var remoteNode = mctnSys.GetRemoteConnectionFor(Owner, mctNode, this);
                 if (remoteNode != null)
                     yield return remoteNode;
             }

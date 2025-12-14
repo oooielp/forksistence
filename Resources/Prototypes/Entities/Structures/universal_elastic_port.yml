@@ -1,13 +1,13 @@
 - type: entity
-  id: BaseUniversalElasticPort
+  id: BaseMCTNode
   abstract: true
   components:
     - type: ActivatableUI
-      key: enum.UEPConsoleUiKey.Key
+      key: enum.MCTNConsoleUiKey.Key
     - type: UserInterface
       interfaces:
-        enum.UEPConsoleUiKey.Key:
-          type: UEPBoundUserInterface
+        enum.MCTNConsoleUiKey.Key:
+          type: MCTNBoundUserInterface
     - type: NodeContainer
       examinable: true
       nodes:
@@ -39,18 +39,16 @@
           rotationsEnabled: false
           pipeDirection: All
           pipeLayer: 2
-
-    - type: UEP
-      linkSprite: { sprite: Structures/Power/Cables/hv_cable.rsi, state: hvcable_3 }
+    - type: MCTN
 
 - type: entity
-  id: UEPTetherStub
+  id: MCTNTetherStub
   save: false
 
 - type: entity
-  parent: [BaseUniversalElasticPort, BaseMachinePowered]
-  id: UniversalElasticPortMachine
-  name: UEP (WIP)
+  parent: [BaseMCTNode, BaseMachinePowered]
+  id: MCTNodeMachine
+  name: Multi-Channel Transfer Node
   components:
   - type: ApcPowerReceiver
     powerLoad: 0
