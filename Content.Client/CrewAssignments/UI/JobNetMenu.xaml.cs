@@ -1,4 +1,5 @@
 using Content.Client.Actions;
+using Content.Client.Cargo.UI;
 using Content.Client.Message;
 using Content.Shared.CrewAssignments;
 using Content.Shared.FixedPoint;
@@ -10,6 +11,7 @@ using Robust.Client.UserInterface.Controls;
 using Robust.Client.UserInterface.CustomControls;
 using Robust.Client.UserInterface.XAML;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Timing;
 using System.Linq;
 using System.Text;
 using static Robust.Client.UserInterface.Controls.BaseButton;
@@ -21,14 +23,17 @@ public sealed partial class JobNetMenu : DefaultWindow
 {
     [Dependency] private readonly IEntityManager _entityManager = default!;
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
+    public TimeSpan UntilNextPay = TimeSpan.Zero;
     public event Action<ButtonEventArgs>? OnJobPressed;
     public JobNetMenu()
     {
         RobustXamlLoader.Load(this);
         IoCManager.InjectDependencies(this);
-
+        MasterTabContainer.SetTabTitle(0, "Job Network");
+        MasterTabContainer.SetTabTitle(1, "Historic Achievements");
+        MasterTabContainer.SetTabTitle(2, "Threshold Codex");
     }
-
+     
     public void UpdateState(JobNetUpdateState state)
     {
         PossibleJobs.Clear();
@@ -65,19 +70,44 @@ public sealed partial class JobNetMenu : DefaultWindow
         }
         if(state.RemainingMinutes != null)
         {
-            var remainingMinutes = TimeSpan.FromMinutes(Math.Round(state.RemainingMinutes.Value.TotalMinutes));
-            if(remainingMinutes <= TimeSpan.Zero)
-                TimeLabel.Text = "Less than a minute!";
-            else
-                TimeLabel.Text = TimeSpan.FromMinutes(Math.Round(state.RemainingMinutes.Value.TotalMinutes)).ToString() + " minutes.";
+            UntilNextPay = state.RemainingMinutes.Value;
+            TimeLabel.Text = UntilNextPay.ToString("mm\\:ss");
         }
         else
         {
             TimeLabel.Text = "Invalid";
         }
+        CurrentObjectives.RemoveAllChildren();
+        foreach (var objective in state.CurrentObjectives)
+        {
+            if (!objective.Visible) continue;
+            WorldObjectiveEntryFragment entry = new(objective.Title,objective.Description,objective.Reward,null,null);
+            CurrentObjectives.AddChild(entry);
+        }
+        CompletedObjectives.RemoveAllChildren();
+        foreach (var objective in state.CompletedObjectives)
+        {
+            if (!objective.Visible) continue;
+            WorldObjectiveEntryFragment entry = new(objective.Title, objective.Description, objective.Reward, objective.CompletedTime, objective.CompletedDescription);
+            CompletedObjectives.AddChild(entry);
+        }
     }
 
+    private void UpdateSkipButton(float deltaSeconds)
+    {
+        UntilNextPay -= TimeSpan.FromSeconds(deltaSeconds);
+        if (UntilNextPay > TimeSpan.Zero)
+        {
+            TimeLabel.Text = UntilNextPay.ToString("mm\\:ss");
+            return;
+        }
+    }
 
+    protected override void FrameUpdate(FrameEventArgs args)
+    {
+        base.FrameUpdate(args);
+        UpdateSkipButton(args.DeltaSeconds);
+    }
 
 }
 public sealed class JobButton : Button

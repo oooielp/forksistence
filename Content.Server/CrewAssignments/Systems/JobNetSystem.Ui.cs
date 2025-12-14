@@ -1,11 +1,13 @@
 using System.Linq;
 using Content.Server.Actions;
 using Content.Server.Administration.Logs;
+using Content.Server.CrewRecords.Systems;
 using Content.Server.Stack;
 using Content.Server.Station.Systems;
 using Content.Shared.Actions;
 using Content.Shared.CrewAssignments;
 using Content.Shared.CrewAssignments.Components;
+using Content.Shared.CrewAssignments.Systems;
 using Content.Shared.CrewRecords.Components;
 using Content.Shared.Hands.EntitySystems;
 using Content.Shared.Mind;
@@ -29,6 +31,7 @@ public sealed partial class JobNetSystem
     [Dependency] private readonly StackSystem _stack = default!;
     [Dependency] private readonly UserInterfaceSystem _ui = default!;
     [Dependency] private readonly StationSystem _station = default!;
+    [Dependency] private readonly CrewMetaRecordsSystem _meta = default!;
 
     private void InitializeUi()
     {
@@ -103,7 +106,19 @@ public sealed partial class JobNetSystem
 
 
         }
-        var state = new JobNetUpdateState(possibleStations, assignmentName, wage, selectedstation, remainingTime);
+        List<WorldObjectivesEntry> currentObjectives;
+        List<WorldObjectivesEntry> completedObjectives;
+        if (_meta.MetaRecords != null)
+        {
+            completedObjectives = _meta.MetaRecords.CompletedObjectives;
+            currentObjectives = _meta.MetaRecords.CurrentObjectives;
+        }
+        else
+        {
+            completedObjectives = new();
+            currentObjectives = new();
+        }
+        var state = new JobNetUpdateState(possibleStations, assignmentName, wage, selectedstation, remainingTime, currentObjectives, completedObjectives);
         _ui.SetUiState(jobnet, JobNetUiKey.Key, state);
     }
 

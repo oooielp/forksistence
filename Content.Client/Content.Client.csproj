@@ -26,9 +26,6 @@
   <Import Project="..\RobustToolbox\MSBuild\Robust.Properties.targets" />
   <Import Project="..\RobustToolbox\MSBuild\XamlIL.targets" />
   <ItemGroup>
-    <EmbeddedResource Remove="GridControl\StationTaggerWindow.xaml" />
-  </ItemGroup>
-  <ItemGroup>
     <AdditionalFiles Update="GridControl\UI\StationTaggerWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
     </AdditionalFiles>
@@ -49,6 +46,15 @@
     </Compile>
     <Compile Update="Invoices\UI\InvoiceWindow.xaml.cs">
       <DependentUpon>InvoiceWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="CrewAssignments\UI\WorldObjectiveEntryFragment.xaml.cs">
+      <DependentUpon>WorldObjectiveEntryFragment.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="CrewAssignments\AdminUI\AdminWorldObjectivesWindow.xaml.cs">
+      <DependentUpon>AdminWorldObjectivesWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="CrewAssignments\UI\WorldObjectiveEdit.xaml.cs">
+      <DependentUpon>WorldObjectiveEdit.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
