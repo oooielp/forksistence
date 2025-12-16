@@ -941,6 +941,11 @@ namespace Content.Server.Cargo.Systems
 
             // Note that a market must be both on the station and on the console to be available.
             var markets = tradeComp.Markets; //ent.Comp.AllowedGroups.Intersect(tradeComp.Markets).ToList();
+            InfrastructureLevelPrototype? levelProto = GetTradeStationLevel(oStation.Value, tradeComp);
+            if(levelProto != null)
+            {
+                markets = levelProto.Markets;
+            }
             foreach (var product in _protoMan.EnumeratePrototypes<CargoProductPrototype>())
             {
                 if (!markets.Contains(product.Group))

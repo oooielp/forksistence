@@ -1,5 +1,5 @@
 <DefaultWindow xmlns="https://spacestation14.io"
-               Title="World Objectives"
+               Title="Codex Entries"
                SetSize="650 600"
                MinSize="650 600">
     <BoxContainer Orientation="Vertical" VerticalExpand="True">

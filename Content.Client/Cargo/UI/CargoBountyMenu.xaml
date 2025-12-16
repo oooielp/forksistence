@@ -15,34 +15,64 @@
                 Access="Public"
                 HorizontalExpand="True" />
             <Control HorizontalExpand="True"/>
+            
         </BoxContainer>
-        <BoxContainer Orientation="Horizontal">
-            <Control MinWidth="10"/>
-            <Label Text="Bounties Expire In:"
-                   StyleClasses="LabelKeyText" />
-            <Label Text="00:20"
-                   Name="ResetText" />
-            <Control HorizontalExpand="True"/>
+        <BoxContainer Orientation="Vertical" Name="TradeStationDetails" VerticalExpand="True" HorizontalExpand="True">
+            <BoxContainer Orientation="Horizontal">
+                <Control MinWidth="10"/>
+                <Label Text="Infrastructure Level:"
+                       StyleClasses="LabelKeyText" />
+                <Label Text="Trade Outpost"
+                       Name="LevelText" />
+                <Control HorizontalExpand="True"/>
+                <Label Text="Tax Rate:"
+                       StyleClasses="LabelKeyText" />
+                <Label Text="77%" Name="TaxText" />
+            </BoxContainer>
+            <BoxContainer Orientation="Horizontal">
+                <ProgressBar Name="LevelBar"
+                    HorizontalExpand="True"
+                    MaxValue="1"
+                    MinValue="0"
+                    SetHeight="25"
+                    Margin="10 0 10 0"
+                    VerticalAlignment="Center">
+                    <Label Name="LevelBarText"
+                           Margin="4 0"
+                           Text="0 %" />
+                </ProgressBar>
+            </BoxContainer>
+            <BoxContainer Orientation="Horizontal">
+                <Control MinWidth="10"/>
+                <Label Text="Bounties Expire In:"
+                       StyleClasses="LabelKeyText" />
+                <Label Name="ResetText" />
+                <Control HorizontalExpand="True"/>
+                <Label Text="Owner:"
+                       StyleClasses="LabelKeyText" />
+                <Label Text="Syndicate" Name="FactionText" />
+            </BoxContainer>
+            <PanelContainer VerticalExpand="True" HorizontalExpand="True" Margin="10">
+                <PanelContainer.PanelOverride>
+                    <gfx:StyleBoxFlat BackgroundColor="#1B1B1E" />
+                </PanelContainer.PanelOverride>
+                <TabContainer Name="MasterTabContainer" VerticalExpand="True" HorizontalExpand="True">
+                    <ScrollContainer HScrollEnabled="False"
+                                     HorizontalExpand="True"
+                                     VerticalExpand="True">
+                        <Label Name="NoHistoryLabel"
+                               Text="{Loc 'bounty-console-history-empty-label'}"
+                               Visible="False"
+                               Align="Center" />
+                        <BoxContainer Name="BountyHistoryContainer"
+                                      Orientation="Vertical"
+                                      VerticalExpand="True"
+                                      HorizontalExpand="True" />
+                    </ScrollContainer>
+                </TabContainer>
+            </PanelContainer>
         </BoxContainer>
-        <PanelContainer VerticalExpand="True" HorizontalExpand="True" Margin="10">
-            <PanelContainer.PanelOverride>
-                <gfx:StyleBoxFlat BackgroundColor="#1B1B1E" />
-            </PanelContainer.PanelOverride>
-            <TabContainer Name="MasterTabContainer" VerticalExpand="True" HorizontalExpand="True">
-                <ScrollContainer HScrollEnabled="False"
-                                 HorizontalExpand="True"
-                                 VerticalExpand="True">
-                    <Label Name="NoHistoryLabel"
-                           Text="{Loc 'bounty-console-history-empty-label'}"
-                           Visible="False"
-                           Align="Center" />
-                    <BoxContainer Name="BountyHistoryContainer"
-                                  Orientation="Vertical"
-                                  VerticalExpand="True"
-                                  HorizontalExpand="True" />
-                </ScrollContainer>
-            </TabContainer>
-        </PanelContainer>
+
         <!-- Footer -->
         <BoxContainer Orientation="Vertical">
             <PanelContainer StyleClasses="LowDivider" />

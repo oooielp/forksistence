@@ -1,0 +1,55 @@
+- type: infrastructureLevel
+  id: ILevelGeneral1
+  demotionXP: 0
+  requiredXP: 0
+  name: Simple Trading Outpost (1)
+  markets:
+    - market
+  groups:
+    StationBounty : 4
+    ServiceBounty : 2
+  income: -5000
+
+- type: infrastructureLevel
+  id: ILevelGeneral2
+  demotionXP: 150
+  requiredXP: 200
+  name: Decent Trading Station (2)
+  markets:
+    - market
+    - SalvageJobReward2
+  groups:
+    StationBounty : 4
+    ServiceBounty : 2
+  income: 0
+
+- type: infrastructureLevel
+  id: ILevelGeneral3
+  demotionXP: 650
+  requiredXP: 700
+  name: Busy Trade Hub (3)
+  markets:
+    - market
+    - SalvageJobReward2
+    - SalvageJobReward3
+  groups:
+    StationBounty : 6
+    ServiceBounty : 3
+  income: 10000
+
+- type: infrastructureLevel
+  id: ILevelGeneral4
+  demotionXP: 1400
+  requiredXP: 1500
+  name: Masterful Trade Citadel (4)
+  markets:
+    - market
+    - SalvageJobReward2
+    - SalvageJobReward3
+    - SalvageJobRewardMAX
+  groups:
+    StationBounty : 10
+    ServiceBounty : 5
+  income: 30000
+
+

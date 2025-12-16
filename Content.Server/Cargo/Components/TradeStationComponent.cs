@@ -18,4 +18,16 @@ public sealed partial class TradeStationComponent : Component
     {
         "market"
     };
+    [DataField]
+    public int ExperiencePoints = 0;
+
+    [DataField]
+    public List<ProtoId<InfrastructureLevelPrototype>> Levels = new()
+    {
+        "ILevelGeneral1",
+        "ILevelGeneral2",
+        "ILevelGeneral3",
+        "ILevelGeneral4"
+    };
+
 }

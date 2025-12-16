@@ -81,6 +81,18 @@ public sealed partial class CargoBountyMenu : FancyWindow
                 BountyHistoryContainer.AddChild(new BountyHistoryEntry(history[i]));
             }
         }
+        TaxText.Text = $"{state.TaxRate}%";
+        LevelText.Text = state.ILevelTitle;
+        LevelBar.MaxValue = state.PromotionExp;
+        LevelBar.MinValue = state.DemotionExp;
+        LevelBar.Value = state.Exp;
+        LevelBarText.Text = $"{state.Exp}/{state.PromotionExp}";
+        FactionText.Text = state.Owner;
+        TradeStationDetails.Visible = true;
+        if (state.SelectedTrade == null || state.SelectedTrade == 0)
+        {
+            TradeStationDetails.Visible = false;
+        }
     }
 
 

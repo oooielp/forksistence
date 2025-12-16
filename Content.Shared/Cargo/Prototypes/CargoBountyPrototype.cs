@@ -23,6 +23,12 @@ public sealed partial class CargoBountyPrototype : IPrototype
     [DataField(required: true)]
     public int Reward;
 
+    [DataField]
+    public int SuccessXP = 10;
+
+    [DataField]
+    public int FailureXP = 5;
+
     /// <summary>
     /// A description for flava purposes.
     /// </summary>

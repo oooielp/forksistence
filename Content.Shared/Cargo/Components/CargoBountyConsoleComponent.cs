@@ -70,13 +70,25 @@ public sealed class CargoBountyConsoleState : BoundUserInterfaceState
     public TimeSpan UntilNextSkip;
     public Dictionary<int, string> PossibleTrades;
     public int? SelectedTrade;
-    public CargoBountyConsoleState(Dictionary<ProtoId<CargoBountyGroupPrototype>, List<CargoBountyData>> bounties, List<CargoBountyHistoryData> history, TimeSpan untilNextSkip, Dictionary<int, string> possibletrades, int? selectedTrade)
+    public int TaxRate;
+    public int Exp;
+    public int DemotionExp;
+    public int PromotionExp;
+    public string ILevelTitle;
+    public string Owner;
+    public CargoBountyConsoleState(Dictionary<ProtoId<CargoBountyGroupPrototype>, List<CargoBountyData>> bounties, List<CargoBountyHistoryData> history, TimeSpan untilNextSkip, Dictionary<int, string> possibletrades, int? selectedTrade, int tax, int exp, int demotionExp, int promotionExp, string iLevelTitle, string owner)
     {
         Bounties = bounties;
         History = history;
         UntilNextSkip = untilNextSkip;
         PossibleTrades = possibletrades;
         SelectedTrade = selectedTrade;
+        Exp = exp;
+        DemotionExp = demotionExp;
+        PromotionExp = promotionExp;
+        ILevelTitle = iLevelTitle;
+        Owner = owner;
+        TaxRate = tax;
     }
 }
 
