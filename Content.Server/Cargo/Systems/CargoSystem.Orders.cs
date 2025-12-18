@@ -35,12 +35,49 @@ namespace Content.Server.Cargo.Systems
             SubscribeLocalEvent<CargoOrderConsoleComponent, CargoConsoleAddOrderMessage>(OnAddOrderMessage);
             SubscribeLocalEvent<CargoOrderConsoleComponent, CargoConsoleRemoveOrderMessage>(OnRemoveOrderMessage);
             SubscribeLocalEvent<CargoOrderConsoleComponent, CargoConsoleApproveOrderMessage>(OnApproveOrderMessage);
+            SubscribeLocalEvent<CargoOrderConsoleComponent, CargoConsoleSelectTradeMessage>(OnSelectTrade);
+
             SubscribeLocalEvent<CargoOrderConsoleComponent, BoundUIOpenedEvent>(OnOrderUIOpened);
             SubscribeLocalEvent<CargoOrderConsoleComponent, ComponentInit>(OnInit);
             SubscribeLocalEvent<CargoOrderConsoleComponent, InteractUsingEvent>(OnInteractUsing);
             SubscribeLocalEvent<CargoOrderConsoleComponent, GotEmaggedEvent>(OnEmagged);
+
+            SubscribeLocalEvent<TradeStationComponent, ComponentStartup>(RegisterTS);
+        }
+        private void RegisterTS(EntityUid uid, TradeStationComponent component, ref ComponentStartup args)
+        {
+            if (component.UID == 0)
+            {
+                var stations = EntityManager.AllComponents<TradeStationComponent>();
+                int tryUID = 1;
+                while (component.UID == 0)
+                {
+                    bool success = true;
+                    foreach (var station in stations)
+                    {
+                        if (station.Component.UID == tryUID)
+                        {
+                            success = false;
+                            tryUID++;
+                            break;
+                        }
+                    }
+                    if (success) component.UID = tryUID;
+                }
+            }
         }
 
+        public EntityUid? GetTradeStationByID(int uid)
+        {
+            var stations = new List<EntityUid>();
+            var query = EntityQueryEnumerator<TradeStationComponent>();
+            while (query.MoveNext(out var ent, out var comp))
+            {
+                if (comp.UID == uid) return ent;
+            }
+
+            return null;
+        }
         private void OnInteractUsingCash(EntityUid uid, CargoOrderConsoleComponent component, ref InteractUsingEvent args)
         {
             var price = _pricing.GetPrice(args.Used);
@@ -142,6 +179,24 @@ namespace Content.Server.Cargo.Systems
         #region Interface
 
 
+        private void OnSelectTrade(EntityUid uid, CargoBountyConsoleComponent component, CargoConsoleSelectTradeMessage args)
+        {
+            if (args.Actor is not { Valid: true } player)
+                return;
+            component.SelectedTradeGrid = args.TradeUID;
+            UiUpdate(uid, component);
+        }
+
+        private void OnSelectTrade(EntityUid uid, CargoOrderConsoleComponent component, CargoConsoleSelectTradeMessage args)
+        {
+            if (args.Actor is not { Valid: true } player)
+                return;
+            component.SelectedTradeGrid = args.TradeUID;
+            var station = _station.GetOwningStation(component.Owner);
+            if(station != null)
+                UpdateOrders(station.Value);
+        }
+
         private void OnApproveOrderMessage(EntityUid uid, CargoOrderConsoleComponent component, CargoConsoleApproveOrderMessage args)
         {
             if (args.Actor is not { Valid: true } player)
@@ -199,7 +254,7 @@ namespace Content.Server.Cargo.Systems
                 }
 
                 var cost = order.Price * order.OrderQuantity;
-                var taxRate = stationData.ImportTax;
+                var taxRate = order.Tax;
                 var taxPaid = (int)Math.Round((float)cost * ((float)taxRate / 100f));
                 cost += taxPaid;
 
@@ -237,7 +292,16 @@ namespace Content.Server.Cargo.Systems
                 }
                 if(taxPaid > 0)
                 {
-                    UpdateBankAccount((station.Value, bank), taxPaid, order.Account);
+                    var oStation = GetTradeStationByID(order.TradeStation);
+                    if(oStation != null)
+                    {
+                        var owningStation = _station.GetOwningStation(oStation.Value);
+                        if(owningStation != null)
+                        {
+                            TryComp<StationBankAccountComponent>(owningStation, out var owningBank);
+                            UpdateBankAccount((owningStation.Value, owningBank), taxPaid, order.Account);
+                        }
+                    }
                 }
                 order.Approved = true;
                 _audio.PlayPvs(ApproveSound, uid);
@@ -311,6 +375,19 @@ namespace Content.Server.Cargo.Systems
                 }
 
                 var cost = order.Price * order.OrderQuantity;
+                var taxRate = order.Tax;
+
+                var oStation = GetTradeStationByID(order.TradeStation);
+                if(oStation != null)
+                {
+                    var owningStation = _station.GetOwningStation(oStation);
+                    if (owningStation != null)
+                    {
+                        if (owningStation == station) taxRate = 0;
+                    }
+                }
+                var taxPaid = (int)Math.Round((float)cost * ((float)taxRate / 100f));
+                cost += taxPaid;
                 var accountBalance = GetBalanceFromAccount((station.Value, bank), order.Account);
 
                 // Not enough balance
@@ -365,6 +442,19 @@ namespace Content.Server.Cargo.Systems
 
                 orderDatabase.Orders[component.Account].Remove(order);
                 UpdateBankAccount((station.Value, bank), -cost, order.Account);
+                if (taxPaid > 0)
+                {
+                    var owStation = GetTradeStationByID(order.TradeStation);
+                    if (owStation != null)
+                    {
+                        var owningStation = _station.GetOwningStation(owStation.Value);
+                        if (owningStation != null)
+                        {
+                            TryComp<StationBankAccountComponent>(owningStation, out var owningBank);
+                            UpdateBankAccount((owningStation.Value, owningBank), taxPaid, order.Account);
+                        }
+                    }
+                }
                 UpdateOrders(station.Value);
             }
             
@@ -372,36 +462,27 @@ namespace Content.Server.Cargo.Systems
 
         private EntityUid? TryFulfillOrder(Entity<StationDataComponent> stationData, ProtoId<CargoAccountPrototype> account, CargoOrderData order, StationCargoOrderDatabaseComponent orderDatabase, string? personalAccount = null)
         {
-            // No slots at the trade station
-            _listEnts.Clear();
-            GetTradeStations(stationData, ref _listEnts);
+            var trade = GetTradeStationByID(order.TradeStation);
+            if (trade == null) return null;
             EntityUid? tradeDestination = null;
+            var tradePads = GetCargoPallets(trade.Value, BuySellType.Buy);
+            _random.Shuffle(tradePads);
 
-            // Try to fulfill from any station where possible, if the pad is not occupied.
-            foreach (var trade in _listEnts)
+            var freePads = GetFreeCargoPallets(trade.Value, tradePads);
+            if (freePads.Count >= order.OrderQuantity) //check if the station has enough free pallets
             {
-                var tradePads = GetCargoPallets(trade, BuySellType.Buy);
-                _random.Shuffle(tradePads);
-
-                var freePads = GetFreeCargoPallets(trade, tradePads);
-                if (freePads.Count >= order.OrderQuantity) //check if the station has enough free pallets
+                foreach (var pad in freePads)
                 {
-                    foreach (var pad in freePads)
-                    {
-                        var coordinates = new EntityCoordinates(trade, pad.Transform.LocalPosition);
+                    var coordinates = new EntityCoordinates(trade.Value, pad.Transform.LocalPosition);
 
-                        if (FulfillOrder(order, account, coordinates, orderDatabase.PrinterOutput, personalAccount))
-                        {
-                            tradeDestination = trade;
-                            order.NumDispatched++;
-                            if (order.OrderQuantity <= order.NumDispatched) //Spawn a crate on free pellets until the order is fulfilled.
-                                break;
-                        }
+                    if (FulfillOrder(order, account, coordinates, orderDatabase.PrinterOutput, personalAccount))
+                    {
+                        tradeDestination = trade;
+                        order.NumDispatched++;
+                        if (order.OrderQuantity <= order.NumDispatched) //Spawn a crate on free pellets until the order is fulfilled.
+                            break;
                     }
                 }
-
-                if (tradeDestination != null)
-                    break;
             }
 
             return tradeDestination;
@@ -415,6 +496,23 @@ namespace Content.Server.Cargo.Systems
                     continue;
 
                 ents.Add(gridUid);
+            }
+        }
+
+        private void GetAllTradeStations(ref Dictionary<int,string> ents, EntityUid? owningStation, out int ownedTradeStation)
+        {
+            ownedTradeStation = 0;
+            var query = EntityQueryEnumerator<TradeStationComponent>();
+            while (query.MoveNext(out var uid, out var comp))
+            {
+                var station = _station.GetOwningStation(uid);
+                int? stationUID = null;
+                if (owningStation != null && station == owningStation) ownedTradeStation = comp.UID;
+                if(TryComp<StationDataComponent>(station, out var sD) && sD != null)
+                {
+                    stationUID = sD.UID;
+                }
+                ents.Add(comp.UID, Name(uid));
             }
         }
 
@@ -480,6 +578,9 @@ namespace Content.Server.Cargo.Systems
             if (args.Amount <= 0)
                 return;
 
+            if (component.SelectedTradeGrid == 0)
+                return;
+
             var stationUid = _station.GetOwningStation(uid);
 
             if (!TryGetOrderDatabase(stationUid, out var orderDatabase))
@@ -506,7 +607,18 @@ namespace Content.Server.Cargo.Systems
             var targetAccount = component.Mode == CargoOrderConsoleMode.SendToPrimary ? bank.PrimaryAccount : component.Account;
 
             var data = GetOrderData(args, product, GenerateOrderId(orderDatabase), component.Account);
-
+            data.TradeStation = component.SelectedTradeGrid;
+            var oStation = GetTradeStationByID(component.SelectedTradeGrid);
+            var owningStation = _station.GetOwningStation(oStation);
+            int tax = 25;
+            if(owningStation != null)
+            {
+                if(TryComp<StationDataComponent>(owningStation, out var oSD) && oSD != null)
+                {
+                    tax = oSD.ImportTax;
+                }
+            }
+            data.Tax = tax;
             if (!TryAddOrder(stationUid.Value, targetAccount, data, orderDatabase))
             {
                 PlayDenySound(uid, component);
@@ -535,9 +647,30 @@ namespace Content.Server.Cargo.Systems
 
             if (!TryComp<StationCargoOrderDatabaseComponent>(station, out var orderDatabase))
                 return;
-            if (!TryComp<StationDataComponent>(station, out var sD))
-                return;
+            int tax = 25;
+            var oStation = GetTradeStationByID(console.SelectedTradeGrid);
+            var ownedTrade = _station.GetOwningStation(oStation);
+            if(ownedTrade != null)
+            {
+                if(TryComp<StationDataComponent>(ownedTrade, out var sD) && sD != null)
+                {
+                    tax = sD.ImportTax;
+                }
+                
+            }
+            
 
+            Dictionary<int, string> possibleTrades = new();
+            GetAllTradeStations(ref possibleTrades, station.Value, out var ownedTradeStation);
+            int? selectedTrade = null;
+            if(console.SelectedTradeGrid != null)
+            {
+                var tstation = GetTradeStationByID(console.SelectedTradeGrid);
+                if(TryComp<TradeStationComponent>(tstation, out var comp) && comp != null)
+                {
+                    selectedTrade = comp.UID;
+                }
+            }
             if (_uiSystem.HasUi(consoleUid, CargoConsoleUiKey.Orders))
             {
                 _uiSystem.SetUiState(consoleUid,
@@ -549,8 +682,11 @@ namespace Content.Server.Cargo.Systems
                     GetNetEntity(station.Value),
                     RelevantOrders((station!.Value, orderDatabase), (consoleUid, console)),
                     GetAvailableProducts((consoleUid, console)),
+                    possibleTrades,
+                    selectedTrade,
                     console.PersonalAccountMode,
-                    sD.ImportTax
+                    tax,
+                    ownedTradeStation
                 ));
             }
         }
@@ -589,7 +725,7 @@ namespace Content.Server.Cargo.Systems
 
         private static CargoOrderData GetOrderData(CargoConsoleAddOrderMessage args, CargoProductPrototype cargoProduct, int id, ProtoId<CargoAccountPrototype> account)
         {
-            return new CargoOrderData(id, cargoProduct.Product, cargoProduct.Name, cargoProduct.Cost, args.Amount, args.Requester, args.Reason, account);
+            return new CargoOrderData(id, cargoProduct.Product, cargoProduct.Name, cargoProduct.Cost, args.Amount, args.Requester, args.Reason ,account);
         }
 
         public int GetOutstandingOrderCount(Entity<StationCargoOrderDatabaseComponent> station, ProtoId<CargoAccountPrototype> account)
@@ -796,11 +932,20 @@ namespace Content.Server.Cargo.Systems
             {
                 return new List<ProtoId<CargoProductPrototype>>();
             }
+            if(ent.Comp.SelectedTradeGrid == 0) return new List<ProtoId<CargoProductPrototype>>();
+            var oStation = GetTradeStationByID(ent.Comp.SelectedTradeGrid);
+            if(oStation == null) return new List<ProtoId<CargoProductPrototype>>();
+            if(!TryComp<TradeStationComponent>(oStation, out var tradeComp) || tradeComp == null) return new List<ProtoId<CargoProductPrototype>>();
 
             var products = new List<ProtoId<CargoProductPrototype>>();
 
             // Note that a market must be both on the station and on the console to be available.
-            var markets = ent.Comp.AllowedGroups.Intersect(db.Markets).ToList();
+            var markets = tradeComp.Markets; //ent.Comp.AllowedGroups.Intersect(tradeComp.Markets).ToList();
+            InfrastructureLevelPrototype? levelProto = GetTradeStationLevel(oStation.Value, tradeComp);
+            if(levelProto != null)
+            {
+                markets = levelProto.Markets;
+            }
             foreach (var product in _protoMan.EnumeratePrototypes<CargoProductPrototype>())
             {
                 if (!markets.Contains(product.Group))

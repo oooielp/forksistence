@@ -1,5 +1,6 @@
 using Content.Server._NF.Bank;
 using Content.Server.Chat.Managers;
+using Content.Server.CrewManifest;
 using Content.Server.Lathe.Components;
 using Content.Server.Sound;
 using Content.Server.Store.Components;
@@ -40,6 +41,7 @@ public sealed partial class JobNetSystem : EntitySystem
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedCargoSystem _cargo = default!;
+    [Dependency] private readonly CrewManifestSystem _crewManifest = default!;
     public override void Initialize()
     {
         base.Initialize();
@@ -60,7 +62,18 @@ public sealed partial class JobNetSystem : EntitySystem
         var station = _station.GetStationByID(args.ID);
         if(station == null || args.ID == 0)
         {
+            var currentWorkingFor = component.WorkingFor;
             component.WorkingFor = 0;
+            if (currentWorkingFor != 0 && currentWorkingFor != null)
+            {
+                var sId = _station.GetStationByID(currentWorkingFor.Value);
+                if(sId != null) _crewManifest.BuildCrewManifest(sId.Value);
+            }
+            if (component.WorkingFor != 0 && component.WorkingFor != null)
+            {
+                var sId = _station.GetStationByID(component.WorkingFor.Value);
+                if (sId != null) _crewManifest.BuildCrewManifest(sId.Value);
+            }
             UpdateUserInterface(args.Actor, uid, component);
             return;
         }
@@ -77,13 +90,25 @@ public sealed partial class JobNetSystem : EntitySystem
                         {
                             if (component.LastWorkedFor != stationData.UID)
                                 component.WorkedTime = TimeSpan.Zero;
+                            var currentWorkingFor = component.WorkingFor;
                             component.WorkingFor = stationData.UID;
+                            if (currentWorkingFor != 0 && currentWorkingFor != null)
+                            {
+                                var sId = _station.GetStationByID(currentWorkingFor.Value);
+                                if (sId != null) _crewManifest.BuildCrewManifest(sId.Value);
+                            }
+                            if (component.WorkingFor != 0 && component.WorkingFor != null)
+                            {
+                                var sId = _station.GetStationByID(component.WorkingFor.Value);
+                                if (sId != null) _crewManifest.BuildCrewManifest(sId.Value);
+                            }
                             UpdateUserInterface(args.Actor, uid, component);
                         }
                     }
                 }
             }
         }
+
     }
 
     private void OnJobNetOpenAttempt(EntityUid uid, JobNetComponent component, ActivatableUIOpenAttemptEvent args)
@@ -102,12 +127,24 @@ public sealed partial class JobNetSystem : EntitySystem
 
     private void OnStartup(EntityUid uid, JobNetComponent component, ComponentStartup args)
     {
-
+        var currentWorkingFor = component.WorkingFor;
+        if (currentWorkingFor != 0 && currentWorkingFor != null)
+        {
+            var sId = _station.GetStationByID(currentWorkingFor.Value);
+            if (sId != null) _crewManifest.BuildCrewManifest(sId.Value);
+        }
     }
 
     private void OnShutdown(EntityUid uid, JobNetComponent component, ComponentShutdown args)
     {
-
+        var currentWorkingFor = component.WorkingFor;
+        component.WorkingFor = 0;
+        if (currentWorkingFor != 0 && currentWorkingFor != null)
+        {
+            var sId = _station.GetStationByID(currentWorkingFor.Value);
+            if (sId != null) _crewManifest.BuildCrewManifest(sId.Value);
+        }
+        component.WorkingFor = currentWorkingFor;
     }
 
     private void OnImplantActivate(EntityUid uid, JobNetComponent component, OpenJobNetImplantEvent args)

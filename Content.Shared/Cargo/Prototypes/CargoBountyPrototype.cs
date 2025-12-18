@@ -1,4 +1,4 @@
-﻿using Content.Shared.Whitelist;
+using Content.Shared.Whitelist;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
 using Robust.Shared.Utility;
@@ -23,6 +23,12 @@ public sealed partial class CargoBountyPrototype : IPrototype
     [DataField(required: true)]
     public int Reward;
 
+    [DataField]
+    public int SuccessXP = 10;
+
+    [DataField]
+    public int FailureXP = 5;
+
     /// <summary>
     /// A description for flava purposes.
     /// </summary>
@@ -34,6 +40,8 @@ public sealed partial class CargoBountyPrototype : IPrototype
     /// </summary>
     [DataField(required: true)]
     public List<CargoBountyItemEntry> Entries = new();
+
+
 
     /// <summary>
     /// A prefix appended to the beginning of a bounty's ID.

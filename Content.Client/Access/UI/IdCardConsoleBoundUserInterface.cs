@@ -51,7 +51,7 @@ namespace Content.Client.Access.UI
             {
                 Title = EntMan.GetComponent<MetaDataComponent>(Owner).EntityName
             };
-
+            _window.CrewManifestButton.OnPressed += _ => SendMessage(new CrewManifestOpenUiMessage());
             _window.PrivilegedIdButton.OnPressed += _ => SendMessage(new ItemSlotButtonPressedEvent(PrivilegedIdCardSlotId));
             _window.TargetIdButton.OnPressed += _ => SendMessage(new ItemSlotButtonPressedEvent(TargetIdCardSlotId));
 

@@ -101,8 +101,8 @@
 - type: entity
   parent: BaseComputerCircuitboard
   id: StationModComputerCircuitboard
-  name: station modification computer board
-  description: A computer printed circuit board for a station modification computer.
+  name: faction modification computer board
+  description: A computer printed circuit board for a faction modification computer.
   components:
     - type: Sprite
       state: cpu_supply
@@ -120,7 +120,21 @@
     - type: Sprite
       state: cpu_supply
     - type: ComputerBoard
-      prototype: ComputerStationModification
+      prototype: ComputerIdPrinter
+    - type: StaticPrice
+      price: 750
+
+
+- type: entity
+  parent: BaseComputerCircuitboard
+  id: InvoicePrinterCircuitboard
+  name: Invoice printer console board
+  description: A computer printed circuit board for an Invoice printer console.
+  components:
+    - type: Sprite
+      state: cpu_supply
+    - type: ComputerBoard
+      prototype: ComputerInvoicePrinter
     - type: StaticPrice
       price: 750
 

@@ -55,7 +55,7 @@ public sealed class StationModificationConsoleBoundUserInterface : BoundUserInte
             orderRequester = Identity.Name(localPlayer.Value, EntMan);
         else
             orderRequester = string.Empty;
-        
+
         _menu.OnClose += Close;
         _menu.OnOwnerPressed += RemoveOwner;
         _menu.NewOwnerConfirm.OnPressed += AddOwner;
@@ -74,7 +74,7 @@ public sealed class StationModificationConsoleBoundUserInterface : BoundUserInte
         _menu.ReassignmentBtn.OnPressed += ToggleAssign;
         _menu.ITaxConfirm.OnPressed += ChangeITax;
         _menu.ETaxConfirm.OnPressed += ChangeETax;
-
+        _menu.STaxConfirm.OnPressed += ChangeSTax;
         _menu.OpenCentered();
     }
 
@@ -100,6 +100,7 @@ public sealed class StationModificationConsoleBoundUserInterface : BoundUserInte
         {
             _menu.ETaxSpinBox.Value = cState.ExportTax;
             _menu.ITaxSpinBox.Value = cState.ImportTax;
+            _menu.STaxSpinBox.Value = cState.SalesTax;
         }
 
     }
@@ -117,7 +118,7 @@ public sealed class StationModificationConsoleBoundUserInterface : BoundUserInte
     private void RemoveOwner(ButtonEventArgs args)
     {
         if (args.Button is not StationOwnerButton row)
-            return;            
+            return;
 
         SendMessage(new StationModificationRemoveOwner(row.Owner));
     }
@@ -146,9 +147,9 @@ public sealed class StationModificationConsoleBoundUserInterface : BoundUserInte
     }
     private void DeleteAccess(ButtonEventArgs args)
     {
-        if (_menu == null || Accesses == null) return;
+        if (_menu == null || Accesses == null || Accesses.Count == 0) return;
         var i = _menu.PossibleAccesses.SelectedId;
-        var access = Accesses.ElementAt(i);
+        var access = Accesses.ElementAtOrDefault(i);
 
         SendMessage(new StationModificationRemoveAccess(access.Key));
     }
@@ -214,7 +215,13 @@ public sealed class StationModificationConsoleBoundUserInterface : BoundUserInte
 
         SendMessage(new StationModificationChangeExportTax(clevel));
     }
+    private void ChangeSTax(ButtonEventArgs args)
+    {
+        if (_menu == null) return;
+        var clevel = _menu.STaxSpinBox.Value;
 
+        SendMessage(new StationModificationChangeSalesTax(clevel));
+    }
     private void ChangeWage(ButtonEventArgs args)
     {
         if (_menu == null) return;

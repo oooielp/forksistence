@@ -275,8 +275,8 @@
 - type: entity
   parent: BaseFlatpack
   id: ComputerStationModificationFlatpack
-  name: station modifcation computer flatpack
-  description: A flatpack used for constructing a station modifcation computer.
+  name: faction modifcation computer flatpack
+  description: A flatpack used for constructing a faction modifcation computer.
   components:
   - type: Flatpack
     entity: ComputerStationModification

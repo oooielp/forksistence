@@ -55,6 +55,10 @@
   id: EngineeringBoardsStatic
   recipes:
   - SpaceHeaterMachineCircuitBoard
+  - AlertsComputerCircuitboard
+  - AtmosMonitoringComputerCircuitboard
+  - SolarControlComputerCircuitboard
+  - PowerComputerCircuitboard
 
 ## Dynamic
 

@@ -59,7 +59,10 @@ public abstract class SharedPoweredLightSystem : EntitySystem
 
     private void OnComponentStartup(Entity<PoweredLightComponent> ent, ref ComponentStartup args)
     {
-        UpdateLight(ent.Owner, ent.Comp);
+        if(LifeStage(ent.Owner) == EntityLifeStage.MapInitialized)
+        {
+            UpdateLight(ent.Owner, ent.Comp);
+        }
     }
 
     private void OnInit(EntityUid uid, PoweredLightComponent light, ComponentInit args)

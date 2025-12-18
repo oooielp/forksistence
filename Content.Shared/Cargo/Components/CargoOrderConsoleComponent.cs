@@ -146,6 +146,9 @@ public sealed partial class CargoOrderConsoleComponent : Component
     /// </summary>
     [DataField]
     public TimeSpan DenySoundDelay = TimeSpan.FromSeconds(2);
+
+    [DataField]
+    public int SelectedTradeGrid = 0;
 }
 
 /// <summary>
@@ -189,3 +192,18 @@ public sealed class CargoConsoleWithdrawFundsMessage : BoundUserInterfaceMessage
 /// </summary>
 [Serializable, NetSerializable]
 public sealed class CargoConsoleToggleLimitMessage : BoundUserInterfaceMessage;
+
+
+/// <summary>
+/// Toggle the limit on withdrawals and transfers.
+/// </summary>
+[Serializable, NetSerializable]
+public sealed class CargoConsoleSelectTradeMessage : BoundUserInterfaceMessage
+{
+    public int TradeUID;
+
+    public CargoConsoleSelectTradeMessage(int uid)
+    {
+        TradeUID = uid;
+    }
+}

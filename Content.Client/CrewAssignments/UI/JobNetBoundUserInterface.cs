@@ -1,3 +1,4 @@
+using Content.Client.Cargo.UI;
 using Content.Client.CrewAssignments.UI;
 using Content.Shared.Cargo.BUI;
 using Content.Shared.Cargo.Events;
@@ -22,6 +23,9 @@ public sealed class JobNetBoundUserInterface : BoundUserInterface
     private JobNetMenu? _menu;
 
     [ViewVariables]
+    public CodexEntryMenu? _codexMenu;
+
+    [ViewVariables]
     private string _search = string.Empty;
 
     [ViewVariables]
@@ -36,8 +40,10 @@ public sealed class JobNetBoundUserInterface : BoundUserInterface
         base.Open();
 
         _menu = this.CreateWindow<JobNetMenu>();
-
+        _menu._owner = this;
         _menu.PossibleJobs.OnItemSelected += OnJobPressed;
+
+        _codexMenu = new();
 
     }
 

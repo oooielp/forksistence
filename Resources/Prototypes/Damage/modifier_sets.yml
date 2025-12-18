@@ -336,5 +336,5 @@
 - type: damageModifierSet
   id: Vulpkanin
   coefficients:
-    Heat: 1.15
-    Cold: 0.85
+    Heat: 1.20
+    Cold: 0.80

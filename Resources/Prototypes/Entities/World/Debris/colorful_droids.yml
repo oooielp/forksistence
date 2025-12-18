@@ -1,9 +1,36 @@
+# Minimal mob table for all space biomes (except void) - Based on SalvageMagnetMobTable
+- type: entityTable
+  id: BaseSpaceMobTable
+  table: !type:GroupSelector
+    children:
+    - !type:GroupSelector # normal theats
+      weight: 95
+      children:
+      - id: MobCarpSalvage
+        weight: 2
+    - !type:GroupSelector # scary monsters
+      weight: 5
+      children:
+      - !type:AllSelector
+        children:
+        - id: MobSharkSalvage
+        - id: MobCarpSalvage
+          amount: 2
+
+- type: entityTable
+  id: DebugImpossibleSpaceMobTable
+  table: !type:AllSelector
+    children:
+    - id: MobSharkSalvage
+      amount: 100
+
 - type: spaceBiome
   priority: 0 # This probably shouldn't get selected.
   id: BaseBiome
   noiseRanges:
-    BiomeBaseMask:
-      - 0.5,1
+    BiomeBaseMask: # | 0.1,1 = Abundant | 0.35,1 = Common | 0.5,1 = Rare | 0.9,1 = Desolate |
+      - 0.35,1
+  debrisEntityTable: 'BaseSpaceMobTable'
 
 - type: spaceBiome
   parent: BaseBiome
@@ -11,7 +38,7 @@
   priority: 1
   noiseRanges:
     BiomeBase:
-      - 0,4
+      - 2,4
 
   chunkComponents:
     - type: DebrisFeaturePlacerController
@@ -22,17 +49,8 @@
         - id: IronrockDebrisMedium
         - id: IronrockDebrisLarge
           prob: 0.6
-        - id: IronrockDebrisLarger
+        - id: IronrockDebrisHuge
           prob: 0.4
-        - id: IronrockSalvageSmall
-          prob: 0.6
-        - id: IronrockSalvageMedium
-          prob: 0.5
-        - id: IronrockSalvageLarge
-          prob: 0.3
-        - id: IronrockSalvageHuge
-          prob: 0.1
-
     - type: NoiseRangeCarver
       ranges:
         - 0.4, 0.6
@@ -45,7 +63,7 @@
   noiseRanges:
     BiomeBase:
       - 4,6
-    
+
   chunkComponents:
     - type: DebrisFeaturePlacerController
       densityNoiseChannel: Density
@@ -67,24 +85,24 @@
 - type: spaceBiome
   parent: BaseBiome
   id: VolcanicZone
-  priority: 2
+  priority: 1
   noiseRanges:
     BiomeBase:
-      - 6,10
-    
-    Temperature:
-      - 0.7,1
+      - 6,8
+
+    #Temperature:
+      #- 0.7,1
   chunkComponents:
     - type: DebrisFeaturePlacerController
       densityNoiseChannel: Density
     - type: SimpleDebrisSelector
       debrisTable:
-        - id: VolcanicDebrisSmall
-        - id: VolcanicDebrisMedium
+        - id: BasaltDebrisSmall
+        - id: BasaltDebrisMedium
           prob: 0.6
-        - id: VolcanicDebrisLarge
+        - id: BasaltDebrisLarge
           prob: 0.3
-        - id: VolcanicDebrisHuge
+        - id: BasaltDebrisHuge
           prob: 0.1
 
     - type: NoiseRangeCarver
@@ -98,8 +116,8 @@
   priority: 1
   noiseRanges:
     BiomeBase:
-      - 6,10
-    
+      - 8,10
+
   chunkComponents:
     - type: DebrisFeaturePlacerController
       densityNoiseChannel: Density

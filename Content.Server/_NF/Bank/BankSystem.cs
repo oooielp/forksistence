@@ -149,6 +149,32 @@ public sealed partial class BankSystem : SharedBankSystem
         return true;
     }
 
+    public bool TryBankDeposit(string realName, int amount)
+    {
+        if (amount <= 0)
+        {
+            _log.Info($"TryBankDeposit: {amount} is invalid");
+            return false;
+        }
+
+        var component = GetMoneyAccountsComponent();
+        if (component == null)
+        {
+            return false;
+        }
+        MoneyAccountsComponent? accounts = component;
+        var accName = realName;
+        if (!accounts!.TryGetAccount(accName, out var account))
+        {
+            _log.Info($"TryBankDeposit: {accName} has no bank account");
+            return false;
+        }
+        account!.Balance += amount;
+        _log.Info($"{accName} deposited {amount}");
+        DirtyMoneyAccountsComponent();
+        return true;
+    }
+
     /// <summary>
     /// Retrieves a character's balance via its in-game entity, if it has one.
     /// </summary>

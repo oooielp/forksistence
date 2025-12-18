@@ -17,7 +17,7 @@
                 <Label Name="SelectedAccountLabel" />
             </GridContainer>
             <BoxContainer Orientation="Vertical">
-          <!--      <Button Name="CrewManifestButton" Access="Public" Text="{Loc 'crew-manifest-button-label'}" /> -->
+            <Button Name="CrewManifestButton" Access="Public" Text="{Loc 'crew-manifest-button-label'}" />
             </BoxContainer>
         </GridContainer>
         <Control MinSize="0 8" />

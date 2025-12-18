@@ -13,6 +13,10 @@ public sealed partial class StationTrackerComponent : Component
     /// The station this entity is currently on, if any.
     /// Null when in space or not on any grid.
     /// </summary>
-    [DataField, AutoNetworkedField]
+    [DataField(readOnly: true), AutoNetworkedField]
     public EntityUid? Station;
+    [DataField]
+    public int stationUID = 0;
+    [DataField]
+    public bool locked = true;
 }

@@ -14,9 +14,9 @@
     sprite: Clothing/Head/Hardsuits/luxury.rsi
     state: icon
   product: CrateCargoLuxuryHardsuit
-  cost: 15000
+  cost: 10000
   category: cargoproduct-category-name-cargo
-  group: market
+  group: explorermarket3
 
 - type: cargoProduct
   id: CargoParcelWrap
@@ -57,6 +57,27 @@
   cost: 2500
   category: cargoproduct-category-name-cargo
   group: market
+
+- type: cargoProduct
+  id: QuartermasterLocker
+  icon:
+    sprite: Clothing/Head/Hats/beret_qm.rsi
+    state: icon
+  product: LockerQuarterMasterFilledNoDigi
+  cost: 7500
+  category: cargoproduct-category-name-cargo
+  group: market2
+
+- type: cargoProduct
+  id: SalvageLocker
+  icon:
+    sprite: Clothing/Head/Hardsuits/salvage.rsi
+    state: icon
+  product: LockerSalvageSpecialistFilledHardsuit
+  cost: 5000
+  category: cargoproduct-category-name-cargo
+  group: market
+
 
 - type: cargoProduct
   id: CargoMailCart

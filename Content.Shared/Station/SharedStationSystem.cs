@@ -88,12 +88,12 @@ public abstract partial class SharedStationSystem : EntitySystem
     /// <remarks>
     /// This does not remember what station an entity started on, it simply checks where it is currently located.
     /// </remarks>
-    public EntityUid? GetOwningStation(EntityUid entity, TransformComponent? xform = null)
+    public EntityUid? GetOwningStation(EntityUid entity, TransformComponent? xform = null, bool gridOwner = false)
     {
         if (!Resolve(entity, ref xform))
             throw new ArgumentException("Tried to use an abstract entity!", nameof(entity));
 
-        if (TryComp<StationTrackerComponent>(entity, out var stationTracker))
+        if (TryComp<StationTrackerComponent>(entity, out var stationTracker) && !gridOwner)
         {
             // We have a specific station we are tracking and are tethered to.
             return stationTracker.Station;

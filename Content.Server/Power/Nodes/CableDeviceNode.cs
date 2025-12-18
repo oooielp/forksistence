@@ -2,6 +2,8 @@ using Content.Server.NodeContainer;
 using Content.Server.NodeContainer.EntitySystems;
 using Content.Server.NodeContainer.Nodes;
 using Content.Shared.NodeContainer;
+using Content.Server.MCTN.Components;
+using Content.Server.MCTN.Systems;
 using Robust.Shared.Map.Components;
 
 namespace Content.Server.Power.Nodes
@@ -39,6 +41,13 @@ namespace Content.Server.Power.Nodes
         {
             if (!xform.Anchored || grid == null)
                 yield break;
+
+            if (entMan.TryGetComponent<MCTNComponent>(Owner, out var mctn) && entMan.TrySystem<MCTNSystem>(out var uepSys))
+            {
+                var remoteNode = uepSys.GetRemoteConnectionFor(Owner, mctn, this);
+                if (remoteNode != null)
+                    yield return remoteNode;
+            }
 
             var gridIndex = grid.TileIndicesFor(xform.Coordinates);
 

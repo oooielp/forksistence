@@ -5,6 +5,7 @@ using Content.Shared.Access;
 using Content.Shared.Access.Components;
 using Content.Shared.Access.Systems;
 using Content.Shared.Administration.Logs;
+using Content.Shared.CCVar;
 using Content.Shared.Containers.ItemSlots;
 using Content.Shared.CrewAccesses.Components;
 using Content.Shared.CrewAssignments.Components;
@@ -21,14 +22,18 @@ using Robust.Server.Containers;
 using Robust.Server.GameObjects;
 using Robust.Shared.Audio;
 using Robust.Shared.Audio.Systems;
+using Robust.Shared.Configuration;
 using Robust.Shared.Containers;
+using Robust.Shared.Map.Components;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
 using System;
 using System.Globalization;
 using System.Linq;
+using static Content.Shared.Access.Components.AccessOverriderComponent;
 using static Content.Shared.GridControl.Components.GridConfigComponent;
 using static Content.Shared.GridControl.Components.StationCreatorComponent;
+using static Content.Shared.GridControl.Components.StationTaggerComponent;
 
 namespace Content.Server.GridControl.Systems;
 
@@ -46,6 +51,9 @@ public sealed class GridConfigSystem : SharedGridConfigSystem
     [Dependency] private readonly TransformSystem _transform = default!;
     [Dependency] private readonly MetaDataSystem _metaData = default!;
     [Dependency] private readonly ItemSlotsSystem _itemSlots = default!;
+    [Dependency] private readonly MapSystem _mapSystem = default!;
+    [Dependency] private readonly IConfigurationManager _cfg = default!;
+
     public override void Initialize()
     {
         base.Initialize();
@@ -55,8 +63,13 @@ public sealed class GridConfigSystem : SharedGridConfigSystem
         SubscribeLocalEvent<GridConfigComponent, EntRemovedFromContainerMessage>(OnRemoved);
         SubscribeLocalEvent<StationCreatorComponent, EntInsertedIntoContainerMessage>(UpdateUserInterface);
         SubscribeLocalEvent<StationCreatorComponent, EntRemovedFromContainerMessage>(OnRemoved);
-        SubscribeLocalEvent<GridConfigComponent, AfterInteractEvent>(AfterInteractOn);
-        SubscribeLocalEvent<GridConfigComponent, GridConfigDoAfterEvent>(OnDoAfter);
+        
+
+        SubscribeLocalEvent<StationTaggerComponent, StationTaggerDoAfterEvent>(OnDoAfter);
+        SubscribeLocalEvent<StationTaggerComponent, AfterInteractEvent>(AfterInteractOn);
+        SubscribeLocalEvent<StationTaggerComponent, ComponentStartup>(UpdateUserInterface);
+        SubscribeLocalEvent<StationTaggerComponent, EntInsertedIntoContainerMessage>(UpdateUserInterface);
+        SubscribeLocalEvent<StationTaggerComponent, EntRemovedFromContainerMessage>(OnRemoved);
 
 
         Subs.BuiEvents<GridConfigComponent>(GridConfigUiKey.Key, subs =>
@@ -69,7 +82,13 @@ public sealed class GridConfigSystem : SharedGridConfigSystem
             subs.Event<GridConfigDisconnect>(OnDisconnect);
         });
 
-
+        Subs.BuiEvents<StationTaggerComponent>(StationTaggerUiKey.Key, subs =>
+        {
+            subs.Event<BoundUIOpenedEvent>(UpdateUserInterface);
+            subs.Event<StationTaggerTargetSelect>(OnTargetSelect);
+            subs.Event<StationTaggerLink>(OnLink);
+            subs.Event<StationTaggerUnlink>(OnUnlink);
+        });
 
         Subs.BuiEvents<StationCreatorComponent>(StationCreatorUiKey.Key, subs =>
         {
@@ -79,12 +98,43 @@ public sealed class GridConfigSystem : SharedGridConfigSystem
 
     }
 
+    private void OnUnlink(EntityUid uid, StationTaggerComponent component, EntityEventArgs args)
+    {
+        if (component.TargetAccessReaderId == EntityUid.Invalid) return;
+        if(TryComp<StationTrackerComponent>(component.TargetAccessReaderId, out var comp) && comp != null)
+        {
+            EntityManager.RemoveComponent(component.TargetAccessReaderId, comp);
+        }
+        UpdateUserInterface(uid, component, args);
+    }
+    private void OnLink(EntityUid uid, StationTaggerComponent component, EntityEventArgs args)
+    {
+        if (component.TargetAccessReaderId == EntityUid.Invalid) return;
+        if (component.ConnectedStation == null || component.ConnectedStation == 0) return;
+        if (TryComp<StationTrackerComponent>(component.TargetAccessReaderId, out var comp) && comp != null)
+        {
+            return;
+        }
+        if (component.ConnectedStation == null) return;
+        var station = _station.GetStationByID(component.ConnectedStation.Value);
+        if (station == null) return;
+        var comp2 = EnsureComp<StationTrackerComponent>(component.TargetAccessReaderId);
+        if (comp2 == null) return;
+
+        _station.SetStation((component.TargetAccessReaderId, comp2), station);
+        UpdateUserInterface(uid, component, args);
+    }
     private void OnRemoved(EntityUid uid, GridConfigComponent component, EntityEventArgs args)
     {
         component.ConnectedStation = null;
         UpdateUserInterface(uid, component, args);
     }
     private void OnRemoved(EntityUid uid, StationCreatorComponent component, EntityEventArgs args)
+    {
+        component.ConnectedStation = null;
+        UpdateUserInterface(uid, component, args);
+    }
+    private void OnRemoved(EntityUid uid, StationTaggerComponent component, EntityEventArgs args)
     {
         component.ConnectedStation = null;
         UpdateUserInterface(uid, component, args);
@@ -100,6 +150,12 @@ public sealed class GridConfigSystem : SharedGridConfigSystem
         UpdateUserInterface(uid, component, args);
     }
 
+    private void OnTargetSelect(EntityUid uid, StationTaggerComponent component, StationTaggerTargetSelect args)
+    {
+        component.ConnectedStation = args.Target;
+        UpdateUserInterface(uid, component, args);
+    }
+
     private bool Validate(EntityUid uid, GridConfigComponent component, bool requireTarget = true)
     {
         EntityUid? owningStation = _station.GetOwningStation(uid);
@@ -108,6 +164,21 @@ public sealed class GridConfigSystem : SharedGridConfigSystem
         var privilegedIdName = string.Empty;
         var privilegedName = string.Empty;
         bool idPresent = false;
+
+
+        if (component.PersonalMode)
+        {
+            var targetGrid = _transform.GetGrid(uid);
+            if (targetGrid.HasValue && TryComp<MapGridComponent>(targetGrid, out var targetGridComp))
+            {
+                var tiles = _mapSystem.GetAllTiles(targetGrid.Value, targetGridComp);
+                if (tiles.Count() > _cfg.GetCVar(CCVars.GridClaimPersonalMaxTiles))
+                    return false;
+            }
+            else
+                return false;
+        }
+
         if (component.PrivilegedIdSlot.Item is { Valid: true } idCard)
         {
             idPresent = true;
@@ -309,16 +380,15 @@ public sealed class GridConfigSystem : SharedGridConfigSystem
         UpdateUserInterface(uid, component, args);
     }
 
-    private void AfterInteractOn(EntityUid uid, GridConfigComponent component, AfterInteractEvent args)
+    private void AfterInteractOn(EntityUid uid, StationTaggerComponent component, AfterInteractEvent args)
     {
-        return;
         if (args.Target == null || !TryComp(args.Target, out AccessReaderComponent? accessReader))
             return;
 
         if (!_interactionSystem.InRangeUnobstructed(args.User, (EntityUid) args.Target))
             return;
 
-        var doAfterEventArgs = new DoAfterArgs(EntityManager, args.User, component.DoAfter, new GridConfigDoAfterEvent(), uid, target: args.Target, used: uid)
+        var doAfterEventArgs = new DoAfterArgs(EntityManager, args.User, component.DoAfter, new StationTaggerDoAfterEvent(), uid, target: args.Target, used: uid)
         {
             BreakOnMove = true,
             BreakOnDamage = true,
@@ -329,14 +399,15 @@ public sealed class GridConfigSystem : SharedGridConfigSystem
     }
 
 
-    private void OnDoAfter(EntityUid uid, GridConfigComponent component, GridConfigDoAfterEvent args)
+    private void OnDoAfter(EntityUid uid, StationTaggerComponent component, StationTaggerDoAfterEvent args)
     {
         if (args.Handled || args.Cancelled)
             return;
 
         if (args.Args.Target != null)
         {
-            _userInterface.OpenUi(uid, GridConfigUiKey.Key, args.User);
+            component.TargetAccessReaderId = args.Args.Target.Value;
+            _userInterface.OpenUi(uid, StationTaggerUiKey.Key, args.User);
             UpdateUserInterface(uid, component, args);
         }
 
@@ -499,7 +570,15 @@ public sealed class GridConfigSystem : SharedGridConfigSystem
         GridConfigBoundUserInterfaceState newState;
         bool allowed = true;
 
-        newState = new GridConfigBoundUserInterfaceState(idPresent, isOwner, isAuth, component.PersonalMode, possibleStations, targetName, owningPerson, gridName, privilegedIdName, targetStation);
+        int gridTileCount = 0;
+        if (TryComp<MapGridComponent>(grid, out var targetGridComp))
+            gridTileCount = _mapSystem.GetAllTiles(grid.Value, targetGridComp).Count();
+
+        newState = new GridConfigBoundUserInterfaceState(
+            idPresent, isOwner, isAuth, component.PersonalMode, possibleStations,
+            targetName, owningPerson, gridName, privilegedIdName, targetStation,
+            gridTileCount, _cfg.GetCVar(CCVars.GridClaimPersonalMaxTiles)
+        );
 
         _userInterface.SetUiState(uid, GridConfigUiKey.Key, newState);
     }
@@ -527,6 +606,122 @@ public sealed class GridConfigSystem : SharedGridConfigSystem
         newState = new StationCreatorBoundUserInterfaceState(idPresent, privilegedIdName, privilegedName);
 
         _userInterface.SetUiState(uid, StationCreatorUiKey.Key, newState);
+    }
+
+    private void UpdateUserInterface(EntityUid uid, StationTaggerComponent component, EntityEventArgs args)
+    {
+        if (!component.Initialized)
+            return;
+        EntityUid? station = null;
+        if (component.ConnectedStation != null)
+        {
+            station = _station.GetStationByID(component.ConnectedStation.Value);
+        }
+        var privilegedIdName = string.Empty;
+        var privilegedName = string.Empty;
+        bool idPresent = false;
+        if (component.PrivilegedIdSlot.Item is { Valid: true } idCard)
+        {
+            idPresent = true;
+            privilegedIdName = Comp<MetaDataComponent>(idCard).EntityName;
+            if (TryComp<IdCardComponent>(idCard, out var id) && id.FullName != null)
+            {
+                privilegedName = id.FullName;
+            }
+
+        }
+        String? targetName = null;
+        int? targetStation = null;
+        Dictionary<int, string>? possibleStations = null;
+        
+        if (TryComp<StationDataComponent>(station, out var SD) && SD != null)
+        {
+            targetName = SD.StationName;
+            targetStation = SD.UID;
+        }
+        var stations = _station.GetStations();
+        possibleStations = new Dictionary<int, string>();
+        foreach (var iStation in stations)
+        {
+            bool auth = false;
+            var station_name = "";
+            int stationID = 0;
+            if (TryComp<StationDataComponent>(iStation, out var owningSD) && owningSD != null)
+            {
+                stationID = owningSD.UID;
+                if (owningSD.StationName != null)
+                    station_name = owningSD.StationName;
+                if (owningSD.Owners.Contains(privilegedName))
+                {
+                    auth = true;
+                }
+                else
+                {
+                    if (TryComp<CrewRecordsComponent>(iStation, out var owningCrew) && owningCrew != null)
+                    {
+                        if (owningCrew.TryGetRecord(privilegedName, out var crewRecord) && crewRecord != null)
+                        {
+                            if (TryComp<CrewAssignmentsComponent>(iStation, out var crewAssignments) && crewAssignments != null)
+                            {
+                                if (crewAssignments.TryGetAssignment(crewRecord.AssignmentID, out var crewAssignment) && crewAssignment != null)
+                                {
+                                    if (crewAssignment.CanClaim)
+                                    {
+                                        auth = true;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            if (auth)
+            {
+                possibleStations.Add(stationID, station_name);
+            }
+
+        }
+        
+        var targetLabel = Loc.GetString("access-overrider-window-no-target");
+        var targetLabelColor = Color.Red;
+        Entity<AccessReaderComponent>? accessReaderEnt = null;
+        bool allowed = false;
+        string? taggedFaction = null;
+        int taggedStationUID = 0;
+        if (component.TargetAccessReaderId is { Valid: true } accessReader)
+        {
+            if(TryComp<StationTrackerComponent>(accessReader, out var stationTracker) && stationTracker != null)
+            { 
+                var taggedStation = stationTracker.Station;
+                if(TryComp<StationDataComponent>(taggedStation, out var taggedSD) && taggedSD != null)
+                {
+                    taggedFaction = taggedSD.StationName;
+                    taggedStationUID = taggedSD.UID;
+                }
+            }
+            targetLabel = Loc.GetString("access-overrider-window-target-label") + " " + Comp<MetaDataComponent>(component.TargetAccessReaderId).EntityName;
+            targetLabelColor = Color.White;
+            if (accessReader != null)
+            {
+                allowed = PrivilegedIdIsAuthorized(uid, accessReader, component);
+            }
+        }
+        StationTaggerBoundUserInterfaceState newState;
+
+        newState = new StationTaggerBoundUserInterfaceState(idPresent,allowed,privilegedIdName,targetLabel,targetLabelColor,taggedFaction,possibleStations,component.ConnectedStation, taggedStationUID);
+
+        _userInterface.SetUiState(uid, StationTaggerUiKey.Key, newState);
+
+    }
+
+
+    private bool PrivilegedIdIsAuthorized(EntityUid uid, EntityUid? readerComponent, StationTaggerComponent? component = null)
+    {
+        if (!Resolve(uid, ref component) || readerComponent == null)
+            return true;
+
+        var privilegedId = component.PrivilegedIdSlot.Item;
+        return privilegedId != null && _accessReader.IsAllowed(privilegedId.Value, readerComponent.Value);
     }
 
 }

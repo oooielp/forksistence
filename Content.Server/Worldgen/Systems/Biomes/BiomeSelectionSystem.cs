@@ -14,6 +14,7 @@ public sealed class BiomeSelectionSystem : BaseWorldSystem
     [Dependency] private readonly NoiseIndexSystem _noiseIdx = default!;
     [Dependency] private readonly IPrototypeManager _proto = default!;
     [Dependency] private readonly ISerializationManager _ser = default!;
+    [Dependency] private readonly SharedTransformSystem _transform = default!;
 
     /// <inheritdoc />
     public override void Initialize()
@@ -43,19 +44,32 @@ public sealed class BiomeSelectionSystem : BaseWorldSystem
 
     private void OnWorldChunkAdded(EntityUid uid, BiomeSelectionComponent component, ref WorldChunkAddedEvent args)
     {
-        var coords = args.Coords;
-        foreach (var biomeId in component.Biomes)
+        if (!TryComp<WorldChunkComponent>(args.Chunk, out var chunkComponent))
+            return;
+
+        var biomeProto = GetBiomeForChunk(new Entity<WorldChunkComponent>(args.Chunk, chunkComponent));
+
+        if (biomeProto != null)
+            biomeProto.Apply(args.Chunk, _ser, EntityManager);
+        else
+            Log.Error($"Biome selection ran out of biomes to select? See biomes list: {component.Biomes}");
+    }
+
+    public BiomePrototype? GetBiomeForChunk(Entity<WorldChunkComponent> chunk)
+    {
+        if (!TryComp<BiomeSelectionComponent>(chunk.Comp.Map, out var selection))
+            return null;
+
+        foreach (var biomeId in selection.Biomes)
         {
             var biome = GetBiomePrototype(biomeId);
 
-            if (!CheckBiomeValidity(uid, biome, coords))
+            if (!CheckBiomeValidity(chunk.Comp.Map, biome, chunk.Comp.Coordinates))
                 continue;
 
-            biome.Apply(args.Chunk, _ser, EntityManager);
-            return;
+            return biome;
         }
-
-        Log.Error($"Biome selection ran out of biomes to select? See biomes list: {component.Biomes}");
+        return null;
     }
 
     private void OnBiomeSelectionStartup(EntityUid uid, BiomeSelectionComponent component, ComponentStartup args)

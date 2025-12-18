@@ -32,6 +32,7 @@ public sealed partial class CrewAssignmentSystem
     
     private void InitializeConsole()
     {
+        SubscribeLocalEvent<StationModificationConsoleComponent, StationModificationChangeSalesTax>(OnChangeSalesTax);
         SubscribeLocalEvent<StationModificationConsoleComponent, StationModificationChangeExportTax>(OnChangeExportTax);
         SubscribeLocalEvent<StationModificationConsoleComponent, StationModificationChangeImportTax>(OnChangeImportTax);
         SubscribeLocalEvent<StationModificationConsoleComponent, StationModificationRemoveOwner>(OnRemoveOwner);
@@ -180,6 +181,21 @@ public sealed partial class CrewAssignmentSystem
         UpdateOrders(station.Value);
     }
 
+    private void OnChangeSalesTax(EntityUid uid, StationModificationConsoleComponent component, StationModificationChangeSalesTax args)
+    {
+        if (args.Level < 0 || args.Level > 100) return;
+        if (args.Actor is not { Valid: true } player)
+            return;
+
+        var station = _station.GetOwningStation(uid);
+        if (station == null) return;
+
+        if (!Validate(uid, component, player, out var stationData)) return;
+        if (args.Level < 0) return;
+        stationData!.SalesTax = args.Level;
+        UpdateOrders(station.Value);
+
+    }
     private void OnChangeExportTax(EntityUid uid, StationModificationConsoleComponent component, StationModificationChangeExportTax args)
     {
         if (args.Level < 0 || args.Level > 100) return;
@@ -555,7 +571,8 @@ public sealed partial class CrewAssignmentSystem
                 cadata.CrewAccesses,
                 casdata.CrewAssignments,
                 data.ImportTax,
-                data.ExportTax
+                data.ExportTax,
+                data.SalesTax
             ));
         }
     }

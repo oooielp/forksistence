@@ -1,0 +1,48 @@
+using Content.Shared.Access.Components;
+using Content.Shared.Containers.ItemSlots;
+using JetBrains.Annotations;
+using Robust.Shared.GameStates;
+using Robust.Shared.Serialization;
+using Robust.Shared.Prototypes;
+using Content.Shared.Invoices.Components;
+
+namespace Content.Shared.Invoices.Systems
+{
+    [UsedImplicitly]
+    public abstract class SharedInvoicePrinterConsoleSystem : EntitySystem
+    {
+        [Dependency] private readonly ItemSlotsSystem _itemSlotsSystem = default!;
+        [Dependency] private readonly ILogManager _log = default!;
+
+        public const string Sawmill = "idconsole";
+        protected ISawmill _sawmill = default!;
+
+        public override void Initialize()
+        {
+            base.Initialize();
+            _sawmill = _log.GetSawmill(Sawmill);
+
+            SubscribeLocalEvent<InvoicePrinterConsoleComponent, ComponentRemove>(OnComponentRemove);
+            SubscribeLocalEvent<InvoicePrinterConsoleComponent, ComponentInit>(OnComponentInit);
+        }
+
+        private void OnComponentInit(EntityUid uid, InvoicePrinterConsoleComponent component, ComponentInit args)
+        {
+            _itemSlotsSystem.AddItemSlot(uid, InvoicePrinterConsoleComponent.PrivilegedIdCardSlotId, component.PrivilegedIdSlot);
+        }
+
+        private void OnComponentRemove(EntityUid uid, InvoicePrinterConsoleComponent component, ComponentRemove args)
+        {
+            _itemSlotsSystem.RemoveItemSlot(uid, component.PrivilegedIdSlot);
+        }
+
+        [Serializable, NetSerializable]
+        private sealed class InvoicePrinterConsoleComponentState : ComponentState
+        {
+
+            public InvoicePrinterConsoleComponentState()
+            {
+            }
+        }
+    }
+}

@@ -25,6 +25,8 @@ public abstract partial class SharedGridConfigSystem : EntitySystem
         SubscribeLocalEvent<GridConfigComponent, ComponentInit>(OnComponentInit);
         SubscribeLocalEvent<StationCreatorComponent, ComponentRemove>(OnComponentRemove);
         SubscribeLocalEvent<StationCreatorComponent, ComponentInit>(OnComponentInit);
+        SubscribeLocalEvent<StationTaggerComponent, ComponentRemove>(OnComponentRemove);
+        SubscribeLocalEvent<StationTaggerComponent, ComponentInit>(OnComponentInit);
     }
 
     private void OnComponentInit(EntityUid uid, StationCreatorComponent component, ComponentInit args)
@@ -33,6 +35,15 @@ public abstract partial class SharedGridConfigSystem : EntitySystem
     }
 
     private void OnComponentRemove(EntityUid uid, StationCreatorComponent component, ComponentRemove args)
+    {
+        _itemSlotsSystem.RemoveItemSlot(uid, component.PrivilegedIdSlot);
+    }
+    private void OnComponentInit(EntityUid uid, StationTaggerComponent component, ComponentInit args)
+    {
+        _itemSlotsSystem.AddItemSlot(uid, StationTaggerComponent.PrivilegedIdCardSlotId, component.PrivilegedIdSlot);
+    }
+
+    private void OnComponentRemove(EntityUid uid, StationTaggerComponent component, ComponentRemove args)
     {
         _itemSlotsSystem.RemoveItemSlot(uid, component.PrivilegedIdSlot);
     }
@@ -50,6 +61,16 @@ public abstract partial class SharedGridConfigSystem : EntitySystem
     public sealed partial class GridConfigDoAfterEvent : DoAfterEvent
     {
         public GridConfigDoAfterEvent()
+        {
+        }
+
+        public override DoAfterEvent Clone() => this;
+    }
+
+    [Serializable, NetSerializable]
+    public sealed partial class StationTaggerDoAfterEvent : DoAfterEvent
+    {
+        public StationTaggerDoAfterEvent()
         {
         }
 

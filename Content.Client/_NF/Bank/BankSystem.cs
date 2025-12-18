@@ -36,7 +36,6 @@ public sealed partial class BankSystem : SharedBankSystem
         var accName = Name(ent);
         if (!accounts!.TryGetAccount(accName, out var account))
         {
-            _log.Info($"TryGetBalance: {ent} has no bank account");
             return false;
         }
 

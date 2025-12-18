@@ -106,6 +106,14 @@
                     <Button Name="ETaxConfirm" Access="Public"
                         Text="Save"/>
                 </BoxContainer>
+                <BoxContainer Orientation="Horizontal">
+                    <Label Text="Sales Tax:"
+                        StyleClasses="LabelKeyText" />
+                    <Control HorizontalExpand="True"/>
+                    <SpinBox Name="STaxSpinBox" Access="Public" MinWidth="100" Value="0"/>
+                    <Button Name="STaxConfirm" Access="Public"
+                        Text="Save"/>
+                </BoxContainer>
             </BoxContainer>
             <!-- Assignment Management -->
             <BoxContainer Orientation="Vertical" Margin="15">

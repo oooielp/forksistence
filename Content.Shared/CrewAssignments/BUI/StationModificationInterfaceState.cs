@@ -16,8 +16,9 @@ public sealed class StationModificationInterfaceState : BoundUserInterfaceState
     public Dictionary<int, CrewAssignment> CrewAssignments;
     public int ImportTax;
     public int ExportTax;
+    public int SalesTax;
 
-    public StationModificationInterfaceState(string name, NetEntity station, List<string> owners, Dictionary<string, CrewAccess> crewAccess, Dictionary<int, CrewAssignment> crewAssignments, int importTax, int exportTax)
+    public StationModificationInterfaceState(string name, NetEntity station, List<string> owners, Dictionary<string, CrewAccess> crewAccess, Dictionary<int, CrewAssignment> crewAssignments, int importTax, int exportTax, int salesTax)
     {
         Name = name;
         Station = station;
@@ -26,6 +27,6 @@ public sealed class StationModificationInterfaceState : BoundUserInterfaceState
         CrewAssignments = crewAssignments;
         ImportTax = importTax;
         ExportTax = exportTax;
-
+        SalesTax = salesTax;
     }
 }

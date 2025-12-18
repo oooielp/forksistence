@@ -1,5 +1,5 @@
-using Content.Shared.Cargo;
 using Content.Client.Cargo.UI;
+using Content.Shared.Cargo;
 using Content.Shared.Cargo.BUI;
 using Content.Shared.Cargo.Components;
 using Content.Shared.Cargo.Events;
@@ -7,8 +7,9 @@ using Content.Shared.Cargo.Prototypes;
 using Content.Shared.IdentityManagement;
 using Robust.Client.GameObjects;
 using Robust.Client.Player;
-using Robust.Shared.Utility;
+using Robust.Client.UserInterface.Controls;
 using Robust.Shared.Prototypes;
+using Robust.Shared.Utility;
 using static Robust.Client.UserInterface.Controls.BaseButton;
 
 namespace Content.Client.Cargo.BUI
@@ -93,6 +94,7 @@ namespace Content.Client.Cargo.BUI
             };
             _menu.OnOrderApproved += ApproveOrder;
             _menu.OnOrderCanceled += RemoveOrder;
+            _menu.PossibleTrades.OnItemSelected += OnPossibleTradeSelected;
             
             _orderMenu.SubmitButton.OnPressed += (_) =>
             {
@@ -115,14 +117,18 @@ namespace Content.Client.Cargo.BUI
             _menu.OpenCentered();
         }
 
-        private void Populate(List<CargoOrderData> orders)
+        private void OnPossibleTradeSelected(OptionButton.ItemSelectedEventArgs args)
+        {
+            SendMessage(new CargoConsoleSelectTradeMessage(args.Id));
+        }
+        private void Populate(List<CargoOrderData> orders, CargoConsoleInterfaceState state)
         {
             if (_menu == null)
                 return;
 
             _menu.PopulateProducts();
             _menu.PopulateCategories();
-            _menu.PopulateOrders(orders);
+            _menu.PopulateOrders(orders, state);
             _menu.PopulateAccountActions();
         }
 
@@ -144,8 +150,8 @@ namespace Content.Client.Cargo.BUI
                 return;
             _menu.ProductCatalogue = cState.Products;
 
-            _menu?.UpdateStation(station, cState.PersonalMode, cState.Tax);
-            Populate(cState.Orders);
+            _menu?.UpdateStation(station, cState.PersonalMode, cState.Tax, cState.PossibleTrades, cState.SelectedTrade,cState.OwnedTrade);
+            Populate(cState.Orders, cState);
         }
 
         protected override void Dispose(bool disposing)

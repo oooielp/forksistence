@@ -49,6 +49,9 @@ public sealed partial class StationCargoBountyDatabaseComponent : Component
     [DataField]
     public ProtoId<CargoBountyGroupPrototype> Group = "StationBounty";
 
+    [DataField]
+    public Dictionary<ProtoId<CargoBountyGroupPrototype>, int> Groups = new() { {"StationBounty", 4}, {"ServiceBounty", 2} };
+
     /// <summary>
     /// The time at which players will be able to skip the next bounty.
     /// </summary>
@@ -60,4 +63,15 @@ public sealed partial class StationCargoBountyDatabaseComponent : Component
     /// </summary>
     [DataField]
     public TimeSpan SkipDelay = TimeSpan.FromMinutes(15);
+
+    /// <summary>
+    /// The time at which bounties will respawn
+    /// </summary>
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer))]
+    public TimeSpan NextResetTime = TimeSpan.Zero;
+    /// <summary>
+    /// The time between respawning bounties.
+    /// </summary>
+    [DataField]
+    public TimeSpan ResetDelay = TimeSpan.FromMinutes(150);
 }

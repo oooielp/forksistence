@@ -1,3 +1,4 @@
+using Content.Shared.CrewAssignments.Systems;
 using Content.Shared.FixedPoint;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization;
@@ -18,14 +19,20 @@ public sealed class JobNetUpdateState : BoundUserInterfaceState
     public int? Wage;
     public int SelectedStation;
     public TimeSpan? RemainingMinutes;
+    public List<WorldObjectivesEntry> CurrentObjectives;
+    public List<WorldObjectivesEntry> CompletedObjectives;
+    public List<CodexEntry> CodexEntries;
 
-    public JobNetUpdateState( Dictionary<int, string>? stations, string? assignmentName, int? wage, int selectedstation, TimeSpan? remainingminutes)
+    public JobNetUpdateState(Dictionary<int, string>? stations, string? assignmentName, int? wage, int selectedStation, TimeSpan? remainingMinutes, List<WorldObjectivesEntry> currentObjectives, List<WorldObjectivesEntry> completedObjectives, List<CodexEntry> codexEntries)
     {
         Stations = stations;
         AssignmentName = assignmentName;
         Wage = wage;
-        SelectedStation = selectedstation;
-        RemainingMinutes = remainingminutes;
+        SelectedStation = selectedStation;
+        RemainingMinutes = remainingMinutes;
+        CurrentObjectives = currentObjectives;
+        CompletedObjectives = completedObjectives;
+        CodexEntries = codexEntries;
     }
 }
 

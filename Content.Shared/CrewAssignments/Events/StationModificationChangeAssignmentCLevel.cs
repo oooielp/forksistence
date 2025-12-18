@@ -41,4 +41,14 @@ public sealed class StationModificationChangeExportTax : BoundUserInterfaceMessa
     }
 }
 
+[Serializable, NetSerializable]
+public sealed class StationModificationChangeSalesTax : BoundUserInterfaceMessage
+{
+    public int Level;
+
+    public StationModificationChangeSalesTax(int tlevel)
+    {
+        Level = tlevel;
+    }
+}
 
