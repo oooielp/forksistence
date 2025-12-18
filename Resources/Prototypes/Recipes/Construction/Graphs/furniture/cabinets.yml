@@ -113,6 +113,8 @@
     entity: ExtinguisherCabinetOpen
     edges:
     - to: screwing
+      completed:
+        - !type:EmptyAllContainers
       steps:
         - tool: Screwing
           doAfter: 2
