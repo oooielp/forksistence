@@ -101,8 +101,8 @@
 - type: entity
   parent: BaseComputerCircuitboard
   id: StationModComputerCircuitboard
-  name: station modification computer board
-  description: A computer printed circuit board for a station modification computer.
+  name: faction modification computer board
+  description: A computer printed circuit board for a faction modification computer.
   components:
     - type: Sprite
       state: cpu_supply

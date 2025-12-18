@@ -48,7 +48,7 @@
 - type: entity
   parent: BaseItem
   id: StationTagger
-  name: station tagger
+  name: faction tagger
   description: Used to link specific machines and structures with a station.
   components:
     - type: EmitSoundOnLand
@@ -96,8 +96,8 @@
 - type: entity
   parent: BaseItem
   id: StationGenesisDevice
-  name: station genesis device
-  description: A one time use device which creates a new station network which grids can be connected to.
+  name: faction genesis device
+  description: A one time use device which creates a new faction network which grids can be connected to.
   components:
     - type: EmitSoundOnLand
       sound:
