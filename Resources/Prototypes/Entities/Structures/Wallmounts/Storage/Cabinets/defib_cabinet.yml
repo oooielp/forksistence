@@ -17,6 +17,9 @@
       visible: true
     - state: closed
       map: ["enum.OpenableVisuals.Layer"]
+  - type: Icon
+    sprite: Structures/Wallmounts/defib_cabinet.rsi
+    state: "icon"
   - type: ItemSlots
     slots:
       ItemCabinet:
@@ -40,6 +43,9 @@
       - !type:PlaySoundBehavior
         sound:
           collection: MetalGlassBreak
+  - type: Construction
+    graph: DefibrillatorCabinetGraph
+    node: defibrillator_cabinet
 
 - type: entity
   parent: DefibrillatorCabinet
@@ -50,7 +56,6 @@
     opened: true
   - type: Construction
     graph: DefibrillatorCabinetGraph
-    node: defibrillator_cabinet
 
 - type: entity
   parent: DefibrillatorCabinet
@@ -61,25 +66,26 @@
     containers:
       ItemCabinet:
       - Defibrillator
+  - type: Construction
+    graph: DefibrillatorCabinetGraph
 
 - type: entity
   parent: [DefibrillatorCabinetFilled, DefibrillatorCabinetOpen]
   id: DefibrillatorCabinetFilledOpen
   suffix: Filled, Open
+  components:
+  - type: Construction
+    graph: DefibrillatorCabinetGraph
 
 - type: entity
   parent: BaseWallmountGlass
   id: DefibrillatorCabinetAssembly
   name: disassembled defibrillator cabinet
   description: An unfinished defibrillator cabinet.
-  placement:
-    mode: SnapgridCenter
   components:
   - type: Sprite
     sprite: Structures/Wallmounts/defib_cabinet.rsi
-    noRot: false
-    layers:
-    - state: frame
+    state: frame
   - type: Destructible
     thresholds:
     - trigger: !type:DamageTrigger
