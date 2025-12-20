@@ -47,10 +47,12 @@
   save: false
 
 - type: entity
-  parent: [BaseMCTNode, BaseMachinePowered]
+  parent: [BaseMCTNode, BaseMachinePowered, ConstructibleMachine]
   id: MCTNodeMachine
   name: Multi-Channel Transfer Node
   components:
+  - type: Machine
+    board: MCTNMachineCircuitboard
   - type: CollideOnAnchor
   - type: ApcPowerReceiver
     powerLoad: 0

@@ -1,10 +1,12 @@
 - type: entity
   id: GasUnaryBaseNoItem
-  parent: BaseMachine
+  parent: [BaseMachine, ConstructibleMachine]
   abstract: true
   placement:
     mode: SnapgridCenter
   components:
+    - type: Machine
+      board: TrappedFluidExtractorMachineCircuitboard
     # All this to remove a single component..
     # GasPipeSansLayers
     - type: Visibility
