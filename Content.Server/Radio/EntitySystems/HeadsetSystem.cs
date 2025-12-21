@@ -57,7 +57,7 @@ public sealed class HeadsetSystem : SharedHeadsetSystem
         {
             if (TryComp<StationDataComponent>(station, out var data) && data != null)
             {
-                formattedStations.Add(data.UID, data.StationName);
+                if(data.StationName != null) formattedStations.Add(data.UID, data.StationName);
             }
         }
         var newState = new HeadsetMenuBoundUserInterfaceState(formattedStations, component.TransmitTo, component.RecieveFrom);

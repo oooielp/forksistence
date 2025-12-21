@@ -58,7 +58,7 @@ public sealed partial class CargoSystem
         {
             if (TryComp<StationDataComponent>(selectedStation, out var sD) && sD != null)
             {
-                selectedName = sD.StationName;
+                if(sD.StationName != null) selectedName = sD.StationName;
             }
         }
         int taxingStation = 0;
@@ -71,7 +71,10 @@ public sealed partial class CargoSystem
         {
             if (TryComp<StationDataComponent>(station, out var data) && data != null)
             {
-                formattedStations.Add(data.UID, data.StationName);
+                if(data.StationName != null)
+                {
+                    formattedStations.Add(data.UID, data.StationName);
+                }
             }
         }
         if (Transform(uid).GridUid is not { } gridUid)
@@ -96,7 +99,10 @@ public sealed partial class CargoSystem
             {
                 tax = sD.ExportTax;
                 taxingStation = sD.UID;
-                name = sD.StationName;
+                if(sD.StationName != null)
+                {
+                    name = sD.StationName;
+                }
             }
         }
         GetPalletGoods(gridUid, out var toSell, out var goods);

@@ -30,7 +30,6 @@ namespace Content.Client.Access.UI
 
         public void UpdateState(IPrototypeManager protoManager, AccessOverriderBoundUserInterfaceState state)
         {
-            PrivilegedIdGrid.Visible = state.ShowPrivilegedIdGrid;
 
             PrivilegedIdLabel.Text = state.PrivilegedIdName;
             PrivilegedIdButton.Text = state.IsPrivilegedIdPresent
@@ -55,9 +54,6 @@ namespace Content.Client.Access.UI
                     missingPrivileges.Add(tag);
                 }
 
-                MissingPrivilegesLabel.Text = state.ShowPrivilegedIdGrid ?
-                    Loc.GetString("access-overrider-window-missing-privileges") :
-                    Loc.GetString("access-overrider-window-missing-privileges-no-id");
                 MissingPrivilegesText.Text = string.Join(", ", missingPrivileges);
             }
 

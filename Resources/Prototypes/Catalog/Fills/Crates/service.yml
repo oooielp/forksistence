@@ -245,7 +245,6 @@
 - type: entity
   id: CrateServiceBooks
   parent: CrateGenericSteel
-  id: CrateServiceBooks
   name: books crate
   description: Contains 10 empty books of random appearance.
   components:

@@ -12,6 +12,13 @@ namespace Content.Shared.Power.Components;
 public sealed partial class BatterySelfRechargerComponent : Component
 {
     /// <summary>
+    /// bool to control where or not to auto recharge
+    /// </summary>
+    [DataField, AutoNetworkedField, ViewVariables]
+    public bool AutoRecharge;
+
+
+    /// <summary>
     /// At what rate does the entity automatically recharge? In watts.
     /// </summary>
     [DataField, AutoNetworkedField, ViewVariables]

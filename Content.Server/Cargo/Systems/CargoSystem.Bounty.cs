@@ -95,7 +95,10 @@ public sealed partial class CargoSystem
                     {
                         if (TryComp<StationDataComponent>(station, out var sD) && sD != null)
                         {
-                            owner = sD.StationName;
+                            if(sD.StationName != null)
+                            {
+                                owner = sD.StationName;
+                            }
                             tax = sD.ExportTax;
                         }
                         exp = tradeStation.ExperiencePoints;
