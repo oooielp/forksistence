@@ -35,7 +35,7 @@ public sealed partial class StationDataComponent : Component
     public int UID = 0;
 
     [DataField, AutoNetworkedField]
-    public string StationName = "unnamed station";
+    public string? StationName;
 
     [DataField, AutoNetworkedField]
     public int ImportTax = 0;
