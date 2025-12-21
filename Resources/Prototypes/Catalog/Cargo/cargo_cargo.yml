@@ -14,9 +14,9 @@
     sprite: Clothing/Head/Hardsuits/luxury.rsi
     state: icon
   product: CrateCargoLuxuryHardsuit
-  cost: 15000
+  cost: 10000
   category: cargoproduct-category-name-cargo
-  group: market
+  group: explorermarket3
 
 - type: cargoProduct
   id: CargoParcelWrap
@@ -39,11 +39,62 @@
   group: market
 
 - type: cargoProduct
+  id: ComputerWithdrawBankATMFlatpack
+  icon:
+    sprite: _NF/Structures/Machines/atm/atm.rsi
+    state: icon
+  product: ComputerWithdrawBankATMFlatpack
+  cost: 5000
+  category: cargoproduct-category-name-cargo
+  group: market
+
+- type: cargoProduct
+  id: CargoRequestCircuitboard
+  icon:
+    sprite: Objects/Misc/module.rsi
+    state: cpu_supply
+  product: CargoRequestComputerCircuitboard
+  cost: 2500
+  category: cargoproduct-category-name-cargo
+  group: market
+
+- type: cargoProduct
+  id: QuartermasterLocker
+  icon:
+    sprite: Clothing/Head/Hats/beret_qm.rsi
+    state: icon
+  product: LockerQuarterMasterFilledNoDigi
+  cost: 7500
+  category: cargoproduct-category-name-cargo
+  group: market2
+
+- type: cargoProduct
+  id: SalvageLocker
+  icon:
+    sprite: Clothing/Head/Hardsuits/salvage.rsi
+    state: icon
+  product: LockerSalvageSpecialistFilledHardsuit
+  cost: 5000
+  category: cargoproduct-category-name-cargo
+  group: market
+
+
+- type: cargoProduct
   id: CargoMailCart
   icon:
-      sprite: Objects/Specific/Cargo/mailcart.rsi
-      state: icon
+    sprite: Objects/Specific/Cargo/mailcart.rsi
+    state: icon
   product: MailCart
   cost: 300
   category: cargoproduct-category-name-cargo
   group: market
+
+- type: cargoProduct
+  id: BusinessStartingKitCrate
+  icon:
+    sprite: Objects\Misc\bureaucracy.rsi
+    state: acquisition_form_words
+  product: BusinessStartingKit
+  cost: 12500
+  category: cargoproduct-category-name-cargo
+  group: market2

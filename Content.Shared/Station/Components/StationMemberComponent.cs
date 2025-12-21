@@ -13,4 +13,10 @@ public sealed partial class StationMemberComponent : Component
     /// </summary>
     [DataField, AutoNetworkedField]
     public EntityUid Station = EntityUid.Invalid;
+
+    /// <summary>
+    /// Station that this grid is a part of.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public int? StationUID = null;
 }

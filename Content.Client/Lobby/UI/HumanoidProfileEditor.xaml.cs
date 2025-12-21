@@ -72,6 +72,11 @@ namespace Content.Client.Lobby.UI
         public event Action? Save;
 
         /// <summary>
+        /// If we're attempting to join.
+        /// </summary>
+        public event Action? Join;
+
+        /// <summary>
         /// Entity used for the profile editor preview
         /// </summary>
         public EntityUid PreviewDummy;
@@ -109,6 +114,50 @@ namespace Content.Client.Lobby.UI
 
         private ISawmill _sawmill;
 
+        public string ThresholdLore = "An area of space which has been unreachable due to cosmic storms which make long-distance FTL travel lethal to all intelligent creatures.\n\nNanotrasen has discovered a method to send living people into the Threshold by keeping them in cryosleep through the journey.\n\nNanotrasen has begun mass recruiting across the Galaxy in an effort to find people willing to leave everything behind and journey into the Threshold.\n\nThe Threshold is an extremely dangerous area of space with many secrets and mysteries including [bold]bluespace crystal[/bold].";
+        public string NanotrasenLore = "An ultra large galactic RnD firm named Nanotrasen has begun sending colonists into the Threshold.\n\nThe colonists are expected to establish a variety of independent space stations within the Threshold to establish trade infrastructure.\n\nNanotrasen hopes that these stations will allow greater exploration and exploitation of the Threshold.";
+        public Dictionary<string, string> Alignments = new Dictionary<string, string>
+        {
+            { "Lawful Good", "[bold]'Justice'[/bold]\n\nBanish evil through higher authority.\nYou believe law and order is the best way to help others." },
+            { "Good", "[bold]'Temperance'[/bold]\n\nHeal the universe through kindness.\nYou have a strong conviction towards helping others, no matter the cost." },
+            { "Chaotic Good", "[bold]'Strength'[/bold]\n\nSet others free from evil.\nYou believe freedom from tyranny is the best way to help others." },
+            { "Lawful", "[bold]'The Chariot'[/bold]\n\nBring the universe into order.\nYou value law and well ordered society above all else." },
+            { "True Neutral", "[bold]'The Hermit'[/bold]\n\nIn all things, the middle way.\nYou have no strong preference between law and freedom and do not go out of your way to help or harm others." },
+            { "Chaotic", "[bold]'The Moon'[/bold]\n\nUntether yourself from all obligations.\nYou value your own personal freedom above all else." },
+            { "Lawful Evil", "[bold]'The Emperor'[/bold]\n\nRule others with an iron first.\nYou believe order and hierarchy are tools to personally benefit you." },
+            { "Evil", "[bold]'Death'[/bold]\n\nPut yourself before all others.\nYou have no true regard for others and act only to benefit yourself." },
+            { "Chaotic Evil", "[bold]'The Devil'[/bold]\n\nFreedom at any cost.\nYou hate authority and will seek freedom and personal gratification even when it harms others." },
+
+        };
+
+        public Dictionary<string, string> Sigils = new Dictionary<string, string>
+        {
+            { "The Whale", "[bold]Dreaming is impossible in the perfect void of cryosleep.[/bold]\n\nBut as you enter the Threshold you dream of a whale. When it opens its mouth it reveals a giant blue crystal protruding up from its throat.\n\nYour shipmates haul it aboard and start butchering it. The fumes make your eyes and mouth burn viciously." },
+            { "The Lock", "[bold]Dreaming is impossible in the perfect void of cryosleep.[/bold]\n\nBut as you enter the Threshold you dream of a lock. It holds the doors of your cage shut until the day of your execution.\n\nAfter you die you still aren't free, as they put your soul into a vault. All you can see is the lock." },
+            { "The Show", "[bold]Dreaming is impossible in the perfect void of cryosleep.[/bold]\n\nBut as you enter the Threshold you dream of a show. It's the story of your life as a show. In the show you are rejected from joining the crew into the Threshold.\n\nThe show continues on but you cant keep watching it. The signal cant reach." },
+            { "The Thought", "[bold]Dreaming is impossible in the perfect void of cryosleep.[/bold]\n\nBut as you enter the Threshold you dream of a thought. It exists in two places at once and what else could?\n\nIt clamors upwards and happily takes its place along with the others. They are building a gate." },
+            { "The Void", "[bold]Dreaming is impossible in the perfect void of cryosleep.[/bold]\n\nBut as you enter the Threshold the void grows even darker than pitch. You hit the surface of nothingness and go beneath the waters\n\nIt's so cold and when you look up you see yourself looking down at a reflection." }
+        };
+
+        public Dictionary<string, string> Backgrounds = new Dictionary<string, string>
+        {
+            { "Corporate Space Station", "You have worked aboard a large space station for one of the galaxies largest ultra-mega-corps. You didn't get many breaks." },
+            { "Labor World", "You lived on an impoverished world where everyone worked all the time to produce profit for off-world shareholders." },
+            { "War Cursed World", "You lived on a world which is a constant warzone. Survival was a desperate prospect." },
+            { "Suburb World", "You lived on a underpopulated and unimportant world. It wasn't a very exciting place." },
+            { "Core World", "You lived on a world controlled by the Solar Legion, one of the wealthiest Empires in the Galaxy. The planet was in decline." },
+            { "Commune", "You lived as part of a communist refuge. Supplies were very limited." }
+        };
+
+        public Dictionary<string, string> Motives = new Dictionary<string, string>
+        {
+            { "Wealth", "The Threshold offers the promise of eternal riches to those bold enough to seize them." },
+            { "Power", "You are tired of submitting to the authority of others. Within the Threshold you will build your perfect world." },
+            { "Secret Knowledge", "The last frontiers of science may be hidden within the Threshold. You intend to discover them." },
+            { "Friendship", "You want to be well liked and to know many people." },
+            { "Enlightenment", "Rumors swirl that the Gods from a different universe dwell at the edges of the Threshold." }
+        };
+
         public HumanoidProfileEditor(
             IClientPreferencesManager preferencesManager,
             IConfigurationManager configurationManager,
@@ -137,6 +186,71 @@ namespace Content.Client.Lobby.UI
 
             _maxNameLength = _cfgManager.GetCVar(CCVars.MaxNameLength);
             _allowFlavorText = _cfgManager.GetCVar(CCVars.FlavorText);
+
+            foreach (var kv in Alignments)
+            {
+                AlignmentButton.AddItem(kv.Key);
+
+            }
+            AlignmentButton.OnItemSelected += args =>
+            {
+                var e = Alignments.ElementAt(args.Id);
+                AlignTitleLabel.Text = e.Key;
+                AlignDescLabel.Text = e.Value;
+                AlignmentButton.SelectId(args.Id);
+            };
+            AlignmentButton.Select(4);
+            var e = Alignments.ElementAt(4);
+            AlignTitleLabel.Text = e.Key;
+            AlignDescLabel.Text = e.Value;
+            foreach (var kv in Backgrounds)
+            {
+                BGButton.AddItem(kv.Key);
+            }
+            BGButton.OnItemSelected += args =>
+            {
+                var e = Backgrounds.ElementAt(args.Id);
+                BGTitleLabel.Text = e.Key;
+                BGDescLabel.Text = e.Value;
+                BGButton.SelectId(args.Id);
+            };
+            BGButton.Select(0);
+            e = Backgrounds.ElementAt(0);
+            BGTitleLabel.Text = e.Key;
+            BGDescLabel.Text = e.Value;
+            foreach (var kv in Motives)
+            {
+                MotiveButton.AddItem(kv.Key);
+            }
+            MotiveButton.OnItemSelected += args =>
+            {
+                var e = Motives.ElementAt(args.Id);
+                MotiveTitleLabel.Text = e.Key;
+                MotiveDescLabel.Text = e.Value;
+                MotiveButton.SelectId(args.Id);
+            };
+            MotiveButton.Select(3);
+            e = Motives.ElementAt(3);
+            MotiveTitleLabel.Text = e.Key;
+            MotiveDescLabel.Text = e.Value;
+            ThresholdLoreLabel.Text = ThresholdLore;
+            NanotrasenLabel.Text = NanotrasenLore;
+            foreach (var kv in Sigils)
+            {
+                SigilButton.AddItem(kv.Key);
+            }
+            SigilButton.OnItemSelected += args =>
+            {
+                var e = Sigils.ElementAt(args.Id);
+                SigilTitle.Text = e.Key;
+                SigilLabel.Text = e.Value;
+                SigilButton.SelectId(args.Id);
+            };
+            SigilButton.Select(0);
+            e = Sigils.ElementAt(0);
+            SigilTitle.Text = e.Key;
+            SigilLabel.Text = e.Value;
+
 
             ImportButton.OnPressed += args =>
             {
@@ -167,9 +281,13 @@ namespace Content.Client.Lobby.UI
             {
                 Save?.Invoke();
             };
+            JoinGameButton.OnPressed += args =>
+            {
+                Join?.Invoke();
+            };
 
             #region Left
-
+            
             #region Name
 
             NameEdit.OnTextChanged += args => { SetName(args.Text); };
@@ -386,22 +504,7 @@ namespace Content.Client.Lobby.UI
 
             #region Jobs
 
-            TabContainer.SetTabTitle(1, Loc.GetString("humanoid-profile-editor-jobs-tab"));
-
-            PreferenceUnavailableButton.AddItem(
-                Loc.GetString("humanoid-profile-editor-preference-unavailable-stay-in-lobby-button"),
-                (int) PreferenceUnavailableMode.StayInLobby);
-            PreferenceUnavailableButton.AddItem(
-                Loc.GetString("humanoid-profile-editor-preference-unavailable-spawn-as-overflow-button",
-                              ("overflowJob", Loc.GetString(SharedGameTicker.FallbackOverflowJobName))),
-                (int) PreferenceUnavailableMode.SpawnAsOverflow);
-
-            PreferenceUnavailableButton.OnItemSelected += args =>
-            {
-                PreferenceUnavailableButton.SelectId(args.Id);
-                Profile = Profile?.WithPreferenceUnavailable((PreferenceUnavailableMode) args.Id);
-                SetDirty();
-            };
+            TabContainer.SetTabTitle(1, Loc.GetString("humanoid-profile-editor-markings-tab"));
 
             _jobCategories = new Dictionary<string, BoxContainer>();
 
@@ -410,13 +513,11 @@ namespace Content.Client.Lobby.UI
 
             #endregion Jobs
 
-            TabContainer.SetTabTitle(2, Loc.GetString("humanoid-profile-editor-antags-tab"));
 
             RefreshTraits();
 
             #region Markings
 
-            TabContainer.SetTabTitle(4, Loc.GetString("humanoid-profile-editor-markings-tab"));
 
             Markings.OnMarkingAdded += OnMarkingChange;
             Markings.OnMarkingRemoved += OnMarkingChange;
@@ -452,7 +553,12 @@ namespace Content.Client.Lobby.UI
             SpeciesInfoButton.OnPressed += OnSpeciesInfoButtonPressed;
 
             UpdateSpeciesGuidebookIcon();
-            IsDirty = false;
+            if (Profile == null)
+            {
+                Profile = new HumanoidCharacterProfile();
+                RandomizeEverything();
+            }
+            SetDirty();
         }
 
         /// <summary>
@@ -491,111 +597,7 @@ namespace Content.Client.Lobby.UI
         /// </summary>
         public void RefreshTraits()
         {
-            TraitsList.RemoveAllChildren();
-
-            var traits = _prototypeManager.EnumeratePrototypes<TraitPrototype>().OrderBy(t => Loc.GetString(t.Name)).ToList();
-            TabContainer.SetTabTitle(3, Loc.GetString("humanoid-profile-editor-traits-tab"));
-
-            if (traits.Count < 1)
-            {
-                TraitsList.AddChild(new Label
-                {
-                    Text = Loc.GetString("humanoid-profile-editor-no-traits"),
-                    FontColorOverride = Color.Gray,
-                });
-                return;
-            }
-
-            // Setup model
-            Dictionary<string, List<string>> traitGroups = new();
-            List<string> defaultTraits = new();
-            traitGroups.Add(TraitCategoryPrototype.Default, defaultTraits);
-
-            foreach (var trait in traits)
-            {
-                if (trait.Category == null)
-                {
-                    defaultTraits.Add(trait.ID);
-                    continue;
-                }
-
-                if (!_prototypeManager.HasIndex(trait.Category))
-                    continue;
-
-                var group = traitGroups.GetOrNew(trait.Category);
-                group.Add(trait.ID);
-            }
-
-            // Create UI view from model
-            foreach (var (categoryId, categoryTraits) in traitGroups)
-            {
-                TraitCategoryPrototype? category = null;
-
-                if (categoryId != TraitCategoryPrototype.Default)
-                {
-                    category = _prototypeManager.Index<TraitCategoryPrototype>(categoryId);
-                    // Label
-                    TraitsList.AddChild(new Label
-                    {
-                        Text = Loc.GetString(category.Name),
-                        Margin = new Thickness(0, 10, 0, 0),
-                        StyleClasses = { StyleClass.LabelHeading },
-                    });
-                }
-
-                List<TraitPreferenceSelector?> selectors = new();
-                var selectionCount = 0;
-
-                foreach (var traitProto in categoryTraits)
-                {
-                    var trait = _prototypeManager.Index<TraitPrototype>(traitProto);
-                    var selector = new TraitPreferenceSelector(trait);
-
-                    selector.Preference = Profile?.TraitPreferences.Contains(trait.ID) == true;
-                    if (selector.Preference)
-                        selectionCount += trait.Cost;
-
-                    selector.PreferenceChanged += preference =>
-                    {
-                        if (preference)
-                        {
-                            Profile = Profile?.WithTraitPreference(trait.ID, _prototypeManager);
-                        }
-                        else
-                        {
-                            Profile = Profile?.WithoutTraitPreference(trait.ID, _prototypeManager);
-                        }
-
-                        SetDirty();
-                        RefreshTraits(); // If too many traits are selected, they will be reset to the real value.
-                    };
-                    selectors.Add(selector);
-                }
-
-                // Selection counter
-                if (category is { MaxTraitPoints: >= 0 })
-                {
-                    TraitsList.AddChild(new Label
-                    {
-                        Text = Loc.GetString("humanoid-profile-editor-trait-count-hint", ("current", selectionCount) ,("max", category.MaxTraitPoints)),
-                        FontColorOverride = Color.Gray
-                    });
-                }
-
-                foreach (var selector in selectors)
-                {
-                    if (selector == null)
-                        continue;
-
-                    if (category is { MaxTraitPoints: >= 0 } &&
-                        selector.Cost + selectionCount > category.MaxTraitPoints)
-                    {
-                        selector.Checkbox.Label.FontColorOverride = Color.Red;
-                    }
-
-                    TraitsList.AddChild(selector);
-                }
-            }
+            
         }
 
         /// <summary>
@@ -633,79 +635,43 @@ namespace Content.Client.Lobby.UI
 
         public void RefreshAntags()
         {
-            AntagList.RemoveAllChildren();
-            var items = new[]
-            {
-                ("humanoid-profile-editor-antag-preference-yes-button", 0),
-                ("humanoid-profile-editor-antag-preference-no-button", 1)
-            };
-
-            foreach (var antag in _prototypeManager.EnumeratePrototypes<AntagPrototype>().OrderBy(a => Loc.GetString(a.Name)))
-            {
-                if (!antag.SetPreference)
-                    continue;
-
-                var antagContainer = new BoxContainer()
-                {
-                    Orientation = LayoutOrientation.Horizontal,
-                };
-
-                var selector = new RequirementsSelector()
-                {
-                    Margin = new Thickness(3f, 3f, 3f, 0f),
-                };
-                selector.OnOpenGuidebook += OnOpenGuidebook;
-
-                var title = Loc.GetString(antag.Name);
-                var description = Loc.GetString(antag.Objective);
-                selector.Setup(items, title, 250, description, guides: antag.Guides);
-                selector.Select(Profile?.AntagPreferences.Contains(antag.ID) == true ? 0 : 1);
-
-                if (!_requirements.IsAllowed(
-                        antag,
-                        (HumanoidCharacterProfile?)_preferencesManager.Preferences?.SelectedCharacter,
-                        out var reason))
-                {
-                    selector.LockRequirements(reason);
-                    Profile = Profile?.WithAntagPreference(antag.ID, false);
-                    SetDirty();
-                }
-                else
-                {
-                    selector.UnlockRequirements();
-                }
-
-                selector.OnSelected += preference =>
-                {
-                    Profile = Profile?.WithAntagPreference(antag.ID, preference == 0);
-                    SetDirty();
-                };
-
-                antagContainer.AddChild(selector);
-
-                antagContainer.AddChild(new Button()
-                {
-                    Disabled = true,
-                    Text = Loc.GetString("loadout-window"),
-                    HorizontalAlignment = HAlignment.Right,
-                    Margin = new Thickness(3f, 0f, 0f, 0f),
-                });
-
-                AntagList.AddChild(antagContainer);
-            }
+           
         }
 
         private void SetDirty()
         {
-            // If it equals default then reset the button.
-            if (Profile == null || _preferencesManager.Preferences?.SelectedCharacter.MemberwiseEquals(Profile) == true)
+            if (Profile == null)
             {
-                IsDirty = false;
+                Profile = new HumanoidCharacterProfile();
+                RandomizeEverything();
+            }
+            ImportButton.Visible = false;
+            ExportButton.Visible = false;
+            ExportImageButton.Visible = false;
+            ResetButton.Visible = false;
+            OpenImagesButton.Visible = false;
+
+            // If it equals default then reset the button.
+            if (Profile == null || _preferencesManager.Preferences?.SelectedCharacter == null)
+            {
+                IsDirty = true;
+                TabContainer.Visible = true;
+                SaveButton.Visible = true;
+                JoinGameButton.Visible = false;
+                RandomizeEverythingButton.Visible = true;
+                NameRandomize.Visible = true;
+                NameEdit.Editable = true;
                 return;
             }
 
             // TODO: Check if profile matches default.
-            IsDirty = true;
+            IsDirty = false;
+            TabContainer.Visible = false;
+            SaveButton.Visible = false;
+            JoinGameButton.Visible = true;
+            RandomizeEverythingButton.Visible = false;
+            NameRandomize.Visible = false;
+            NameEdit.Editable = false;
         }
 
         /// <summary>
@@ -755,7 +721,7 @@ namespace Content.Client.Lobby.UI
         {
             Profile = profile?.Clone();
             CharacterSlot = slot;
-            IsDirty = false;
+            SetDirty();
             JobOverride = null;
 
             UpdateNameEdit();
@@ -780,10 +746,7 @@ namespace Content.Client.Lobby.UI
             RefreshFlavorText();
             ReloadPreview();
 
-            if (Profile != null)
-            {
-                PreferenceUnavailableButton.SelectId((int) Profile.PreferenceUnavailable);
-            }
+    
         }
 
 
@@ -827,186 +790,7 @@ namespace Content.Client.Lobby.UI
         /// </summary>
         public void RefreshJobs()
         {
-            JobList.RemoveAllChildren();
-            _jobCategories.Clear();
-            _jobPriorities.Clear();
-            var firstCategory = true;
-
-            // Get all displayed departments
-            var departments = new List<DepartmentPrototype>();
-            foreach (var department in _prototypeManager.EnumeratePrototypes<DepartmentPrototype>())
-            {
-                if (department.EditorHidden)
-                    continue;
-
-                departments.Add(department);
-            }
-
-            departments.Sort(DepartmentUIComparer.Instance);
-
-            var items = new[]
-            {
-                ("humanoid-profile-editor-job-priority-never-button", (int) JobPriority.Never),
-                ("humanoid-profile-editor-job-priority-low-button", (int) JobPriority.Low),
-                ("humanoid-profile-editor-job-priority-medium-button", (int) JobPriority.Medium),
-                ("humanoid-profile-editor-job-priority-high-button", (int) JobPriority.High),
-            };
-
-            foreach (var department in departments)
-            {
-                var departmentName = Loc.GetString(department.Name);
-
-                if (!_jobCategories.TryGetValue(department.ID, out var category))
-                {
-                    category = new BoxContainer
-                    {
-                        Orientation = LayoutOrientation.Vertical,
-                        Name = department.ID,
-                        ToolTip = Loc.GetString("humanoid-profile-editor-jobs-amount-in-department-tooltip",
-                            ("departmentName", departmentName))
-                    };
-
-                    if (firstCategory)
-                    {
-                        firstCategory = false;
-                    }
-                    else
-                    {
-                        category.AddChild(new Control
-                        {
-                            MinSize = new Vector2(0, 23),
-                        });
-                    }
-
-                    category.AddChild(new PanelContainer
-                    {
-                        PanelOverride = new StyleBoxFlat {BackgroundColor = Color.FromHex("#464966")},
-                        Children =
-                        {
-                            new Label
-                            {
-                                Text = Loc.GetString("humanoid-profile-editor-department-jobs-label",
-                                    ("departmentName", departmentName)),
-                                Margin = new Thickness(5f, 0, 0, 0)
-                            }
-                        }
-                    });
-
-                    _jobCategories[department.ID] = category;
-                    JobList.AddChild(category);
-                }
-
-                var jobs = department.Roles.Select(jobId => _prototypeManager.Index(jobId))
-                    .Where(job => job.SetPreference)
-                    .ToArray();
-
-                Array.Sort(jobs, JobUIComparer.Instance);
-
-                foreach (var job in jobs)
-                {
-                    var jobContainer = new BoxContainer()
-                    {
-                        Orientation = LayoutOrientation.Horizontal,
-                    };
-
-                    var selector = new RequirementsSelector()
-                    {
-                        Margin = new Thickness(3f, 3f, 3f, 0f),
-                    };
-                    selector.OnOpenGuidebook += OnOpenGuidebook;
-
-                    var icon = new TextureRect
-                    {
-                        TextureScale = new Vector2(2, 2),
-                        VerticalAlignment = VAlignment.Center
-                    };
-                    var jobIcon = _prototypeManager.Index(job.Icon);
-                    icon.Texture = _sprite.Frame0(jobIcon.Icon);
-                    selector.Setup(items, job.LocalizedName, 200, job.LocalizedDescription, icon, job.Guides);
-
-                    if (!_requirements.IsAllowed(job, (HumanoidCharacterProfile?)_preferencesManager.Preferences?.SelectedCharacter, out var reason))
-                    {
-                        selector.LockRequirements(reason);
-                    }
-                    else
-                    {
-                        selector.UnlockRequirements();
-                    }
-
-                    selector.OnSelected += selectedPrio =>
-                    {
-                        var selectedJobPrio = (JobPriority) selectedPrio;
-                        Profile = Profile?.WithJobPriority(job.ID, selectedJobPrio);
-
-                        foreach (var (jobId, other) in _jobPriorities)
-                        {
-                            // Sync other selectors with the same job in case of multiple department jobs
-                            if (jobId == job.ID)
-                            {
-                                other.Select(selectedPrio);
-                                continue;
-                            }
-
-                            if (selectedJobPrio != JobPriority.High || (JobPriority) other.Selected != JobPriority.High)
-                                continue;
-
-                            // Lower any other high priorities to medium.
-                            other.Select((int)JobPriority.Medium);
-                            Profile = Profile?.WithJobPriority(jobId, JobPriority.Medium);
-                        }
-
-                        // TODO: Only reload on high change (either to or from).
-                        ReloadPreview();
-
-                        UpdateJobPriorities();
-                        SetDirty();
-                    };
-
-                    var loadoutWindowBtn = new Button()
-                    {
-                        Text = Loc.GetString("loadout-window"),
-                        HorizontalAlignment = HAlignment.Right,
-                        VerticalAlignment = VAlignment.Center,
-                        Margin = new Thickness(3f, 3f, 0f, 0f),
-                    };
-
-                    var collection = IoCManager.Instance!;
-                    var protoManager = collection.Resolve<IPrototypeManager>();
-
-                    // If no loadout found then disabled button
-                    if (!protoManager.TryIndex<RoleLoadoutPrototype>(LoadoutSystem.GetJobPrototype(job.ID), out var roleLoadoutProto))
-                    {
-                        loadoutWindowBtn.Disabled = true;
-                    }
-                    // else
-                    else
-                    {
-                        loadoutWindowBtn.OnPressed += args =>
-                        {
-                            RoleLoadout? loadout = null;
-
-                            // Clone so we don't modify the underlying loadout.
-                            Profile?.Loadouts.TryGetValue(LoadoutSystem.GetJobPrototype(job.ID), out loadout);
-                            loadout = loadout?.Clone();
-
-                            if (loadout == null)
-                            {
-                                loadout = new RoleLoadout(roleLoadoutProto.ID);
-                                loadout.SetDefault(Profile, _playerManager.LocalSession, _prototypeManager);
-                            }
-
-                            OpenLoadout(job, loadout, roleLoadoutProto);
-                        };
-                    }
-
-                    _jobPriorities.Add((job.ID, selector));
-                    jobContainer.AddChild(selector);
-                    jobContainer.AddChild(loadoutWindowBtn);
-                    category.AddChild(jobContainer);
-                }
-            }
-
-            UpdateJobPriorities();
+            
         }
 
         private void OpenLoadout(JobPrototype? jobProto, RoleLoadout roleLoadout, RoleLoadoutPrototype roleLoadoutProto)
@@ -1500,7 +1284,10 @@ namespace Content.Client.Lobby.UI
 
         private void RandomizeEverything()
         {
-            Profile = HumanoidCharacterProfile.Random();
+            if(Profile != null)
+                 Profile = HumanoidCharacterProfile.RandomWithSpecies(Profile.Species);
+            else
+                Profile = HumanoidCharacterProfile.Random();
             SetProfile(Profile, CharacterSlot);
             SetDirty();
         }

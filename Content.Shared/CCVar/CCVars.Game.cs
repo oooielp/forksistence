@@ -5,6 +5,8 @@ namespace Content.Shared.CCVar;
 
 public sealed partial class CCVars
 {
+    public static readonly CVarDef<int>
+        AutoSaveInterval = CVarDef.Create("game.autosaveinterval", 60, CVar.ARCHIVE);
     /// <summary>
     ///     Disables most functionality in the GameTicker.
     /// </summary>
@@ -63,7 +65,7 @@ public sealed partial class CCVars
     ///     Controls the maximum number of character slots a player is allowed to have.
     /// </summary>
     public static readonly CVarDef<int>
-        GameMaxCharacterSlots = CVarDef.Create("game.maxcharacterslots", 30, CVar.ARCHIVE | CVar.SERVERONLY);
+        GameMaxCharacterSlots = CVarDef.Create("game.maxcharacterslots", 3, CVar.ARCHIVE | CVar.SERVERONLY);
 
     /// <summary>
     ///     Controls the game map prototype to load. SS14 stores these prototypes in Prototypes/Maps.
@@ -409,4 +411,7 @@ public sealed partial class CCVars
     /// </summary>
     public static readonly CVarDef<bool> GameHostnameInTitlebar =
         CVarDef.Create("game.hostname_in_titlebar", true, CVar.SERVER | CVar.REPLICATED);
+
+    public static readonly CVarDef<int> ForensicsMaxEntries =
+        CVarDef.Create("game.forensics_max_entries", 5, CVar.SERVER);
 }

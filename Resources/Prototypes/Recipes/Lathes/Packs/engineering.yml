@@ -22,6 +22,7 @@
   - HandheldStationMap
   - ClothingHeadHatWelding
   - ClothingHeadHatCone
+  - AccessConfigurator
 
 - type: latheRecipePack
   id: AtmosStatic
@@ -47,11 +48,19 @@
   - CellRechargerCircuitboard
   - WeaponCapacitorRechargerCircuitboard
   - FreezerElectronics
+  - MorgueElectronics
+  - BarSignElectronics
 
 - type: latheRecipePack
   id: EngineeringBoardsStatic
   recipes:
   - SpaceHeaterMachineCircuitBoard
+  - AlertsComputerCircuitboard
+  - AtmosMonitoringComputerCircuitboard
+  - SolarControlComputerCircuitboard
+  - PowerComputerCircuitboard
+  - MCTNMachineCircuitboard
+  - TrappedFluidExtractorMachineCircuitboard
 
 ## Dynamic
 

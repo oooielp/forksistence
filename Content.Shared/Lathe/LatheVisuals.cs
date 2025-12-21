@@ -11,7 +11,5 @@ namespace Content.Shared.Lathe
     public enum LatheVisuals : byte
     {
         IsRunning,
-        IsInserting,
-        InsertingColor
     }
 }

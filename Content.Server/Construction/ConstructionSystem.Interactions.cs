@@ -160,6 +160,9 @@ namespace Content.Server.Construction
             if (handle is not HandleResult.True)
                 return handle;
 
+            if (validation) // idk why this isnt checked properly but grilling meat in a griller will bypass validation and straight to handling.
+                return HandleResult.Validated;
+
             // Handle step should never handle the interaction during validation.
             DebugTools.Assert(!validation);
 
@@ -205,6 +208,9 @@ namespace Content.Server.Construction
             var handle = HandleInteraction(uid, ev, step, validation, out user, construction);
             if (handle is not HandleResult.True)
                 return handle;
+
+            if (validation) // idk why this isnt checked properly but grilling meat in a griller will bypass validation and straight to handling.
+                return HandleResult.Validated;
 
             DebugTools.Assert(!validation);
 

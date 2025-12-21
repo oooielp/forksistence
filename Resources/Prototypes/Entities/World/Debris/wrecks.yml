@@ -57,7 +57,7 @@
   components:
     - type: MapGrid
     - type: BlobFloorPlanBuilder
-      floorPlacements: 8
+      floorPlacements: 12
 
 - type: entity
   id: ScrapDebrisMedium
@@ -67,7 +67,8 @@
   components:
     - type: MapGrid
     - type: BlobFloorPlanBuilder
-      floorPlacements: 16
+      radius: 9
+      floorPlacements: 24
 
 - type: entity
   id: ScrapDebrisLarge
@@ -77,4 +78,5 @@
   components:
     - type: MapGrid
     - type: BlobFloorPlanBuilder
-      floorPlacements: 24
+      radius: 11
+      floorPlacements: 36

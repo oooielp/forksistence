@@ -15,8 +15,8 @@ RELEASE_DIR = "release"
 # CONFIGURATION PARAMETERS
 # Forks should change these to publish to their own infrastructure.
 #
-ROBUST_CDN_URL = "https://wizards.cdn.spacestation14.com/"
-FORK_ID = "wizards"
+ROBUST_CDN_URL = "http://194.156.90.191:4000/"
+FORK_ID = "pss14"
 
 def main():
     parser = argparse.ArgumentParser()
@@ -75,9 +75,9 @@ def get_files_to_publish() -> Iterable[str]:
 
 
 def get_engine_version() -> str:
-    proc = subprocess.run(["git", "describe","--tags", "--abbrev=0"], stdout=subprocess.PIPE, cwd="RobustToolbox", check=True, encoding="UTF-8")
+    subprocess.run(["git", "fetch","--tags"], stdout=subprocess.PIPE, cwd="RobustToolbox", check=True, encoding="UTF-8")
+    proc = subprocess.run(["git", "describe","--tags", "--abbrev=0", "--always"], stdout=subprocess.PIPE, cwd="RobustToolbox", check=True, encoding="UTF-8")
     tag = proc.stdout.strip()
-    assert tag.startswith("v")
     return tag[1:] # Cut off v prefix.
 
 

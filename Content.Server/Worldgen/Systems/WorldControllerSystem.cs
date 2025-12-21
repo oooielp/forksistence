@@ -1,10 +1,17 @@
 ﻿using System.Linq;
+using System.Numerics;
 using Content.Server.Worldgen.Components;
+using Content.Server.Worldgen.Systems.Biomes;
+using Content.Shared.CCVar;
+using Content.Shared.EntityTable;
 using Content.Shared.Ghost;
 using Content.Shared.Mind.Components;
 using JetBrains.Annotations;
 using Robust.Server.GameObjects;
+using Robust.Shared.Configuration;
 using Robust.Shared.Map;
+using Robust.Shared.Prototypes;
+using Robust.Shared.Random;
 using Robust.Shared.Timing;
 
 namespace Content.Server.Worldgen.Systems;
@@ -18,6 +25,14 @@ public sealed class WorldControllerSystem : EntitySystem
     [Dependency] private readonly IGameTiming _gameTiming = default!;
     [Dependency] private readonly ILogManager _logManager = default!;
     [Dependency] private readonly MetaDataSystem _metaData = default!;
+
+    [Dependency] private readonly IConfigurationManager _configurationManager = default!;
+    [Dependency] private readonly BiomeSelectionSystem _biomeSelection = default!;
+    [Dependency] private readonly EntityTableSystem _entityTable = default!;
+    [Dependency] private readonly IPrototypeManager _protoMan = default!;
+    [Dependency] private readonly IRobustRandom _random = default!;
+    [Dependency] private readonly ChunkOwnedEntitySystem _ownedEntity = default!;
+
 
     private const int PlayerLoadRadius = 2;
 
@@ -155,13 +170,14 @@ public sealed class WorldControllerSystem : EntitySystem
 
         var loadedEnum = EntityQueryEnumerator<LoadedChunkComponent, WorldChunkComponent>();
         var chunksUnloaded = 0;
+        TimeSpan chunkUnloadDelay = TimeSpan.FromSeconds(_configurationManager.GetCVar(CCVars.WorldChunkUnloadDelay));
 
         // Make sure these chunks get unloaded at the end of the tick.
-        while (loadedEnum.MoveNext(out var uid, out var _, out var chunk))
+        while (loadedEnum.MoveNext(out var uid, out var loadedChunkComp, out var chunk))
         {
             var coords = chunk.Coordinates;
 
-            if (!chunksToLoad[chunk.Map].ContainsKey(coords))
+            if (!chunksToLoad[chunk.Map].ContainsKey(coords) && loadedChunkComp.LoadedOn + chunkUnloadDelay < _gameTiming.CurTime)
             {
                 RemCompDeferred<LoadedChunkComponent>(uid);
                 chunksUnloaded++;
@@ -188,6 +204,9 @@ public sealed class WorldControllerSystem : EntitySystem
                 if (ent is not null && !loadedQuery.TryGetComponent(ent.Value, out c))
                 {
                     c = AddComp<LoadedChunkComponent>(ent.Value);
+
+                    c.LoadedOn = _gameTiming.CurTime;
+                    DoEntitySpawns(ent.Value);
                     count += 1;
                 }
 
@@ -200,6 +219,29 @@ public sealed class WorldControllerSystem : EntitySystem
         {
             var timeSpan = _gameTiming.RealTime - startTime;
             _sawmill.Debug($"Loaded {count} chunks in {timeSpan.TotalMilliseconds:N2}ms.");
+        }
+    }
+
+    private void DoEntitySpawns(EntityUid uid)
+    {
+        if (!TryComp<WorldChunkComponent>(uid, out var worldChunkComp)) return;
+        var biomeProto = _biomeSelection.GetBiomeForChunk(new Entity<WorldChunkComponent>(uid, worldChunkComp));
+        if (
+            biomeProto != null
+            && biomeProto.ChunkEntityTable.HasValue
+            && _protoMan.Resolve(biomeProto.ChunkEntityTable, out var type)
+        )
+        {
+            var chunkCenter = WorldGen.ChunkToWorldCoordsCentered(worldChunkComp.Coordinates);
+            var halfChunk = WorldGen.ChunkSize / 2f;
+            foreach (var spawnProto in _entityTable.GetSpawns(type))
+            {
+                var rX = chunkCenter.X + _random.NextFloat(-halfChunk, halfChunk);
+                var rY = chunkCenter.Y + _random.NextFloat(-halfChunk, halfChunk);
+                var randomCoords = new Vector2(rX, rY);
+
+                _ownedEntity.GenerateEntity(spawnProto, new EntityCoordinates(worldChunkComp.Map, randomCoords));
+            }
         }
     }
 

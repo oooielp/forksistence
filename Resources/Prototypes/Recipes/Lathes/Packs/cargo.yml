@@ -12,6 +12,10 @@
   recipes:
   - OreProcessorMachineCircuitboard
   - SalvageMagnetMachineCircuitboard
+  - RecyclerMachineCircuitboard
+  - CargoBountyComputerCircuitboard
+  - SalvageJobBoardComputerCircuitboard
+  - RadarConsoleCircuitboard
 
 ## Dynamic
 

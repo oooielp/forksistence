@@ -10,16 +10,55 @@
         - id: AsteroidDebrisSmall
         - id: AsteroidDebrisMedium
         - id: AsteroidDebrisLarge
-          prob: 0.7
+          prob: 0.9
         - id: AsteroidDebrisLarger
+          prob: 0.8
+        - id: IronrockDebrisSmall
+          prob: 0.5
+        - id: IronrockDebrisMedium
           prob: 0.4
+        - id: IronrockDebrisLarge
+          prob: 0.3
+        - id: IronrockDebrisLarger
+          prob: 0.2
+        - id: IronrockSalvageSmall
+          prob: 0.4
+        - id: IronrockSalvageMedium
+          prob: 0.3
+        - id: IronrockSalvageLarge
+          prob: 0.1
+        - id: IronrockSalvageHuge
+          prob: 0.05
+        - id: ChromiteDebrisSmall
+          prob: 0.2
+        - id: ChromiteDebrisMedium
+          prob: 0.15
+        - id: ChromiteDebrisLarge
+          prob: 0.1
+        - id: ChromiteDebrisHuge
+          prob: 0.03
+        - id: VolcanicDebrisSmall
+          prob: 0.4
+        - id: VolcanicDebrisMedium
+          prob: 0.3
+        - id: VolcanicDebrisLarge
+          prob: 0.2
+        - id: VolcanicDebrisHuge
+          prob: 0.1
+        - id: AndesiteDebrisSmall
+          prob: 0.4
+        - id: AndesiteDebrisMedium
+          prob: 0.3
+        - id: AndesiteDebrisLarge
+          prob: 0.2
+        - id: AndesiteDebrisHuge
+          prob: 0.1
     - type: NoiseDrivenDebrisSelector
       noiseChannel: Wreck
       debrisTable:
         - id: ScrapDebrisSmall
         - id: ScrapDebrisMedium
         - id: ScrapDebrisLarge
-          prob: 0.5
     - type: NoiseRangeCarver
       ranges:
         - 0.4, 0.6

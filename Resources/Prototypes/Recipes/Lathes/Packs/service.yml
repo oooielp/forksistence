@@ -38,6 +38,11 @@
   - BoozeDispenserMachineCircuitboard
   - SodaDispenserMachineCircuitboard
   - SmartFridgeCircuitboard
+  - IdPrinterCircuitboard
+  - BlockGameArcadeComputerCircuitboard
+  - SpaceVillainArcadeComputerCircuitboard
+  - InvoicePrinterCircuitboard
+  - ComputerTelevisionCircuitboard
 
 ## Dynamic
 

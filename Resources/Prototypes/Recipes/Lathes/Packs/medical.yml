@@ -84,6 +84,10 @@
   - ChemMasterMachineCircuitboard
   - CondenserMachineCircuitBoard
   - HotplateMachineCircuitboard
+  - CrewMonitoringComputerCircuitboard
+  - MedicalRecordsComputerCircuitboard
+  - BodyScannerComputerCircuitboard
+  - CloningConsoleComputerCircuitboard
 
 ## Dynamic
 
@@ -105,3 +109,4 @@
   - StasisBedMachineCircuitboard
   - CryoPodMachineCircuitboard
   - BiomassReclaimerMachineCircuitboard
+  - CrematoriumElectronics

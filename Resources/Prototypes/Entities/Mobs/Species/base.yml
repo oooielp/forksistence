@@ -1,5 +1,5 @@
 - type: entity
-  save: false
+  save: true
   parent:
   - BaseMob
   - MobDamageable
@@ -211,7 +211,7 @@
     - AnomalyHost
 
 - type: entity
-  save: false
+  save: true
   parent:
   - MobBloodstream
   - MobRespirator
@@ -280,7 +280,7 @@
   - type: StunVisuals
 
 - type: entity
-  save: false
+  save: true
   id: BaseSpeciesDummy
   parent: InventoryBase
   abstract: true

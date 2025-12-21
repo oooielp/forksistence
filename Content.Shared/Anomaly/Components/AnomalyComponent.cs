@@ -30,6 +30,7 @@ public sealed partial class AnomalyComponent : Component
     /// value that only matters in relation to the <see cref="GrowthThreshold"/> and <see cref="DecayThreshold"/>
     /// </remarks>
     [ViewVariables(VVAccess.ReadWrite), AutoNetworkedField]
+    [DataField]
     public float Stability = 0f;
 
     /// <summary>
@@ -42,6 +43,7 @@ public sealed partial class AnomalyComponent : Component
     /// Wacky-Stability scale lives on in my heart. - emo
     /// </remarks>
     [ViewVariables(VVAccess.ReadWrite), AutoNetworkedField]
+    [DataField]
     public float Severity = 0f;
 
     #region Health
@@ -52,6 +54,7 @@ public sealed partial class AnomalyComponent : Component
     /// reaching a supercritical point.
     /// </summary>
     [ViewVariables(VVAccess.ReadWrite), AutoNetworkedField]
+    [DataField]
     public float Health = 1f;
 
     /// <summary>

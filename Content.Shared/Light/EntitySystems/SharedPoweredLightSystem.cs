@@ -44,6 +44,7 @@ public abstract class SharedPoweredLightSystem : EntitySystem
     {
         base.Initialize();
         SubscribeLocalEvent<PoweredLightComponent, ComponentInit>(OnInit);
+        SubscribeLocalEvent<PoweredLightComponent, ComponentStartup>(OnComponentStartup);
         SubscribeLocalEvent<PoweredLightComponent, EntRemovedFromContainerMessage>(OnRemoved);
         SubscribeLocalEvent<PoweredLightComponent, EntInsertedIntoContainerMessage>(OnInserted);
         SubscribeLocalEvent<PoweredLightComponent, InteractUsingEvent>(OnInteractUsing);
@@ -54,6 +55,14 @@ public abstract class SharedPoweredLightSystem : EntitySystem
         SubscribeLocalEvent<PoweredLightComponent, PoweredLightDoAfterEvent>(OnDoAfter);
         SubscribeLocalEvent<PoweredLightComponent, DamageChangedEvent>(HandleLightDamaged);
         SubscribeLocalEvent<PoweredLightComponent, EmpPulseEvent>(OnEmpPulse);
+    }
+
+    private void OnComponentStartup(Entity<PoweredLightComponent> ent, ref ComponentStartup args)
+    {
+        if(LifeStage(ent.Owner) == EntityLifeStage.MapInitialized)
+        {
+            UpdateLight(ent.Owner, ent.Comp);
+        }
     }
 
     private void OnInit(EntityUid uid, PoweredLightComponent light, ComponentInit args)

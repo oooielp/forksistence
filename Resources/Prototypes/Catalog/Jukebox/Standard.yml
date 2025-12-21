@@ -39,3 +39,39 @@
   name: PigeonBeans - Sunset
   path:
     path: /Audio/Jukebox/sunset.ogg
+
+- type: jukebox
+  id: thisisrain
+  name: Koollan - This is Rain
+  path:
+    path: /Audio/Jukebox/thisisrain.ogg
+
+- type: jukebox
+  id: peaceandtranquility
+  name: Dolan Somans - Peace and Tranquility
+  path:
+    path: /Audio/Jukebox/peaceandtranquility.ogg
+
+- type: jukebox
+  id: smoothivory
+  name: Koollan - Smooth Ivory
+  path:
+    path: /Audio/Jukebox/smoothivory.ogg
+
+- type: jukebox
+  id: resurfaced
+  name: Koollan - Resurfaced
+  path:
+    path: /Audio/Jukebox/resurfaced.ogg
+
+- type: jukebox
+  id: sanctuary
+  name: DM Dokuro - Sanctuary
+  path:
+    path: /Audio/Jukebox/sanctuary.ogg
+
+- type: jukebox
+  id: dreaminginspace
+  name: Zachariehs - Dreaming in Space
+  path:
+    path: /Audio/Jukebox/dreaminginspace.ogg

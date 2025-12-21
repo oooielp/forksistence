@@ -218,7 +218,7 @@
   parent: CrateCommandSecure
   id: CrateServicePersonnel
   name: personnel crate
-  description: Contains a box of blank ID cards and PDAs.
+  description: Contains a box of blank ID cards and PDAs. 
   components:
   - type: EntityTableContainerFill
     containers:
@@ -228,6 +228,22 @@
         - id: BoxID
 
 - type: entity
+  id: CrateServiceEncryptionKeys
+  parent: CrateCommandSecure
+  name: encryption key crate
+  description: Contains several encryption key boxes inside the crate.
+  components:
+  - type: StorageFill
+    contents:
+    - id: BoxEncryptionKeyCargo
+    - id: BoxEncryptionKeyEngineering
+    - id: BoxEncryptionKeyMedical
+    - id: BoxEncryptionKeyScience
+    - id: BoxEncryptionKeySecurity
+    - id: BoxEncryptionKeyService
+
+- type: entity
+  id: CrateServiceBooks
   parent: CrateGenericSteel
   id: CrateServiceBooks
   name: books crate

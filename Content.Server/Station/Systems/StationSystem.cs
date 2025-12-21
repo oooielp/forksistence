@@ -1,11 +1,16 @@
-using System.Linq;
+using Content.Server.Cargo.Components;
 using Content.Server.Chat.Systems;
+using Content.Server.CrewRecords.Systems;
 using Content.Server.GameTicking;
 using Content.Server.Station.Components;
 using Content.Server.Station.Events;
+using Content.Server.Worldgen.Components.Debris;
+using Content.Shared.GridControl.Components;
 using Content.Shared.Station;
 using Content.Shared.Station.Components;
+using Content.Shared.Warps;
 using JetBrains.Annotations;
+using Robust.Server.GameObjects;
 using Robust.Server.GameStates;
 using Robust.Server.Player;
 using Robust.Shared.Collections;
@@ -14,6 +19,7 @@ using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Player;
 using Robust.Shared.Utility;
+using System.Linq;
 
 namespace Content.Server.Station.Systems;
 
@@ -27,11 +33,14 @@ public sealed partial class StationSystem : SharedStationSystem
 {
     [Dependency] private readonly ILogManager _logManager = default!;
     [Dependency] private readonly IPlayerManager _player = default!;
+    [Dependency] private readonly IEntityManager _entManager = default!;
     [Dependency] private readonly ChatSystem _chatSystem = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
     [Dependency] private readonly MetaDataSystem _metaData = default!;
     [Dependency] private readonly PvsOverrideSystem _pvsOverride = default!;
-
+    [Dependency] private readonly EntityManager _entMan = default!;
+    [Dependency] private readonly CrewMetaRecordsSystem _metaRecords = default!;
+    [Dependency] private readonly MapSystem _mapSystem = default!;
     private ISawmill _sawmill = default!;
 
     private EntityQuery<MapGridComponent> _gridQuery;
@@ -61,6 +70,53 @@ public sealed partial class StationSystem : SharedStationSystem
         SubscribeLocalEvent<StationGridRemovedEvent>(OnStationGridRemoved);
 
         _player.PlayerStatusChanged += OnPlayerStatusChanged;
+    }
+
+
+    public int GetPersonalTileCount(string realName)
+    {
+        var count = 0;
+        var query = _entManager.AllEntityQueryEnumerator<PersonalMemberComponent, MapGridComponent>();
+        while (query.MoveNext(out var gridUid, out var member, out var mapgrid))
+        {
+            if (member.OwnerName == realName)
+            {
+                var tiles = _mapSystem.GetAllTiles(gridUid, mapgrid).Count();
+                count += tiles;
+            }
+
+        }
+        return count;
+    }
+
+    public int GetStationTileCount(EntityUid uid)
+    {
+        var count = 0;
+        var query = _entManager.AllEntityQueryEnumerator<StationMemberComponent, MapGridComponent>();
+        while (query.MoveNext(out var gridUid, out var member, out var mapgrid))
+        {
+            if(member.Station == uid)
+            {
+                var tiles = _mapSystem.GetAllTiles(gridUid, mapgrid).Count();
+                count += tiles;
+            }
+            
+        }
+        return count;
+    }
+    public EntityUid? GetStationTradeStation(EntityUid uid)
+    {
+        var count = 0;
+        var query = _entManager.AllEntityQueryEnumerator<StationMemberComponent, TradeStationComponent>();
+        while (query.MoveNext(out var gridUid, out var member, out var mapgrid))
+        {
+            if (member.Station == uid)
+            {
+                return gridUid;
+            }
+
+        }
+        return null;
     }
 
     private void OnStationSplitEvent(EntityUid uid, StationMemberComponent component, ref PostGridSplitEvent args)
@@ -109,10 +165,41 @@ public sealed partial class StationSystem : SharedStationSystem
     {
         RaiseNetworkEvent(new StationsUpdatedEvent(GetStationNames()), Filter.Broadcast());
 
+        if (component.StationName != null)
+        {
+            RenameStation(uid, component.StationName, false);
+
+        }
         var metaData = MetaData(uid);
         RaiseLocalEvent(new StationInitializedEvent(uid));
         _sawmill.Info($"Set up station {metaData.EntityName} ({uid}).");
         _pvsOverride.AddGlobalOverride(uid);
+        if (component.UID == 0)
+        {
+            var stations = EntityManager.AllComponents<StationDataComponent>();
+            int tryUID = 1;
+            while(component.UID == 0)
+            {
+                bool success = true;
+                foreach (var station in stations)
+                {
+                    if (station.Component.UID == tryUID)
+                    {
+                        success = false;
+                        tryUID++;
+                        break;
+                    }
+                }
+                if(success) component.UID = tryUID;
+            }
+        }
+        if(_metaRecords.MetaRecords != null)
+        {
+            if(!_metaRecords.MetaRecords.Stations.ContainsKey(component.UID))
+            {
+                _metaRecords.MetaRecords.Stations.Add(component.UID, uid);
+            }
+        }
     }
 
     private void OnStationDeleted(EntityUid uid, StationDataComponent component, ComponentShutdown args)
@@ -296,17 +383,18 @@ public sealed partial class StationSystem : SharedStationSystem
     /// <param name="name">Optional override for the station name.</param>
     /// <remarks>This is for ease of use, manually spawning the entity works just fine.</remarks>
     /// <returns>The initialized station.</returns>
-    public EntityUid InitializeNewStation(StationConfig stationConfig, IEnumerable<EntityUid>? gridIds, string? name = null)
+    public EntityUid InitializeNewStation(StationConfig stationConfig, IEnumerable<EntityUid>? gridIds, string? name = null, string? owner = null)
     {
         // Use overrides for setup.
         var station = EntityManager.SpawnEntity(stationConfig.StationPrototype, MapCoordinates.Nullspace, stationConfig.StationComponentOverrides);
-
-        if (name is not null)
-            RenameStation(station, name, false);
-
         DebugTools.Assert(HasComp<StationDataComponent>(station), "Stations should have StationData in their prototype.");
-
+        
         var data = Comp<StationDataComponent>(station);
+        if (name is not null && data.StationName is null)
+            RenameStation(station, name, false);
+        if (owner is not null)
+            data.AddOwner(owner);
+
         name ??= MetaData(station).EntityName;
 
         foreach (var grid in gridIds ?? Array.Empty<EntityUid>())
@@ -348,7 +436,28 @@ public sealed partial class StationSystem : SharedStationSystem
         RaiseLocalEvent(station, new StationGridAddedEvent(mapGrid, station, false), true);
 
         _sawmill.Info($"Adding grid {mapGrid} to station {Name(station)} ({station})");
+        OnGridClaimed(mapGrid);
     }
+
+    public void AddGridToPerson(string owner, EntityUid mapGrid, MapGridComponent? gridComponent = null, StationDataComponent? stationData = null, string? name = null)
+    {
+        if (!Resolve(mapGrid, ref gridComponent))
+            throw new ArgumentException("Tried to initialize a station on a non-grid entity!", nameof(mapGrid));
+
+        if (!string.IsNullOrEmpty(name))
+            _metaData.SetEntityName(mapGrid, name);
+
+        var stationMember = EnsureComp<PersonalMemberComponent>(mapGrid);
+        stationMember.OwnerName = owner;
+
+        OnGridClaimed(mapGrid);
+    }
+
+    private void OnGridClaimed(EntityUid mapGrid)
+    {
+        RemComp<OwnedDebrisComponent>(mapGrid);
+    }
+
 
     /// <summary>
     /// Removes the given grid from a station.
@@ -373,6 +482,14 @@ public sealed partial class StationSystem : SharedStationSystem
         _sawmill.Info($"Removing grid {mapGrid} from station {Name(station)} ({station})");
     }
 
+    public void RemoveGridFromPerson(EntityUid mapGrid, MapGridComponent? gridComponent = null, StationDataComponent? stationData = null)
+    {
+        if (!Resolve(mapGrid, ref gridComponent))
+            throw new ArgumentException("Tried to initialize a station on a non-grid entity!", nameof(mapGrid));
+
+        RemComp<PersonalMemberComponent>(mapGrid);
+    }
+
     /// <summary>
     /// Renames the given station.
     /// </summary>
@@ -389,7 +506,10 @@ public sealed partial class StationSystem : SharedStationSystem
 
         var oldName = metaData.EntityName;
         _metaData.SetEntityName(station, name, metaData);
-
+        if (EntityManager.TryGetComponent<StationDataComponent>(station,out var data))
+        {
+            data.StationName = name;
+        }
         if (loud)
         {
             _chatSystem.DispatchStationAnnouncement(station, $"The station {oldName} has been renamed to {name}.");

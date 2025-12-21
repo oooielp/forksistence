@@ -15,6 +15,8 @@ public sealed partial class JointVisualsComponent : Component
     /// </summary>
     [DataField(required: true), AutoNetworkedField]
     public SpriteSpecifier Sprite = default!;
+    [DataField, AutoNetworkedField]
+    public SpriteSpecifier? SpriteOverlay = null;
 
     /// <summary>
     /// The line is drawn between this target and the entity owning the component.
@@ -36,4 +38,18 @@ public sealed partial class JointVisualsComponent : Component
     /// </summary>
     [DataField, AutoNetworkedField]
     public Vector2 OffsetB;
+
+    [DataField, AutoNetworkedField]
+    public JointOffsetRotationMode OffsetRotationMode = JointOffsetRotationMode.Local;
+
+    [DataField, AutoNetworkedField]
+    public Color? Modulate { get; set; }
+    [DataField, AutoNetworkedField]
+    public Color? ModulateOverlay { get; set; }
+}
+
+public enum JointOffsetRotationMode
+{
+    Local,
+    TowardsTarget
 }

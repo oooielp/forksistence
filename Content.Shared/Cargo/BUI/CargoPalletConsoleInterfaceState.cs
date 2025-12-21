@@ -20,10 +20,33 @@ public sealed class CargoPalletConsoleInterfaceState : BoundUserInterfaceState
     /// </summary>
     public bool Enabled;
 
-    public CargoPalletConsoleInterfaceState(int appraisal, int count, bool enabled)
+    public bool CashMode;
+
+    public int Tax;
+
+    public int TaxingStation;
+
+    public string TaxingName;
+
+    public Dictionary<int, string> FormattedStations;
+
+    public int SelectedStation;
+
+    public string SelectedName;
+
+    
+
+    public CargoPalletConsoleInterfaceState(int appraisal, int count, bool enabled, bool cashmode, int tax, int taxingStation, string taxingName, Dictionary<int, string> formattedStations, int selectedFaction, string selectedName)
     {
         Appraisal = appraisal;
         Count = count;
         Enabled = enabled;
+        CashMode = cashmode;
+        Tax = tax;
+        TaxingStation = taxingStation;
+        FormattedStations = formattedStations;
+        SelectedStation = selectedFaction;
+        TaxingName = taxingName;
+        SelectedName = selectedName;
     }
 }

@@ -26,13 +26,20 @@ public sealed class MaterialStorageSystem : SharedMaterialStorageSystem
     [Dependency] private readonly SharedAudioSystem _audio = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly StackSystem _stackSystem = default!;
+    [Dependency] private readonly SharedAppearanceSystem _appearance = default!;
 
     public override void Initialize()
     {
         base.Initialize();
         SubscribeLocalEvent<MaterialStorageComponent, MachineDeconstructedEvent>(OnDeconstructed);
+        SubscribeLocalEvent<MaterialStorageComponent, ComponentStartup>(OnComponentStartup);
 
         SubscribeAllEvent<EjectMaterialMessage>(OnEjectMessage);
+    }
+
+    private void OnComponentStartup(Entity<MaterialStorageComponent> ent, ref ComponentStartup args)
+    {
+        _appearance.SetData(ent.Owner, MaterialStorageVisuals.Inserting, false);
     }
 
     private void OnDeconstructed(EntityUid uid, MaterialStorageComponent component, MachineDeconstructedEvent args)

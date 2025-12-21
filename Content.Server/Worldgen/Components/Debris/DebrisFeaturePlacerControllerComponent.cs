@@ -20,6 +20,7 @@ public sealed partial class DebrisFeaturePlacerControllerComponent : Component
     /// <summary>
     ///     Whether or not entities are already spawned.
     /// </summary>
+    [DataField("doSpawns")]
     public bool DoSpawns = true;
 
     [DataField("ownedDebris")] public Dictionary<Vector2, EntityUid?> OwnedDebris = new();

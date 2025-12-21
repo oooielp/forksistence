@@ -12,6 +12,10 @@ namespace Content.Server.Atmos.Piping.Trinary.Components
         public bool Enabled = true;
 
         [ViewVariables(VVAccess.ReadWrite)]
+        [DataField]
+        public bool DesiredEnabled = false;
+
+        [ViewVariables(VVAccess.ReadWrite)]
         [DataField("inletOne")]
         public string InletOneName = "inletOne";
 

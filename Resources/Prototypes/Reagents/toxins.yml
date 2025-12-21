@@ -549,7 +549,7 @@
           type: [Animal]
         damage:
           types:
-            Poison: 0.06
+            Poison: 0.2
 
 - type: reagent
   id: Pax

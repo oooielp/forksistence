@@ -60,6 +60,9 @@
   id: Bandana # CargoBounty: BountyBandana
 
 - type: Tag
+  id: BarSignElectronics # 
+
+- type: Tag
   id: BaseballBat # CargoBounty: BountyBaseballBat
 
 - type: Tag
@@ -410,6 +413,9 @@
 
 - type: Tag
   id: Creamsicle # Blacklist on BountyFruit
+
+- type: Tag
+  id: CrematoriumElectronics # Blacklist on BountyFruit
 
 - type: Tag
   id: Crowbar # Storage whitelist: BaseClothingBeltEngineering, ClothingBeltChiefEngineer. ItemMapper: BaseClothingBeltEngineering, ClothingBeltChiefEngineer
@@ -905,6 +911,9 @@
 
 - type: Tag
   id: MagazineShotgun # WeaponShotgunBulldog
+
+- type: Tag
+  id: MorgueElectronics # MorgueElectronics
 
 #endregion
 

@@ -94,6 +94,10 @@ public sealed class DebrisFeaturePlacerSystem : BaseWorldSystem
     private void OnChunkUnloaded(EntityUid uid, DebrisFeaturePlacerControllerComponent component,
         ref WorldChunkUnloadedEvent args)
     {
+        // Remove all debris
+        foreach (var debris in component.OwnedDebris)
+            QueueDel(debris.Value);
+
         component.DoSpawns = true;
     }
 

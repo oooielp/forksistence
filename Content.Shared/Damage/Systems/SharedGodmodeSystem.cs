@@ -8,6 +8,7 @@ using Content.Shared.Slippery;
 using Content.Shared.StatusEffect;
 using Content.Shared.StatusEffectNew;
 using Content.Shared.StatusEffectNew.Components;
+using Robust.Shared.Map.Events;
 using Robust.Shared.Prototypes;
 
 namespace Content.Shared.Damage.Systems;
@@ -28,6 +29,27 @@ public abstract class SharedGodmodeSystem : EntitySystem
         SubscribeLocalEvent<GodmodeComponent, IngestibleEvent>(BeforeEdible);
         SubscribeLocalEvent<GodmodeComponent, SlipAttemptEvent>(OnSlipAttempt);
         SubscribeLocalEvent<GodmodeComponent, DestructionAttemptEvent>(OnDestruction);
+        SubscribeLocalEvent<BeforeSerializationEvent>(OnMapSave);
+        SubscribeLocalEvent<GodmodeComponent, ComponentInit>(OnInit);
+    }
+
+    private void OnInit(Entity<GodmodeComponent> ent, ref ComponentInit args)
+    {
+        if (ent.Comp.DamageDictCopy != null && ent.Comp.OldDamage != null)
+        {
+            ent.Comp.OldDamage.DamageDict = ent.Comp.DamageDictCopy;
+        }
+    }
+
+    private void OnMapSave(BeforeSerializationEvent ev)
+    {
+        var query = EntityQueryEnumerator<GodmodeComponent>();
+        while (query.MoveNext(out var uid, out var comp))
+        {
+            comp.DamageDictCopy = comp.OldDamage?.DamageDict;
+        }
+
+
     }
 
     private void OnSlipAttempt(EntityUid uid, GodmodeComponent component, SlipAttemptEvent args)

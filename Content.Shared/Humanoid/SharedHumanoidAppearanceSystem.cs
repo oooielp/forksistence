@@ -85,6 +85,10 @@ public abstract class SharedHumanoidAppearanceSystem : EntitySystem
 
     private void OnInit(EntityUid uid, HumanoidAppearanceComponent humanoid, ComponentInit args)
     {
+        if(humanoid.Setup)
+        {
+            return;
+        }
         if (string.IsNullOrEmpty(humanoid.Species) || _netManager.IsClient && !IsClientSide(uid))
         {
             return;
@@ -392,7 +396,7 @@ public abstract class SharedHumanoidAppearanceSystem : EntitySystem
         {
             return;
         }
-
+        humanoid.Setup = true;
         SetSpecies(uid, profile.Species, false, humanoid);
         SetSex(uid, profile.Sex, false, humanoid);
         humanoid.EyeColor = profile.Appearance.EyeColor;
@@ -458,7 +462,6 @@ public abstract class SharedHumanoidAppearanceSystem : EntitySystem
         {
             _grammarSystem.SetGender((uid, grammar), profile.Gender);
         }
-
         humanoid.Age = profile.Age;
 
         Dirty(uid, humanoid);

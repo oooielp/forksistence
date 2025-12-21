@@ -87,3 +87,51 @@
   cost: 250
   category: cargoproduct-category-name-security
   group: market
+
+- type: cargoProduct
+  id: FilledDetectiveLocker
+  icon:
+    sprite: Clothing/Head/Hats/greyfedora.rsi
+    state: icon
+  product: LockerDetectiveFilled
+  cost: 3000
+  category: cargoproduct-category-name-security
+  group: market
+
+
+- type: cargoProduct
+  id: FilledBrigmedicLocker
+  icon:
+    sprite: Clothing/Head/Hats/beret_brigmedic.rsi
+    state: icon
+  product: LockerBrigmedicFilled
+  cost: 5000
+  category: cargoproduct-category-name-security
+  group: market2
+
+- type: cargoProduct
+  id: FilledWardenLocker
+  icon:
+    sprite: Clothing/Head/Hats/warden.rsi
+    state: icon
+  product: LockerWardenFilledHardsuit
+  cost: 9000
+  category: cargoproduct-category-name-security
+  group: market2
+
+- type: cargoProduct
+  id: FilledHoSLocker
+  icon:
+    sprite: Clothing/Head/Hats/hoshat.rsi
+    state: icon
+  product: LockerHeadOfSecurityFilledHardsuitNoGun
+  cost: 12500
+  category: cargoproduct-category-name-security
+  group: market2
+
+- type: cargoProduct
+  id: FilledSecLocker
+  icon:
+    sprite: Clothing/Head/Hats/beret_security.rsi
+    state: icon
+  product: LockerSecurityFilled

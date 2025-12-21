@@ -15,4 +15,13 @@ public sealed partial class CCVars
     /// </summary>
     public static readonly CVarDef<string> WorldgenConfig =
         CVarDef.Create("worldgen.worldgen_config", "Default", CVar.SERVERONLY);
+
+    public static readonly CVarDef<int> WorldgenSeed =
+        CVarDef.Create("worldgen.seed", 1337, CVar.SERVERONLY);
+
+    /// <summary>
+    ///     How much round time in seconds must pass before a chunk is unloaded
+    /// </summary>
+    public static readonly CVarDef<int> WorldChunkUnloadDelay =
+        CVarDef.Create("worldgen.chunk_unload_delay", 3 * 24 * 60 * 60, CVar.SERVERONLY); // 3 Days default of total Round Time
 }

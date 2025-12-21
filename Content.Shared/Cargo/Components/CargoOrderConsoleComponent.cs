@@ -17,6 +17,8 @@ namespace Content.Shared.Cargo.Components;
 [Access(typeof(SharedCargoSystem))]
 public sealed partial class CargoOrderConsoleComponent : Component
 {
+    [DataField]
+    public bool PersonalAccountMode = false;
     /// <summary>
     /// The account that this console pulls from for ordering.
     /// </summary>
@@ -45,7 +47,7 @@ public sealed partial class CargoOrderConsoleComponent : Component
     /// The maximum percent of total funds that can be transferred or withdrawn in one action.
     /// </summary>
     [DataField, AutoNetworkedField]
-    public float BaseTransferLimit = 0.20f;
+    public float BaseTransferLimit = 0.05f;
 
     /// <summary>
     /// The time at which account actions can be performed again.
@@ -144,6 +146,9 @@ public sealed partial class CargoOrderConsoleComponent : Component
     /// </summary>
     [DataField]
     public TimeSpan DenySoundDelay = TimeSpan.FromSeconds(2);
+
+    [DataField]
+    public int SelectedTradeGrid = 0;
 }
 
 /// <summary>
@@ -187,3 +192,18 @@ public sealed class CargoConsoleWithdrawFundsMessage : BoundUserInterfaceMessage
 /// </summary>
 [Serializable, NetSerializable]
 public sealed class CargoConsoleToggleLimitMessage : BoundUserInterfaceMessage;
+
+
+/// <summary>
+/// Toggle the limit on withdrawals and transfers.
+/// </summary>
+[Serializable, NetSerializable]
+public sealed class CargoConsoleSelectTradeMessage : BoundUserInterfaceMessage
+{
+    public int TradeUID;
+
+    public CargoConsoleSelectTradeMessage(int uid)
+    {
+        TradeUID = uid;
+    }
+}

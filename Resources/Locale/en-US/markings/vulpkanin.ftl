@@ -1,136 +1,136 @@
 # Ears
-marking-VulpEar-vulp = Vulpkanin ears (Base)
-marking-VulpEar-vulp-inner = Vulpkanin ears (Inner)
-marking-VulpEar = Vulpkanin
+marking-VulpEar-vulp = Canidae ears (Base)
+marking-VulpEar-vulp-inner = Canidae ears (Inner)
+marking-VulpEar = Canidae
 
-marking-VulpEarFade-vulp = Vulpkanin ears (Base)
-marking-VulpEarFade-vulp-fade = Vulpkanin ears (Fade)
-marking-VulpEarFade-vulp-inner = Vulpkanin ears (Inner)
-marking-VulpEarFade = Vulpkanin (Fade)
+marking-VulpEarFade-vulp = Canidae ears (Base)
+marking-VulpEarFade-vulp-fade = Canidae ears (Fade)
+marking-VulpEarFade-vulp-inner = Canidae ears (Inner)
+marking-VulpEarFade = Canidae (Fade)
 
-marking-VulpEarSharp-vulp = Vulpkanin ears (Base)
-marking-VulpEarSharp-vulp-sharp = Vulpkanin ears (Sharp)
-marking-VulpEarSharp-vulp-inner = Vulpkanin ears (Inner)
-marking-VulpEarSharp = Vulpkanin (Sharp)
+marking-VulpEarSharp-vulp = Canidae ears (Base)
+marking-VulpEarSharp-vulp-sharp = Canidae ears (Sharp)
+marking-VulpEarSharp-vulp-inner = Canidae ears (Inner)
+marking-VulpEarSharp = Canidae (Sharp)
 
 marking-VulpEarCoyote-coyote = Coyote ears (Base)
 marking-VulpEarCoyote-coyote-inner = Coyote ears (Inner)
-marking-VulpEarCoyote = Vulpkanin Coyote
+marking-VulpEarCoyote = Canidae Coyote
 
 marking-VulpEarJackal-jackal = Jackal ears (Base)
 marking-VulpEarJackal-jackal-inner = Jackal ears (Inner)
-marking-VulpEarJackal = Vulpkanin Jackal
+marking-VulpEarJackal = Canidae Jackal
 
 marking-VulpEarTerrier-terrier = Terrier ears (Base)
 marking-VulpEarTerrier-terrier-inner = Terrier ears (Inner)
-marking-VulpEarTerrier = Vulpkanin Terrier
+marking-VulpEarTerrier = Canidae Terrier
 
 marking-VulpEarFennec-fennec = Fennec ears (Base)
 marking-VulpEarFennec-fennec-inner = Fennec ears (Inner)
-marking-VulpEarFennec = Vulpkanin Fennec
+marking-VulpEarFennec = Canidae Fennec
 
 marking-VulpEarFox-fox = Fox ears (Base)
 marking-VulpEarFox-fox-inner = Fox ears (Inner)
-marking-VulpEarFox = Vulpkanin Fox
+marking-VulpEarFox = Canidae Fox
 
 marking-VulpEarOtie-otie = Otie ears (Base)
 marking-VulpEarOtie-otie-inner = Otie ears (Inner)
-marking-VulpEarOtie = Vulpkanin Otie
+marking-VulpEarOtie = Canidae Otie
 
 marking-VulpEarShock-shock = Shock ears (Base)
 marking-VulpEarShock-shock-inner = Shock ears (Inner)
-marking-VulpEarShock = Vulpkanin Shock
+marking-VulpEarShock = Canidae Shock
 
 
 # Snout
 
 marking-VulpSnout-snout = Snout
-marking-VulpSnout = Vulpkanin Snout
+marking-VulpSnout = Canidae Snout
 
 marking-VulpSnoutNose-snout-nose = Nose
-marking-VulpSnoutNose = Vulpkanin Nose
+marking-VulpSnoutNose = Canidae Nose
 
 marking-VulpSnoutVulpine-vulpine = Vulpine
-marking-VulpSnoutVulpine = Vulpkanin Vulpine
+marking-VulpSnoutVulpine = Canidae Vulpine
 
 marking-VulpSnoutVulpineLines-vulpine-lines = Vulpine Lines
-marking-VulpSnoutVulpineLines = Vulpkanin Vulpine Lines
+marking-VulpSnoutVulpineLines = Canidae Vulpine Lines
 
 marking-VulpSnoutBlaze-blaze = Blaze
-marking-VulpSnoutBlaze = Vulpkanin Blaze
+marking-VulpSnoutBlaze = Canidae Blaze
 
 marking-VulpSnoutMask-mask = Mask
-marking-VulpSnoutMask = Vulpkanin Mask
+marking-VulpSnoutMask = Canidae Mask
 
 marking-VulpSnoutTop-snout-top = Top
-marking-VulpSnoutTop = Vulpkanin Snout Top
+marking-VulpSnoutTop = Canidae Snout Top
 
 marking-VulpSnoutPatch-patch = Patch
-marking-VulpSnoutPatch = Vulpkanin Patch
+marking-VulpSnoutPatch = Canidae Patch
 
 
 # Head
 
 marking-VulpHeadBlaze-blaze = Blaze
-marking-VulpHeadBlaze = Vulpkanin Blaze
+marking-VulpHeadBlaze = Canidae Blaze
 
 marking-VulpHeadMask-mask = Mask
-marking-VulpHeadMask = Vulpkanin Mask
+marking-VulpHeadMask = Canidae Mask
 
 marking-VulpPatch-patch = Patch
-marking-VulpPatch = Vulpkanin Patch
+marking-VulpPatch = Canidae Patch
 
 marking-VulpSlash-slash = Slash
-marking-VulpSlash = Vulpkanin Slash
+marking-VulpSlash = Canidae Slash
 
 marking-VulpStripes1-stripes_1 = Stripes
-marking-VulpStripes1 = Vulpkanin Stripes 1
+marking-VulpStripes1 = Canidae Stripes 1
 
 marking-VulpStripes2-stripes_2 = Stripes
-marking-VulpStripes2 = Vulpkanin Stripes 2
+marking-VulpStripes2 = Canidae Stripes 2
 
 marking-VulpVulpine-vulpine = Nose
-marking-VulpVulpine = Vulpkanin Nose
+marking-VulpVulpine = Canidae Nose
 
 
 # Tails
 
 marking-VulpTailFennec-fennec = Fennec tail (Base)
 marking-VulpTailFennec-fennec-tip = Fennec tail (Tip)
-marking-VulpTailFennec = Vulpkanin Fennec
+marking-VulpTailFennec = Canidae Fennec
 
 marking-VulpTailFluffy-fluffy = Fluffy tail (Base)
 marking-VulpTailFluffy-fluffy-tip = Fluffy tail (Tip)
-marking-VulpTailFluffy = Vulpkanin Fluffy
+marking-VulpTailFluffy = Canidae Fluffy
 
 marking-VulpTailHusky-husky = Husky tail (Base)
 marking-VulpTailHusky-husky-inner = Husky tail (Inner)
 marking-VulpTailHusky-husky-outer = Husky tail (Outer)
-marking-VulpTailHusky = Vulpkanin Husky
+marking-VulpTailHusky = Canidae Husky
 
 marking-VulpTailLong-long = Long tail (Base)
 marking-VulpTailLong-long-tip = Long tail (Tip)
-marking-VulpTailLong = Vulpkanin Long
+marking-VulpTailLong = Canidae Long
 
-marking-VulpTailVulp-vulp = Vulpkanin tail (Base)
-marking-VulpTailVulp-vulp-tip = Vulpkanin tail (Tip)
-marking-VulpTailVulp = Vulpkanin
+marking-VulpTailVulp-vulp = Canidae tail (Base)
+marking-VulpTailVulp-vulp-tip = Canidae tail (Tip)
+marking-VulpTailVulp = Canidae
 
-marking-VulpTailVulpFade-vulp = Vulpkanin tail (Base)
-marking-VulpTailVulpFade-vulp-fade = Vulpkanin tail (Fade)
-marking-VulpTailVulpFade = Vulpkanin (Fade)
+marking-VulpTailVulpFade-vulp = Canidae tail (Base)
+marking-VulpTailVulpFade-vulp-fade = Canidae tail (Fade)
+marking-VulpTailVulpFade = Canidae (Fade)
 
 
 # Chest
 
 marking-VulpBellyCrest-belly_crest = Belly
-marking-VulpBellyCrest = Vulpkanin Belly Crest
+marking-VulpBellyCrest = Canidae Belly Crest
 
 marking-VulpBellyFull-belly_full = Belly
-marking-VulpBellyFull = Vulpkanin Belly Full
+marking-VulpBellyFull = Canidae Belly Full
 
 marking-VulpBellyFox-belly_fox = Belly
-marking-VulpBellyFox = Vulpkanin Belly Fox
+marking-VulpBellyFox = Canidae Belly Fox
 
 
 # Arms

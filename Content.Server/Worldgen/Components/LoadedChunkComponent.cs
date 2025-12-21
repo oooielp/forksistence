@@ -13,5 +13,8 @@ public sealed partial class LoadedChunkComponent : Component
     ///     The current list of entities loading this chunk.
     /// </summary>
     [ViewVariables] public List<EntityUid>? Loaders = null;
+
+    [DataField]
+    public TimeSpan LoadedOn { get; set; }
 }
 

@@ -4,6 +4,15 @@
     - type: WorldController
     - type: BiomeSelection
       biomes:
-        - AsteroidsFallback
-        - Failsafe
-        - AsteroidsStandard
+        - FrozenWasteBiome
+        - ColdstoneBiome
+        - RockBiome
+        - IronrockBiome
+        - RockyWastesBiome
+        - VolcanicRemnantsBiome
+        - GeoactiveBiome
+        - WeirdmetalBiome
+        - BrassmetalBiome
+        - RainbowBiome
+        - VoidBiome
+        - BaseBiome

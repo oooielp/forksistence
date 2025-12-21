@@ -10,7 +10,7 @@ namespace Content.Shared.MagicMirror;
 [RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class MagicMirrorComponent : Component
 {
-    [DataField]
+    [ViewVariables]
     public DoAfterId? DoAfter;
 
     /// <summary>

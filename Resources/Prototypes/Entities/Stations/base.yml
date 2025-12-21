@@ -3,6 +3,10 @@
   abstract: true
   components:
     - type: StationData
+    - type: CrewAssignments
+    - type: CrewRecords
+    - type: CrewAccesses
+
 
 - type: entity
   id: BaseStationCargo
@@ -30,8 +34,6 @@
 - type: entity
   id: BaseStationRecords
   abstract: true
-  components:
-    - type: StationRecords
 
 - type: entity
   id: BaseStationArrivals
@@ -57,6 +59,7 @@
           addComponents:
             - type: ProtectedGrid
             - type: TradeStation
+            - type: StationCargoBountyDatabase
           paths:
             - /Maps/Shuttles/trading_outpost.yml
         # Spawn last

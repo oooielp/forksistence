@@ -1919,7 +1919,7 @@
 - type: entity
   parent: MobMouse
   suffix: Dead
-  save: false
+  save: true
   id: MobMouseDead
   name: mouse
   description: Squeak!
