@@ -360,6 +360,9 @@
   - type: PhysicalComposition
     materialComposition:
       Coal: 100
+  - type: Tag
+    tags:
+    - Coal
   - type: Item
     heldPrefix: coal
 

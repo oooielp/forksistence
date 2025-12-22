@@ -254,6 +254,7 @@
     heldPrefix: wood
   - type: Tag
     tags:
+    - Wood
     - Wooden
     - RawMaterial
     - ConstructionMaterial
@@ -528,6 +529,9 @@
   - type: PhysicalComposition
     materialComposition:
       Bananium: 150
+  - type: Tag
+    tags:
+    - Bananium
   - type: Sprite
     state: bananium_1
     layers:

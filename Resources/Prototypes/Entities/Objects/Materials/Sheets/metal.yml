@@ -46,6 +46,9 @@
     materialComposition:
       Steel: 100
   - type: Stack
+  - type: Tag
+    tags:
+    - Steel
     stackType: Steel
     baseLayer: base
     layerStates:
@@ -106,6 +109,9 @@
   - type: PhysicalComposition
     materialComposition:
       Brass: 100
+  - type: Tag
+    tags:
+    - Brass
   - type: Stack
     stackType: Brass
     baseLayer: base
@@ -169,6 +175,9 @@
   - type: PhysicalComposition
     materialComposition:
       Plasteel: 100
+  - type: Tag
+    tags:
+    - Plasteel
   - type: Stack
     stackType: Plasteel
     baseLayer: base

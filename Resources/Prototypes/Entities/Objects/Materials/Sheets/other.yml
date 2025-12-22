@@ -84,6 +84,9 @@
   - type: PhysicalComposition
     materialComposition:
       Plasma: 100
+  - type: Tag
+    tags:
+    - Plasma
   - type: Stack
     stackType: Plasma
     baseLayer: base
@@ -207,6 +210,9 @@
   - type: PhysicalComposition
     materialComposition:
       Uranium: 100
+  - type: Tag
+    tags:
+    - Uranium
   - type: Stack
     stackType: Uranium
     baseLayer: base
