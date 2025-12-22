@@ -18,33 +18,51 @@
     - type: SimpleFloorPlanPopulator
       entries:
         Plating:
-          - prob: 3 # Intentional blank.
+          - prob: 2.5 # Intentional blank.
           - id: SalvageMaterialCrateSpawner
-            prob: 1
+            prob: 0.4
           - id: SalvageCanisterSpawner
             prob: 0.2
-          - id: SalvageMobSpawner
-            prob: 0.7
+          - id: SalvageSpawnerMobMagnet
+            prob: 0.2
+          - id: SalvageSpawnerMobMagnet
+            prob: 0.3
           - id: WallSolid
             prob: 1
           - id: Grille
             prob: 0.5
+          - id: SalvageSpawnerScrapCommon
+            prob: 0.9    
+          - id: SalvageSpawnerScrapValuable
+            prob: 0.4                 
         Lattice:
-          - prob: 2
+          - prob: 1.5
           - id: Grille
-            prob: 0.2
+            prob: 0.4
           - id: SalvageMaterialCrateSpawner
+            prob: 0.1
+          - id: SalvageSpawnerScrapValuable
+            prob: 0.4
+          - id: SalvageCanisterSpawner
+            prob: 0.2
+          - id: SalvageSpawnerMobMagnet
+            prob: 0.2
+          - id: SalvageSpawnerScrapValuable
             prob: 0.3
-          - id: SalvageCanisterSpawner
-            prob: 0.2
+          - id: SalvageSpawnerScrapCommon
+            prob: 0.3                
         FloorSteel:
-          - prob: 3 # Intentional blank.
-          - id: SalvageMaterialCrateSpawner
-            prob: 1
-          - id: SalvageCanisterSpawner
+          - prob: 2 # Intentional blank.
+          - id: SalvageSpawnerStructuresVarious
             prob: 0.2
-          - id: SalvageMobSpawner
-            prob: 0.7
+          - id: SalvageSpawnerScrapCommon
+            prob: 0.8            
+          - id: SalvageSpawnerStructuresVarious
+            prob: 0.3
+          - id: SalvageSpawnerMobMagnet
+            prob: 0.4
+          - id: SalvageSpawnerScrapValuable
+            prob: 0.3    
     - type: IFF
       flags: HideLabel
       color: "#88b0d1"
