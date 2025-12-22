@@ -152,11 +152,11 @@
       staticMixture: # IMPORTANT: Use *Mixture instead of air!!
         temperature: 60 # Yall come up with temperature that makes sense
         moles: # Maximum Moles per TILE, factors such as seed upper/lower bound also apply.
-          CarbonDioxide: 512
-          Oxygen: 120
+          CarbonDioxide: 254
+          Nitrogen: 120
       variableMixture:
         Oxygen:
-          moles: 40
+          moles: 80
           prob: 0.1
         Plasma:
           moles: 60
@@ -214,8 +214,8 @@
       staticMixture: # IMPORTANT: Use *Mixture instead of air!!
         temperature: 60 # Yall come up with temperature that makes sense
         moles: # Maximum Moles per TILE, factors such as seed upper/lower bound also apply.
-          CarbonDioxide: 512
-          Oxygen: 120
+          CarbonDioxide: 254
+          Nitrogen: 120
       variableMixture:
         Plasma:
           moles: 60
@@ -272,11 +272,11 @@
       staticMixture: # IMPORTANT: Use *Mixture instead of air!!
         temperature: 60 # Yall come up with temperature that makes sense
         moles: # Maximum Moles per TILE, factors such as seed upper/lower bound also apply.
-          CarbonDioxide: 512
-          Oxygen: 120
+          CarbonDioxide: 254
+          Nitrogen: 120
       variableMixture:
         Oxygen:
-          moles: 60
+          moles: 80
           prob: 0.3
         Plasma:
           moles: 60
@@ -461,7 +461,7 @@
         temperature: 60 # Yall come up with temperature that makes sense
         moles: # Maximum Moles per TILE, factors such as seed upper/lower bound also apply.
           Plasma: 240
-          CarbonDioxide: 100
+          Ammonia: 100
       variableMixture:
         Nitrogen:
           moles: 60
@@ -517,7 +517,7 @@
         temperature: 60 # Yall come up with temperature that makes sense
         moles: # Maximum Moles per TILE, factors such as seed upper/lower bound also apply.
           Plasma: 240
-          CarbonDioxide: 100
+          Ammonia: 100
       variableMixture:
         Nitrogen:
           moles: 60
@@ -570,7 +570,7 @@
         temperature: 60 # Yall come up with temperature that makes sense
         moles: # Maximum Moles per TILE, factors such as seed upper/lower bound also apply.
           Plasma: 240
-          CarbonDioxide: 100
+          Ammonia: 100
       variableMixture:
         Nitrogen:
           moles: 60
@@ -773,11 +773,15 @@
       staticMixture: # IMPORTANT: Use *Mixture instead of air!!
         temperature: 125 # Yall come up with temperature that makes sense
         moles: # Maximum Moles per TILE, factors such as seed upper/lower bound also apply.
-          CarbonDioxide: 420
-          Plasma: 60
+          CarbonDioxide: 270
+          Ammonia: 160
+          Plasma: 20
       variableMixture:
         Plasma:
           moles: 160
+          prob: 0.5
+        Ammonia:
+          moles: 130
           prob: 0.5
 
 - type: entity
@@ -826,12 +830,16 @@
       staticMixture: # IMPORTANT: Use *Mixture instead of air!!
         temperature: 125 # Yall come up with temperature that makes sense
         moles: # Maximum Moles per TILE, factors such as seed upper/lower bound also apply.
-          CarbonDioxide: 420
-          Plasma: 40
+          CarbonDioxide: 230
+          Ammonia: 160
+          Plasma: 10
       variableMixture:
         Plasma:
           moles: 160
           prob: 0.3
+        Ammonia:
+          moles: 100
+          prob: 0.5
 
 - type: entity
   id: BaseBasaltDebrisRich
@@ -879,12 +887,16 @@
       staticMixture: # IMPORTANT: Use *Mixture instead of air!!
         temperature: 125 # Yall come up with temperature that makes sense
         moles: # Maximum Moles per TILE, factors such as seed upper/lower bound also apply.
-          CarbonDioxide: 320
-          Plasma: 100
+          CarbonDioxide: 150
+          Ammonia: 140
+          Plasma: 50
       variableMixture:
         Plasma:
           moles: 180
           prob: 0.7
+        Ammonia:
+          moles: 90
+          prob: 0.5
 
 - type: entity
   id: BasaltDebrisSmall
@@ -1074,7 +1086,12 @@
         temperature: 165 # Yall come up with temperature that makes sense
         moles: # Maximum Moles per TILE, factors such as seed upper/lower bound also apply.
           Nitrogen: 164
+          WaterVapor: 50
+          Ammonia: 75
       variableMixture:
+        WaterVapor:
+          moles: 120
+          prob: 0.7
         Plasma:
           moles: 160
           prob: 0.5
@@ -1126,7 +1143,12 @@
         temperature: 165 # Yall come up with temperature that makes sense
         moles: # Maximum Moles per TILE, factors such as seed upper/lower bound also apply.
           Nitrogen: 140
+          WaterVapor: 100
+          Ammonia: 75
       variableMixture:
+        WaterVapor:
+          moles: 120
+          prob: 0.7
         Plasma:
           moles: 160
           prob: 0.3
@@ -1178,7 +1200,12 @@
         temperature: 165 # Yall come up with temperature that makes sense
         moles: # Maximum Moles per TILE, factors such as seed upper/lower bound also apply.
           Nitrogen: 164
+          WaterVapor: 50
+          Ammonia: 75
       variableMixture:
+        WaterVapor:
+          moles: 50
+          prob: 0.4
         Plasma:
           moles: 160
           prob: 0.7
@@ -1367,14 +1394,17 @@
       staticMixture: # IMPORTANT: Use *Mixture instead of air!!
         temperature: 30 # Yall come up with temperature that makes sense
         moles: # Maximum Moles per TILE, factors such as seed upper/lower bound also apply.
-          Oxygen: 164
-          Frezon: 5
+          Oxygen: 90
+          WaterVapor: 256
       variableMixture:
+        Frezon:
+          moles: 10
+          prob: 0.05
         Plasma:
           moles: 110
           prob: 0.5
         Oxygen:
-          moles: 110
+          moles: 130
           prob: 0.3
 
 - type: entity
@@ -1414,9 +1444,12 @@
       staticMixture: # IMPORTANT: Use *Mixture instead of air!!
         temperature: 30 # Yall come up with temperature that makes sense
         moles: # Maximum Moles per TILE, factors such as seed upper/lower bound also apply.
-          Oxygen: 140
-          Frezon: 5
+          Oxygen: 70
+          WaterVapor: 340
       variableMixture:
+        Frezon:
+          moles: 3
+          prob: 0.1
         Plasma:
           moles: 90
           prob: 0.3
@@ -1461,9 +1494,12 @@
       staticMixture: # IMPORTANT: Use *Mixture instead of air!!
         temperature: 30 # Yall come up with temperature that makes sense
         moles: # Maximum Moles per TILE, factors such as seed upper/lower bound also apply.
-          Oxygen: 164
-          Frezon: 5
+          Oxygen: 125
+          Frezon: 3
+          WaterVapor: 215
       variableMixture:
+        Frezon:
+
         Plasma:
           moles: 110
           prob: 0.7
@@ -1661,19 +1697,19 @@
       staticMixture: # IMPORTANT: Use *Mixture instead of air!!
         temperature: 60 # Yall come up with temperature that makes sense
         moles: # Maximum Moles per TILE, factors such as seed upper/lower bound also apply.
-          Oxygen: 364
           Nitrogen: 120
-          CarbonDioxide: 234
+          CarbonDioxide: 160
+          Ammonia: 60
       variableMixture:
         CarbonDioxide:
           moles: 110
-          prob: 0.2
+          prob: 0.1
         Oxygen:
           moles: 120
-          prob: 0.1
+          prob: 0.3
         Nitrogen:
-          moles: 250
-          prob: 0.2
+          moles: 120
+          prob: 0.1
 
 
 - type: entity
@@ -1719,15 +1755,15 @@
       staticMixture: # IMPORTANT: Use *Mixture instead of air!!
         temperature: 60 # Yall come up with temperature that makes sense
         moles: # Maximum Moles per TILE, factors such as seed upper/lower bound also apply.
-          Oxygen: 250
           Nitrogen: 120
           CarbonDioxide: 200
+          Ammonia: 60
       variableMixture:
         CarbonDioxide:
           moles: 110
           prob: 0.1
         Nitrogen:
-          moles: 250
+          moles: 180
           prob: 0.1
 
 - type: entity
@@ -1773,18 +1809,19 @@
       staticMixture: # IMPORTANT: Use *Mixture instead of air!!
         temperature: 60 # Yall come up with temperature that makes sense
         moles: # Maximum Moles per TILE, factors such as seed upper/lower bound also apply.
-          Oxygen: 364
+          Oxygen: 50
           Nitrogen: 120
-          CarbonDioxide: 234
+          CarbonDioxide: 100
+          Ammoia: 75
       variableMixture:
         CarbonDioxide:
           moles: 110
-          prob: 0.3
+          prob: 0.2
         Oxygen:
           moles: 120
           prob: 0.4
         Nitrogen:
-          moles: 250
+          moles: 180
           prob: 0.4
 
 - type: entity

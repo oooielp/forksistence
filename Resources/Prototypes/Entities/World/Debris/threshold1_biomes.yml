@@ -119,6 +119,7 @@
   noiseRanges:
     BiomeBase:
       - 3,4
+  debrisEntityTable: 'SpaceMobCreaturesTable'
   chunkComponents:
     - type: DebrisFeaturePlacerController
       densityNoiseChannel: Density
@@ -152,6 +153,7 @@
   noiseRanges:
     BiomeBase:
       - 4,5
+  debrisEntityTable: 'SpaceMobCreaturesTable'
   chunkComponents:
     - type: DebrisFeaturePlacerController
       densityNoiseChannel: Density
@@ -178,6 +180,7 @@
   noiseRanges:
     BiomeBase:
       - 5,6
+  debrisEntityTable: 'SpaceMobCreaturesTable'
   chunkComponents:
     - type: DebrisFeaturePlacerController
       densityNoiseChannel: Density
@@ -203,6 +206,7 @@
   noiseRanges:
     BiomeBase:
       - 6,7
+  debrisEntityTable: 'SpaceMobCreaturesTable'
   chunkComponents:
     - type: DebrisFeaturePlacerController
       densityNoiseChannel: Density
@@ -236,6 +240,7 @@
   noiseRanges:
     BiomeBase:
       - 7,8
+  debrisEntityTable: 'SpaceMobCreaturesTable'
   chunkComponents:
     - type: DebrisFeaturePlacerController
       densityNoiseChannel: Density
@@ -261,6 +266,7 @@
   noiseRanges:
     BiomeBase:
       - 8,9
+  debrisEntityTable: 'SpaceMobCreaturesTable'
   chunkComponents:
     - type: DebrisFeaturePlacerController
       densityNoiseChannel: Density
@@ -288,6 +294,7 @@
   noiseRanges:
     BiomeBase:
       - 9,10
+  debrisEntityTable: 'SpaceMobCreaturesTable'
   chunkComponents:
     - type: DebrisFeaturePlacerController
       densityNoiseChannel: Density

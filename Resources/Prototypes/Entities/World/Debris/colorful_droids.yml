@@ -18,6 +18,27 @@
           amount: 2
 
 - type: entityTable
+  id: SpaceMobCreaturesTable
+  table: !type:GroupSelector
+    children:
+    - !type:GroupSelector # normal theats
+      weight: 95
+      children:
+      - id: MobCarpSalvage
+        amount: 2
+        weight: 2
+    - !type:GroupSelector # scary monsters
+      weight: 5
+      children:
+      - !type:AllSelector
+        children:
+        - id: MobGoliath
+        - id: MobCarpSalvage
+          amount: 2
+        - id: MobBasilisk
+
+
+- type: entityTable
   id: DebugImpossibleSpaceMobTable
   table: !type:AllSelector
     children:
