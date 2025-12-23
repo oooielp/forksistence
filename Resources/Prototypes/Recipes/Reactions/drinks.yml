@@ -445,19 +445,6 @@
     ErikaSurprise: 6
 
 - type: reaction
-  id: EthanolBreakdown
-  source: true
-  requiredMixerCategories:
-  - Electrolysis
-  reactants:
-    Ethanol:
-      amount: 9
-  products:
-    Hydrogen: 6
-    Carbon: 2
-    Oxygen: 1
-
-- type: reaction
   id: FourteenLoko
   reactants:
     Coffee:
