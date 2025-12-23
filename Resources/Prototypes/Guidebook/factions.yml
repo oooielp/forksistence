@@ -1,0 +1,17 @@
+- type: guideEntry
+  id: Factions
+  name: Factions
+  text: "/ServerInfo/Guidebook/Persistence/Factions.xml"
+  children:
+  - FactionCreation
+  - FactionModification
+
+- type: guideEntry
+  id: FactionCreation
+  name: Faction Creation
+  text: "/ServerInfo/Guidebook/Persistence/FactionCreation.xml"
+
+- type: guideEntry
+  id: FactionModification
+  name: Faction Modification
+  text: "/ServerInfo/Guidebook/Persistence/FactionModification.xml"
