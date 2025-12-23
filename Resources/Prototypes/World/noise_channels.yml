@@ -11,11 +11,53 @@
   minimum: 45.0
 
 - type: noiseChannel
+  id: DensityMid
+  noiseType: Perlin
+  fractalLacunarityByPi: 0.666666666
+  remapTo0Through1: true
+  clippingRanges:
+    - 0.4, 0.6
+  clippedValue: 1.658 # magic number for chunk size.
+  inputMultiplier: 4 # Makes density hopefully low noise in the local area while still being interesting at scale.
+  outputMultiplier: 50.0 # We scale density up significantly for more human-friendly numbers.
+  minimum: 45.0
+
+- type: noiseChannel
+  id: DensityLow
+  noiseType: Perlin
+  fractalLacunarityByPi: 0.666666666
+  remapTo0Through1: true
+  clippingRanges:
+    - 0.4, 0.6
+  clippedValue: 1.658 # magic number for chunk size.
+  inputMultiplier: 2 # Makes density hopefully low noise in the local area while still being interesting at scale.
+  outputMultiplier: 50.0 # We scale density up significantly for more human-friendly numbers.
+  minimum: 45.0
+
+- type: noiseChannel
   id: DensityUnclipped
   noiseType: Perlin
   fractalLacunarityByPi: 0.666666666
   remapTo0Through1: true
   inputMultiplier: 6  # Makes density hopefully low noise in the local area while still being interesting at scale.
+  outputMultiplier: 50.0 # We scale density up significantly for more human-friendly numbers.
+  minimum: 45.0
+
+- type: noiseChannel
+  id: DensityUnclippedMid
+  noiseType: Perlin
+  fractalLacunarityByPi: 0.666666666
+  remapTo0Through1: true
+  inputMultiplier: 4  # Makes density hopefully low noise in the local area while still being interesting at scale.
+  outputMultiplier: 50.0 # We scale density up significantly for more human-friendly numbers.
+  minimum: 45.0
+
+- type: noiseChannel
+  id: DensityUnclippedLow
+  noiseType: Perlin
+  fractalLacunarityByPi: 0.666666666
+  remapTo0Through1: true
+  inputMultiplier: 2  # Makes density hopefully low noise in the local area while still being interesting at scale.
   outputMultiplier: 50.0 # We scale density up significantly for more human-friendly numbers.
   minimum: 45.0
 

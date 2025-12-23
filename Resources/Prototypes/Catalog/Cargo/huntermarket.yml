@@ -94,9 +94,9 @@
     sprite: Objects/Weapons/Guns/Shotguns/enforcer.rsi
     state: icon
   product: GunSafeShotgunEnforcer
-  cost: 8000
+  cost: 10000
   category: cargoproduct-category-name-armory
-  group: huntermarket3
+  group: huntermarket4
 
 - type: cargoProduct
   id: GunSafeShotgunKammererHTS
@@ -104,7 +104,7 @@
     sprite: Objects/Weapons/Guns/Shotguns/pump.rsi
     state: icon
   product: GunSafeShotgunKammerer
-  cost: 9000
+  cost: 7500
   category: cargoproduct-category-name-armory
   group: huntermarket3
 
