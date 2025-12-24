@@ -281,3 +281,12 @@
     containers:
       key_slots:
       - EncryptionKeyCommand
+
+
+- type: entity
+  parent: TelecomServer
+  id: TelecomServer1k
+  name: high tech telecommunication server
+  components:
+  - type: TelecomServer
+    maxRange: 1024

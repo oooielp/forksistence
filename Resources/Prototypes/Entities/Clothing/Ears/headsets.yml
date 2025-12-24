@@ -27,7 +27,7 @@
     requiresComplex: true
     requireActiveHand: false
     singleUser: true
-    inHandsOnly: true
+    inHandsOnly: false
 
 - type: entity
   parent: ClothingHeadset
