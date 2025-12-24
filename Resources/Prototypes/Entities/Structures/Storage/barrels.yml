@@ -69,13 +69,16 @@
   table: !type:GroupSelector
     children:
     - id: BarrelChemFilledIodine
+    - id: BarrelChemFilledRandom
     - id: BarrelChemFilledFluorine
     - id: BarrelChemFilledChlorine
     - id: BarrelChemFilledEthanol
+    - id: BarrelChemFilledRandom
     - id: BarrelChemFilledPhosphorus
     - id: BarrelChemFilledSilicon
     - id: BarrelChemFilledMercury
     - id: BarrelChemFilledLube # oiled up...
+    - id: BarrelChemFilledRandom # adding this multiple times.
       weight: 0.1
 
 - type: entityTable
@@ -231,3 +234,97 @@
         reagents:
         - ReagentId: Uranium
           Quantity: 500
+
+# random chems in barrels 
+
+- type: entity
+  parent: BaseBarrelChem
+  id: BarrelChemFilledRandom
+  suffix: Random
+  components:
+  - type: SolutionContainerManager
+    solutions:
+      tank:
+        maxVol: 500
+  - type: RandomFillSolution
+    solution: tank
+    weightedRandomId: RandomFillChemBarrel
+    
+- type: weightedRandomFillSolution
+  id: RandomFillChemBarrel
+  fills:
+  - quantity: 500
+    weight: 0.1
+    reagents:
+    - Omnizine
+    - Amatoxin
+    - Bungotoxin
+    - Razorium
+    - Lead
+    - Vestine
+    - Mold
+    - PolytrinicAcid
+    - VentCrud
+    - ChlorineTrifluoride
+    - Napalm
+    - Phlogiston
+    - Thermite
+    - Desoxyephedrine
+    - Ephedrine
+    - Nicotine
+    - TearGas
+    - Stimulants   
+
+  - quantity: 500
+    weight: 0.5
+    reagents:
+    - SpaceCleaner
+    - SpaceGlue
+    - Diethylamine
+    - Left4Zed
+    - Cryoxadone
+    - Dylovene
+    - Bicaridine
+    - Kelotane
+    - Inaprovaline
+    - Hyronalin
+    - Tricordrazine
+
+  - quantity: 500
+    weight: 1.5 # more you go up, the more complex, and rarer the chems should be.
+    reagents:
+    - Sugar
+    - Benzene
+    - Ash
+    - Hydroxide
+    - Fersilicite
+    - Fiber
+    - Lye
+    - SodiumPolyacrylate
+    - Slime
+    - Ammonia
+    - EzNutrient
+    - SulfuricAcid
+    - UnstableMutagen
+    
+  - quantity: 500 
+    weight: 2.5 # this should be Elements
+    reagents:
+    - Aluminium
+    - Carbon
+    - Copper
+    - Hydrogen
+    - Iron
+    - Lithium
+    - Nitrogen
+    - Oxygen
+    - Potassium
+    - Sodium
+    - Sulfur
+    - Gold
+    - Silver
+
+  - quantity: 0 # this should be nothing, I cant find a better way of doing this. -beridot
+    weight: 3
+    reagents:
+    - Water
