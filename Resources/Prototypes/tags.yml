@@ -1591,6 +1591,7 @@
 ## Z ##
 # ALPHABETICAL
 
+##Persistence Materials
 
 - type: Tag
   id: Silver 
@@ -1614,7 +1615,23 @@
   id: Uranium 
 
 - type: Tag
+  id: Bananium
+
+- type: Tag
   id: Coal 
 
 - type: Tag
   id: Plasteel 
+
+##Persistence Bounty Tags
+
+# Science
+
+- type: Tag
+  id: ApeCircuitboard
+
+- type: Tag
+  id: AnomalyScanner
+
+- type: Tag
+  id: AnomalyLocator
