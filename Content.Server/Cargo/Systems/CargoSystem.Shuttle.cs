@@ -321,6 +321,7 @@ public sealed partial class CargoSystem
             UpdatePalletConsoleInterface(uid, component, args.Actor);
             return;
         }
+        if (!component.CashMode && station == null) return;
 
         if (!SellPallets(gridUid, station, out var goods))
             return;
