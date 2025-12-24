@@ -1,12 +1,17 @@
+using System.Diagnostics;
+using System.Linq;
 using Content.Server.Administration.Logs;
 using Content.Server.Chat.Systems;
 using Content.Server.Power.Components;
 using Content.Server.Station.Systems;
+using Content.Shared.CCVar;
 using Content.Shared.Chat;
 using Content.Shared.Database;
+using Content.Shared.Examine;
 using Content.Shared.Radio;
 using Content.Shared.Radio.Components;
 using Content.Shared.Speech;
+using Robust.Shared.Configuration;
 using Robust.Shared.Map;
 using Robust.Shared.Network;
 using Robust.Shared.Player;
@@ -23,6 +28,7 @@ namespace Content.Server.Radio.EntitySystems;
 public sealed class RadioSystem : EntitySystem
 {
     [Dependency] private readonly INetManager _netMan = default!;
+    [Dependency] private readonly IConfigurationManager _cfg = default!;
     [Dependency] private readonly IReplayRecordingManager _replay = default!;
     [Dependency] private readonly IAdminLogManager _adminLogger = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
@@ -30,6 +36,7 @@ public sealed class RadioSystem : EntitySystem
     [Dependency] private readonly ChatSystem _chat = default!;
     [Dependency] private readonly HeadsetSystem _headset = default!;
     [Dependency] private readonly StationSystem _station = default!;
+    [Dependency] private readonly SharedTransformSystem _xform = default!;
     // set used to prevent radio feedback loops.
     private readonly HashSet<string> _messages = new();
 
@@ -41,7 +48,20 @@ public sealed class RadioSystem : EntitySystem
         SubscribeLocalEvent<IntrinsicRadioReceiverComponent, RadioReceiveEvent>(OnIntrinsicReceive);
         SubscribeLocalEvent<IntrinsicRadioTransmitterComponent, EntitySpokeEvent>(OnIntrinsicSpeak);
 
+        SubscribeLocalEvent<TelecomServerComponent, ExaminedEvent>(OnServerExamined);
+
         _exemptQuery = GetEntityQuery<TelecomExemptComponent>();
+    }
+
+    private void OnServerExamined(Entity<TelecomServerComponent> ent, ref ExaminedEvent args)
+    {
+        if (!args.IsInDetailsRange)
+            return;
+
+        using (args.PushGroup(nameof(TelecomServerComponent)))
+        {
+            args.PushMarkup($"Range: {ent.Comp.MaxRange:F0}m");
+        }
     }
 
     private void OnIntrinsicSpeak(EntityUid uid, IntrinsicRadioTransmitterComponent component, EntitySpokeEvent args)
@@ -77,6 +97,8 @@ public sealed class RadioSystem : EntitySystem
         // TODO if radios ever garble / modify messages, feedback-prevention needs to be handled better than this.
         if (!_messages.Add(message))
             return;
+
+        var debugWatch = Stopwatch.StartNew();
 
         var evt = new TransformSpeakerNameEvent(messageSource, MetaData(messageSource).EntityName);
         RaiseLocalEvent(messageSource, evt);
@@ -118,13 +140,43 @@ public sealed class RadioSystem : EntitySystem
         RaiseLocalEvent(radioSource, ref sendAttemptEv);
         var canSend = !sendAttemptEv.Cancelled;
 
-        var sourceMapId = Transform(radioSource).MapID;
-        var hasActiveServer = HasActiveServer(sourceMapId, channel.ID);
+        var sourceTransform = Transform(radioSource);
+        var sourceMapId = sourceTransform.MapID;
+        var hasActiveServer = false;
         var sourceServerExempt = _exemptQuery.HasComp(radioSource);
 
+        // Relay network
+        var useNetwork = _cfg.GetCVar(CCVars.TCommsUseNetwork);
+        NetworkGraph? network = null;
+        NetworkNode? transmitterNode = null;
+        if (useNetwork)
+        {
+            network = NetworkGraph.BuildGraph(
+                EntityQuery<TelecomServerComponent, EncryptionKeyHolderComponent, ApcPowerReceiverComponent, TransformComponent>()
+                    .Select(entry =>
+                    {
+                        var (telecomServer, keys, power, transform) = entry;
+                        return new NetworkNode()
+                        {
+                            IsPowered = power.Powered,
+                            Range = telecomServer.MaxRange,
+                            MapCoordinates = _xform.GetMapCoordinates(transform)
+                        };
+                    })
+            );
+            transmitterNode = new NetworkNode()
+            {
+                IsPowered = true,
+                Range = float.PositiveInfinity,
+                MapCoordinates = _xform.GetMapCoordinates(sourceTransform)
+            };
+        }
+        else
+            hasActiveServer = HasActiveServer(sourceMapId, channel.ID);
+
         var radioQuery = EntityQueryEnumerator<ActiveRadioComponent, TransformComponent>();
-        int encryptionID = 0;
-        if(TryComp<HeadsetComponent>(radioSource, out var headset) && headset != null)
+        var encryptionID = 0;
+        if (TryComp<HeadsetComponent>(radioSource, out var headset) && headset != null)
         {
             encryptionID = headset.TransmitTo;
         }
@@ -153,7 +205,7 @@ public sealed class RadioSystem : EntitySystem
                 {
                     continue;
                 }
-             
+
             }
             else if (!radio.ReceiveAllChannels)
             {
@@ -169,8 +221,19 @@ public sealed class RadioSystem : EntitySystem
 
             // don't need telecom server for long range channels or handheld radios and intercoms
             var needServer = !channel.LongRange && !sourceServerExempt;
-            if (needServer && !hasActiveServer)
+            if (!useNetwork && needServer && !hasActiveServer)
                 continue;
+            else if (useNetwork && needServer)
+            {
+                var receiverNode = new NetworkNode()
+                {
+                    IsPowered = true,
+                    Range = float.PositiveInfinity,
+                    MapCoordinates = _xform.GetMapCoordinates(transform)
+                };
+                if (!network!.CanTransmit(transmitterNode!, receiverNode))
+                    continue;
+            }
 
             // check if message can be sent to specific receiver
             var attemptEv = new RadioReceiveAttemptEvent(channel, radioSource, receiver);
@@ -183,10 +246,13 @@ public sealed class RadioSystem : EntitySystem
             RaiseLocalEvent(receiver, ref ev);
         }
 
+        debugWatch.Stop();
+        var debugDuration = debugWatch.ElapsedMilliseconds;
+
         if (name != Name(messageSource))
-            _adminLogger.Add(LogType.Chat, LogImpact.Low, $"Radio message from {ToPrettyString(messageSource):user} as {name} on {channel.LocalizedName}: {message}");
+            _adminLogger.Add(LogType.Chat, LogImpact.Low, $"Radio message from {ToPrettyString(messageSource):user} as {name} on {channel.LocalizedName} ({debugDuration:F0}ms): {message}");
         else
-            _adminLogger.Add(LogType.Chat, LogImpact.Low, $"Radio message from {ToPrettyString(messageSource):user} on {channel.LocalizedName}: {message}");
+            _adminLogger.Add(LogType.Chat, LogImpact.Low, $"Radio message from {ToPrettyString(messageSource):user} on {channel.LocalizedName} ({debugDuration:F0}ms): {message}");
 
         _replay.RecordServerMessage(chat);
         _messages.Remove(message);
@@ -203,6 +269,91 @@ public sealed class RadioSystem : EntitySystem
                 keys.Channels.Contains(channelId))
             {
                 return true;
+            }
+        }
+        return false;
+    }
+
+}
+
+public sealed class NetworkNode
+{
+    public MapCoordinates MapCoordinates { get; set; }
+    public float Range { get; set; }
+    public bool IsPowered { get; set; }
+
+    public bool InRange(NetworkNode other)
+    {
+        var maxRange = Math.Min(Range, other.Range);
+        if (maxRange == float.PositiveInfinity) return true;
+        return MapCoordinates.InRange(other.MapCoordinates, maxRange);
+    }
+}
+
+public sealed class NetworkGraph
+{
+    private readonly Dictionary<NetworkNode, List<NetworkNode>> _adjency = new();
+    public IReadOnlyDictionary<NetworkNode, List<NetworkNode>> Adjency => _adjency;
+
+    public static NetworkGraph BuildGraph(IEnumerable<NetworkNode> relays)
+    {
+        var relayList = relays.Where(r => r.IsPowered).ToList();
+
+        var graph = new NetworkGraph();
+
+        foreach (var relay in relayList)
+            graph._adjency[relay] = new();
+
+        for (var i = 0; i < relayList.Count; i++)
+        {
+            for (var j = i + 1; j < relayList.Count; j++)
+            {
+                var a = relayList[i];
+                var b = relayList[j];
+
+
+                if (a.InRange(b))
+                {
+                    graph._adjency[a].Add(b);
+                    graph._adjency[b].Add(a);
+                }
+            }
+        }
+
+        return graph;
+    }
+
+    public IEnumerable<NetworkNode> GetNodesInRange(NetworkNode current)
+    {
+        foreach (var relay in _adjency.Keys)
+        {
+            if (!relay.IsPowered) continue;
+            if (relay.InRange(current))
+                yield return relay;
+        }
+    }
+
+    public bool CanTransmit(NetworkNode transmitter, NetworkNode receiver)
+    {
+        var visited = new HashSet<NetworkNode>();
+        var queue = new Queue<NetworkNode>();
+
+        foreach (var relay in GetNodesInRange(transmitter))
+        {
+            visited.Add(relay);
+            queue.Enqueue(relay);
+        }
+
+        while (queue.Count > 0)
+        {
+            var relay = queue.Dequeue();
+            if (relay.InRange(receiver))
+                return true;
+
+            foreach (var neighbour in _adjency[relay])
+            {
+                if (visited.Add(neighbour))
+                    queue.Enqueue(neighbour);
             }
         }
         return false;

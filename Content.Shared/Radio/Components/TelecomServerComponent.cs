@@ -9,4 +9,6 @@ namespace Content.Shared.Radio.Components;
 [RegisterComponent]
 public sealed partial class TelecomServerComponent : Component
 {
+    [DataField]
+    public float MaxRange { get; set; } = 512f;
 }
