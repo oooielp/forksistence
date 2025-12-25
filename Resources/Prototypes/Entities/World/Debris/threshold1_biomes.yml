@@ -12,6 +12,7 @@
       - 0,1
     #Temperature:
      # - 0.25,0.75
+  debrisEntityTable: 'BluespaceMobCreaturesTable'
   chunkComponents:
     - type: DebrisFeaturePlacerController
       densityNoiseChannel: Density
@@ -49,6 +50,7 @@
   noiseRanges:
     BiomeBase:
       - 1,2
+  debrisEntityTable: 'BluespaceMobCreaturesTable'
   chunkComponents:
     - type: DebrisFeaturePlacerController
       densityNoiseChannel: Density
@@ -82,6 +84,7 @@
   noiseRanges:
     BiomeBase:
       - 2,3
+  debrisEntityTable: 'BaseSpaceMobTable'
   chunkComponents:
     - type: DebrisFeaturePlacerController
       densityNoiseChannel: Density
@@ -119,7 +122,7 @@
   noiseRanges:
     BiomeBase:
       - 3,4
-  debrisEntityTable: 'SpaceMobCreaturesTable'
+  debrisEntityTable: 'CarpMobCreaturesTable'
   chunkComponents:
     - type: DebrisFeaturePlacerController
       densityNoiseChannel: Density
@@ -153,7 +156,7 @@
   noiseRanges:
     BiomeBase:
       - 4,5
-  debrisEntityTable: 'SpaceMobCreaturesTable'
+  debrisEntityTable: 'BaseSpaceMobTable'
   chunkComponents:
     - type: DebrisFeaturePlacerController
       densityNoiseChannel: Density
@@ -180,7 +183,7 @@
   noiseRanges:
     BiomeBase:
       - 5,6
-  debrisEntityTable: 'SpaceMobCreaturesTable'
+  debrisEntityTable: 'CarpMobCreaturesTable'
   chunkComponents:
     - type: DebrisFeaturePlacerController
       densityNoiseChannel: Density
@@ -206,7 +209,7 @@
   noiseRanges:
     BiomeBase:
       - 6,7
-  debrisEntityTable: 'SpaceMobCreaturesTable'
+  debrisEntityTable: 'CarpMobCreaturesTable'
   chunkComponents:
     - type: DebrisFeaturePlacerController
       densityNoiseChannel: Density
@@ -240,7 +243,7 @@
   noiseRanges:
     BiomeBase:
       - 7,8
-  debrisEntityTable: 'SpaceMobCreaturesTable'
+  debrisEntityTable: 'BluespaceMobCreaturesTable'
   chunkComponents:
     - type: DebrisFeaturePlacerController
       densityNoiseChannel: Density
@@ -266,7 +269,7 @@
   noiseRanges:
     BiomeBase:
       - 8,9
-  debrisEntityTable: 'SpaceMobCreaturesTable'
+  debrisEntityTable: 'BluespaceMobCreaturesTable'
   chunkComponents:
     - type: DebrisFeaturePlacerController
       densityNoiseChannel: Density
@@ -294,7 +297,7 @@
   noiseRanges:
     BiomeBase:
       - 9,10
-  debrisEntityTable: 'SpaceMobCreaturesTable'
+  debrisEntityTable: 'BaseSpaceMobTable'
   chunkComponents:
     - type: DebrisFeaturePlacerController
       densityNoiseChannel: Density

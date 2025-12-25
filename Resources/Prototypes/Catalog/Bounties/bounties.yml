@@ -926,81 +926,81 @@
         tags:
         - Diamond
 
-#- type: cargoBounty
-#  id: BountyAnomalyScience
-#  reward: 7500
-#  description: bounty-description-anomalyscience
-#  entries:
-#    - name: bounty-item-anomalyscanner
-#      amount: 1
-#      whitelist:
-#        tags:
-#          - AnomalyScanner
-#    - name: bounty-item-anomalylocator
-#      amount: 1
-#      whitelist:
-#        tags:
-#          - AnomalyLocator
-#    - name: bounty-item-apeboard
-#      amount: 1
-#      whitelist:
-#        tags:
-#          - ApeCircuitboard
-#  group: ScienceBounty          
+# - type: cargoBounty
+#   id: BountyAnomalyScience
+#   reward: 7500
+#   description: bounty-description-anomalyscience
+#   entries:
+#     - name: bounty-item-anomalyscanner
+#       amount: 1
+#       whitelist:
+#         tags:
+#         - AnomalyScanner
+#     - name: bounty-item-anomalylocator
+#       amount: 1
+#       whitelist:
+#         tags:
+#         - AnomalyLocator
+#     - name: bounty-item-apeboard
+#       amount: 1
+#       whitelist:
+#         tags:
+#         - ApeCircuitboard
+#   group: ScienceBounty          
 
-#- type: cargoBounty ##Commented out because non functional currently, needs troubleshooting with tags
-#  id: BountyRipley
-#  reward: 12500
-#  description: bounty-description-ripley
-#  entries:
-#    - name: bounty-item-ripleyleftleg
-#      amount: 1
-#      whitelist:
-#        tags:
-#        - RipleyLLeg
-#    - name: bounty-item-ripleyleftarm
-#      amount: 1
-#      whitelist:
-#        tags:
-#        - RipleyLArm
-#    - name: bounty-item-ripleyrightleg
-#      amount: 1
-#      whitelist:
-#        tags:
-#        - RipleyRLeg
-#    - name: bounty-item-ripleyrightarm
-#      amount: 1
-#      whitelist:
-#        tags:
-#        - RipleyRArm
-#    - name: bounty-item-ripleycentral
-#      amount: 1
-#      whitelist:
-#        tags:
-#        - RipleyCentralControlModule
-#    - name: bounty-item-ripleyperipheral
-#      amount: 1
-#      whitelist:
-#        tags:
-#        - RipleyPeripheralsControlModule
-#    - name: bounty-item-powercell
-#      amount: 1
-#      whitelist:
-#        tags:
-#        - PowerCell
-#    - name: bounty-item-steel
-#      amount: 5
-#      whitelist:
-#        tags:
-#        - SheetSteel
-#    - name: bounty-item-rod
-#      amount: 10
-#      whitelist:
-#        tags:
-#        - PartRodMetal
-#    - name: bounty-item-lvcable
-#      amount: 1
-#      whitelist:
-#        tags:
-#        - CableCoil
-#  group: ScienceBounty
+# - type: cargoBounty ##Commented out because non functional currently, needs troubleshooting with tags
+#   id: BountyRipley
+#   reward: 12500
+#   description: bounty-description-ripley
+#   entries:
+#     - name: bounty-item-ripleyleftleg
+#       amount: 1
+#       whitelist:
+#         tags:
+#         - RipleyLLeg
+#     - name: bounty-item-ripleyleftarm
+#       amount: 1
+#       whitelist:
+#         tags:
+#         - RipleyLArm
+#     - name: bounty-item-ripleyrightleg
+#       amount: 1
+#       whitelist:
+#         tags:
+#         - RipleyRLeg
+#     - name: bounty-item-ripleyrightarm
+#       amount: 1
+#       whitelist:
+#         tags:
+#         - RipleyRArm
+#     - name: bounty-item-ripleycentral
+#       amount: 1
+#       whitelist:
+#         tags:
+#         - RipleyCentralControlModule
+#     - name: bounty-item-ripleyperipheral
+#       amount: 1
+#       whitelist:
+#         tags:
+#         - RipleyPeripheralsControlModule
+#     - name: bounty-item-powercell
+#       amount: 1
+#       whitelist:
+#         tags:
+#         - PowerCell
+#     - name: bounty-item-steel
+#       amount: 5
+#       whitelist:
+#         tags:
+#         - SheetSteel
+#     - name: bounty-item-rod
+#       amount: 10
+#       whitelist:
+#         tags:
+#         - PartRodMetal
+#     - name: bounty-item-lvcable
+#       amount: 1
+#       whitelist:
+#         tags:
+#         - CableCoil
+#   group: ScienceBounty

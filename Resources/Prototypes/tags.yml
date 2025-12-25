@@ -1635,3 +1635,23 @@
 
 - type: Tag
   id: AnomalyLocator
+
+# Hunter
+
+- type: Tag
+  id: BearHide
+
+- type: Tag
+  id: BearMeat
+
+- type: Tag
+  id: GoliathMeat
+
+- type: Tag
+  id: SpiderMeat
+
+- type: Tag
+  id: SnakeMeat
+
+- type: Tag
+  id: SnakeBoots

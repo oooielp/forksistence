@@ -339,6 +339,10 @@
     energy: 2.7
     color: "#4faffb"
     slots:
+      - HEAD
+  - type: Tag
+    tags:
+    - BearHide
 
 - type: entity
   parent: MaterialBase
@@ -355,7 +359,7 @@
     sprite: Clothing/Head/Misc/hides.rsi
     equippedPrefix: corgi2
     slots:
-    - HEAD
+      - HEAD
   - type: Tag
     tags:
     - HideCorgi
@@ -753,6 +757,9 @@
           Quantity: 3
   - type: Item
     heldPrefix: bones
+  - type: Tag
+    tags:
+      - Bone
 
 - type: entity
   parent: MaterialBones
