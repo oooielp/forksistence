@@ -1,0 +1,32 @@
+- type: constructionGraph
+  id: GenericTankGraph
+  start: start
+  graph:
+    - node: start
+      edges:
+        - to: generictank
+          steps:
+            - material: Steel
+              amount: 15
+            - material: ReinforcedGlass
+              amount: 5
+              doAfter: 5
+
+    - node: generictank
+      entity: GenericTank
+      edges:
+        - to: start
+          completed:
+            - !type:SpawnPrototype
+              prototype: SheetSteel1
+              amount: 15
+            - !type:SpawnPrototype
+              prototype: SheetRGlass1
+              amount: 5
+            - !type:DeleteEntity {}
+          conditions:
+            - !type:EntityAnchored
+              anchored: false
+          steps:
+            - tool: Welding
+              doAfter: 10

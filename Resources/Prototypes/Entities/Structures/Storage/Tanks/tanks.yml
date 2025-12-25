@@ -216,3 +216,6 @@
       fillBaseName: watertank-2-
     - type: ExaminableSolution
       solution: tank
+    - type: Icon
+      sprite: Structures/Storage/tanks.rsi
+      state: "generictank-1"
