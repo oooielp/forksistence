@@ -1,3 +1,11 @@
+- type: spaceBiome
+  priority: 0 # This probably shouldn't get selected.
+  id: BaseBiome
+  noiseRanges:
+    BiomeBaseMask: # | 0.1,1 = Abundant | 0.35,1 = Common | 0.5,1 = Rare | 0.9,1 = Desolate |
+      - 0.35,1
+  debrisEntityTable: 'BaseSpaceMobTable'
+
 # Minimal mob table for all space biomes (except void) - Based on SalvageMagnetMobTable
 - type: entityTable
   id: BaseSpaceMobTable
@@ -39,7 +47,7 @@
           amount: 2
         - id: MobBasilisk
           amount: 2
-              - !type:GroupSelector # scary monsters
+    - !type:GroupSelector # scary monsters
       weight: 20
       children:
       - !type:AllSelector
@@ -87,14 +95,6 @@
     children:
     - id: MobSharkSalvage
       amount: 100
-
-- type: spaceBiome
-  priority: 0 # This probably shouldn't get selected.
-  id: BaseBiome
-  noiseRanges:
-    BiomeBaseMask: # | 0.1,1 = Abundant | 0.35,1 = Common | 0.5,1 = Rare | 0.9,1 = Desolate |
-      - 0.35,1
-  debrisEntityTable: 'BaseSpaceMobTable'
 
 - type: spaceBiome
   parent: BaseBiome
