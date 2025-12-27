@@ -15,7 +15,7 @@
   debrisEntityTable: 'BluespaceMobCreaturesTable'
   chunkComponents:
     - type: DebrisFeaturePlacerController
-      densityNoiseChannel: Density
+      densityNoiseChannel: DensityLow
     - type: SimpleDebrisSelector
       debrisTable:
         - id: IceDebrisSmall
@@ -53,7 +53,7 @@
   debrisEntityTable: 'BluespaceMobCreaturesTable'
   chunkComponents:
     - type: DebrisFeaturePlacerController
-      densityNoiseChannel: Density
+      densityNoiseChannel: DensityLow
     - type: SimpleDebrisSelector
       debrisTable:
         - id: AsteroidDebrisSmall
@@ -87,7 +87,7 @@
   debrisEntityTable: 'BaseSpaceMobTable'
   chunkComponents:
     - type: DebrisFeaturePlacerController
-      densityNoiseChannel: Density
+      densityNoiseChannel: DensityLow
     - type: SimpleDebrisSelector
       debrisTable:
         - id: AsteroidDebrisSmall
@@ -125,7 +125,7 @@
   debrisEntityTable: 'CarpMobCreaturesTable'
   chunkComponents:
     - type: DebrisFeaturePlacerController
-      densityNoiseChannel: Density
+      densityNoiseChannel: DensityLow
     - type: SimpleDebrisSelector
       debrisTable:
         - id: IronrockDebrisSmall
@@ -159,7 +159,7 @@
   debrisEntityTable: 'BaseSpaceMobTable'
   chunkComponents:
     - type: DebrisFeaturePlacerController
-      densityNoiseChannel: Density
+      densityNoiseChannel: DensityLow
     - type: SimpleDebrisSelector
       debrisTable:
         - id: AsteroidDebrisSmall
@@ -186,7 +186,7 @@
   debrisEntityTable: 'CarpMobCreaturesTable'
   chunkComponents:
     - type: DebrisFeaturePlacerController
-      densityNoiseChannel: Density
+      densityNoiseChannel: DensityLow
     - type: SimpleDebrisSelector
       debrisTable:
         - id: ConglomerateDebrisSmallRich
@@ -212,7 +212,7 @@
   debrisEntityTable: 'CarpMobCreaturesTable'
   chunkComponents:
     - type: DebrisFeaturePlacerController
-      densityNoiseChannel: Density
+      densityNoiseChannel: DensityLow
     - type: SimpleDebrisSelector
       debrisTable:
         - id: BasaltDebrisSmall
@@ -246,7 +246,7 @@
   debrisEntityTable: 'BluespaceMobCreaturesTable'
   chunkComponents:
     - type: DebrisFeaturePlacerController
-      densityNoiseChannel: Density
+      densityNoiseChannel: DensityLow
     - type: SimpleDebrisSelector
       debrisTable:
         - id: BasaltDebrisSmallBarren
@@ -272,7 +272,7 @@
   debrisEntityTable: 'BluespaceMobCreaturesTable'
   chunkComponents:
     - type: DebrisFeaturePlacerController
-      densityNoiseChannel: Density
+      densityNoiseChannel: DensityLow
     - type: SimpleDebrisSelector
       debrisTable:
         - id: BrassDebrisSmall

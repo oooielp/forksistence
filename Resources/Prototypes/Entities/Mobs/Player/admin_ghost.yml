@@ -82,6 +82,7 @@
     initialDelay: 0
     global: true
   - type: RadarConsole
+    maxRange: 5000
     followEntity: true
   - type: CargoOrderConsole
   - type: CrewMonitoringConsole
