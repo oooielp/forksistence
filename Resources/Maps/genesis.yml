@@ -4,8 +4,8 @@ meta:
   engineVersion: 270.0.0
   forkId: ""
   forkVersion: ""
-  time: 12/28/2025 20:33:52
-  entityCount: 7339
+  time: 12/29/2025 23:15:09
+  entityCount: 7365
 maps:
 - 1
 grids:
@@ -41,8 +41,8 @@ entities:
     - type: Broadphase
     - type: OccluderTree
     - type: SolarLocation
-      sunAngularVelocity: 0.001966673850887658 rad
-      towardsSun: 3.134766543091421 rad
+      sunAngularVelocity: 0.0018834432629909726 rad
+      towardsSun: 0.1517512675052175 rad
   - uid: 2
     components:
     - type: MetaData
@@ -5233,6 +5233,13 @@ entities:
         Blunt: 0
         Slash: 0
         Piercing: 0
+- proto: AmeJar
+  entities:
+  - uid: 7365
+    components:
+    - type: Transform
+      pos: 46.553627,-27.409222
+      parent: 2
 - proto: AmmoniaCanister
   entities:
   - uid: 2175
@@ -24907,6 +24914,30 @@ entities:
         Piercing: 0
 - proto: CableMV
   entities:
+  - uid: 771
+    components:
+    - type: Transform
+      pos: 20.5,12.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 772
+    components:
+    - type: Transform
+      pos: 20.5,11.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
   - uid: 779
     components:
     - type: Transform
@@ -29839,6 +29870,270 @@ entities:
         Blunt: 0
         Slash: 0
         Piercing: 0
+  - uid: 7340
+    components:
+    - type: Transform
+      pos: 16.5,13.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 7343
+    components:
+    - type: Transform
+      pos: 21.5,11.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 7344
+    components:
+    - type: Transform
+      pos: 22.5,11.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 7345
+    components:
+    - type: Transform
+      pos: 23.5,11.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 7346
+    components:
+    - type: Transform
+      pos: 23.5,12.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 7347
+    components:
+    - type: Transform
+      pos: 24.5,12.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 7348
+    components:
+    - type: Transform
+      pos: 25.5,12.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 7349
+    components:
+    - type: Transform
+      pos: 25.5,13.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 7350
+    components:
+    - type: Transform
+      pos: 25.5,14.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 7351
+    components:
+    - type: Transform
+      pos: 25.5,15.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 7352
+    components:
+    - type: Transform
+      pos: 20.5,10.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 7353
+    components:
+    - type: Transform
+      pos: 19.5,10.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 7354
+    components:
+    - type: Transform
+      pos: 18.5,10.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 7355
+    components:
+    - type: Transform
+      pos: 17.5,10.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 7356
+    components:
+    - type: Transform
+      pos: 16.5,10.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 7357
+    components:
+    - type: Transform
+      pos: 15.5,10.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 7358
+    components:
+    - type: Transform
+      pos: 14.5,10.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 7359
+    components:
+    - type: Transform
+      pos: 15.5,13.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 7360
+    components:
+    - type: Transform
+      pos: 14.5,13.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 7361
+    components:
+    - type: Transform
+      pos: 13.5,13.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 7362
+    components:
+    - type: Transform
+      pos: 15.5,15.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 7363
+    components:
+    - type: Transform
+      pos: 15.5,14.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
 - proto: CableTerminal
   entities:
   - uid: 1555
@@ -33943,6 +34238,23 @@ entities:
         Blunt: 0
         Slash: 0
         Piercing: 0
+- proto: ComputerGridControl
+  entities:
+  - uid: 7342
+    components:
+    - type: Transform
+      pos: 20.5,16.5
+      parent: 2
+    - type: Wires
+      wireSeed: 1970977857
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
 - proto: ComputerId
   entities:
   - uid: 207
@@ -34147,6 +34459,24 @@ entities:
       parent: 2
     - type: Wires
       wireSeed: 105804802
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+- proto: ComputerStationModification
+  entities:
+  - uid: 7341
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 18.5,14.5
+      parent: 2
+    - type: Wires
+      wireSeed: 2077301254
     - type: Damageable
       damageDictCopy:
         Heat: 0
@@ -65704,6 +66034,22 @@ entities:
         Blunt: 0
         Slash: 0
         Piercing: 0
+- proto: GasRecycler
+  entities:
+  - uid: 7364
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 51.5,-40.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
 - proto: GasThermoMachineHeater
   entities:
   - uid: 6606
@@ -76932,8 +77278,8 @@ entities:
     - type: UseDelay
       delays:
         gasTank:
-          endTime: 42.8724402
-          startTime: 41.8724402
+          endTime: 17.4000285
+          startTime: 16.4000285
           length: 1
     - type: Jetpack
       toggleActionEntity: 661
@@ -76960,8 +77306,8 @@ entities:
     - type: UseDelay
       delays:
         gasTank:
-          endTime: 42.8724402
-          startTime: 41.8724402
+          endTime: 17.4000285
+          startTime: 16.4000285
           length: 1
     - type: Jetpack
       toggleActionEntity: 6933
@@ -84579,7 +84925,7 @@ entities:
       pos: 47.5,5.5
       parent: 2
     - type: ResearchServer
-      id: 2
+      id: 3
     - type: Damageable
       damageDictCopy:
         Heat: 0
@@ -88925,34 +89271,6 @@ entities:
     components:
     - type: Transform
       pos: 4.5,24.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 771
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 18.5,15.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 772
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 18.5,14.5
       parent: 2
     - type: Damageable
       damageDictCopy:
