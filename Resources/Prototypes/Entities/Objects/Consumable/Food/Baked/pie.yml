@@ -525,6 +525,8 @@
           Quantity: 5
         - ReagentId: Sugar
           Quantity: 5
+        - ReagentId: TartaricAcid
+          Quantity: 5
   - type: Tag
     tags:
     - Fruit

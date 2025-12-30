@@ -2327,6 +2327,8 @@
           Quantity: 5
         - ReagentId: Vitamin
           Quantity: 4
+        - ReagentId: TartaricAcid
+          Quantity: 4
   - type: Sprite
     sprite: Objects/Specific/Hydroponics/grape.rsi
   - type: Item
