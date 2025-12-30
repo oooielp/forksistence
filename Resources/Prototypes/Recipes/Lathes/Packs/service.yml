@@ -26,6 +26,7 @@
   - Holoprojector
   - WetFloorSign
   - WireBrush
+  - BSPAnchorKey
 
 - type: latheRecipePack
   id: ServiceBoardsStatic

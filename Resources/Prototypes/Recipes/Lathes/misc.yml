@@ -185,6 +185,15 @@
   materials:
     Steel: 300
     Plastic: 100
+    
+- type: latheRecipe
+  id: BSPAnchorKey
+  result: BSPAnchorKey
+  completetime: 2
+  materials:
+    Steel: 300
+    Plastic: 100
+    Glass: 200
 
 - type: latheRecipe
   id: ClothingHeadHatWelding

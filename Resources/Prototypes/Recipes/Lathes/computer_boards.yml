@@ -72,6 +72,11 @@
   parent: [ BaseCircuitboardRecipe, BaseEngineeringComputerRecipeCategory ]
   id: PowerComputerCircuitboard
   result: PowerComputerCircuitboard
+  
+- type: latheRecipe
+  parent: [ BaseGoldCircuitboardRecipe, BaseEngineeringComputerRecipeCategory ]
+  id: GridControlComputerCircuitboard
+  result: GridControlComputerCircuitboard
 
 # Medical
 
