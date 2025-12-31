@@ -224,20 +224,6 @@
 
 - type: entity
   parent: MarkerBase
-  id: EngineeringChunkSpawner
-  name: Ruins Spawner
-  suffix: Engineering Chunk
-  components:
-  - type: Sprite
-    layers:
-    - state: pink
-    - sprite: Objects/Materials/Scrap/generic.rsi
-      state: metal-1
-  - type: GridSpawner
-    gridPath: Maps/Salvage/engineering-chunk.yml
-
-- type: entity
-  parent: MarkerBase
   id: HaulingShuttleRuinSpawner
   name: Ruins Spawner
   suffix: Hauling Shuttle
