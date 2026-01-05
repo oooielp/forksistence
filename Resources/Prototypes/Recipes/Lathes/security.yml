@@ -299,3 +299,50 @@
   materials:
     Plastic: 100
     Steel: 400
+
+- type: latheRecipe
+  parent: BaseToolRecipe
+  id: ClothingBeltTanMilitaryWebbing
+  result: ClothingBeltTanMilitaryWebbing
+  materials:
+    Plastic: 400
+
+- type: latheRecipe
+  parent: BaseToolRecipe
+  id: ClothingHeadHelmetMilitaryWoodland
+  result: ClothingHeadHelmetMilitaryWoodland
+  materials:
+    Steel: 500
+    Plastic: 100
+
+- type: latheRecipe
+  parent: BaseToolRecipe
+  id: ClothingHeadHelmetMilitaryArctic
+  result: ClothingHeadHelmetMilitaryArctic
+  materials:
+    Steel: 500
+    Plastic: 100
+
+- type: latheRecipe
+  parent: BaseToolRecipe
+  id: ClothingHeadHelmetMilitaryDesert
+  result: ClothingHeadHelmetMilitaryDesert
+  materials:
+    Steel: 500
+    Plastic: 100
+
+- type: latheRecipe
+  parent: BaseToolRecipe
+  id: ClothingHeadHelmetRiot
+  result: ClothingHeadHelmetRiot
+  materials:
+    Steel: 500
+    Plastic: 200
+
+- type: latheRecipe
+  parent: BaseToolRecipe
+  id: ClothingHeadHelmetBasic
+  result: ClothingHeadHelmetBasic
+  materials:
+    Steel: 500
+    Plastic: 100
