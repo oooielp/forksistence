@@ -69,9 +69,6 @@
     solution: tank  
   - type: Transform
     noRot: true
-  - type: Construction
-    graph: GenericTankGraph
-    node: generictank
 
 # For highcap tanks
 - type: entity
