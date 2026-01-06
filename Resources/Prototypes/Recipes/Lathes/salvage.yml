@@ -7,6 +7,7 @@
     Glass: 300
     Plastic: 300
     Gold: 500
+  unlockUses: 4
 
 - type: latheRecipe
   id: AdvancedMineralScannerEmpty
@@ -17,6 +18,7 @@
     Glass: 300
     Plastic: 300
     Uranium: 500
+  unlockUses: 2
 
 - type: latheRecipe
   id: Fulton
@@ -27,6 +29,7 @@
   materials:
     Steel: 200
     Cloth: 500
+  unlockUses: 15
 
 - type: latheRecipe
   id: FultonBeacon
@@ -49,6 +52,7 @@
     Plastic: 1500
     Steel: 100
     Silver: 100
+  unlockUses: 4
 
 - type: latheRecipe
   parent: BaseToolRecipe
@@ -58,6 +62,7 @@
   materials:
     Steel: 500
     Plastic: 100
+  unlockUses: 3
 
 - type: latheRecipe
   parent: MiningDrill
@@ -68,6 +73,7 @@
     Plastic: 200
     Silver: 200
     Diamond: 100
+  unlockUses: 2
 
 - type: latheRecipe
   id: PKAUpgradeDamage
@@ -79,6 +85,7 @@
     Steel: 1500
     Gold: 500
     Silver: 500
+  unlockUses: 2
 
 - type: latheRecipe
   id: PKAUpgradeRange
@@ -90,6 +97,7 @@
     Steel: 1500
     Gold: 500
     Silver: 500
+  unlockUses: 2
 
 - type: latheRecipe
   id: PKAUpgradeFireRate
@@ -101,4 +109,5 @@
     Steel: 1500
     Gold: 500
     Silver: 500
+  unlockUses: 2
 

@@ -67,7 +67,7 @@
   parent: [ BaseCircuitboardRecipe, BaseEngineeringComputerRecipeCategory ]
   id: SolarControlComputerCircuitboard
   result: SolarControlComputerCircuitboard
-
+  
 - type: latheRecipe
   parent: [ BaseCircuitboardRecipe, BaseEngineeringComputerRecipeCategory ]
   id: PowerComputerCircuitboard
@@ -106,21 +106,25 @@
   parent: [ BaseGoldCircuitboardRecipe, BaseResearchComputerRecipeCategory ]
   id: AnalysisComputerCircuitboard
   result: AnalysisComputerCircuitboard
-
+  unlockUses: 4
+  
 - type: latheRecipe
   parent: [ BaseGoldCircuitboardRecipe, BaseResearchComputerRecipeCategory ]
   id: TechDiskComputerCircuitboard
   result: TechDiskComputerCircuitboard
+  unlockUses: 4
 
 - type: latheRecipe
   parent: [ BaseGoldCircuitboardRecipe, BaseResearchComputerRecipeCategory ]
   id: RoboticsConsoleCircuitboard
   result: RoboticsConsoleCircuitboard
+  unlockUses: 4
 
 - type: latheRecipe
   parent: [ BaseSilverCircuitboardRecipe, BaseResearchComputerRecipeCategory ]
   id: ResearchComputerCircuitboard
   result: ResearchComputerCircuitboard
+  unlockUses: 4
 
 # Cameras
 
@@ -128,19 +132,21 @@
   parent: [ BaseCircuitboardRecipe, BaseSecurityComputerRecipeCategory ]
   id: SurveillanceCameraMonitorCircuitboard
   result: SurveillanceCameraMonitorCircuitboard
-
+  unlockUses: 4
+  
 - type: latheRecipe
   parent: [ BaseCircuitboardRecipe, BaseServiceComputerRecipeCategory ]
   id: SurveillanceWirelessCameraMonitorCircuitboard
   result: SurveillanceWirelessCameraMonitorCircuitboard
-
+  unlockUses: 4
 # Service
 
 - type: latheRecipe
   parent: [ BaseCircuitboardRecipe, BaseServiceComputerRecipeCategory ]
   id: MassMediaCircuitboard
   result: ComputerMassMediaCircuitboard
-
+  unlockUses: 4
+  
 - type: latheRecipe
   parent: [ BaseCircuitboardRecipe, BaseServiceComputerRecipeCategory ]
   id: BlockGameArcadeComputerCircuitboard
@@ -157,6 +163,7 @@
   parent: [ BaseGoldCircuitboardRecipe, BaseSupplyComputerRecipeCategory ]
   id: ShuttleConsoleCircuitboard
   result: ShuttleConsoleCircuitboard
+  unlockUses: 4
 
 - type: latheRecipe
   parent: [ BaseCircuitboardRecipe, BaseSupplyComputerRecipeCategory ]
