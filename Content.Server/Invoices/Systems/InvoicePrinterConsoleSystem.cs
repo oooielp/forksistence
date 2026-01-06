@@ -166,7 +166,7 @@ public sealed class InvoicePrinterConsoleSystem : SharedInvoicePrinterConsoleSys
             invoiceComp.InvoiceReason = args.InvoiceReason;
             invoiceComp.TaxOwner = owningStation;
             Dirty(invoice, invoiceComp);
-            _audio.PlayEntity(component.PrintSound, args.Actor, invoice);
+            _audio.PlayEntity(component.PrintSound, args.Actor, uid);
         }
         UpdateUserInterface(uid, component, args);
     }
@@ -323,7 +323,7 @@ public sealed class InvoicePrinterConsoleSystem : SharedInvoicePrinterConsoleSys
                         }
                     }
                 }
-                
+
             }
             if (TryComp<StationDataComponent>(station, out var sD) && sD != null)
             {
@@ -372,7 +372,7 @@ public sealed class InvoicePrinterConsoleSystem : SharedInvoicePrinterConsoleSys
 
                 _cargo.UpdateBankAccount((station.Value, stationBank), -cost, "Cargo");
                 if(taxAmount > 0 && taxStation != null)
-                { 
+                {
                     if(TryComp<StationBankAccountComponent>(taxStation, out var taxBank))
                     {
                         _cargo.UpdateBankAccount((taxStation.Value, taxBank), taxAmount, "Cargo");
@@ -446,7 +446,7 @@ public sealed class InvoicePrinterConsoleSystem : SharedInvoicePrinterConsoleSys
             }
             component.Paid = true;
             component.PaidBy = userName;
-            _audio.PlayEntity(component.ErrorSound, args.Actor, uid);
+            _audio.PlayEntity(component.PaySuccessSound, args.Actor, uid);
             _appearance.SetData(uid, PaperVisuals.Invoice, "paid");
             if (component.TargetStation != null)
             {
