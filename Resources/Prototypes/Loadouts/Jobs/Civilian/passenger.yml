@@ -121,3 +121,14 @@
   id: WinterBoots
   equipment:
     shoes: ClothingShoesBootsWinter
+
+# Wallet
+- type: loadout
+  id: ClothingWalletLeatherBrown
+  equipment:
+    wallet: ClothingWalletLeatherBrown
+
+- type: startingGear
+  id: ClothingWalletLeatherBrown
+  equipment:
+    wallet: ClothingWalletLeatherBrown

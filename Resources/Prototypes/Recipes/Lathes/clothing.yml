@@ -963,3 +963,49 @@
   parent: BaseNeckClothingRecipe
   id: ClothingNeckScarfStripedPurple
   result: ClothingNeckScarfStripedPurple
+
+# Military
+- type: latheRecipe
+  parent: BaseJumpsuitRecipe
+  id: ClothingUniformJumpsuitBattleDressUniformWoodland
+  result: ClothingUniformJumpsuitBattleDressUniformWoodland
+
+- type: latheRecipe
+  parent: BaseJumpsuitRecipe
+  id: ClothingUniformJumpsuitBattleDressUniformWoodlandShortSleeve
+  result: ClothingUniformJumpsuitBattleDressUniformWoodlandShortSleeve
+
+- type: latheRecipe
+  parent: BaseJumpsuitRecipe
+  id: ClothingUniformJumpsuitBattleDressUniformWoodlandTShirt
+  result: ClothingUniformJumpsuitBattleDressUniformWoodlandTShirt
+
+- type: latheRecipe
+  parent: BaseJumpsuitRecipe
+  id: ClothingUniformJumpsuitBattleDressUniformDesert
+  result: ClothingUniformJumpsuitBattleDressUniformDesert
+
+- type: latheRecipe
+  parent: BaseJumpsuitRecipe
+  id: ClothingUniformJumpsuitBattleDressUniformDesertShortSleeve
+  result: ClothingUniformJumpsuitBattleDressUniformDesertShortSleeve
+
+- type: latheRecipe
+  parent: BaseJumpsuitRecipe
+  id: ClothingUniformJumpsuitBattleDressUniformDesertTShirt
+  result: ClothingUniformJumpsuitBattleDressUniformDesertTShirt
+
+- type: latheRecipe
+  parent: BaseJumpsuitRecipe
+  id: ClothingUniformJumpsuitBattleDressUniformArctic
+  result: ClothingUniformJumpsuitBattleDressUniformArctic
+
+- type: latheRecipe
+  parent: BaseJumpsuitRecipe
+  id: ClothingUniformJumpsuitBattleDressUniformArcticShortSleeve
+  result: ClothingUniformJumpsuitBattleDressUniformArcticShortSleeve
+
+- type: latheRecipe
+  parent: BaseJumpsuitRecipe
+  id: ClothingUniformJumpsuitBattleDressUniformArcticTShirt
+  result: ClothingUniformJumpsuitBattleDressUniformArcticTShirt

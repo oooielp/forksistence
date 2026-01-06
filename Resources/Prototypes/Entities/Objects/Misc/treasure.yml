@@ -152,6 +152,7 @@
     size: Tiny
   - type: StaticPrice
     price: 75
+  - type: NFCoin # Persistence: add frontier coin component so wallets can contain coins
 
 - type: entity
   parent: TreasureCoinIron

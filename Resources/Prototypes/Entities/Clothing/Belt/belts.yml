@@ -210,3 +210,14 @@
     sprite: Clothing/Belt/militarywebbingert.rsi
   - type: Clothing
     sprite: Clothing/Belt/militarywebbingert.rsi
+
+- type: entity
+  parent: [ ClothingBeltStorageBase, BaseSecurityCargoContraband ]
+  id: ClothingBeltTanMilitaryWebbing
+  name: tan military webbing
+  description: A set of tan military style webbing.
+  components:
+  - type: Sprite
+    sprite: Clothing/Belt/militarywebbingtan.rsi
+  - type: Clothing
+    sprite: Clothing/Belt/militarywebbingtan.rsi

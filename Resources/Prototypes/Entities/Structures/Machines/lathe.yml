@@ -507,11 +507,13 @@
     - ClothingScience
     - ClothingSecurity
     - ClothingService
+    - ClothingMilitary
     - WinterCoats
     - Ties
     - Scarves
     - Carpets
     - Bedsheets
+    - NFWallets # Frontier
   - type: EmagLatheRecipes
     emagStaticPacks:
     - ClothingCentComm

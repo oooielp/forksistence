@@ -234,3 +234,16 @@
   - ClothingOuterWinterSyndie
   - ClothingOuterWinterSyndieCap
   - BedsheetSyndie
+
+- type: latheRecipePack
+  id: ClothingMilitary
+  recipes:
+  - ClothingUniformJumpsuitBattleDressUniformWoodland
+  - ClothingUniformJumpsuitBattleDressUniformWoodlandShortSleeve
+  - ClothingUniformJumpsuitBattleDressUniformWoodlandTShirt
+  - ClothingUniformJumpsuitBattleDressUniformDesert
+  - ClothingUniformJumpsuitBattleDressUniformDesertShortSleeve
+  - ClothingUniformJumpsuitBattleDressUniformDesertTShirt
+  - ClothingUniformJumpsuitBattleDressUniformArctic
+  - ClothingUniformJumpsuitBattleDressUniformArcticShortSleeve
+  - ClothingUniformJumpsuitBattleDressUniformArcticTShirt

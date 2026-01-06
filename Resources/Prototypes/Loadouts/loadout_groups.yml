@@ -1646,3 +1646,10 @@
   hidden: true
   loadouts:
   - LoadoutSpeciesBreathToolSecurity
+
+- type: loadoutGroup
+  id: BasicWallet
+  name: loadout-group-basic-wallet
+  loadouts:
+  - ClothingWalletLeatherBrown
+  - ClothingWalletLeatherBlack

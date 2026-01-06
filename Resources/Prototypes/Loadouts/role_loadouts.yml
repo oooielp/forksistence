@@ -55,6 +55,7 @@
   - Trinkets
   - PassengerJobTrinkets
   - GroupSpeciesBreathTool
+  - BasicWallet
 
 - type: roleLoadout
   id: JobBartender
