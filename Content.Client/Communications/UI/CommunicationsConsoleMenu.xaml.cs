@@ -70,15 +70,8 @@ namespace Content.Client.Communications.UI
 
             AlertLevelButton.Disabled = !AlertLevelSelectable;
 
-            EmergencyShuttleButton.OnPressed += _ => OnEmergencyLevel?.Invoke();
-            EmergencyShuttleButton.Disabled = !CanCall;
         }
 
-        protected override void FrameUpdate(FrameEventArgs args)
-        {
-            base.FrameUpdate(args);
-            UpdateCountdown();
-        }
 
         // The current alert could make levels unselectable, so we need to ensure that the UI reacts properly.
         // If the current alert is unselectable, the only item in the alerts list will be
@@ -117,21 +110,5 @@ namespace Content.Client.Communications.UI
             }
         }
 
-        public void UpdateCountdown()
-        {
-            if (!CountdownStarted)
-            {
-                CountdownLabel.SetMessage(string.Empty);
-                EmergencyShuttleButton.Text = Loc.GetString("comms-console-menu-call-shuttle");
-                return;
-            }
-
-            var diff = MathHelper.Max((CountdownEnd - _timing.CurTime) ?? TimeSpan.Zero, TimeSpan.Zero);
-
-            EmergencyShuttleButton.Text = Loc.GetString("comms-console-menu-recall-shuttle");
-            var infoText = Loc.GetString($"comms-console-menu-time-remaining",
-                ("time", diff.ToString(@"hh\:mm\:ss", CultureInfo.CurrentCulture)));
-            CountdownLabel.SetMessage(infoText);
-        }
     }
 }
