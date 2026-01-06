@@ -265,32 +265,10 @@ public sealed class InvoicePrinterConsoleSystem : SharedInvoicePrinterConsoleSys
                 {
                     if (component.TargetStation == sD.UID && sD.StationName != null) paidTo = sD.StationName;
                 }
-                if (sD.Owners.Contains(userName))
+                if (_station.CanSpend(userName, station, component.InvoiceCost))
                 {
                     possibleStations.Add(sD.UID, sD.StationName != null ? sD.StationName : "");
                 }
-                else
-                {
-                    if(TryComp<CrewRecordsComponent>(station, out var crewRecords) && crewRecords != null)
-                    {
-                        crewRecords.TryGetRecord(userName, out var crewRecord);
-                        if(crewRecord != null)
-                        {
-                            if(TryComp<CrewAssignmentsComponent>(station, out var crewAssignments) && crewAssignments != null)
-                            {
-                                if(crewAssignments.TryGetAssignment(crewRecord.AssignmentID, out var assignment) && assignment != null)
-                                {
-                                    if(assignment.CanSpend)
-                                    {
-                                        possibleStations.Add(sD.UID, sD.StationName != null ? sD.StationName : "");
-                                    }
-                                }
-                            }
-
-                        }
-                    }
-                }
-
             }
         }
         InvoiceBoundUserInterfaceState newState = new(possibleStations,component.InvoiceCost, component.InvoiceReason, paidTo, component.PaidBy, component.Paid, userName);
@@ -328,32 +306,10 @@ public sealed class InvoicePrinterConsoleSystem : SharedInvoicePrinterConsoleSys
             if (TryComp<StationDataComponent>(station, out var sD) && sD != null)
             {
                 if (sD.StationName != null) stationName = sD.StationName;
-                if (sD.Owners.Contains(userName))
+                if (_station.CanSpend(userName, station.Value, component.InvoiceCost))
                 {
                     valid = true;
                 }
-                else
-                {
-                    if (TryComp<CrewRecordsComponent>(station, out var crewRecords) && crewRecords != null)
-                    {
-                        crewRecords.TryGetRecord(userName, out var crewRecord);
-                        if (crewRecord != null)
-                        {
-                            if (TryComp<CrewAssignmentsComponent>(station, out var crewAssignments) && crewAssignments != null)
-                            {
-                                if (crewAssignments.TryGetAssignment(crewRecord.AssignmentID, out var assignment) && assignment != null)
-                                {
-                                    if (assignment.CanSpend)
-                                    {
-                                        valid = true;
-                                    }
-                                }
-                            }
-
-                        }
-                    }
-                }
-
             }
         }
         if(valid && station != null)
@@ -398,6 +354,7 @@ public sealed class InvoicePrinterConsoleSystem : SharedInvoicePrinterConsoleSys
                 }
                 component.Paid = true;
                 component.PaidBy = $"{stationName} ({userName})";
+                _station.TrackSpending(userName, station.Value, component.InvoiceCost);
                 _audio.PlayEntity(component.PaySuccessSound, args.Actor, uid);
                 _appearance.SetData(uid, PaperVisuals.Invoice, "paid");
             }

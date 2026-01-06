@@ -69,7 +69,8 @@ public sealed class StationModificationConsoleBoundUserInterface : BoundUserInte
         _menu.CommandLevelConfirm.OnPressed += ChangeCommandLevel;
         _menu.AssignmentWageConfirm.OnPressed += ChangeWage;
         _menu.AssignmentNameConfirm.OnPressed += ChangeAssignmentName;
-        _menu.DeleteAssignment.OnPressed += DeleteAssignment;
+        _menu.SpendingLimitConfirm.OnPressed += ChangeAssignmentSpendingLimit;
+_menu.DeleteAssignment.OnPressed += DeleteAssignment;
         _menu.DefaultAccessCreate.OnPressed += DefaultAccessCreate;
         _menu.ClaimBtn.OnPressed += ToggleClaim;
         _menu.SpendingBtn.OnPressed += ToggleSpend;
@@ -80,6 +81,7 @@ public sealed class StationModificationConsoleBoundUserInterface : BoundUserInte
         _menu.LevelPurchaseButton.OnPressed += PurchaseUpgrade;
         _menu.ChannelEnable.OnPressed += OnChannelEnable;
         _menu.ChannelDisable.OnPressed += OnChannelDisable;
+
         _menu.OpenCentered();
     }
 
@@ -279,6 +281,14 @@ public sealed class StationModificationConsoleBoundUserInterface : BoundUserInte
         string newName = _menu.AssignmentNameField.Text;
         if (newName == null || newName == "") return;
         SendMessage(new StationModificationChangeAssignmentName(assignment, newName));
+    }
+    private void ChangeAssignmentSpendingLimit(ButtonEventArgs args)
+    {
+        if (_menu == null) return;
+        var assignment = _menu.PossibleAssignments.SelectedId;
+        int newLimit = _menu.SpendingLimitSpinBox.Value;
+        if (newLimit < 0) return;
+        SendMessage(new StationModificationChangeAssignmentSpendingLimit(assignment, newLimit));
     }
 
     private void DeleteAssignment(ButtonEventArgs args)

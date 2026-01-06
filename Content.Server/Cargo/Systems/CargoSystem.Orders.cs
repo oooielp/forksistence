@@ -319,13 +319,6 @@ namespace Content.Server.Cargo.Systems
             }
             else
             {
-                if (!_accessReaderSystem.IsAllowed(player, uid) || !_accessReaderSystem.CanSpend(player, uid))
-                {
-                    ConsolePopup(args.Actor, Loc.GetString("cargo-console-order-not-allowed"));
-                    PlayDenySound(uid, component);
-                    return;
-                }
-
                 var station = _station.GetOwningStation(uid);
 
                 // No station to deduct from.
@@ -337,7 +330,6 @@ namespace Content.Server.Cargo.Systems
                     PlayDenySound(uid, component);
                     return;
                 }
-
                 // Find our order again. It might have been dispatched or approved already
                 var order = orderDatabase.Orders[component.Account].Find(order => args.OrderId == order.OrderId && !order.Approved);
                 if (order == null || !_protoMan.Resolve(order.Account, out var account))
@@ -345,6 +337,13 @@ namespace Content.Server.Cargo.Systems
                     return;
                 }
 
+                var cost = order.Price * order.OrderQuantity;
+                if (!_accessReaderSystem.IsAllowed(player, uid) || !_accessReaderSystem.CanSpend(player, uid, null, cost))
+                {
+                    ConsolePopup(args.Actor, "Insufficent Spending Limit");
+                    PlayDenySound(uid, component);
+                    return;
+                }
                 // Invalid order
                 if (!_protoMan.HasIndex<EntityPrototype>(order.ProductId))
                 {
@@ -374,7 +373,7 @@ namespace Content.Server.Cargo.Systems
                     PlayDenySound(uid, component);
                 }
 
-                var cost = order.Price * order.OrderQuantity;
+                
                 var taxRate = order.Tax;
 
                 var oStation = GetTradeStationByID(order.TradeStation);
@@ -442,6 +441,11 @@ namespace Content.Server.Cargo.Systems
 
                 orderDatabase.Orders[component.Account].Remove(order);
                 UpdateBankAccount((station.Value, bank), -cost, order.Account);
+                var idName = _accessReaderSystem.GetIdName(player);
+                if(idName != null)
+                {
+                    _station.TrackSpending(idName, station.Value, cost);
+                }
                 if (taxPaid > 0)
                 {
                     var owStation = GetTradeStationByID(order.TradeStation);

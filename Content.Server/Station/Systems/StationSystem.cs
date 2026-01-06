@@ -5,6 +5,8 @@ using Content.Server.GameTicking;
 using Content.Server.Station.Components;
 using Content.Server.Station.Events;
 using Content.Server.Worldgen.Components.Debris;
+using Content.Shared.CrewAssignments.Components;
+using Content.Shared.CrewRecords.Components;
 using Content.Shared.GridControl.Components;
 using Content.Shared.Station;
 using Content.Shared.Station.Components;
@@ -74,7 +76,37 @@ public sealed partial class StationSystem : SharedStationSystem
         _player.PlayerStatusChanged += OnPlayerStatusChanged;
     }
 
-
+    public void ResetSpending(string userName, EntityUid station)
+    {
+        if (TryComp<CrewRecordsComponent>(station, out var crewRecords) && crewRecords != null)
+        {
+            crewRecords.TryGetRecord(userName, out var crewRecord);
+            if (crewRecord != null)
+            {
+                crewRecord.Spent = 0;
+            }
+        }
+    }
+    public void TrackSpending(string userName, EntityUid station, int toSpend)
+    {
+        if (TryComp<StationDataComponent>(station, out var sD) && sD != null)
+        {
+            if (sD.Owners.Contains(userName))
+            {
+                return;
+            }
+        }
+        if (TryComp<CrewRecordsComponent>(station, out var crewRecords) && crewRecords != null)
+        {
+            crewRecords.TryGetRecord(userName, out var crewRecord);
+            if (crewRecord != null)
+            {
+                crewRecord.Spent += toSpend;
+            }
+        }
+    }
+    
+    
     public int GetPersonalTileCount(string realName)
     {
         var count = 0;

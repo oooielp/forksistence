@@ -53,6 +53,7 @@ public sealed partial class CrewAssignmentSystem
         SubscribeLocalEvent<StationModificationConsoleComponent, StationModificationChangeAssignmentCLevel>(OnChangeCLevel);
         SubscribeLocalEvent<StationModificationConsoleComponent, StationModificationChangeAssignmentWage>(OnChangeWage);
         SubscribeLocalEvent<StationModificationConsoleComponent, StationModificationChangeAssignmentName>(OnChangeAName);
+        SubscribeLocalEvent<StationModificationConsoleComponent, StationModificationChangeAssignmentSpendingLimit>(OnChangeSpendingLimit);
         SubscribeLocalEvent<StationModificationConsoleComponent, StationModificationDeleteAssignment>(OnDeleteAssignment);
         SubscribeLocalEvent<StationModificationConsoleComponent, StationModificationDefaultAccess>(OnDefaultAccess);
         SubscribeLocalEvent<StationModificationConsoleComponent, BoundUIOpenedEvent>(OnOrderUIOpened);
@@ -112,6 +113,36 @@ public sealed partial class CrewAssignmentSystem
         }
         stationData!.RemoveOwner(args.Owner);
         Dirty((EntityUid)station, stationData);
+        UpdateOrders(station.Value);
+
+    }
+
+    private void OnChangeSpendingLimit(EntityUid uid, StationModificationConsoleComponent component, StationModificationChangeAssignmentSpendingLimit args)
+    {
+        if (args.Actor is not { Valid: true } player)
+            return;
+
+        var station = _station.GetOwningStation(uid);
+        if (station == null) return;
+
+        if (!Validate(uid, component, player, out var stationData)) return;
+        if (args.Limit < 0)
+        {
+            ConsolePopup(player, "Cannot be below zero!");
+            return;
+        }
+        if (!TryComp(station, out CrewAssignmentsComponent? crewAssignments))
+        {
+            ConsolePopup(player, "No CrewAssignment Component!");
+            return;
+        }
+        if (!crewAssignments.CrewAssignments.TryGetValue(args.AccessID, out var crewAssignment))
+        {
+            ConsolePopup(player, "Invalid Assignment!");
+            return;
+        }
+        crewAssignment.SpendingLimit = args.Limit;
+        Dirty((EntityUid)station, crewAssignments);
         UpdateOrders(station.Value);
 
     }

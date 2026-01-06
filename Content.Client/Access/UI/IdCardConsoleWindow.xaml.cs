@@ -56,8 +56,8 @@ namespace Content.Client.Access.UI
                 FullNameSaveButton.Disabled = FullNameSaveButton.Text == _lastFullName;
             };
             FullNameSaveButton.OnPressed += _ => SubmitData();
+            SpendingReset.OnPressed += _ => ResetSpending();
 
-            JobTitleLineEdit.IsValid = s => s.Length <= _maxIdJobLength;
 
         }
 
@@ -77,14 +77,16 @@ namespace Content.Client.Access.UI
 
             var interfaceEnabled =
                 state.IsPrivilegedIdPresent && state.IsPrivilegedIdAuthorized && state.TargetIdFullName != null && state.TargetIdFullName != "";
-            if (state.TargetIdFullName != null)
+            if (state.TargetIdFullName != null && state.TargetIdFullName != "")
             {
                 FullNameLineEdit.Text = state.TargetIdFullName;
                 SelectedAccountLabel.Text = state.TargetIdFullName;
+                AccountDetails.Visible = true;
             }
             else
             {
                 SelectedAccountLabel.Text = "*None*";
+                AccountDetails.Visible = false;
             }
 
                 var fullNameDirty = _lastFullName != null && FullNameLineEdit.Text != state.TargetIdFullName;
@@ -97,16 +99,21 @@ namespace Content.Client.Access.UI
 
             FullNameSaveButton.Disabled = !fullNameDirty;
 
-            JobTitleLabel.Modulate = Color.Gray;
-            JobTitleLineEdit.Editable = false;
-            JobTitleLineEdit.Text = "*Unassigned*";
-            if (state.Assignment != null) JobTitleLineEdit.Text = state.Assignment.Name;
-
-
+            if (state.Assignment != null)
+            {
+                AssignmentLabel.Text = state.Assignment.Name;
+                SpendingLabel.Text = $"${state.SpentFunds}/{state.Assignment.SpendingLimit}";
+            }
+            else
+            {
+                AssignmentLabel.Text = "*Unassigned*";
+                SpendingLabel.Text = $"${state.SpentFunds}/0";
+            }
             _lastFullName = state.TargetIdFullName;
             AccessLevelControlContainer.RemoveAllChildren();
             if (state.AllAssignments != null)
             {
+                
                 foreach (var item in state.AllAssignments)
                 {
                     var id = item.Key;
@@ -135,6 +142,10 @@ namespace Content.Client.Access.UI
             }
         }
 
+        private void ResetSpending()
+        {
+            _owner.ResetSpending();
+        }
         private void SubmitData()
         {
             _owner.SearchRecord(FullNameLineEdit.Text);

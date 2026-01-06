@@ -230,6 +230,8 @@ namespace Content.Client.CrewAssignments.UI
                 AssignmentNameField.Text = assignment.Name;
                 WageSpinBox.Value = assignment.Wage;
                 CLevelSpinBox.Value = assignment.Clevel;
+                SpendingLimitSpinBox.Value = assignment.SpendingLimit;
+
                 if(assignment.CanClaim)
                 {
                     ClaimBtn.Pressed = true;

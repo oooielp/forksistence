@@ -44,6 +44,15 @@ public sealed partial class JobNetMenu : DefaultWindow
      
     public void UpdateState(JobNetUpdateState state)
     {
+        if(state.SpendAuth)
+        {
+            SLDetails.Visible = true;
+            SpendingLabel.Text = $"${state.Spent}/${state.Spendable}";
+        }
+        else
+        {
+            SLDetails.Visible = false;
+        }
         AccountBalanceLabel.Text = $"${state.Balance}";
         var dependencies = IoCManager.Instance!;
         var localPlayer = dependencies.Resolve<IPlayerManager>().LocalEntity;

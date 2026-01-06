@@ -44,6 +44,11 @@ public sealed partial class IdCardConsoleComponent : Component
     }
 
     [Serializable, NetSerializable]
+    public sealed class AccountModResetSpending : BoundUserInterfaceMessage
+    {
+    }
+
+    [Serializable, NetSerializable]
     public sealed class SearchRecord : BoundUserInterfaceMessage
     {
         public readonly string FullName;
@@ -118,6 +123,7 @@ public sealed partial class IdCardConsoleComponent : Component
         public readonly CrewAssignment? PrivAssignment;
         public readonly Dictionary<int, CrewAssignment>? AllAssignments;
         public readonly bool IsOwner = false;
+        public readonly int SpentFunds;
 
         public IdCardConsoleBoundUserInterfaceState(bool isPrivilegedIdPresent,
             bool isPrivilegedIdAuthorized,
@@ -129,7 +135,8 @@ public sealed partial class IdCardConsoleComponent : Component
             CrewAssignment? crewAssignment,
             CrewAssignment? privCrewAssignment,
             Dictionary<int, CrewAssignment>? allAssignments,
-            bool isOwner)
+            bool isOwner,
+            int spentFunds)
         {
             IsPrivilegedIdPresent = isPrivilegedIdPresent;
             IsPrivilegedIdAuthorized = isPrivilegedIdAuthorized;
@@ -142,6 +149,7 @@ public sealed partial class IdCardConsoleComponent : Component
             PrivAssignment = privCrewAssignment;
             AllAssignments = allAssignments;
             this.IsOwner = isOwner;
+            SpentFunds = spentFunds;
         }
     }
 

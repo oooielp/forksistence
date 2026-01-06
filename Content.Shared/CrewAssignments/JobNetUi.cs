@@ -25,8 +25,11 @@ public sealed class JobNetUpdateState : BoundUserInterfaceState
     public List<CodexEntry> CodexEntries;
     public ProtoId<NetworkLevelPrototype> Level;
     public int Balance;
+    public bool SpendAuth;
+    public int Spent;
+    public int Spendable;
 
-    public JobNetUpdateState(Dictionary<int, string>? stations, string? assignmentName, int? wage, int selectedStation, TimeSpan? remainingMinutes, List<WorldObjectivesEntry> currentObjectives, List<WorldObjectivesEntry> completedObjectives, List<CodexEntry> codexEntries, ProtoId<NetworkLevelPrototype> level, int balance)
+    public JobNetUpdateState(Dictionary<int, string>? stations, string? assignmentName, int? wage, int selectedStation, TimeSpan? remainingMinutes, List<WorldObjectivesEntry> currentObjectives, List<WorldObjectivesEntry> completedObjectives, List<CodexEntry> codexEntries, ProtoId<NetworkLevelPrototype> level, int balance, bool spendAuth, int spent, int spendable)
     {
         Stations = stations;
         AssignmentName = assignmentName;
@@ -38,6 +41,9 @@ public sealed class JobNetUpdateState : BoundUserInterfaceState
         CodexEntries = codexEntries;
         Level = level;
         Balance = balance;
+        SpendAuth = spendAuth;
+        Spent = spent;
+        Spendable = spendable;
     }
 }
 

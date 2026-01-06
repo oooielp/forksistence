@@ -392,7 +392,7 @@ public sealed class AccessReaderSystem : EntitySystem
         return false;
     }
 
-    public bool CanSpend(EntityUid user, EntityUid target, AccessReaderComponent? reader = null)
+    public bool CanSpend(EntityUid user, EntityUid target, AccessReaderComponent? reader = null, int toSpend = 0)
     {
         string? actorName = null;
         var accessSources = FindPotentialAccessItems(user);
@@ -416,35 +416,10 @@ public sealed class AccessReaderSystem : EntitySystem
                 }
             }
         }
-        if (actorName != null)
+        if (actorName != null && station != null)
         {
 
-            if (TryComp(station, out StationDataComponent? sD))
-            {
-                if (sD.Owners.Contains(actorName)) return true;
-            }
-
-            if (!TryComp(station, out CrewRecordsComponent? crewRecords))
-            {
-                crewRecords = null;
-                return false;
-            }
-            if (crewRecords == null) return true;
-            crewRecords.TryGetRecord(actorName, out var record);
-
-            if (!TryComp(station, out CrewAssignmentsComponent? stationData))
-            {
-                return false;
-            }
-            if (!TryComp(station, out CrewAccessesComponent? crewAccesses))
-            {
-                return false;
-            }
-            if (stationData != null && record != null)
-            {
-                if (!stationData.TryGetAssignment(record.AssignmentID, out var assignment) || assignment == null) return false;
-                return assignment.CanSpend;
-            }
+            return _station.CanSpend(actorName, station.Value, toSpend);
         }
         return false;
     }

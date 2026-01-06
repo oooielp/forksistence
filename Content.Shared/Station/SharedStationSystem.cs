@@ -28,6 +28,52 @@ public abstract partial class SharedStationSystem : EntitySystem
         _stationMemberQuery = GetEntityQuery<StationMemberComponent>();
     }
 
+    public bool IsOwner(string userName, EntityUid station)
+    {
+        if (TryComp<StationDataComponent>(station, out var sD) && sD != null)
+        {
+            if (sD.Owners.Contains(userName))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+    public bool CanSpend(string userName, EntityUid station, int toSpend = 0)
+    {
+        if (TryComp<StationDataComponent>(station, out var sD) && sD != null)
+        {
+            if (sD.Owners.Contains(userName))
+            {
+                return true;
+            }
+        }
+        if (TryComp<CrewRecordsComponent>(station, out var crewRecords) && crewRecords != null)
+        {
+            crewRecords.TryGetRecord(userName, out var crewRecord);
+            if (crewRecord != null)
+            {
+                if (TryComp<CrewAssignmentsComponent>(station, out var crewAssignments) && crewAssignments != null)
+                {
+                    if (crewAssignments.TryGetAssignment(crewRecord.AssignmentID, out var assignment) && assignment != null)
+                    {
+                        if (assignment.CanSpend)
+                        {
+                            if (toSpend > 0)
+                            {
+                                var spendable = assignment.SpendingLimit - crewRecord.Spent;
+                                if (spendable >= toSpend) return true;
+                            }
+                            else return true;
+                        }
+                    }
+                }
+
+            }
+        }
+        return false;
+    }
+
     /// <summary>
     /// Gets the largest member grid from a station.
     /// </summary>
