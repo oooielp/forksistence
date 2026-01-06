@@ -24,10 +24,10 @@ public sealed partial class CargoBountyPrototype : IPrototype
     public int Reward;
 
     [DataField]
-    public int SuccessXP = 10;
+    public int SuccessXP = 25;
 
     [DataField]
-    public int FailureXP = 5;
+    public int FailureXP = 15;
 
     /// <summary>
     /// A description for flava purposes.
