@@ -170,6 +170,7 @@
   parent: PortableGeneratorPacmanMachineCircuitboard
   id: PortableGeneratorOldmanMachineCircuitboard
   result: PortableGeneratorOldmanMachineCircuitboard
+  unlockUses: 4
 
 - type: latheRecipe
   parent: PortableGeneratorPacmanMachineCircuitboard
