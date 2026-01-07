@@ -66,6 +66,12 @@ namespace Content.Client.Invoices.UI
                 PaidByLabel.Visible = true;
                 PaidLabel.Visible = true;
                 PayButton.Visible = false;
+                if(state.PaidTime != null)
+                {
+                    var yearOffset = _cfgManager.GetCVar(CCVars.YearOffset);
+                    var finalTime = state.PaidTime.Value.AddYears(yearOffset);
+                    PaidLabel.Text = $"*Paid on {finalTime.ToString()}*";
+                }
             }
             else
             {

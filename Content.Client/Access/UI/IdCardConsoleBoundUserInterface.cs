@@ -27,7 +27,6 @@ namespace Content.Client.Access.UI
         public IdCardConsoleBoundUserInterface(EntityUid owner, Enum uiKey) : base(owner, uiKey)
         {
             _idCardConsoleSystem = EntMan.System<SharedIdCardConsoleSystem>();
-
             _maxNameLength =_cfgManager.GetCVar(CCVars.MaxNameLength);
             _maxIdJobLength = _cfgManager.GetCVar(CCVars.MaxIdJobLength);
         }

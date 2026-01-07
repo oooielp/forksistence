@@ -368,7 +368,7 @@ public sealed class InvoicePrinterConsoleSystem : SharedInvoicePrinterConsoleSys
             }
         }
 
-        InvoiceBoundUserInterfaceState newState = new(possibleStations, component.InvoiceCost, component.InvoiceReason, paidTo, component.PaidBy, component.Paid, userName, component.PayslipMode);
+        InvoiceBoundUserInterfaceState newState = new(possibleStations, component.InvoiceCost, component.InvoiceReason, paidTo, component.PaidBy, component.Paid, userName, component.PayslipMode, component.PaidTime);
         _userInterface.SetUiState(uid, InvoiceUiKey.Key, newState);
     }
 
@@ -453,6 +453,7 @@ public sealed class InvoicePrinterConsoleSystem : SharedInvoicePrinterConsoleSys
                     }
                     component.Paid = true;
                     component.PaidBy = $"{stationName} ({userName})";
+                    component.PaidTime = DateTime.Now;
                     _station.TrackSpending(userName, station.Value, component.InvoiceCost);
                     _audio.PlayEntity(component.PaySuccessSound, args.Actor, uid);
                     _appearance.SetData(uid, PaperVisuals.Invoice, "paid");
@@ -472,6 +473,7 @@ public sealed class InvoicePrinterConsoleSystem : SharedInvoicePrinterConsoleSys
                     _cargo.UpdateBankAccount((station.Value, stationBank), cost, "Cargo");
                     component.Paid = true;
                     component.PaidBy = $"{stationName} ({userName})";
+                    component.PaidTime = DateTime.Now;
                     _audio.PlayEntity(component.PaySuccessSound, args.Actor, uid);
                     _appearance.SetData(uid, PaperVisuals.Invoice, "paid");
                 }
@@ -523,6 +525,7 @@ public sealed class InvoicePrinterConsoleSystem : SharedInvoicePrinterConsoleSys
                 }
                 component.Paid = true;
                 component.PaidBy = userName;
+                component.PaidTime = DateTime.Now;
                 _audio.PlayEntity(component.PaySuccessSound, args.Actor, uid);
                 _appearance.SetData(uid, PaperVisuals.Invoice, "paid");
                 if (component.TargetStation != null)
@@ -557,6 +560,7 @@ public sealed class InvoicePrinterConsoleSystem : SharedInvoicePrinterConsoleSys
             {
                 component.Paid = true;
                 component.PaidBy = userName;
+                component.PaidTime = DateTime.Now;
                 _audio.PlayEntity(component.PaySuccessSound, args.Actor, uid);
                 _appearance.SetData(uid, PaperVisuals.Invoice, "paid");
             }

@@ -15,6 +15,8 @@ namespace Content.Shared.Invoices.Components;
 public sealed partial class InvoiceComponent : Component
 {
     [DataField]
+    public DateTime? PaidTime;
+    [DataField]
     public int InvoiceCost = 0;
     [DataField]
     public string InvoiceReason = "";
@@ -54,8 +56,9 @@ public sealed class InvoiceBoundUserInterfaceState : BoundUserInterfaceState
     public string PaidBy;
     public string UserName;
     public bool PayslipMode;
+    public DateTime? PaidTime;
 
-    public InvoiceBoundUserInterfaceState(Dictionary<int,string> possiblestations, int invoicecost, string invoicereason, string paidTo, string paidBy, bool paid, string userName, bool payslipMode)
+    public InvoiceBoundUserInterfaceState(Dictionary<int,string> possiblestations, int invoicecost, string invoicereason, string paidTo, string paidBy, bool paid, string userName, bool payslipMode, DateTime? paidTime)
     {
         PossibleStations = possiblestations;
         InvoiceCost = invoicecost;
@@ -65,6 +68,7 @@ public sealed class InvoiceBoundUserInterfaceState : BoundUserInterfaceState
         Paid = paid;
         UserName = userName;
         PayslipMode = payslipMode;
+        PaidTime = paidTime;
     }
 }
 
