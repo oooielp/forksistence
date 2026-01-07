@@ -151,7 +151,7 @@
       sprite: Objects/Misc/bureaucracy.rsi
       state: invoiceunpaid
     - type: Item
-      size: Small
+      size: Tiny
     - type: Invoice
     - type: UserInterface
       interfaces:
