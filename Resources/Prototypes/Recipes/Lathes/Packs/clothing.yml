@@ -6,6 +6,27 @@
   - ClothingUniformJumpsuitColorGrey
   - ClothingUniformJumpskirtColorGrey
   - ClothingUniformJumpsuitLoungewear
+  - ClothingUniformGenericTurtleNeckAndJeans
+  - ClothingUniformGenericBusinessCasual
+  - ClothingUniformGenericTunicAndJeans
+  - ClothingUniformGenericOldManSweater
+  - ClothingUniformJumpsuitFlannel
+  - ClothingUniformJumpsuitHawaiBlue
+  - ClothingUniformJumpsuitHawaiBlack
+  - ClothingUniformJumpsuitHawaiYellow
+  - ClothingUniformJumpsuitHawaiRed
+  - ClothingUniformGenericFudd
+  - ClothingUniformGenericShirtAndJeansBrown
+  - ClothingUniformGenericShirtAndJeansGreen
+  - ClothingUniformGenericShirtAndJeansRed
+  - ClothingUniformGenericKilt
+  - ClothingUniformGenericSweaterAndSlacks
+  - ClothingUniformGenericCollaredShirtAndSlacksBlack
+  - ClothingUniformGenericCollaredShirtAndSlacksBlackAlt
+  - ClothingUniformGenericCollaredShirtAndSlacksBrown
+  - ClothingUniformGenericCollaredShirtAndSlacksBrownAlt
+  - ClothingUniformGenericCollaredShirtAndSlacksWhite
+  - ClothingUniformGenericCollaredShirtAndSlacksWhiteAlt
 
 - type: latheRecipePack
   id: ClothingCargo
@@ -89,6 +110,8 @@
   recipes:
   - ClothingUniformJumpsuitDetective
   - ClothingUniformJumpskirtDetective
+  - ClothingUniformJumpsuitSecDetectiveBlue
+  - ClothingUniformJumpsuitSecDetectiveBlack
   - ClothingHeadHatBeretHoS
   - ClothingHeadHatHoshat
   - ClothingUniformJumpsuitHoS
@@ -103,18 +126,32 @@
   - ClothingUniformJumpskirtHoSParadeMale
   - ClothingUniformJumpsuitSeniorOfficer
   - ClothingUniformJumpskirtSeniorOfficer
+  - ClothingUniformSecurityTrooper
+  - ClothingUniformSecurityTrooperSenior
   - ClothingUniformJumpsuitPrisoner
   - ClothingUniformJumpskirtPrisoner
   - ClothingHeadHatBeretSecurity
   - ClothingUniformJumpsuitSec
   - ClothingUniformJumpskirtSec
+  - ClothingUniformJumpsuitSecGrey
+  - ClothingUniformJumpskirtSecGrey
+  - ClothingUniformJumpsuitSecAlt
+  - ClothingUniformJumpsuitSecBlueAlt
+  - ClothingUniformJumpsuitSecGreyAlt
   - ClothingHeadHatBeretBrigmedic
   - ClothingUniformJumpsuitBrigmedic
   - ClothingUniformJumpskirtBrigmedic
   - ClothingHeadHatBeretWarden
+  - ClothingHeadHatBeretSecurityDarkRed
+  - ClothingHeadHatBeretSecurityLightBlue
+  - ClothingHeadHatBeretSecurityBlack
+  - ClothingHeadHatBeretSecurityLightRed
+  - ClothingHeadHatBeretSecurityDarkBlue
   - ClothingHeadHatWarden
   - ClothingUniformJumpsuitWarden
   - ClothingUniformJumpskirtWarden
+  - ClothingUniformJumpsuitSecCorpsmanBlue
+  - ClothingUniformJumpsuitSecCorpsmanBlack
 
 - type: latheRecipePack
   id: ClothingService
@@ -247,3 +284,4 @@
   - ClothingUniformJumpsuitBattleDressUniformArctic
   - ClothingUniformJumpsuitBattleDressUniformArcticShortSleeve
   - ClothingUniformJumpsuitBattleDressUniformArcticTShirt
+  - ClothingUniformGenericTacticalTurtleNeck

@@ -1,8 +1,8 @@
 <controls:FancyWindow xmlns="https://spacestation14.io"
                            xmlns:gfx="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
                            xmlns:controls="clr-namespace:Content.Client.UserInterface.Controls"
-                           SetSize="600 630"
-                           MinSize="600 630">
+                           SetSize="600 690"
+                           MinSize="600 690">
     <BoxContainer Orientation="Vertical" Margin="15 5 15 10">
         <BoxContainer Orientation="Horizontal">
             <Label Name="StationNameLabel"
@@ -88,7 +88,7 @@
                         Access="Public"
                         Text="Delete"/>
                 </BoxContainer>
-                <Control MinHeight="15"/>
+                <Control MinHeight="50"/>
                 <BoxContainer Orientation="Horizontal">
                     <Label Text="Import Tax:"
                         StyleClasses="LabelKeyText" />
@@ -106,6 +106,7 @@
                     <Button Name="ETaxConfirm" Access="Public"
                         Text="Save"/>
                 </BoxContainer>
+                <Control MinHeight="15"/>
                 <BoxContainer Orientation="Horizontal">
                     <Label Text="Sales Tax:"
                         StyleClasses="LabelKeyText" />
@@ -152,6 +153,15 @@
                         <Control HorizontalExpand="True"/>
                         <SpinBox Name="CLevelSpinBox" Access="Public" MinWidth="100" Value="10"/>
                         <Button Name="CommandLevelConfirm" Access="Public"
+                            Text="Save"/>
+                    </BoxContainer>
+                    <Control MinHeight="15"/>
+                    <BoxContainer Orientation="Horizontal">
+                        <Label Text="Spending Limit:"
+                            StyleClasses="LabelKeyText" />
+                        <Control HorizontalExpand="True"/>
+                        <SpinBox Name="SpendingLimitSpinBox" Access="Public" MinWidth="100" Value="10"/>
+                        <Button Name="SpendingLimitConfirm" Access="Public"
                             Text="Save"/>
                     </BoxContainer>
                     <Control MinHeight="15"/>

@@ -69,7 +69,8 @@
   - type: Item
     storedRotation: -90
   - type: Tag
-    id: AnomalyScanner
+    tags:
+      - AnomalyScanner
 
 - type: entity
   id: AnomalyLocatorUnpowered
@@ -109,7 +110,8 @@
         maxDistance: 1
         volume: -8
   - type: Tag
-    id: AnomalyLocator
+    tags:
+      - AnomalyLocator
 
 - type: entity
   id: AnomalyLocator

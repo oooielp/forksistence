@@ -10,43 +10,43 @@
     - sprite: Objects/Materials/Scrap/generic.rsi
       state: metal-1
   - type: GridSpawner
-    gridPath: Maps/Shuttles/trading_outpost.yml
+    gridPath: /Maps/Shuttles/trading_outpost.yml
     stationGrid: True
     addComponents:
       - type: ProtectedGrid
       - type: TradeStation
       - type: StationCargoBountyDatabase
 
-- type: entity
-  parent: MarkerBase
-  id: TradeStationSyndieSpawnerMarker
-  name: Grid Spawner
-  suffix: Syndie Trade Station
-  components:
-  - type: Sprite
-    layers:
-    - state: pink
-    - sprite: Objects/Materials/Scrap/generic.rsi
-      state: metal-1
-  - type: GridSpawner
-    gridPath: Maps/Shuttles/trading_outpost.yml
-    stationGrid: True
-    addComponents:
-      - type: ProtectedGrid
-      - type: TradeStation
-        levels:
-          - ILevelSyndie1
-          - ILevelSyndie2
-          - ILevelSyndie3
-          - ILevelSyndie4
-        markets:
-        - syndicatemarket
-      - type: StationCargoBountyDatabase
-        groups:
-          CrimeBounty : 3
-          ServiceBounty : 1
-          ExplorationBounty : 1
-        
+#- type: entity # Persistence: pleasing the linter - syndicate trade station not implemented yet
+#  parent: MarkerBase
+#  id: TradeStationSyndieSpawnerMarker
+#  name: Grid Spawner
+#  suffix: Syndie Trade Station
+#  components:
+#  - type: Sprite
+#    layers:
+#    - state: pink
+#    - sprite: Objects/Materials/Scrap/generic.rsi
+#      state: metal-1
+#  - type: GridSpawner
+#    gridPath: /Maps/Shuttles/trading_outpost.yml
+#    stationGrid: True
+#    addComponents:
+#      - type: ProtectedGrid
+#      - type: TradeStation
+#        levels:
+#          - ILevelSyndie1
+#          - ILevelSyndie2
+#          - ILevelSyndie3
+#          - ILevelSyndie4
+#        markets:
+#        - syndicatemarket
+#      - type: StationCargoBountyDatabase
+#        groups:
+#          CrimeBounty : 3
+#          ServiceBounty : 1
+#          ExplorationBounty : 1
+
 - type: entity
   parent: MarkerBase
   id: TradeStationScienceSpawnerMarker
@@ -59,7 +59,7 @@
     - sprite: Objects/Materials/Scrap/generic.rsi
       state: metal-1
   - type: GridSpawner
-    gridPath: Maps/Shuttles/trading_outpost_science.yml
+    gridPath: /Maps/Shuttles/trading_outpost_science.yml
     stationGrid: True
     addComponents:
       - type: ProtectedGrid
@@ -89,7 +89,7 @@
     - sprite: Objects/Materials/Scrap/generic.rsi
       state: metal-1
   - type: GridSpawner
-    gridPath: Maps/Shuttles/trading_outpost_hunter.yml
+    gridPath: /Maps/Shuttles/trading_outpost_hunter.yml
     stationGrid: True
     addComponents:
       - type: ProtectedGrid
@@ -106,7 +106,7 @@
           HunterBounty : 3
           StationBounty : 1
           ScienceBounty : 1
-        
+
 - type: entity
   parent: MarkerBase
   id: TradeStationEngineeringSpawnerMarker
@@ -119,7 +119,7 @@
     - sprite: Objects/Materials/Scrap/generic.rsi
       state: metal-1
   - type: GridSpawner
-    gridPath: Maps/Shuttles/trading_outpost_engineering.yml
+    gridPath: /Maps/Shuttles/trading_outpost_engineering.yml
     stationGrid: True
     addComponents:
       - type: ProtectedGrid
@@ -135,7 +135,7 @@
         groups:
           EngineeringBounty : 3
           StationBounty : 2
-        
+
 - type: entity
   parent: MarkerBase
   id: TradeStationExplorationSpawnerMarker
@@ -148,7 +148,7 @@
     - sprite: Objects/Materials/Scrap/generic.rsi
       state: metal-1
   - type: GridSpawner
-    gridPath: Maps/Shuttles/trading_outpost_explore.yml
+    gridPath: /Maps/Shuttles/trading_outpost_explore.yml
     stationGrid: True
     addComponents:
       - type: ProtectedGrid

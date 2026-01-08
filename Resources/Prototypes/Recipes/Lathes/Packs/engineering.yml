@@ -23,6 +23,7 @@
   - ClothingHeadHatWelding
   - ClothingHeadHatCone
   - AccessConfigurator
+  - ToolboxMechanical
 
 - type: latheRecipePack
   id: AtmosStatic

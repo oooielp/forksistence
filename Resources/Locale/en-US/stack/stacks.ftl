@@ -248,3 +248,25 @@ stack-white-marble-floor = white marble floor
 stack-dark-marble-floor = dark marble floor
 stack-plasma-marble-floor = plasmarble floor
 stack-uranium-marble-floor = uranium marble floor
+
+# salvage treasure coins
+stack-iron-coin = iron {$amount ->
+    [1] coin
+    *[other] coins
+}
+stack-silver-coin = silver {$amount ->
+    [1] coin
+    *[other] coins
+}
+stack-gold-coin = gold {$amount ->
+    [1] coin
+    *[other] coins
+}
+stack-adamantine-coin = adamantine {$amount ->
+    [1] coin
+    *[other] coins
+}
+stack-diamond-coin = diamond {$amount ->
+    [1] coin
+    *[other] coins
+}

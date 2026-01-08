@@ -73,7 +73,7 @@ public sealed partial class JobNetSystem : EntitySystem
         else return;
         _proto.Resolve(currentLevel, out var currentProto);
         if (currentProto == null) return;
-        if (currentProto.Next == string.Empty) return;
+        if (currentProto.Next == null) return;
         _proto.Resolve(currentProto.Next, out var nextProto);
         if (nextProto == null) return;
         int cost = nextProto.Cost;

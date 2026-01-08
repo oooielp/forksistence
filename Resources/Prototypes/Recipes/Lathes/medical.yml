@@ -242,6 +242,7 @@
     Steel: 1000
     Plastic: 200
     Glass: 100
+  unlockUses: 1
 
 - type: latheRecipe
   id: MiniSyringe
@@ -251,6 +252,7 @@
     Steel: 200
     Glass: 100
     Plastic: 100
+  unlockUses: 3
 
 - type: latheRecipe
   id: JetInjector
@@ -276,3 +278,4 @@
     Plastic: 250
     Silver: 400
     Gold: 50 # A bit of gold for the gold ornaments on it!
+  unlockUses: 4

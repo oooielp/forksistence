@@ -1,0 +1,69 @@
+- type: entity
+  id: Shredder
+  parent: [BaseMachinePowered, SmallConstructibleMachine]
+  name: document shredder
+  description: A small shredder for all your bureaucracy needs.
+  components:
+  - type: Sprite
+    sprite: Structures/Machines/shredder.rsi
+    snapCardinals: true
+    layers:
+    - state: shredder-base
+#    - state: shredder-ready # for when we have a component that can toggle machine power states
+#    - state: shredder-processing
+    drawdepth: SmallObjects
+  - type: Fixtures
+    fixtures:
+      collision:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.25,-0.25,0.25,0.25"
+        hard: true
+        mask:
+        - Impassable
+        layer:
+        - MidImpassable
+  - type: Machine
+    board: ShredderMachineCircuitboard
+  - type: ApcPowerReceiver
+    powerLoad: 250
+  - type: Physics
+    bodyType: Static
+  - type: MaterialReclaimer
+    enabled: true
+    scaleProcessSpeed: true # takes time
+    minimumProcessDuration: 1
+    reclaimSolutions: false
+    reclaimMaterials: false # some items with Document tag are infinite: nanotask, paper, nanotask, maybe more
+    whitelist:
+      tags:
+      - Document
+    blacklist:
+      components:
+      - ForensicPad # Is applied to a Document but should not be shreddable
+      tags:
+      - CoordinatesDisk # Is applied to a Document that should not be shreddable
+    sound:
+      path: /Audio/Effects/saw.ogg  # This doesnt work for some reason, I think it's in the C# & related to MaterialReclaimerSystem.OnInteractUsing() but I dunno
+      params:                       # The behavior is replicable with the standard recycler
+        volume: 1                   # Standard recycler eats entities that enter a collider (a fixture named brrt). This makes a noise as expected
+  - type: Destructible              # Can also click standard recycler with trash in-hand to insert, this also does not make a sound & is the interaction the shredder relies on
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 75
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Breakage" ]
+      - !type:PlaySoundBehavior
+        sound:
+          collection: MetalBreak
+  - type: RequireProjectileTarget # not tall
+  - type: InteractionPopup
+    successChance: 0.05
+    interactSuccessString: petting-success-shredder
+    interactFailureString: petting-failure-shredder
+    interactSuccessSound:
+      path: /Audio/Items/drill_hit.ogg
+  - type: ItemToggle
+    onUse: false # What does this do in this context?

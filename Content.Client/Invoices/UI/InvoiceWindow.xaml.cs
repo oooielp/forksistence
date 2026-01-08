@@ -45,13 +45,33 @@ namespace Content.Client.Invoices.UI
             ReasonLabel.SetMarkup(state.InvoiceReason);
             CostLabel.Text = $"${state.InvoiceCost}";
             PaidToLabel.Text = state.PaidTo;
-            if(state.Paid)
+            if(state.PayslipMode)
+            {
+                PaidToTitle.Text = "Paid by:";
+                CostTitle.Text = "Value:";
+                PayingTitle.Text = "Receiving Account:";
+                PayButton.Text = "Deposit Payslip";
+            }
+            else
+            {
+                PaidToTitle.Text = "Paid to:";
+                CostTitle.Text = "Cost:";
+                PayingTitle.Text = "Paying Account:";
+                PayButton.Text = "Pay Invoice";
+            }
+            if (state.Paid)
             {
                 PossibleAccounts.Visible = false;
                 PaidByLabel.Text = state.PaidBy;
                 PaidByLabel.Visible = true;
                 PaidLabel.Visible = true;
                 PayButton.Visible = false;
+                if(state.PaidTime != null)
+                {
+                    var yearOffset = _cfgManager.GetCVar(CCVars.YearOffset);
+                    var finalTime = state.PaidTime.Value.AddYears(yearOffset);
+                    PaidLabel.Text = $"*Paid on {finalTime.ToString()}*";
+                }
             }
             else
             {

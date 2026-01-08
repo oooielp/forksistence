@@ -27,8 +27,8 @@
         whitelist:
           components:
           - IdCard
-      denialSound:
-        path: /Audio/Machines/custom_deny.ogg
+#      denialSound: # pleasing the linter - field denialSound not found in component
+#        path: /Audio/Machines/custom_deny.ogg
       doAfter: 0.5
     - type: UserInterface
       interfaces:
@@ -74,8 +74,8 @@
         whitelist:
           components:
           - IdCard
-      denialSound:
-        path: /Audio/Machines/custom_deny.ogg
+#      denialSound:  # pleasing the linter - field denialSound not found in component
+#        path: /Audio/Machines/custom_deny.ogg
       doAfter: 0.5
     - type: UserInterface
       interfaces:
@@ -122,8 +122,8 @@
         whitelist:
           components:
           - IdCard
-      denialSound:
-        path: /Audio/Machines/custom_deny.ogg
+#      denialSound: # pleasing the linter - field denialSound not found in component
+#        path: /Audio/Machines/custom_deny.ogg
       doAfter: 0.5
     - type: UserInterface
       interfaces:
@@ -151,7 +151,7 @@
       sprite: Objects/Misc/bureaucracy.rsi
       state: invoiceunpaid
     - type: Item
-      size: Small
+      size: Tiny
     - type: Invoice
     - type: UserInterface
       interfaces:
@@ -164,6 +164,9 @@
       singleUser: true
     - type: PaperVisuals
     - type: Appearance
+    - type: Tag
+      tags:
+      - Document
 
 - type: entity
   parent: BaseItem
@@ -194,9 +197,9 @@
         whitelist:
           components:
           - IdCard
-      denialSound:
-        path: /Audio/Machines/custom_deny.ogg
-      doAfter: 0.5
+#      denialSound: # pleasing the linter - field denialSound not found in component
+#        path: /Audio/Machines/custom_deny.ogg
+#      doAfter: 0.5 # pleasing the linter - field doAfter not found in component
     - type: UserInterface
       interfaces:
         enum.BSPAnchorKeyUiKey.Key:

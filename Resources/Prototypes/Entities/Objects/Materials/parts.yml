@@ -74,6 +74,10 @@
   - type: GuideHelp
     guides:
     - ExpandingRepairingStation
+  - type: Tag
+    tags:
+    - ConstructionMaterial
+    - PartRodMetal
 
 - type: entity
   parent: PartRodMetal

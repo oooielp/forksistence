@@ -11,6 +11,7 @@ using Content.Shared.Cargo.Prototypes;
 using Content.Shared.CCVar;
 using Content.Shared.Coordinates;
 using Content.Shared.Hands.Components;
+using Content.Shared.Invoices.Components;
 using Content.Shared.Stacks;
 using Content.Shared.Station.Components;
 using Robust.Server.GameObjects;
@@ -30,7 +31,7 @@ public sealed partial class CargoSystem
 
     [Dependency] private readonly HandsSystem _hands = default!;
     [Dependency] private readonly TransformSystem _transform = default!;
-
+    [Dependency] private readonly IEntityManager _entityManager = default!;
     private static readonly SoundPathSpecifier ApproveSound = new("/Audio/Effects/Cargo/ping.ogg");
     private bool _lockboxCutEnabled;
 
@@ -134,7 +135,18 @@ public sealed partial class CargoSystem
 
     private void OnChangeMoneyMode(EntityUid uid, CargoPalletConsoleComponent component, CargoPalletChangeMoneyMode args)
     {
-        component.CashMode = !component.CashMode;
+        if(component.CashMode == CargoSaleMode.Cash)
+        {
+            component.CashMode = CargoSaleMode.Deposit;
+        }
+        else if (component.CashMode == CargoSaleMode.Deposit)
+        {
+            component.CashMode = CargoSaleMode.Payslip;
+        }
+        else if (component.CashMode == CargoSaleMode.Payslip)
+        {
+            component.CashMode = CargoSaleMode.Cash;
+        }
         UpdatePalletConsoleInterface(uid, component, args.Actor);
     }
 
@@ -321,11 +333,11 @@ public sealed partial class CargoSystem
             UpdatePalletConsoleInterface(uid, component, args.Actor);
             return;
         }
-        if (!component.CashMode && station == null) return;
+        if (component.CashMode == CargoSaleMode.Deposit && station == null) return;
 
         if (!SellPallets(gridUid, station, out var goods))
             return;
-        if(component.CashMode)
+        if(component.CashMode == CargoSaleMode.Cash)
         {
             var tax = GetTaxRate(uid, component);
             var player = args.Actor;
@@ -349,6 +361,46 @@ public sealed partial class CargoSystem
                 if(taxingStation != null)
                 {
                     if(TryComp<StationBankAccountComponent>(taxingStation, out var taxBankAccount) && taxBankAccount != null)
+                    {
+                        UpdateBankAccount((taxingStation.Value, taxBankAccount), taxPaidInt, "Cargo");
+                    }
+                }
+            }
+        }
+        else if (component.CashMode == CargoSaleMode.Payslip)
+        {
+            var tax = GetTaxRate(uid, component);
+            var player = args.Actor;
+            //spawn the cash stack of whatever cash type the ATM is configured to.
+            double total = 0;
+            foreach (var (_, sellComponent, value) in goods)
+            {
+                total += value;
+            }
+            float taxmult = (float)tax / 100f;
+            var taxpaid = (float)total * taxmult;
+            var taxPaidInt = (int)Math.Round(taxpaid);
+            total -= taxPaidInt;
+            var invoice = _entityManager.SpawnAtPosition("Invoice", player.ToCoordinates());
+            if (!_hands.TryPickupAnyHand(player, invoice))
+                _transform.SetLocalRotation(invoice, Angle.Zero); // Orient these to grid north instead of map north
+            if (TryComp<InvoiceComponent>(invoice, out var invoiceComp) && invoiceComp != null)
+            {
+                invoiceComp.TargetStation = 0;
+                invoiceComp.InvoiceCost = (int)Math.Round(total);
+                invoiceComp.InvoiceReason = $"Paid for exporting cargo.";
+                invoiceComp.PayslipMode = true;
+                _metaSystem.SetEntityName(invoice, $"payslip ${(int)Math.Round(total)} Cargo Export");
+                Dirty(invoice, invoiceComp);
+            }
+
+
+
+            if (taxPaidInt > 0)
+            {
+                if (taxingStation != null)
+                {
+                    if (TryComp<StationBankAccountComponent>(taxingStation, out var taxBankAccount) && taxBankAccount != null)
                     {
                         UpdateBankAccount((taxingStation.Value, taxBankAccount), taxPaidInt, "Cargo");
                     }

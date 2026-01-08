@@ -44,6 +44,15 @@ public sealed partial class JobNetMenu : DefaultWindow
      
     public void UpdateState(JobNetUpdateState state)
     {
+        if(state.SpendAuth)
+        {
+            SLDetails.Visible = true;
+            SpendingLabel.Text = $"${state.Spent}/${state.Spendable}";
+        }
+        else
+        {
+            SLDetails.Visible = false;
+        }
         AccountBalanceLabel.Text = $"${state.Balance}";
         var dependencies = IoCManager.Instance!;
         var localPlayer = dependencies.Resolve<IPlayerManager>().LocalEntity;
@@ -129,7 +138,7 @@ public sealed partial class JobNetMenu : DefaultWindow
         {
             NetworkLevelPrototype? nextLevelProto = null;
 
-            if (levelProto.Next != string.Empty)
+            if (levelProto.Next != null)
                 _prototypeManager.Resolve(levelProto.Next, out nextLevelProto);
 
             CurrentLevelLabel.Text = levelProto.Name;

@@ -39,6 +39,7 @@
     Glass: 400
     Plastic: 200
     Gold: 50
+  unlockUses: 4
 
 - type: latheRecipe
   parent: BasePowerCellRecipe
@@ -51,6 +52,7 @@
     Plasma: 300
     Gold: 200
     Silver: 300
+  unlockUses: 3
 
 - type: latheRecipe
   parent: BasePowerCellRecipe
@@ -62,6 +64,7 @@
     Glass: 400
     Uranium: 200
     Gold: 100
+  unlockUses: 2
 
 # Power cages
 - type: latheRecipe
@@ -72,6 +75,7 @@
   materials:
     Steel: 200
     Plastic: 100
+  unlockUses: 2
 
 - type: latheRecipe
   parent: BasePowerCellRecipe
@@ -83,6 +87,7 @@
     Glass: 500
     Plastic: 250
     Gold: 40
+  unlockUses: 2
 
 - type: latheRecipe
   parent: BasePowerCellRecipe
@@ -94,3 +99,4 @@
     Glass: 800
     Plastic: 400
     Gold: 100
+  unlockUses: 1

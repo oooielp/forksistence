@@ -174,7 +174,7 @@ namespace Content.Client.CrewAssignments.UI
             if (levelProto == null) return;
             FactionLevelPrototype? nextLevelProto = null;
 
-            if(levelProto.Next != string.Empty)
+            if(levelProto.Next != null)
                 _protoManager.Resolve(levelProto.Next, out nextLevelProto);
 
             CurrentFactionLevelLabel.Text = levelProto.Name;
@@ -230,6 +230,8 @@ namespace Content.Client.CrewAssignments.UI
                 AssignmentNameField.Text = assignment.Name;
                 WageSpinBox.Value = assignment.Wage;
                 CLevelSpinBox.Value = assignment.Clevel;
+                SpendingLimitSpinBox.Value = assignment.SpendingLimit;
+
                 if(assignment.CanClaim)
                 {
                     ClaimBtn.Pressed = true;

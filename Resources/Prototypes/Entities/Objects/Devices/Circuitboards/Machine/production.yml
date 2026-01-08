@@ -346,7 +346,8 @@
         Cable: 1
         Glass: 1
     - type: Tag
-      id: ApeCircuitboard
+      tags:
+      - ApeCircuitboard
 
 - type: entity
   id: ThermomachineFreezerMachineCircuitBoard
@@ -1042,6 +1043,19 @@
       stackRequirements:
         Manipulator: 3
         Steel: 6
+
+- type: entity
+  id: ShredderMachineCircuitboard
+  parent: BaseMachineCircuitboard
+  name: shredder machine board
+  components:
+  - type: Sprite
+    state: supply
+  - type: MachineBoard
+    prototype: Shredder
+    stackRequirements:
+      Manipulator: 2
+      Steel: 4
 
 - type: entity
   id: MCTNMachineCircuitboard

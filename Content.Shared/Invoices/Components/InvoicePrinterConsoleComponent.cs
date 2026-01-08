@@ -32,6 +32,9 @@ public sealed partial class InvoicePrinterConsoleComponent : Component
     [DataField]
     public int SelectedStation = 0;
 
+    [DataField]
+    public bool InvoiceMode = true;
+
 }
 [Serializable, NetSerializable]
 public sealed class PrintInvoice : BoundUserInterfaceMessage
@@ -39,21 +42,23 @@ public sealed class PrintInvoice : BoundUserInterfaceMessage
 
     public string InvoiceReason = "";
     public int InvoiceCost = 0;
+    public string InvoiceTitle = "";
 
-    public PrintInvoice(string invoiceReason, int invoiceCost)
+    public PrintInvoice(string invoiceReason, int invoiceCost, string invoiceTitle)
     {
         InvoiceReason = invoiceReason;
         InvoiceCost = invoiceCost;
+        InvoiceTitle = invoiceTitle;
     }
 }
 
 [Serializable, NetSerializable]
 public sealed class ChangeInvoiceMode : BoundUserInterfaceMessage
 {
-
-    public ChangeInvoiceMode()
-    {
-    }
+}
+[Serializable, NetSerializable]
+public sealed class ChangeInvoicePayslipMode : BoundUserInterfaceMessage
+{
 }
 
 [Serializable, NetSerializable]
@@ -85,7 +90,8 @@ public sealed class InvoicePrinterConsoleBoundUserInterfaceState : BoundUserInte
     public int SelectedStation;
 
     public string SelectedName;
-    public InvoicePrinterConsoleBoundUserInterfaceState(bool idpresent, string? idname, string? targetname, bool stationMode, int taxRate, int taxingStation, string taxingName, int selectedStation, Dictionary<int, string> formattedStations, string selectedName)
+    public bool InvoiceMode;
+    public InvoicePrinterConsoleBoundUserInterfaceState(bool idpresent, string? idname, string? targetname, bool stationMode, int taxRate, int taxingStation, string taxingName, int selectedStation, Dictionary<int, string> formattedStations, string selectedName, bool invoiceMode)
     {
         IdPresent = idpresent;
         TargetName = targetname;
@@ -97,6 +103,7 @@ public sealed class InvoicePrinterConsoleBoundUserInterfaceState : BoundUserInte
         FormattedStations = formattedStations;
         SelectedStation = selectedStation;
         SelectedName = selectedName;
+        InvoiceMode = invoiceMode;
     }
 }
 

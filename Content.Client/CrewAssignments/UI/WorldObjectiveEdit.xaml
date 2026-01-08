@@ -16,15 +16,15 @@
             <customControls:HSeparator Margin="5 10 5 10"/>
             <Label Text ="Description Markup:"></Label>
             <PanelContainer StyleIdentifier="PaperEditBackground" MinHeight="20">
-                <TextEdit Name="DescriptionLabel"  Access="Public" HorizontalExpand="True" MinHeight="20"/>
+                <TextEdit Name="DescriptionLabel"  Access="Public" HorizontalExpand="True" MinHeight="50"/>
             </PanelContainer>
             <Label Text ="Reward Markup:"></Label>
             <PanelContainer StyleIdentifier="PaperEditBackground" MinHeight="20">
-                <TextEdit Name="RewardLabel"  Access="Public" HorizontalExpand="True" MinHeight="20"/>
+                <TextEdit Name="RewardLabel"  Access="Public" HorizontalExpand="True" MinHeight="50"/>
             </PanelContainer>
             <Label Text ="Completed Description Markup:"></Label>
             <PanelContainer StyleIdentifier="PaperEditBackground" MinHeight="20">
-                <TextEdit Name="CompletedDescriptionLabel" Access="Public" HorizontalExpand="True" MinHeight="20"/>
+                <TextEdit Name="CompletedDescriptionLabel" Access="Public" HorizontalExpand="True" MinHeight="50"/>
             </PanelContainer>
             <BoxContainer Orientation="Horizontal" Name="MainContainer" Access="Public">
 

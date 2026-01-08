@@ -112,6 +112,7 @@
   materials:
     Steel: 300
     Glass: 800
+  unlockUses: 4
 
 # Targets
 - type: latheRecipe
@@ -160,6 +161,7 @@
     Steel: 300
     Glass: 50
     Plastic: 50
+  unlockUses: 4
 
 - type: latheRecipe
   parent: BaseToolRecipe
@@ -188,6 +190,7 @@
   materials:
     Steel: 300
     Plastic: 300
+  unlockUses: 4
 
 - type: latheRecipe
   parent: BaseWeaponRecipeMelee
@@ -225,6 +228,7 @@
     Steel: 2000
     Glass: 800
     Plastic: 500
+  unlockUses: 2
 
 - type: latheRecipe
   parent: BaseWeaponRecipeLong
@@ -235,6 +239,7 @@
     Glass: 1000
     Gold: 500
     Uranium: 300
+  unlockUses: 1
 
 - type: latheRecipe
   parent: BaseWeaponRecipeLong
@@ -244,6 +249,7 @@
     Steel: 1250
     Plastic: 750
     Gold: 350
+  unlockUses: 1
 
 - type: latheRecipe
   parent: BaseWeaponRecipeLong
@@ -254,6 +260,7 @@
     Glass: 500
     Plastic: 250
     Gold: 250
+  unlockUses: 1
 
 - type: latheRecipe
   parent: BaseWeaponRecipeLong
@@ -264,6 +271,7 @@
     Glass: 500
     Plastic: 500
     Gold: 500
+  unlockUses: 1
 
 # Sidearms
 - type: latheRecipe
@@ -274,6 +282,7 @@
     Steel: 300
     Glass: 200
     Plastic: 200
+  unlockUses: 4
 
 - type: latheRecipe
   parent: BaseWeaponRecipeSidearm
@@ -283,6 +292,7 @@
     Steel: 1000
     Glass: 500
     Plastic: 500
+  unlockUses: 2
 
 - type: latheRecipe
   parent: BaseWeaponRecipeSidearm
@@ -291,6 +301,7 @@
   materials:
     Steel: 2000
     Gold: 500
+  unlockUses: 1
 
 - type: latheRecipe
   parent: BaseWeaponRecipeSidearm
@@ -343,6 +354,14 @@
   parent: BaseToolRecipe
   id: ClothingHeadHelmetBasic
   result: ClothingHeadHelmetBasic
+  materials:
+    Steel: 500
+    Plastic: 100
+
+- type: latheRecipe
+  parent: BaseToolRecipe
+  id: ClothingMaskGasSecurity
+  result: ClothingMaskGasSecurity
   materials:
     Steel: 500
     Plastic: 100

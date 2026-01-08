@@ -1,38 +1,68 @@
 <DefaultWindow xmlns="https://spacestation14.io"
+            xmlns:gfx="clr-namespace:Robust.Client.Graphics;assembly=Robust.Client"
             SetSize="700 450"
             MinSize="700 450">
-    <BoxContainer Orientation="Vertical" MaxSize="750, 500">
-        <!-- Privileged and target IDs, crew manifest button. -->
-        <GridContainer Columns="2">
-            <GridContainer Columns="3" HorizontalExpand="True">
-                <Label Text="{Loc 'id-card-console-window-privileged-id'}" />
-                <Button Name="PrivilegedIdButton" Access="Public"/>
-                <Label Name="PrivilegedIdLabel" />
+    <ScrollContainer>
+        <BoxContainer Orientation="Vertical" MaxSize="750, 500">
+            <!-- Privileged and target IDs, crew manifest button. -->
+            <GridContainer Columns="2">
+                <GridContainer Columns="3" HorizontalExpand="True">
+                    <Label Text="{Loc 'id-card-console-window-privileged-id'}" StyleClasses="LabelKeyText"/>
+                    <Button Name="PrivilegedIdButton" Access="Public"/>
+                    <Label Name="PrivilegedIdLabel" />
 
-                <Label Text="{Loc 'id-card-console-window-target-id'}" />
-                <Button Name="TargetIdButton" Access="Public"/>
-                <Label Name="TargetIdLabel" />
-                
-                <Label Text="Selected Account:" />
-                <Label Name="SelectedAccountLabel" />
+                    <Label Text="{Loc 'id-card-console-window-target-id'}" StyleClasses="LabelKeyText"/>
+                    <Button Name="TargetIdButton" Access="Public"/>
+                    <Label Name="TargetIdLabel" />
+                </GridContainer>
+                <BoxContainer Orientation="Vertical">
+                    <Button Name="CrewManifestButton" Access="Public" Text="{Loc 'crew-manifest-button-label'}" />
+                </BoxContainer>
+
             </GridContainer>
-            <BoxContainer Orientation="Vertical">
-            <Button Name="CrewManifestButton" Access="Public" Text="{Loc 'crew-manifest-button-label'}" />
+            <Control MinSize="0 8" />
+            <!-- Full name and job title editing. -->
+            <GridContainer Columns="3" HSeparationOverride="4">
+                <Label Name="FullNameLabel" Text="{Loc 'id-card-console-window-full-name-label'}" />
+                <LineEdit Name="FullNameLineEdit" HorizontalExpand="True" />
+                <Button Name="FullNameSaveButton" Text="Search" Disabled="True" />
+            </GridContainer>
+            <BoxContainer Orientation="Horizontal">
+                <Label Text="Selected Account:"
+                 StyleClasses="LabelKeyText"/>
+                <Control MinSize="8 0" />
+                <Label Name="SelectedAccountLabel" />
             </BoxContainer>
-        </GridContainer>
-        <Control MinSize="0 8" />
-        <!-- Full name and job title editing. -->
-        <GridContainer Columns="3" HSeparationOverride="4">
-            <Label Name="FullNameLabel" Text="{Loc 'id-card-console-window-full-name-label'}" />
-            <LineEdit Name="FullNameLineEdit" HorizontalExpand="True" />
-            <Button Name="FullNameSaveButton" Text="Search" Disabled="True" />
+            <BoxContainer Orientation="Vertical" Name="AccountDetails" VerticalExpand="True">
+                <BoxContainer Orientation="Horizontal">
+                    <Label Text="Spending:"
+                     StyleClasses="LabelKeyText"/>
+                    <Control MinSize="8 0" />
+                    <Label Name="SpendingLabel" />
+                    <Control HorizontalExpand="True" />
+                    <Button Name="SpendingReset" Text="Refresh Spending" />
+                </BoxContainer>
+                <BoxContainer Orientation="Horizontal">
+                    <Label Text="Assignment:"
+                     StyleClasses="LabelKeyText"/>
+                    <Control MinSize="8 0" />
+                    <Label Name="AssignmentLabel"/>
+                </BoxContainer>
+                <Control MinSize="0 8" />
+                <!-- Job preset selection, grant/revoke all access buttons. -->
+                <!-- Individual assignment buttons -->
+                <PanelContainer VerticalExpand="True"
+                                                    HorizontalExpand="True"
+                                               SizeFlagsStretchRatio="1"
+                                               Name="AssignmentAccessesPC">
+                    <PanelContainer.PanelOverride>
+                        <gfx:StyleBoxFlat BackgroundColor="#000000" />
+                    </PanelContainer.PanelOverride>
+                    <WrapContainer Name="AccessLevelControlContainer" />
+                </PanelContainer>
+            </BoxContainer>
+        </BoxContainer>
+            
+    </ScrollContainer>
 
-            <Label Name="JobTitleLabel" Text="{Loc 'id-card-console-window-job-title-label'}" />
-            <LineEdit Name="JobTitleLineEdit" HorizontalExpand="True" />
-        </GridContainer>
-        <Control MinSize="0 8" />
-        <!-- Job preset selection, grant/revoke all access buttons. -->
-        <!-- Individual assignment buttons -->
-        <WrapContainer Name="AccessLevelControlContainer" />
-    </BoxContainer>
 </DefaultWindow>

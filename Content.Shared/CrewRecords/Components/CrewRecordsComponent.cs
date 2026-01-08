@@ -52,6 +52,8 @@ public partial class CrewRecord
     public string Name = "Unnamed Crew Record";
     [DataField("_assignmentid")]
     public int AssignmentID = 0;
+    [DataField("_spent")]
+    public int Spent = 0;
 
     public CrewRecord(string name)
     {

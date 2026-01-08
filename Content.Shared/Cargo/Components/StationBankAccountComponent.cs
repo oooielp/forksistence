@@ -35,7 +35,7 @@ public sealed partial class StationBankAccountComponent : Component
     [DataField, AutoNetworkedField]
     public Dictionary<ProtoId<CargoAccountPrototype>, int> Accounts = new()
     {
-        { "Cargo",       10000 },
+        { "Cargo",       0 },
     };
 
     /// <summary>

@@ -62,7 +62,8 @@ public partial class CrewAssignment
     public bool CanSpend = false;
     [DataField("_canClaim")]
     public bool CanClaim = false;
-
+    [DataField("_spendingLimit")]
+    public int SpendingLimit = 0;
 
     public CrewAssignment(int id, string name, int wage, int clevel)
     {

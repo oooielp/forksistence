@@ -123,6 +123,7 @@
   materials:
     Steel: 600
     Plastic: 200
+  unlockUses: 2
 
 - type: latheRecipe
   parent: BaseToolRecipe
@@ -145,6 +146,7 @@
   parent: BaseBigToolRecipe
   id: HandHeldMassScanner
   result: HandHeldMassScannerEmpty
+  unlockUses: 4
 
 - type: latheRecipe
   parent: BaseBigToolRecipe
@@ -194,6 +196,14 @@
     Steel: 300
     Glass: 50
     Plastic: 50
+  unlockUses: 3
+
+- type: latheRecipe
+  parent: BaseToolRecipe
+  id: ToolboxMechanical
+  result: ToolboxMechanical
+  materials:
+    Steel: 600
 
 - type: latheRecipe
   parent: BaseToolRecipe
@@ -203,6 +213,7 @@
   materials:
     Steel: 800
     Plasma: 200
+  unlockUses: 3
 
 - type: latheRecipe
   parent: BaseToolRecipe
@@ -214,6 +225,7 @@
     Glass: 500
     Plasma: 300
     Gold: 50
+  unlockUses: 3
 
 - type: latheRecipe
   parent: BaseToolRecipe
@@ -224,6 +236,7 @@
     Steel: 500
     Plasma: 300
     Glass: 100
+  unlockUses: 3
 
 - type: latheRecipe
   parent: BaseToolRecipe
@@ -234,3 +247,4 @@
     Steel: 750
     Plasma: 150
     Uranium: 150
+  unlockUses: 3

@@ -39,6 +39,12 @@
                         <Label Name="TimeLabel" Text="0" Margin="0 0 5 0" />
                     </BoxContainer>
                     <Control MinHeight ="30" />
+                    <BoxContainer Orientation="Horizontal" Name="SLDetails">
+                        <Label Text="Spending Limit:" Margin="0 0 10 0"
+                          StyleClasses="LabelKeyText" />
+                        <Label Name="SpendingLabel" Text="$0/$100" Margin="0 0 5 0" />
+                    </BoxContainer>
+                    <Control MinHeight ="30" />
                 </BoxContainer>
             </BoxContainer>
             <ScrollContainer VerticalExpand="True" HorizontalExpand="True" HScrollEnabled="False">

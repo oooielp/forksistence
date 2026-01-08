@@ -37,6 +37,8 @@ namespace Content.Client.Invoices.UI
 
             ChangeModeStation.OnPressed += _ => ChangeMode();
             ChangeModePersonal.OnPressed += _ => ChangeMode();
+            ChangeModePayslip.OnPressed += _ => ChangeModePay();
+            ChangeModeInvoice.OnPressed += _ => ChangeModePay();
 
         }
 
@@ -50,7 +52,8 @@ namespace Content.Client.Invoices.UI
             {
                 PrivilegedIdButton.Text = state.IdName;
             }
-            
+            ChangeModePayslip.Disabled = false;
+            ChangeModeInvoice.Disabled = false;
             if (state.StationMode)
             {
                 PossibleStations.Visible = true;
@@ -69,9 +72,26 @@ namespace Content.Client.Invoices.UI
                 {
                     PrintButton.Disabled = false;
                 }
+                if (state.InvoiceMode)
+                {
+                    ChangeModeInvoice.Pressed = true;
+                    ChangeModePayslip.Pressed = false;
+                    InvoiceModeLabel.Text = $"An invoice paid to {state.SelectedName} by the reciever.";
+                    PrintButton.Text = "Print Invoice";
+                }
+                else
+                {
+                    ChangeModeInvoice.Pressed = false;
+                    ChangeModePayslip.Pressed = true;
+                    InvoiceModeLabel.Text = $"A payslip paid by {state.SelectedName} and deposited by the reciever.";
+                    PrintButton.Text = "Pay & Print Payslip";
+                }
             }
             else
             {
+                InvoiceModeLabel.Text = $"An invoice paid to {state.TargetName} by the reciever.";
+                ChangeModeInvoice.Pressed = true;
+                ChangeModePayslip.Disabled = true;
                 PossibleStations.Visible = false;
                 ChangeModeStation.Pressed = false;
                 ChangeModePersonal.Pressed = true;
@@ -105,8 +125,9 @@ namespace Content.Client.Invoices.UI
         {
             var invoiceReason = Rope.Collapse(ReasonLineEdit.TextRope);
             var invoiceCost = CostSpinBox.Value;
+            var invoiceTitle = InvoiceTitleLE.Text;
             if (invoiceCost < 1) return;
-            _owner.SendMessage(new PrintInvoice(invoiceReason, invoiceCost));
+            _owner.SendMessage(new PrintInvoice(invoiceReason, invoiceCost, invoiceTitle));
             ReasonLineEdit.TextRope = new Rope.Leaf("");
             CostSpinBox.Value = 0;
             Close();
@@ -115,6 +136,11 @@ namespace Content.Client.Invoices.UI
         public void ChangeMode()
         {
             _owner.SendMessage(new ChangeInvoiceMode());
+        }
+
+        public void ChangeModePay()
+        {
+            _owner.SendMessage(new ChangeInvoicePayslipMode());
         }
 
     }

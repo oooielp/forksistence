@@ -60,7 +60,7 @@
   id: Bandana # CargoBounty: BountyBandana
 
 - type: Tag
-  id: BarSignElectronics # 
+  id: BarSignElectronics #
 
 - type: Tag
   id: BaseballBat # CargoBounty: BountyBaseballBat
@@ -91,6 +91,9 @@
 
 - type: Tag
   id: Boll # MaterialStorage whitelist: Sheetifier
+
+- type: Tag
+  id: Bone # Entity: MaterialBones
 
 - type: Tag
   id: Book # Storage whitelist: BorgModuleService, BooksBag, Bookshelf. Blacklisting on various entities whitelisting PaperComponent
@@ -1210,22 +1213,22 @@
   id: Ring # CargoBounty: BountyRing
 
 - type: Tag
-  id: RipleyCentralControlModule # ConstructionGraph: Ripley
+  id: RipleyCentralControlModule # ConstructionGraph: Ripley Bounty: BountyRipley
 
 - type: Tag
-  id: RipleyLArm # PartAssembly: RipleyHarness. ItemMapper: RipleyHarness
+  id: RipleyLArm # PartAssembly: RipleyHarness. ItemMapper: RipleyHarness Bounty: BountyRipley
 
 - type: Tag
-  id: RipleyLLeg # PartAssembly: RipleyHarness. ItemMapper: RipleyHarness
+  id: RipleyLLeg # PartAssembly: RipleyHarness. ItemMapper: RipleyHarness Bounty: BountyRipley
 
 - type: Tag
-  id: RipleyPeripheralsControlModule # ConstructionGraph: Ripley
+  id: RipleyPeripheralsControlModule # ConstructionGraph: Ripley Bounty: BountyRipley
 
 - type: Tag
-  id: RipleyRArm # PartAssembly: RipleyHarness. ItemMapper: RipleyHarness
+  id: RipleyRArm # PartAssembly: RipleyHarness. ItemMapper: RipleyHarness Bounty: BountyRipley
 
 - type: Tag
-  id: RipleyRLeg # PartAssembly: RipleyHarness. ItemMapper: RipleyHarness
+  id: RipleyRLeg # PartAssembly: RipleyHarness. ItemMapper: RipleyHarness Bounty: BountyRipley
 
 - type: Tag
   id: RollingPaper # Storage whitelist: PackPaperRolling, PackPaperRollingFilters
@@ -1594,36 +1597,45 @@
 ##Persistence Materials
 
 - type: Tag
-  id: Silver 
+  id: Silver
 
 - type: Tag
   id: Gold
 
 - type: Tag
-  id: Steel 
+  id: Steel
 
 - type: Tag
-  id: Wood 
+  id: Wood
 
 - type: Tag
-  id: Brass 
+  id: Brass
 
 - type: Tag
   id: Plasma
 
 - type: Tag
-  id: Uranium 
+  id: Uranium
 
 - type: Tag
   id: Bananium
 
 - type: Tag
-  id: Coal 
+  id: Coal
 
 - type: Tag
-  id: Plasteel 
+  id: Plasteel
 
 ##Persistence Bounty Tags
+
+# Explorer
+
+- type: Tag
+  id: TreasureOldComputer # CargoBounty: TreasureOldComputer: Hard drive, floppy drive, CD drive
+
+- type: Tag
+  id: TreasureOldCPU # CargoBounty: TreasureOldCPU: Supercharged CPU
+
 
 # Science
 
@@ -1635,6 +1647,16 @@
 
 - type: Tag
   id: AnomalyLocator
+
+- type: Tag # CargoBounty: BountyRipley
+  id: PartRodMetal
+
+- type: Tag
+  id: TreasureSampleTube # CargoBounty: TreasureSampleTube: Sample tube (unbroken)
+
+- type: Tag
+  id: TreasureDataDisk # CargoBounty: TreasureDataDisk: Data disk
+
 
 # Hunter
 

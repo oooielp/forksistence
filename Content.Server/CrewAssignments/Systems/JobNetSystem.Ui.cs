@@ -78,6 +78,9 @@ public sealed partial class JobNetSystem
         int? wage = null;
         int selectedstation = 0;
         TimeSpan remainingTime = TimeSpan.FromMinutes(20) - component.WorkedTime;
+        var spendAuth = false;
+        var spent = 0;
+        var spendable = 0;
         foreach (var station in stations)
         {
             if(TryComp<CrewRecordsComponent>(station, out var crewRecord) && crewRecord != null)
@@ -99,6 +102,17 @@ public sealed partial class JobNetSystem
                                         assignmentName = assignment.Name;
                                         wage = assignment.Wage;
                                         selectedstation = stationData.UID;
+                                        if(_station.CanSpend(record.Name, station))
+                                        {
+                                            spendAuth = true;
+                                            spent = record.Spent;
+                                            spendable = assignment.SpendingLimit;
+                                        }
+                                        if(_station.IsOwner(record.Name, station))
+                                        {
+                                            spent = 0;
+                                            spendable = 99999999;
+                                        }
                                     }
                                 }
                             }
@@ -131,7 +145,7 @@ public sealed partial class JobNetSystem
         }
         var balance = 0;
         _bank.TryGetBalance(user.Value, out balance);
-        var state = new JobNetUpdateState(possibleStations, assignmentName, wage, selectedstation, remainingTime, currentObjectives, completedObjectives, codexEntries, currentLevel, balance);
+        var state = new JobNetUpdateState(possibleStations, assignmentName, wage, selectedstation, remainingTime, currentObjectives, completedObjectives, codexEntries, currentLevel, balance, spendAuth, spent, spendable);
         _ui.SetUiState(jobnet, JobNetUiKey.Key, state);
     }
 
