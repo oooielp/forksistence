@@ -1823,7 +1823,7 @@
           Oxygen: 50
           Nitrogen: 120
           CarbonDioxide: 100
-          Ammoia: 75
+          Ammonia: 75
       variableMixture:
         CarbonDioxide:
           moles: 110

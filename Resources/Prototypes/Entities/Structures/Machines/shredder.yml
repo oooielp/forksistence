@@ -47,8 +47,7 @@
       path: /Audio/Effects/saw.ogg  # This doesnt work for some reason, I think it's in the C# & related to MaterialReclaimerSystem.OnInteractUsing() but I dunno
       params:                       # The behavior is replicable with the standard recycler
         volume: 1                   # Standard recycler eats entities that enter a collider (a fixture named brrt). This makes a noise as expected
-    cutoffSound: false              # Can also click standard recycler with trash in-hand to insert, this also does not make a sound & is the interaction the shredder relies on
-  - type: Destructible
+  - type: Destructible              # Can also click standard recycler with trash in-hand to insert, this also does not make a sound & is the interaction the shredder relies on
     thresholds:
     - trigger:
         !type:DamageTrigger

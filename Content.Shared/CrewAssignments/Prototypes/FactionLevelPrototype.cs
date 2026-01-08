@@ -6,9 +6,9 @@ using Robust.Shared.Utility;
 namespace Content.Shared.CrewAssignments.Prototypes;
 
 /// <summary>
-/// This is a prototype for a cargo bounty, a set of items
-/// that must be sold together in a labeled container in order
-/// to receive a monetary reward.
+/// This is a set of prototypes for faction levels
+/// that must be purchased in order, each level grants
+/// various rewards
 /// </summary>
 [Prototype]
 public sealed partial class FactionLevelPrototype : IPrototype

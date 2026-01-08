@@ -176,7 +176,7 @@
   markets:
     - engineermarket
   groups:
-    EngineerBounty : 4
+    EngineeringBounty : 4
     ExplorationBounty : 1
     StationBounty : 1
   income: -5000
@@ -190,7 +190,7 @@
     - engineermarket
     - engineermarket2
   groups:
-    EngineerBounty : 6
+    EngineeringBounty : 6
     ExplorationBounty : 1
     StationBounty : 2
   income: 0
@@ -205,7 +205,7 @@
     - engineermarket2
     - engineermarket3
   groups:
-    EngineerBounty : 8
+    EngineeringBounty : 8
     ExplorationBounty : 2
     StationBounty : 2
   income: 10000
@@ -221,7 +221,7 @@
     - engineermarket3
     - engineermarket4
   groups:
-    EngineerBounty : 9
+    EngineeringBounty : 9
     ExplorationBounty : 3
     StationBounty : 3
   income: 30000

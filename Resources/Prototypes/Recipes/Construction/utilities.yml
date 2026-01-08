@@ -263,7 +263,7 @@
   placementMode: SnapgridCenter
   objectType: Structure
   canRotate: true
-  
+
 - type: construction
   id: StorageCanisterConstruction
   name: construction-recipe-storagecanister
@@ -908,24 +908,24 @@
 
 - type: construction
   id: HeatPump
-  name: heat pump
-  description: A pump that moves heat from one side to the other.
+  name: construction-recipe-heat-pump-name
+  description: construction-recipe-heat-pump-desc
   graph: GasBinary
   startNode: start
   targetNode: heatpump
   category: construction-category-utilities
   placementMode: SnapgridCenter
   canBuildInImpassable: false
-  icon:
-    sprite: Structures/Piping/Atmospherics/pump.rsi
-    state: pumpHeat
-  layers:
-  - sprite: Structures/Piping/Atmospherics/pipe.rsi
-    state: pipeStraight
-  - sprite: Structures/Piping/Atmospherics/pump.rsi
-    state: pumpHeat
-  conditions:
-    - !type:NoUnstackableInTile
+#  icon: # pleasing the linter: construction does not have icon field
+#    sprite: Structures/Piping/Atmospherics/pump.rsi
+#    state: pumpHeat
+#  layers: # pleasing the linter: construction does not have layers field
+#  - sprite: Structures/Piping/Atmospherics/pipe.rsi
+#    state: pipeStraight
+#  - sprite: Structures/Piping/Atmospherics/pump.rsi
+#    state: pumpHeat
+#  conditions:
+#    - !type:NoUnstackableInTile
 
 # ATMOS TRINARY
 - type: construction

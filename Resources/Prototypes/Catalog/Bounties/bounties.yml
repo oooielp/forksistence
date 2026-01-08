@@ -102,7 +102,7 @@
     whitelist:
       tags:
       - ClownShoes
-  group: ExplorerBounty
+  group: ExplorationBounty
 
 - type: cargoBounty
   id: BountyCorn
@@ -126,7 +126,7 @@
     whitelist:
       tags:
       - Crayon
-  group: ExplorerBounty
+  group: ExplorationBounty
 
 - type: cargoBounty
   id: BountyCubanCarp
@@ -165,7 +165,7 @@
     whitelist:
       tags:
       - Figurine
-  group: ExplorerBounty
+  group: ExplorationBounty
 
 - type: cargoBounty
   id: BountyFlower
@@ -212,7 +212,7 @@
     whitelist:
       components:
       - Instrument
-  group: ExplorerBounty
+  group: ExplorationBounty
 
 - type: cargoBounty
   id: BountyKnife
@@ -321,7 +321,7 @@
     whitelist:
       tags:
       - PercussionInstrument
-  group: ExplorerBounty
+  group: ExplorationBounty
 
 - type: cargoBounty
   id: BountyPie

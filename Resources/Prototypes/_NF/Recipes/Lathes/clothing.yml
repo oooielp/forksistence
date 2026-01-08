@@ -4,8 +4,8 @@
   abstract: true
   id: NFBaseJumpsuitRecipe
   parent: BaseJumpsuitRecipe
-  categories:
-  - ClothesNF
+#  categories: # Persistence: pleasing the linter
+#  - ClothesNF
   applyMaterialDiscount: false
 
 - type: latheRecipe

@@ -235,7 +235,7 @@
         - ReagentId: Uranium
           Quantity: 500
 
-# random chems in barrels 
+# random chems in barrels
 
 - type: entity
   parent: BaseBarrelChem
@@ -249,7 +249,7 @@
   - type: RandomFillSolution
     solution: tank
     weightedRandomId: RandomFillChemBarrel
-    
+
 - type: weightedRandomFillSolution
   id: RandomFillChemBarrel
   fills:
@@ -273,7 +273,7 @@
     - Ephedrine
     - Nicotine
     - TearGas
-    - Stimulants   
+    - Stimulants
 
   - quantity: 500
     weight: 0.5
@@ -303,11 +303,11 @@
     - SodiumPolyacrylate
     - Slime
     - Ammonia
-    - EzNutrient
+    - EZNutrient
     - SulfuricAcid
     - UnstableMutagen
-    
-  - quantity: 500 
+
+  - quantity: 500
     weight: 2.5 # this should be Elements
     reagents:
     - Aluminium

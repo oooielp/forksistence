@@ -365,7 +365,7 @@
         priority: 1
         whitelist:
           tags:
-            - CartridgeSpecial
+            - CartridgePistol
   - type: ContainerContainer
     containers:
       gun_magazine: !type:ContainerSlot

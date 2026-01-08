@@ -93,6 +93,9 @@
   id: Boll # MaterialStorage whitelist: Sheetifier
 
 - type: Tag
+  id: Bone # Entity: MaterialBones
+
+- type: Tag
   id: Book # Storage whitelist: BorgModuleService, BooksBag, Bookshelf. Blacklisting on various entities whitelisting PaperComponent
 
 - type: Tag
