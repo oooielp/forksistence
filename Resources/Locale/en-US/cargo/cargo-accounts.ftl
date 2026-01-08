@@ -15,6 +15,3 @@ cargo-account-security-code = [SEC]
 
 cargo-account-service-name = Collective Service Holdings
 cargo-account-service-code = [SRV]
-
-#  name: ""
-#  code: ""
