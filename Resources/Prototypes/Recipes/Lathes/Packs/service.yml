@@ -43,7 +43,6 @@
   - BlockGameArcadeComputerCircuitboard
   - SpaceVillainArcadeComputerCircuitboard
   - InvoicePrinterCircuitboard
-  - ComputerTelevisionCircuitboard
 
 ## Dynamic
 
@@ -72,3 +71,4 @@
   - ReagentGrinderIndustrialMachineCircuitboard
   - JukeboxCircuitBoard
   - DawInstrumentMachineCircuitboard
+  - ComputerTelevisionCircuitboard
