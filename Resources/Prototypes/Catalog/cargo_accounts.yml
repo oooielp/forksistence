@@ -27,7 +27,7 @@
   name: cargo-account-science-name
   code: cargo-account-science-code
   color: "#cd7ccd"
-  radioChannel: Supply
+  radioChannel: Science
   acquisitionSlip: PaperAcquisitionSlipScience
 
 - type: cargoAccount
@@ -42,6 +42,6 @@
   id: Security
   name: cargo-account-security-name
   code: cargo-account-security-code
-  color: "#539c00"
-  radioChannel: Service
+  color: "#ff4242"
+  radioChannel: Security
   acquisitionSlip: PaperAcquisitionSlipService
