@@ -232,14 +232,14 @@ public sealed partial class CrewAssignmentSystem
         if (!TryComp<StationDataComponent>(station, out var data))
             return;
         _protoMan.Resolve(data.Level, out var currentLevel);
-        if (currentLevel == null || currentLevel.Next == string.Empty) return;
+        if (currentLevel == null || currentLevel.Next == null) return;
         _protoMan.Resolve(currentLevel.Next, out var nextLevel);
         if (nextLevel == null) return;
         var balance = _cargo.GetBalanceFromAccount((station.Value, bank), "Cargo");
         var cost = nextLevel.Cost;
         if (balance < cost) return;
         _cargo.UpdateBankAccount((station.Value, bank), -cost, "Cargo");
-        data.Level = currentLevel.Next;
+        data.Level = currentLevel.Next.Value;
         UpdateOrders(station.Value);
     }
 
