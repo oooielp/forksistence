@@ -70,7 +70,7 @@ public sealed class StationModificationConsoleBoundUserInterface : BoundUserInte
         _menu.AssignmentWageConfirm.OnPressed += ChangeWage;
         _menu.AssignmentNameConfirm.OnPressed += ChangeAssignmentName;
         _menu.SpendingLimitConfirm.OnPressed += ChangeAssignmentSpendingLimit;
-_menu.DeleteAssignment.OnPressed += DeleteAssignment;
+        _menu.DeleteAssignment.OnPressed += DeleteAssignment;
         _menu.DefaultAccessCreate.OnPressed += DefaultAccessCreate;
         _menu.ClaimBtn.OnPressed += ToggleClaim;
         _menu.SpendingBtn.OnPressed += ToggleSpend;
@@ -81,7 +81,8 @@ _menu.DeleteAssignment.OnPressed += DeleteAssignment;
         _menu.LevelPurchaseButton.OnPressed += PurchaseUpgrade;
         _menu.ChannelEnable.OnPressed += OnChannelEnable;
         _menu.ChannelDisable.OnPressed += OnChannelDisable;
-
+        _menu.JobNetOn.OnPressed += OnJobNetOn;
+        _menu.JobNetOff.OnPressed += OnJobNetOff;
         _menu.OpenCentered();
     }
 
@@ -110,8 +111,28 @@ _menu.DeleteAssignment.OnPressed += DeleteAssignment;
             _menu.ETaxSpinBox.Value = cState.ExportTax;
             _menu.ITaxSpinBox.Value = cState.ImportTax;
             _menu.STaxSpinBox.Value = cState.SalesTax;
+            if (cState.TradeStationClaimed)
+            {
+                _menu.TaxOptions.Visible = true;
+                _menu.ClaimTradeStationLabel.Visible = false;
+            }
+            else
+            {
+                _menu.TaxOptions.Visible = false;
+                _menu.ClaimTradeStationLabel.Visible = true;
+            }
+            if(cState.JobNetEnabled)
+            {
+                _menu.JobNetOff.Pressed = false;
+                _menu.JobNetOn.Pressed = true;
+            }
+            else
+            {
+                _menu.JobNetOff.Pressed = true;
+                _menu.JobNetOn.Pressed = false;
+            }
         }
-
+        
     }
 
     protected override void Dispose(bool disposing)
@@ -124,6 +145,14 @@ _menu.DeleteAssignment.OnPressed += DeleteAssignment;
         _menu?.Dispose();
     }
 
+    private void OnJobNetOff(ButtonEventArgs args)
+    {
+        SendMessage(new StationModificationJobNetOff());
+    }
+    private void OnJobNetOn(ButtonEventArgs args)
+    {
+        SendMessage(new StationModificationJobNetOn());
+    }
     private void PurchaseUpgrade(ButtonEventArgs args)
     {
         if (_menu == null) return;

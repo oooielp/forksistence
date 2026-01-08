@@ -44,6 +44,8 @@ public abstract partial class SharedStationSystem : EntitySystem
         }
         return final;
     }
+
+
     public bool IsOwner(string userName, EntityUid station)
     {
         if (TryComp<StationDataComponent>(station, out var sD) && sD != null)

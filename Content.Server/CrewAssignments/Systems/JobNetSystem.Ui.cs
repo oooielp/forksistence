@@ -89,9 +89,12 @@ public sealed partial class JobNetSystem
                 {
                     if(TryComp<StationDataComponent>(station, out var stationData))
                     {
-                        if (stationData.StationName == null) return;
-                        possibleStations.Add(stationData.UID, stationData.StationName);
-                        if(component.WorkingFor != null && component.WorkingFor != 0)
+                        if (stationData.StationName == null) continue;
+                        if(stationData.JobNetEnabled)
+                        {
+                            possibleStations.Add(stationData.UID, stationData.StationName);
+                        }
+                        if (component.WorkingFor != null && component.WorkingFor != 0)
                         {
                             if(stationData.UID == component.WorkingFor)
                             {

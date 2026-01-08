@@ -90,31 +90,50 @@
                 </BoxContainer>
                 <Control MinHeight="50"/>
                 <BoxContainer Orientation="Horizontal">
-                    <Label Text="Import Tax:"
-                        StyleClasses="LabelKeyText" />
+                    <Label Text="Job Network Status:" Margin="0 0 10 0"
+                           StyleClasses="LabelKeyText" />
                     <Control HorizontalExpand="True"/>
-                    <SpinBox Name="ITaxSpinBox" Access="Public" MinWidth="100" Value="0"/>
-                    <Button Name="ITaxConfirm" Access="Public"
-                        Text="Save"/>
+                    <Button Name="JobNetOn"
+                        Access="Public"
+                        Text="Enabled"/>
+                    <Button Name="JobNetOff"
+                        Access="Public"
+                        Text="Disabled"/>
                 </BoxContainer>
-                <Control MinHeight="15"/>
-                <BoxContainer Orientation="Horizontal">
-                    <Label Text="Export Tax:"
-                        StyleClasses="LabelKeyText" />
-                    <Control HorizontalExpand="True"/>
-                    <SpinBox Name="ETaxSpinBox" Access="Public" MinWidth="100" Value="0"/>
-                    <Button Name="ETaxConfirm" Access="Public"
-                        Text="Save"/>
+                <Control MinHeight="50"/>
+                <Label Text="-Claim Trade Station To Enable Tax Settings-"
+                        Name ="ClaimTradeStationLabel"
+                        StyleClasses="LabelKeyText"
+                        Access="Public" />
+                <BoxContainer Orientation="Vertical" Name="TaxOptions" Access="Public">
+                    <BoxContainer Orientation="Horizontal">
+                        <Label Text="Import Tax:"
+                            StyleClasses="LabelKeyText" />
+                        <Control HorizontalExpand="True"/>
+                        <SpinBox Name="ITaxSpinBox" Access="Public" MinWidth="100" Value="0"/>
+                        <Button Name="ITaxConfirm" Access="Public"
+                            Text="Save"/>
+                    </BoxContainer>
+                    <Control MinHeight="15"/>
+                    <BoxContainer Orientation="Horizontal">
+                        <Label Text="Export Tax:"
+                            StyleClasses="LabelKeyText" />
+                        <Control HorizontalExpand="True"/>
+                        <SpinBox Name="ETaxSpinBox" Access="Public" MinWidth="100" Value="0"/>
+                        <Button Name="ETaxConfirm" Access="Public"
+                            Text="Save"/>
+                    </BoxContainer>
+                    <Control MinHeight="15"/>
+                    <BoxContainer Orientation="Horizontal">
+                        <Label Text="Sales Tax:"
+                            StyleClasses="LabelKeyText" />
+                        <Control HorizontalExpand="True"/>
+                        <SpinBox Name="STaxSpinBox" Access="Public" MinWidth="100" Value="0"/>
+                        <Button Name="STaxConfirm" Access="Public"
+                            Text="Save"/>
+                    </BoxContainer>
                 </BoxContainer>
-                <Control MinHeight="15"/>
-                <BoxContainer Orientation="Horizontal">
-                    <Label Text="Sales Tax:"
-                        StyleClasses="LabelKeyText" />
-                    <Control HorizontalExpand="True"/>
-                    <SpinBox Name="STaxSpinBox" Access="Public" MinWidth="100" Value="0"/>
-                    <Button Name="STaxConfirm" Access="Public"
-                        Text="Save"/>
-                </BoxContainer>
+
             </BoxContainer>
             <!-- Assignment Management -->
             <BoxContainer Orientation="Vertical" Margin="15">

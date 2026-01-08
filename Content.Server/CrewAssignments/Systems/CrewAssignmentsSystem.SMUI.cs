@@ -56,6 +56,8 @@ public sealed partial class CrewAssignmentSystem
         SubscribeLocalEvent<StationModificationConsoleComponent, StationModificationChangeAssignmentSpendingLimit>(OnChangeSpendingLimit);
         SubscribeLocalEvent<StationModificationConsoleComponent, StationModificationDeleteAssignment>(OnDeleteAssignment);
         SubscribeLocalEvent<StationModificationConsoleComponent, StationModificationDefaultAccess>(OnDefaultAccess);
+        SubscribeLocalEvent<StationModificationConsoleComponent, StationModificationJobNetOn>(OnJobNetOn);
+        SubscribeLocalEvent<StationModificationConsoleComponent, StationModificationJobNetOff>(OnJobNetOff);
         SubscribeLocalEvent<StationModificationConsoleComponent, BoundUIOpenedEvent>(OnOrderUIOpened);
         SubscribeLocalEvent<StationModificationConsoleComponent, ComponentInit>(OnInit);
     }
@@ -314,6 +316,32 @@ public sealed partial class CrewAssignmentSystem
 
     }
 
+    private void OnJobNetOff(EntityUid uid, StationModificationConsoleComponent component, StationModificationJobNetOff args)
+    {
+        if (args.Actor is not { Valid: true } player)
+            return;
+
+        var station = _station.GetOwningStation(uid);
+        if (station == null) return;
+
+        if (!Validate(uid, component, player, out var stationData) || stationData == null) return;
+        stationData.JobNetEnabled = false;
+
+        _station2.ClockOutEmployees(station.Value);
+        UpdateOrders(station.Value);
+    }
+    private void OnJobNetOn(EntityUid uid, StationModificationConsoleComponent component, StationModificationJobNetOn args)
+    {
+        if (args.Actor is not { Valid: true } player)
+            return;
+
+        var station = _station.GetOwningStation(uid);
+        if (station == null) return;
+
+        if (!Validate(uid, component, player, out var stationData) || stationData == null) return;
+        stationData.JobNetEnabled = true;
+        UpdateOrders(station.Value);
+    }
     private void OnDefaultAccess(EntityUid uid, StationModificationConsoleComponent component, StationModificationDefaultAccess args)
     {
         if (args.Actor is not { Valid: true } player)
@@ -718,7 +746,11 @@ public sealed partial class CrewAssignmentSystem
             return;
         if (_uiSystem.HasUi(consoleUid, StationModUiKey.StationMod))
         {
-            
+            bool hasTrade = false;
+            if (_station2.GetStationTradeStation(station.Value) != null)
+            {
+                hasTrade = true;
+            }
             _uiSystem.SetUiState(consoleUid,
                 StationModUiKey.StationMod,
                 new StationModificationInterfaceState(
@@ -732,7 +764,9 @@ public sealed partial class CrewAssignmentSystem
                 data.SalesTax,
                 data.Level,
                 _cargo.GetBalanceFromAccount((station.Value, bank), "Cargo"),
-                data.RadioData
+                data.RadioData,
+                data.JobNetEnabled,
+                hasTrade
             ));
         }
     }
