@@ -131,7 +131,13 @@
   id: HellfireFreezerMachineCircuitBoard
   result: HellfireFreezerMachineCircuitBoard
   unlockUses: 2
-
+  
+- type: latheRecipe
+  parent: [ BaseGoldCircuitboardRecipe, BaseEngineeringMachineRecipeCategory ]
+  id: StationAnchorCircuitboard
+  result: StationAnchorCircuitboard
+  unlockUses: 2
+  
 - type: latheRecipe
   parent: [ BaseGoldCircuitboardRecipe, BaseEngineeringMachineRecipeCategory ]
   id: SpaceHeaterMachineCircuitBoard
@@ -517,6 +523,12 @@
   id: TelecomServerCircuitboard
   result: TelecomServerCircuitboard
   unlockUses: 4
+
+- type: latheRecipe
+  parent: [ BaseCircuitboardRecipe, BaseEngineeringMachineRecipeCategory ]
+  id: TelecomServer1kCircuitboard
+  result: TelecomServer1kCircuitboard
+  unlockUses: 1
 
 - type: latheRecipe
   parent: [ BaseCircuitboardRecipe, BaseSecurityMachineRecipeCategory ]
