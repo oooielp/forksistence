@@ -508,6 +508,12 @@
     - ClothingSecurity
     - ClothingService
     - ClothingMilitary
+    - ClothingLabCoats
+    - ClothingCentComm
+    - ClothingAssortedHats
+    - ClothingAssortedOversuits
+    - Cloaks
+    - Mantles
     - WinterCoats
     - Ties
     - Scarves
@@ -516,7 +522,6 @@
     - NFWallets # Frontier
   - type: EmagLatheRecipes
     emagStaticPacks:
-    - ClothingCentComm
     - ClothingSyndie
   - type: MaterialStorage
     whitelist: *StandardMaterialWhitelist
