@@ -5,6 +5,11 @@ namespace Content.Shared.Atmos.Piping.Binary.Components
     public sealed record GasHeatPumpData(float LastMolesTransferred);
 
     [Serializable, NetSerializable]
+    public enum HeatPumpVisuals
+    {
+        Enabled
+    }
+    [Serializable, NetSerializable]
     public enum GasHeatPumpUiKey
     {
         Key,
