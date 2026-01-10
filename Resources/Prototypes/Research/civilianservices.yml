@@ -256,3 +256,15 @@
   recipeUnlocks:
   - LauncherSyringe
   - MiniSyringe
+  
+- type: technology
+  id: AdvancedTelecomms
+  name: research-technology-advanced-telecommunications
+  icon:
+    sprite: Structures/Machines/telecomms.rsi
+    state: telecom-nopower
+  discipline: CivilianServices
+  tier: 3
+  cost: 10000
+  recipeUnlocks:
+  - TelecomServer1kCircuitboard
