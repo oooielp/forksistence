@@ -61,3 +61,14 @@ public sealed class StationModificationToggleAssign : BoundUserInterfaceMessage
         AccessID = id;
     }
 }
+
+[Serializable, NetSerializable]
+public sealed class StationModificationJobNetOn : BoundUserInterfaceMessage
+{
+
+}
+[Serializable, NetSerializable]
+public sealed class StationModificationJobNetOff : BoundUserInterfaceMessage
+{
+
+}

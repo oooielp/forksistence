@@ -39,6 +39,6 @@ public sealed partial class NetworkLevelPrototype : IPrototype
     /// What StationLevel is the next available to purchase
     /// </summary>
     [DataField]
-    public ProtoId<NetworkLevelPrototype> Next = string.Empty;
+    public ProtoId<NetworkLevelPrototype>? Next = null;
 
 }

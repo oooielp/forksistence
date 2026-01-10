@@ -1,5 +1,6 @@
 using Content.Server.Cargo.Components;
 using Content.Server.Chat.Systems;
+using Content.Server.CrewManifest;
 using Content.Server.CrewRecords.Systems;
 using Content.Server.GameTicking;
 using Content.Server.Station.Components;
@@ -43,6 +44,8 @@ public sealed partial class StationSystem : SharedStationSystem
     [Dependency] private readonly EntityManager _entMan = default!;
     [Dependency] private readonly CrewMetaRecordsSystem _metaRecords = default!;
     [Dependency] private readonly MapSystem _mapSystem = default!;
+    [Dependency] private readonly CrewManifestSystem _crewManifest = default!;
+
     private ISawmill _sawmill = default!;
 
     private EntityQuery<MapGridComponent> _gridQuery;
@@ -76,6 +79,36 @@ public sealed partial class StationSystem : SharedStationSystem
         _player.PlayerStatusChanged += OnPlayerStatusChanged;
     }
 
+    public int GetStationID(EntityUid station)
+    {
+        if (TryComp<StationDataComponent>(station, out var sD) && sD != null)
+        {
+            return sD.UID;
+        }
+        return 0;
+    }
+    public void ClockOutEmployees(EntityUid station)
+    {
+        var id = GetStationID(station);
+        if (id == 0) return;
+        var query = _entManager.AllEntityQueryEnumerator<JobNetComponent>();
+        while (query.MoveNext(out var uid, out var comp))
+        {
+            if(comp.WorkingFor == id)
+            {
+                comp.WorkingFor = 0;
+            }
+        }
+        _crewManifest.BuildCrewManifest(station);
+    }
+    public bool GetJobNetStatus(EntityUid station)
+    {
+        if (TryComp<StationDataComponent>(station, out var sD) && sD != null)
+        {
+            return sD.JobNetEnabled;
+        }
+        return false;
+    }
     public void ResetSpending(string userName, EntityUid station)
     {
         if (TryComp<CrewRecordsComponent>(station, out var crewRecords) && crewRecords != null)

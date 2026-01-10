@@ -10,7 +10,7 @@
     - sprite: Objects/Materials/Scrap/generic.rsi
       state: metal-1
   - type: GridSpawner
-    gridPath: Maps/Ruins/jokers_ruins.yml
+    gridPath: /Maps/Ruins/jokers_ruins.yml
 
 - type: entity
   parent: MarkerBase
@@ -24,7 +24,7 @@
     - sprite: Objects/Materials/Scrap/generic.rsi
       state: metal-1
   - type: GridSpawner
-    gridPath: Maps/Ruins/atmos_interchange.yml
+    gridPath: /Maps/Ruins/atmos_interchange.yml
 
 - type: entity
   parent: MarkerBase
@@ -38,7 +38,7 @@
     - sprite: Objects/Materials/Scrap/generic.rsi
       state: metal-1
   - type: GridSpawner
-    gridPath: Maps/Ruins/biodome_satellite.yml
+    gridPath: /Maps/Ruins/biodome_satellite.yml
 
 - type: entity
   parent: MarkerBase
@@ -52,7 +52,7 @@
     - sprite: Objects/Materials/Scrap/generic.rsi
       state: metal-1
   - type: GridSpawner
-    gridPath: Maps/Ruins/chunked_tcomms.yml
+    gridPath: /Maps/Ruins/chunked_tcomms.yml
 
 - type: entity
   parent: MarkerBase
@@ -66,7 +66,7 @@
     - sprite: Objects/Materials/Scrap/generic.rsi
       state: metal-1
   - type: GridSpawner
-    gridPath: Maps/Ruins/derelict.yml
+    gridPath: /Maps/Ruins/derelict.yml
 
 - type: entity
   parent: MarkerBase
@@ -80,7 +80,7 @@
     - sprite: Objects/Materials/Scrap/generic.rsi
       state: metal-1
   - type: GridSpawner
-    gridPath: Maps/Ruins/displaced_telescience.yml
+    gridPath: /Maps/Ruins/displaced_telescience.yml
 
 - type: entity
   parent: MarkerBase
@@ -94,7 +94,7 @@
     - sprite: Objects/Materials/Scrap/generic.rsi
       state: metal-1
   - type: GridSpawner
-    gridPath: Maps/Ruins/empty_flagship.yml
+    gridPath: /Maps/Ruins/empty_flagship.yml
 
 - type: entity
   parent: MarkerBase
@@ -108,7 +108,7 @@
     - sprite: Objects/Materials/Scrap/generic.rsi
       state: metal-1
   - type: GridSpawner
-    gridPath: Maps/Ruins/hydro_outpost.yml
+    gridPath: /Maps/Ruins/hydro_outpost.yml
 
 - type: entity
   parent: MarkerBase
@@ -122,7 +122,7 @@
     - sprite: Objects/Materials/Scrap/generic.rsi
       state: metal-1
   - type: GridSpawner
-    gridPath: Maps/Ruins/old_ai_sat.yml
+    gridPath: /Maps/Ruins/old_ai_sat.yml
 
 - type: entity
   parent: MarkerBase
@@ -136,7 +136,7 @@
     - sprite: Objects/Materials/Scrap/generic.rsi
       state: metal-1
   - type: GridSpawner
-    gridPath: Maps/Ruins/rigged_outpost.yml
+    gridPath: /Maps/Ruins/rigged_outpost.yml
 
 - type: entity
   parent: MarkerBase
@@ -150,7 +150,7 @@
     - sprite: Objects/Materials/Scrap/generic.rsi
       state: metal-1
   - type: GridSpawner
-    gridPath: Maps/Ruins/ruined_prison_ship.yml
+    gridPath: /Maps/Ruins/ruined_prison_ship.yml
 
 - type: entity
   parent: MarkerBase
@@ -164,7 +164,7 @@
     - sprite: Objects/Materials/Scrap/generic.rsi
       state: metal-1
   - type: GridSpawner
-    gridPath: Maps/Ruins/whiteship_ancient.yml
+    gridPath: /Maps/Ruins/whiteship_ancient.yml
 
 - type: entity
   parent: MarkerBase
@@ -178,7 +178,7 @@
     - sprite: Objects/Materials/Scrap/generic.rsi
       state: metal-1
   - type: GridSpawner
-    gridPath: Maps/Ruins/whiteship_bluespacejumper.yml
+    gridPath: /Maps/Ruins/whiteship_bluespacejumper.yml
 
 - type: entity
   parent: MarkerBase
@@ -192,7 +192,7 @@
     - sprite: Objects/Materials/Scrap/generic.rsi
       state: metal-1
   - type: GridSpawner
-    gridPath: Maps/Ruins/wrecklaimer.yml
+    gridPath: /Maps/Ruins/wrecklaimer.yml
 
 - type: entity
   parent: MarkerBase
@@ -206,7 +206,7 @@
     - sprite: Objects/Materials/Scrap/generic.rsi
       state: metal-1
   - type: GridSpawner
-    gridPath: Maps/Salvage/cargo-1.yml
+    gridPath: /Maps/Salvage/cargo-1.yml
 
 - type: entity
   parent: MarkerBase
@@ -220,7 +220,7 @@
     - sprite: Objects/Materials/Scrap/generic.rsi
       state: metal-1
   - type: GridSpawner
-    gridPath: Maps/Salvage/hauling-shuttle.yml
+    gridPath: /Maps/Salvage/hauling-shuttle.yml
 
 - type: entity
   parent: MarkerBase
@@ -234,7 +234,7 @@
     - sprite: Objects/Materials/Scrap/generic.rsi
       state: metal-1
   - type: GridSpawner
-    gridPath: Maps/Salvage/meatball.yml
+    gridPath: /Maps/Salvage/meatball.yml
 
 - type: entity
   parent: MarkerBase
@@ -248,7 +248,7 @@
     - sprite: Objects/Materials/Scrap/generic.rsi
       state: metal-1
   - type: GridSpawner
-    gridPath: Maps/Salvage/medium-1.yml
+    gridPath: /Maps/Salvage/medium-1.yml
 
 - type: entity
   parent: MarkerBase
@@ -262,7 +262,7 @@
     - sprite: Objects/Materials/Scrap/generic.rsi
       state: metal-1
   - type: GridSpawner
-    gridPath: Maps/Salvage/medium-crashed-shuttle.yml
+    gridPath: /Maps/Salvage/medium-crashed-shuttle.yml
 
 - type: entity
   parent: MarkerBase
@@ -276,7 +276,7 @@
     - sprite: Objects/Materials/Scrap/generic.rsi
       state: metal-1
   - type: GridSpawner
-    gridPath: Maps/Salvage/medium-dock.yml
+    gridPath: /Maps/Salvage/medium-dock.yml
 
 - type: entity
   parent: MarkerBase
@@ -290,7 +290,7 @@
     - sprite: Objects/Materials/Scrap/generic.rsi
       state: metal-1
   - type: GridSpawner
-    gridPath: Maps/Salvage/engineering-chunk.yml
+    gridPath: /Maps/Salvage/engineering-chunk.yml
 
 - type: entity
   parent: MarkerBase
@@ -304,7 +304,7 @@
     - sprite: Objects/Materials/Scrap/generic.rsi
       state: metal-1
   - type: GridSpawner
-    gridPath: Maps/Salvage/medium-library.yml
+    gridPath: /Maps/Salvage/medium-library.yml
 
 - type: entity
   parent: MarkerBase
@@ -318,7 +318,7 @@
     - sprite: Objects/Materials/Scrap/generic.rsi
       state: metal-1
   - type: GridSpawner
-    gridPath: Maps/Salvage/medium-pet-hospital.yml
+    gridPath: /Maps/Salvage/medium-pet-hospital.yml
 
 - type: entity
   parent: MarkerBase
@@ -332,7 +332,7 @@
     - sprite: Objects/Materials/Scrap/generic.rsi
       state: metal-1
   - type: GridSpawner
-    gridPath: Maps/Salvage/medium-pirate.yml
+    gridPath: /Maps/Salvage/medium-pirate.yml
 
 - type: entity
   parent: MarkerBase
@@ -346,7 +346,7 @@
     - sprite: Objects/Materials/Scrap/generic.rsi
       state: metal-1
   - type: GridSpawner
-    gridPath: Maps/Salvage/medium-ruined-emergency-shuttle.yml
+    gridPath: /Maps/Salvage/medium-ruined-emergency-shuttle.yml
 
 - type: entity
   parent: MarkerBase
@@ -360,7 +360,7 @@
     - sprite: Objects/Materials/Scrap/generic.rsi
       state: metal-1
   - type: GridSpawner
-    gridPath: Maps/Salvage/medium-silent-orchestra.yml
+    gridPath: /Maps/Salvage/medium-silent-orchestra.yml
 
 - type: entity
   parent: MarkerBase
@@ -374,7 +374,7 @@
     - sprite: Objects/Materials/Scrap/generic.rsi
       state: metal-1
   - type: GridSpawner
-    gridPath: Maps/Salvage/medium-vault-1.yml
+    gridPath: /Maps/Salvage/medium-vault-1.yml
 
 - type: entity
   parent: MarkerBase
@@ -388,7 +388,7 @@
     - sprite: Objects/Materials/Scrap/generic.rsi
       state: metal-1
   - type: GridSpawner
-    gridPath: Maps/Salvage/outpost-arm.yml
+    gridPath: /Maps/Salvage/outpost-arm.yml
 
 - type: entity
   parent: MarkerBase
@@ -402,7 +402,7 @@
     - sprite: Objects/Materials/Scrap/generic.rsi
       state: metal-1
   - type: GridSpawner
-    gridPath: Maps/Salvage/ruin-cargo-salvage.yml
+    gridPath: /Maps/Salvage/ruin-cargo-salvage.yml
 
 - type: entity
   parent: MarkerBase
@@ -416,7 +416,7 @@
     - sprite: Objects/Materials/Scrap/generic.rsi
       state: metal-1
   - type: GridSpawner
-    gridPath: Maps/Salvage/security-chunk.yml
+    gridPath: /Maps/Salvage/security-chunk.yml
 
 - type: entity
   parent: MarkerBase
@@ -430,7 +430,7 @@
     - sprite: Objects/Materials/Scrap/generic.rsi
       state: metal-1
   - type: GridSpawner
-    gridPath: Maps/Salvage/small-1.yml
+    gridPath: /Maps/Salvage/small-1.yml
 
 - type: entity
   parent: MarkerBase
@@ -444,7 +444,7 @@
     - sprite: Objects/Materials/Scrap/generic.rsi
       state: metal-1
   - type: GridSpawner
-    gridPath: Maps/Salvage/small-2.yml
+    gridPath: /Maps/Salvage/small-2.yml
 
 - type: entity
   parent: MarkerBase
@@ -458,7 +458,7 @@
     - sprite: Objects/Materials/Scrap/generic.rsi
       state: metal-1
   - type: GridSpawner
-    gridPath: Maps/Salvage/small-3.yml
+    gridPath: /Maps/Salvage/small-3.yml
 
 - type: entity
   parent: MarkerBase
@@ -472,7 +472,7 @@
     - sprite: Objects/Materials/Scrap/generic.rsi
       state: metal-1
   - type: GridSpawner
-    gridPath: Maps/Salvage/small-4.yml
+    gridPath: /Maps/Salvage/small-4.yml
 
 - type: entity
   parent: MarkerBase
@@ -486,7 +486,7 @@
     - sprite: Objects/Materials/Scrap/generic.rsi
       state: metal-1
   - type: GridSpawner
-    gridPath: Maps/Salvage/small-a-1.yml
+    gridPath: /Maps/Salvage/small-a-1.yml
 
 - type: entity
   parent: MarkerBase
@@ -500,7 +500,7 @@
     - sprite: Objects/Materials/Scrap/generic.rsi
       state: metal-1
   - type: GridSpawner
-    gridPath: Maps/Salvage/small-ai-survey-drone.yml
+    gridPath: /Maps/Salvage/small-ai-survey-drone.yml
 
 - type: entity
   parent: MarkerBase
@@ -514,7 +514,7 @@
     - sprite: Objects/Materials/Scrap/generic.rsi
       state: metal-1
   - type: GridSpawner
-    gridPath: Maps/Salvage/small-chapel.yml
+    gridPath: /Maps/Salvage/small-chapel.yml
 
 - type: entity
   parent: MarkerBase
@@ -528,7 +528,7 @@
     - sprite: Objects/Materials/Scrap/generic.rsi
       state: metal-1
   - type: GridSpawner
-    gridPath: Maps/Salvage/small-chef.yml
+    gridPath: /Maps/Salvage/small-chef.yml
 
 - type: entity
   parent: MarkerBase
@@ -542,7 +542,7 @@
     - sprite: Objects/Materials/Scrap/generic.rsi
       state: metal-1
   - type: GridSpawner
-    gridPath: Maps/Salvage/small-party.yml
+    gridPath: /Maps/Salvage/small-party.yml
 
 - type: entity
   parent: MarkerBase
@@ -556,7 +556,7 @@
     - sprite: Objects/Materials/Scrap/generic.rsi
       state: metal-1
   - type: GridSpawner
-    gridPath: Maps/Salvage/small-ship-1.yml
+    gridPath: /Maps/Salvage/small-ship-1.yml
 
 - type: entity
   parent: MarkerBase
@@ -570,7 +570,7 @@
     - sprite: Objects/Materials/Scrap/generic.rsi
       state: metal-1
   - type: GridSpawner
-    gridPath: Maps/Salvage/small-syndicate.yml
+    gridPath: /Maps/Salvage/small-syndicate.yml
 
 - type: entity
   parent: MarkerBase
@@ -584,7 +584,7 @@
     - sprite: Objects/Materials/Scrap/generic.rsi
       state: metal-1
   - type: GridSpawner
-    gridPath: Maps/Salvage/small-tesla.yml
+    gridPath: /Maps/Salvage/small-tesla.yml
 
 - type: entity
   parent: MarkerBase
@@ -598,7 +598,7 @@
     - sprite: Objects/Materials/Scrap/generic.rsi
       state: metal-1
   - type: GridSpawner
-    gridPath: Maps/Salvage/stationstation.yml
+    gridPath: /Maps/Salvage/stationstation.yml
 
 - type: entity
   parent: MarkerBase
@@ -612,7 +612,7 @@
     - sprite: Objects/Materials/Scrap/generic.rsi
       state: metal-1
   - type: GridSpawner
-    gridPath: Maps/Salvage/tick-colony.yml
+    gridPath: /Maps/Salvage/tick-colony.yml
 
 - type: entity
   parent: MarkerBase
@@ -626,7 +626,7 @@
     - sprite: Objects/Materials/Scrap/generic.rsi
       state: metal-1
   - type: GridSpawner
-    gridPath: Maps/Salvage/vegan-meatball.yml
+    gridPath: /Maps/Salvage/vegan-meatball.yml
 
 - type: entity
   parent: MarkerBase
@@ -640,4 +640,4 @@
     - sprite: Objects/Materials/Scrap/generic.rsi
       state: metal-1
   - type: GridSpawner
-    gridPath: Maps/Salvage/wh-salvage.yml
+    gridPath: /Maps/Salvage/wh-salvage.yml

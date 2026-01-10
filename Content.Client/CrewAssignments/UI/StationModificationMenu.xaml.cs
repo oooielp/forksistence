@@ -174,7 +174,7 @@ namespace Content.Client.CrewAssignments.UI
             if (levelProto == null) return;
             FactionLevelPrototype? nextLevelProto = null;
 
-            if(levelProto.Next != string.Empty)
+            if(levelProto.Next != null)
                 _protoManager.Resolve(levelProto.Next, out nextLevelProto);
 
             CurrentFactionLevelLabel.Text = levelProto.Name;

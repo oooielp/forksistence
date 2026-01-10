@@ -16,6 +16,6 @@
         - id: AsteroidDebrisMedium
         - id: AsteroidDebrisLarge
           prob: 0.7
-        - id: AsteroidDebrisLarger
-          prob: 0.4
+#        - id: AsteroidDebrisLarger # does not exist
+#          prob: 0.4
 

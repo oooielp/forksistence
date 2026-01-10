@@ -138,7 +138,7 @@ public sealed partial class JobNetMenu : DefaultWindow
         {
             NetworkLevelPrototype? nextLevelProto = null;
 
-            if (levelProto.Next != string.Empty)
+            if (levelProto.Next != null)
                 _prototypeManager.Resolve(levelProto.Next, out nextLevelProto);
 
             CurrentLevelLabel.Text = levelProto.Name;

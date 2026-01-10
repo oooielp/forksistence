@@ -10,4 +10,4 @@
     - sprite: Objects/Materials/Scrap/generic.rsi
       state: metal-1
   - type: GridSpawner
-    gridPath: Maps/Shuttles/shittle.yml
+    gridPath: /Maps/Shuttles/shittle.yml

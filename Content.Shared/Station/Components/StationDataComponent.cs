@@ -47,6 +47,9 @@ public sealed partial class StationDataComponent : Component
     public int SalesTax = 0;
 
     [DataField]
+    public bool JobNetEnabled = true;
+
+    [DataField]
     public ProtoId<FactionLevelPrototype> Level = "FactionLevel1";
 
     [DataField]
