@@ -258,7 +258,7 @@
   - MiniSyringe
   
 - type: technology
-  id: BluespaceChemistry
+  id: AdvancedTelecomms
   name: research-technology-advanced-telecommunications
   icon:
     sprite: Structures/Machines/telecomms.rsi
