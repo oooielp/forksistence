@@ -24,6 +24,7 @@
       - Sheet
       - RawMaterial
       - Ingot
+      - Bananium
   - type: ActivatableUI
     key: enum.OreSiloUiKey.Key
   - type: ActivatableUIRequiresPower
