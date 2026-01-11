@@ -160,6 +160,36 @@
         {
             "name": "pumpPressureRegulatorOn",
             "directions": 4
+        },
+        {
+            "name": "pumpHeat",
+            "directions": 4
+        },
+        {
+            "name": "pumpHeatOn",
+            "directions": 4,
+            "delays": [
+                [
+                    0.3,
+                    0.5,
+                    0.3
+                ],
+                [
+                    0.3,
+                    0.5,
+                    0.3
+                ],
+                [
+                    0.3,
+                    0.5,
+                    0.3
+                ],
+                [
+                    0.3,
+                    0.5,
+                    0.3
+                ]
+            ]
         }
     ]
 }

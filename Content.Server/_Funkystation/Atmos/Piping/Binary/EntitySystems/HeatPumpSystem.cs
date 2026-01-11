@@ -38,13 +38,21 @@ namespace Content.Server.Atmos.Piping.Binary.EntitySystems
         {
             base.Initialize();
 
+            SubscribeLocalEvent<HeatPumpComponent, ComponentStartup>(OnComponentStartup);
             SubscribeLocalEvent<HeatPumpComponent, ActivateInWorldEvent>(OnActivate);
             SubscribeLocalEvent<HeatPumpComponent, AtmosDeviceUpdateEvent>(OnAtmosUpdate);
             SubscribeLocalEvent<HeatPumpComponent, ExaminedEvent>(OnExamined);
             SubscribeLocalEvent<HeatPumpComponent, AtmosDeviceDisabledEvent>(OnHeatPumpLeaveAtmosphere);
+            SubscribeLocalEvent<HeatPumpComponent, AtmosDeviceEnabledEvent>(OnHeatPumpJoinAtmosphere);
             // Bound UI subscriptions
             SubscribeLocalEvent<HeatPumpComponent, GasHeatPumpChangeTransferRateMessage>(OnTransferRateChangeMessage);
             SubscribeLocalEvent<HeatPumpComponent, GasHeatPumpToggleStatusMessage>(OnToggleStatusMessage);
+        }
+
+        private void OnComponentStartup(EntityUid uid, HeatPumpComponent pump, ComponentStartup args)
+        {
+            // Set the initial appearance based on the saved state
+            _appearance.SetData(uid, HeatPumpVisuals.Enabled, pump.Active);
         }
 
         private void OnExamined(Entity<HeatPumpComponent> ent, ref ExaminedEvent args)
@@ -121,6 +129,16 @@ namespace Content.Server.Atmos.Piping.Binary.EntitySystems
         {
             pump.Active = false;
 
+            DirtyUI(uid, pump);
+            _userInterfaceSystem.CloseUi(uid, GasHeatPumpUiKey.Key);
+        }
+
+        // Needed so the heat pump's on/off state persists through save/load
+        private void OnHeatPumpJoinAtmosphere(EntityUid uid, HeatPumpComponent pump, ref AtmosDeviceEnabledEvent args)
+        {
+            pump.Active = pump.DesiredEnabled;
+
+            _appearance.SetData(uid, HeatPumpVisuals.Enabled, pump.Active);
             DirtyUI(uid, pump);
             _userInterfaceSystem.CloseUi(uid, GasHeatPumpUiKey.Key);
         }
