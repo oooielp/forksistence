@@ -112,6 +112,7 @@
         - Sheet
         - RawMaterial
         - Ingot
+        - SheetPaper
   - type: OreSiloClient
   - type: Lathe
     idleState: icon
