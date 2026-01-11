@@ -43,6 +43,7 @@ namespace Content.Server.Atmos.Piping.Binary.EntitySystems
             SubscribeLocalEvent<HeatPumpComponent, AtmosDeviceUpdateEvent>(OnAtmosUpdate);
             SubscribeLocalEvent<HeatPumpComponent, ExaminedEvent>(OnExamined);
             SubscribeLocalEvent<HeatPumpComponent, AtmosDeviceDisabledEvent>(OnHeatPumpLeaveAtmosphere);
+            SubscribeLocalEvent<HeatPumpComponent, AtmosDeviceEnabledEvent>(OnHeatPumpJoinAtmosphere);
             // Bound UI subscriptions
             SubscribeLocalEvent<HeatPumpComponent, GasHeatPumpChangeTransferRateMessage>(OnTransferRateChangeMessage);
             SubscribeLocalEvent<HeatPumpComponent, GasHeatPumpToggleStatusMessage>(OnToggleStatusMessage);
@@ -128,6 +129,16 @@ namespace Content.Server.Atmos.Piping.Binary.EntitySystems
         {
             pump.Active = false;
 
+            DirtyUI(uid, pump);
+            _userInterfaceSystem.CloseUi(uid, GasHeatPumpUiKey.Key);
+        }
+
+        // Needed so the heat pump's on/off state persists through save/load
+        private void OnHeatPumpJoinAtmosphere(EntityUid uid, HeatPumpComponent pump, ref AtmosDeviceEnabledEvent args)
+        {
+            pump.Active = pump.DesiredEnabled;
+
+            _appearance.SetData(uid, HeatPumpVisuals.Enabled, pump.Active);
             DirtyUI(uid, pump);
             _userInterfaceSystem.CloseUi(uid, GasHeatPumpUiKey.Key);
         }
