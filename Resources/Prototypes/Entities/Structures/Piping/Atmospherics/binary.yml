@@ -714,3 +714,9 @@
     - type: GuideHelp
       guides:
       - ManualValve
+    - type: GenericVisualizer
+      visuals:
+        enum.HeatPumpVisuals.Enabled:
+          enabled:
+            True: { state: pumpHeatOn }
+            False: { state: pumpHeat }

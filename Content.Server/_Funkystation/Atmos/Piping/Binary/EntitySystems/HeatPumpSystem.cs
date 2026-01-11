@@ -128,6 +128,7 @@ namespace Content.Server.Atmos.Piping.Binary.EntitySystems
         private void OnToggleStatusMessage(EntityUid uid, HeatPumpComponent pump, GasHeatPumpToggleStatusMessage args)
         {
             pump.Active = args.Enabled;
+            _appearance.SetData(uid, HeatPumpVisuals.Enabled, pump.Active);
             _adminLogger.Add(LogType.AtmosPowerChanged, LogImpact.Medium,
                 $"{ToPrettyString(args.Actor):player} set the power on {ToPrettyString(uid):device} to {args.Enabled}");
             DirtyUI(uid, pump);
