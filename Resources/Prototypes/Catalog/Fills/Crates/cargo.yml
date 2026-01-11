@@ -249,8 +249,8 @@
 - type: entity
   id: BusinessStartingKit
   parent: CrateGenericSteel
-  name: business starting kit crate
-  description: Contains the goods relevant to building a business.
+  name: faction starter crate
+  description: Contains the goods relevant to creating a faction.
   components:
   - type: EntityTableContainerFill
     containers:
@@ -263,3 +263,5 @@
           - id: Multitool
           - id: Wrench
           - id: CargoBountyComputerFlatpack
+          - id: BookFactionHandbook
+          - id: ComputerGridControlFlatpack

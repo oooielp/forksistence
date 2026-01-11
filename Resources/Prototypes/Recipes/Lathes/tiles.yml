@@ -80,6 +80,7 @@
   - Faux
   materials:
     Plastic: 100
+  unlockUses: 60
 
 - type: latheRecipe
   abstract: true

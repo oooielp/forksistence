@@ -1,4 +1,5 @@
 using Content.Server._NF.Bank;
+using Content.Server.Access.Systems;
 using Content.Server.Chat.Managers;
 using Content.Server.CrewManifest;
 using Content.Server.Lathe.Components;
@@ -8,6 +9,7 @@ using Content.Shared.Cargo;
 using Content.Shared.Cargo.Components;
 using Content.Shared.CrewAssignments;
 using Content.Shared.CrewAssignments.Components;
+using Content.Shared.CrewAssignments.Prototypes;
 using Content.Shared.CrewRecords.Components;
 using Content.Shared.FixedPoint;
 using Content.Shared.Implants.Components;
@@ -42,6 +44,7 @@ public sealed partial class JobNetSystem : EntitySystem
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly SharedCargoSystem _cargo = default!;
     [Dependency] private readonly CrewManifestSystem _crewManifest = default!;
+    [Dependency] private readonly IdCardSystem _card = default!;
     public override void Initialize()
     {
         base.Initialize();
@@ -54,9 +57,38 @@ public sealed partial class JobNetSystem : EntitySystem
         SubscribeLocalEvent<JobNetComponent, ComponentShutdown>(OnShutdown);
         SubscribeLocalEvent<JobNetComponent, OpenJobNetImplantEvent>(OnImplantActivate);
         SubscribeLocalEvent<JobNetComponent, JobNetSelectMessage>(OnSelect);
+        SubscribeLocalEvent<JobNetComponent, JobNetPurchaseMessage>(OnPurchase);
 
         InitializeUi();
     }
+
+    private void OnPurchase(EntityUid uid, JobNetComponent component, JobNetPurchaseMessage args)
+    {
+        ProtoId<NetworkLevelPrototype> currentLevel = "NetworkLevel1";
+        if (_meta.MetaRecords == null) return;
+        if (_meta.MetaRecords.TryGetRecord(Name(args.Actor), out var record) && record != null)
+        {
+            currentLevel = record.Level;
+        }
+        else return;
+        _proto.Resolve(currentLevel, out var currentProto);
+        if (currentProto == null) return;
+        if (currentProto.Next == null) return;
+        _proto.Resolve(currentProto.Next, out var nextProto);
+        if (nextProto == null) return;
+        int cost = nextProto.Cost;
+        if(_bank.TryGetBalance(args.Actor, out var balance))
+        {
+            if (cost > balance) return;
+            if(_bank.TryBankWithdraw(args.Actor, cost))
+            {
+                record.Level = nextProto.ID;
+            }
+        }
+        UpdateUserInterface(args.Actor, uid, component);
+
+    }
+
     private void OnSelect(EntityUid uid, JobNetComponent component, JobNetSelectMessage args)
     {
         var station = _station.GetStationByID(args.ID);
@@ -74,6 +106,7 @@ public sealed partial class JobNetSystem : EntitySystem
                 var sId = _station.GetStationByID(component.WorkingFor.Value);
                 if (sId != null) _crewManifest.BuildCrewManifest(sId.Value);
             }
+            _card.UpdateIDAssignment(Name(args.Actor), args.ID);
             UpdateUserInterface(args.Actor, uid, component);
             return;
         }
@@ -102,6 +135,7 @@ public sealed partial class JobNetSystem : EntitySystem
                                 var sId = _station.GetStationByID(component.WorkingFor.Value);
                                 if (sId != null) _crewManifest.BuildCrewManifest(sId.Value);
                             }
+                            _card.UpdateIDAssignment(Name(args.Actor), args.ID);
                             UpdateUserInterface(args.Actor, uid, component);
                         }
                     }
@@ -131,7 +165,16 @@ public sealed partial class JobNetSystem : EntitySystem
         if (currentWorkingFor != 0 && currentWorkingFor != null)
         {
             var sId = _station.GetStationByID(currentWorkingFor.Value);
-            if (sId != null) _crewManifest.BuildCrewManifest(sId.Value);
+            if (sId == null) return;
+            var jobNetEnabled = _station.GetJobNetStatus(sId.Value);
+            if (!jobNetEnabled)
+            {
+                component.WorkingFor = 0;
+            }
+            else
+            {
+                _crewManifest.BuildCrewManifest(sId.Value);
+            }
         }
     }
 

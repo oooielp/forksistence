@@ -2,31 +2,51 @@
             MinSize="700 290" Access="Public">
     <BoxContainer Orientation="Vertical">
         <BoxContainer Orientation="Horizontal">
-            <Label Text="{Loc 'id-card-console-window-privileged-id'}" />
+            <Label Text="{Loc 'id-card-console-window-privileged-id'}" StyleClasses="LabelKeyText" />
             <Button Name="PrivilegedIdButton" Access="Public"/>
-            <Label Name="PrivilegedIdLabel" />
             <Control HorizontalExpand="True"/>
-            <Label Text="Change Account:" />
-            <Button Name="ChangeModeBtn" Text="Station" Access="Public" />
+            <Label Text="Account:" />
+            <Button Name="ChangeModeStation" Text="Faction" Access="Public" />
+            <Button Name="ChangeModePersonal" Text="Personal" Access="Public" />
         </BoxContainer>
         <BoxContainer Orientation="Horizontal">
-            <Label Text="Target Account:" />
+            <Label Text="Target Account:" StyleClasses="LabelKeyText" />
             <Control MinWidth="5"/>
             <Label Name="TargetAccountLabel" Text="Station Name" />
             <Control HorizontalExpand="True"/>
-            <BoxContainer Orientation="Horizontal" Name="TaxDetails">
-                
-                <Label Name="TaxRateLabel" Text="Sales Tax: 0%" />
-            </BoxContainer>
+            <OptionButton Name="PossibleStations" Access="Public"/>
         </BoxContainer>
-        <Control VerticalExpand="True"/>
-        <BoxContainer Orientation="Horizontal">
-            <Label Text="Invoice Reason: " />
-            <LineEdit Name="ReasonLineEdit" HorizontalExpand="True" Access="Public"/>
-            
+        <BoxContainer Orientation="Horizontal" Name="TaxDetails">
+            <Label Text="Taxing Account:" />
+            <Control MinWidth="5"/>
+            <Label Name="TaxingAccountLabel" Text="Station Name" />
+            <Control HorizontalExpand="True"/>
+            <Label Name="TaxRateLabel" Text="Sales Tax: 0%" />
         </BoxContainer>
         <BoxContainer Orientation="Horizontal">
-            <Label Text="Invoice Cost:    $" />
+            <Label Text="Invoice Mode:" StyleClasses="LabelKeyText" />
+            <Control MinWidth="5"/>
+            <Label Name="InvoiceModeLabel" />
+            <Control HorizontalExpand="True"/>
+            <Button Name="ChangeModeInvoice" Text="Invoice" Access="Public" />
+            <Button Name="ChangeModePayslip" Text="Payslip" Access="Public" />
+        </BoxContainer>
+        <BoxContainer Orientation="Horizontal">
+            <Label Text="Title:" StyleClasses="LabelKeyText" />
+            <Control MinWidth="5"/>
+            <LineEdit Name="InvoiceTitleLE"
+                PlaceHolder="Enter Title Here"
+                Access="Public"
+                HorizontalExpand="True" />
+        </BoxContainer>
+        <Label Text="Reason: " StyleClasses="LabelKeyText" />
+        <BoxContainer Orientation="Horizontal" MinHeight ="150" VerticalExpand="True">
+            <PanelContainer StyleIdentifier="PaperEditBackground" VerticalExpand="True" HorizontalExpand="True">
+                <TextEdit Name="ReasonLineEdit"  Access="Public" HorizontalExpand="True" VerticalExpand="True"/>
+            </PanelContainer>
+        </BoxContainer>
+        <BoxContainer Orientation="Horizontal">
+            <Label Text="Cost:    $" StyleClasses="LabelKeyText" />
             <SpinBox Name="CostSpinBox" Value="0" MinWidth="150"/>
         </BoxContainer>
         <BoxContainer Orientation="Horizontal">

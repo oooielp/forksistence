@@ -900,7 +900,7 @@
       - !type:DoActsBehavior
         acts: ["Destruction"]
   - type: Construction
-    graph: Girder
+    graph: GirderDiagonal
     node: diagonalshuttleWall
   - type: RadiationBlocker
     resistance: 5

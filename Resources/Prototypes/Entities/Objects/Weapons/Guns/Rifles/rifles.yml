@@ -147,7 +147,7 @@
   name: Lecter
   parent: [BaseWeaponRifle, BaseSecurityContraband]
   id: WeaponRifleLecter
-  description: "Popular gas-operated combat rifle used heavily by Nanotrasen and SolGov. Operating in semi or fully automatic, its accuracy, stopping power, and reliability make it excel in all manner of environments.\nFeeds from .20 rifle magazines."
+  description: "Popular gas-operated combat rifle used heavily by Nanotrasen and the Solar Legion. Operating in semi or fully automatic, its accuracy, stopping power, and reliability make it excel in all manner of environments.\nFeeds from .20 rifle magazines."
   components:
   - type: Sprite
     sprite: Objects/Weapons/Guns/Rifles/lecter.rsi
@@ -318,3 +318,75 @@
   - type: PacifismAllowedGun
   - type: StaticPrice
     price: 100
+
+#begin persistence 
+- type: entity
+  name: Vulcan
+  parent: [BaseWeaponRifle, BaseGunWieldable]
+  id: WeaponRifleVulcan
+  description: One of the heaviest small arms to grace Security's armory, this rifle is a modern take on the classic FAL, informally dubbed the "Right Arm of the Free World". Uses .30 rifle ammo.
+  components:
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Rifles/vulcan.rsi
+    layers:
+      - state: base
+        map: ["enum.GunVisualLayers.Base"]
+      - state: mag-0
+        map: ["enum.GunVisualLayers.Mag"]
+  - type: GunWieldBonus
+    minAngle: -20
+    maxAngle: -30
+  - type: Gun
+    minAngle: 21
+    maxAngle: 32
+    angleIncrease: 6
+    angleDecay: 24
+    fireRate: 3.5
+    selectedMode: SemiAuto
+    availableModes:
+    - SemiAuto
+  - type: ChamberMagazineAmmoProvider
+  - type: ItemSlots
+    slots:
+      gun_magazine:
+        name: Magazine
+        startingItem: MagazineLightRifle
+        insertSound: /Audio/Weapons/Guns/MagIn/ltrifle_magin.ogg
+        ejectSound: /Audio/Weapons/Guns/MagOut/ltrifle_magout.ogg
+        priority: 2
+        whitelist:
+          tags:
+            - MagazineLightRifle
+      gun_chamber:
+        name: Chamber
+        startingItem: CartridgeLightRifle
+        priority: 1
+        whitelist:
+          tags:
+            - CartridgeLightRifle
+  - type: CursorOffsetRequiresWield
+  - type: EyeCursorOffset
+    maxOffset: 2.5
+    pvsIncrease: 0.25
+  - type: ContainerContainer
+    containers:
+      gun_magazine: !type:ContainerSlot
+      gun_chamber: !type:ContainerSlot
+  - type: MagazineVisuals
+    magState: mag
+    steps: 1
+    zeroVisible: true
+  - type: Appearance
+  - type: Clothing
+    sprite: Objects/Weapons/Guns/Rifles/vulcan.rsi
+
+- type: entity
+  name: M-90
+  id: WeaponRifleM90NoGL
+  parent: [WeaponRifleM90GrenadeLauncher, BaseGunWieldable]
+  description: An older bullpup carbine model. Uses .20 rifle ammo.
+  components:
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Rifles/carbinenogl.rsi
+  - type: Clothing
+    sprite: Objects/Weapons/Guns/Rifles/carbinenogl.rsi

@@ -280,6 +280,15 @@
   components:
   - type: Flatpack
     entity: ComputerStationModification
+    
+- type: entity
+  parent: BaseFlatpack
+  id: ComputerGridControlFlatpack
+  name: grid control computer flatpack
+  description: A flatpack used for constructing a grid control computer.
+  components:
+  - type: Flatpack
+    entity: ComputerGridControl
 
 - type: entity
   parent: BaseFlatpack
@@ -334,6 +343,7 @@
     entity: ComputerCargoBounty
     
 - type: entity
+  parent: BaseFlatpack
   id: TinyFanFlatpack
   name: tiny fan flatpack
   description: A flatpack used for constructing a tiny fan. Useful for keeping gases in or out.

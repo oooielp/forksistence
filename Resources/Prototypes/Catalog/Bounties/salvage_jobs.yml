@@ -130,10 +130,15 @@
     state: goliath
   entries:
   - name: bounty-item-plates
-    amount: 6
+    amount: 4
     whitelist:
       tags:
       - GoliathPlate
+  - name: bounty-item-goliathmeat
+    amount: 6
+    whitelist:
+      tags:
+      - GoliathMeat
 
 - type: cargoBounty
   id: BountyHivelordRemains
@@ -149,3 +154,61 @@
     whitelist:
       tags:
       - HivelordRemains
+
+- type: cargoBounty
+  id: BountyBear
+  reward: 7500
+  description: bounty-description-bear
+  entries:
+    - name: bounty-item-bearhide
+      amount: 1
+      whitelist:
+        tags:
+        - BearHide
+    - name: bounty-item-bearmeat
+      amount: 6
+      whitelist:
+        tags:
+        - BearMeat
+  group: HunterBounty
+
+- type: cargoBounty
+  id: BountySpider
+  reward: 7500
+  description: bounty-description-spider
+  entries:
+    - name: bounty-item-spidermeat
+      amount: 4
+      whitelist:
+        tags:
+        - SpiderMeat
+  group: HunterBounty
+
+- type: cargoBounty
+  id: BountySnake
+  reward: 9250
+  description: bounty-description-snake
+  entries:
+    - name: bounty-item-snakemeat
+      amount: 6
+      whitelist:
+        tags:
+        - SnakeMeat
+    - name: bounty-item-snakeboots
+      amount: 1
+      whitelist:
+        tags:
+        - SnakeBoots
+  group: HunterBounty
+
+- type: cargoBounty
+  id: BountyXeno
+  reward: 12500
+  description: bounty-description-xeno
+  entries:
+    - name: bounty-item-xenomeat
+      amount: 12
+      whitelist:
+        tags:
+        - XenoMeat
+  group: HunterBounty

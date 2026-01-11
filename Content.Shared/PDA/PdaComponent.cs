@@ -28,7 +28,8 @@ namespace Content.Shared.PDA
         public string? IdCard;
 
         [DataField] public EntityUid? ContainedId;
-        [ViewVariables] public bool FlashlightOn;
+
+        [DataField] public bool FlashlightOn;
 
         [DataField] public string? OwnerName;
         // The Entity that "owns" the PDA, usually a player's character.

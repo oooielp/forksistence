@@ -19,7 +19,7 @@ public sealed partial class IdCardComponent : Component
 
     [DataField]
     [AutoNetworkedField]
-    public int? stationID = 1;
+    public int? stationID = 0;
 
 
     [DataField]

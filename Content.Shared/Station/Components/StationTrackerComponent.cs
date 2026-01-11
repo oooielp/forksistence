@@ -15,8 +15,10 @@ public sealed partial class StationTrackerComponent : Component
     /// </summary>
     [DataField(readOnly: true), AutoNetworkedField]
     public EntityUid? Station;
+
     [DataField]
     public int stationUID = 0;
+
     [DataField]
     public bool locked = true;
 }

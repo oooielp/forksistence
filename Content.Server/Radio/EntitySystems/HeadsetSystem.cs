@@ -99,13 +99,7 @@ public sealed class HeadsetSystem : SharedHeadsetSystem
         if (!headset.Enabled || MetaData(uid).EntityLifeStage >= EntityLifeStage.Terminating)
             return;
 
-        if (!Resolve(uid, ref keyHolder))
-            return;
-
-        if (keyHolder.Channels.Count == 0)
-            RemComp<ActiveRadioComponent>(uid);
-        else
-            EnsureComp<ActiveRadioComponent>(uid).Channels = new(keyHolder.Channels);
+        EnsureComp<ActiveRadioComponent>(uid);
     }
 
     public bool HasChannelAccess(EntityUid player, EntityUid faction, RadioChannelPrototype channel)

@@ -52,13 +52,6 @@ public sealed class CrewManifestSystem : EntitySystem
 
     private void OnRoundRestart(RoundRestartCleanupEvent ev)
     {
-        foreach (var (_, euis) in _openEuis)
-        {
-            foreach (var (_, eui) in euis)
-            {
-                eui.Close();
-            }
-        }
 
         _openEuis.Clear();
         _cachedEntries.Clear();
@@ -173,6 +166,10 @@ public sealed class CrewManifestSystem : EntitySystem
 
         if (euis.ContainsKey(session))
         {
+            var eui2 = new CrewManifestEui(station, owner, this);
+            euis[session] = eui2;
+            _euiManager.OpenEui(eui2, session);
+            eui2.StateDirty();
             return;
         }
 

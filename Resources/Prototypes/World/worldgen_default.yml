@@ -1,18 +1,13 @@
-﻿- type: worldgenConfig
+- type: worldgenConfig
   id: Default
   components:
     - type: WorldController
     - type: BiomeSelection
       biomes:
-        - FrozenWasteBiome
-        - ColdstoneBiome
-        - RockBiome
+        - FrozenCrystalBiome
         - IronrockBiome
         - RockyWastesBiome
-        - VolcanicRemnantsBiome
-        - GeoactiveBiome
+        - VolcanicBiome
         - WeirdmetalBiome
-        - BrassmetalBiome
-        - RainbowBiome
         - VoidBiome
         - BaseBiome

@@ -87,3 +87,13 @@
   cost: 1500
   category: cargoproduct-category-name-science
   group: sciencemarket
+  
+- type: cargoProduct
+  id: CrateManufacturingKit
+  icon:
+    sprite: Structures/Machines/autolathe.rsi
+    state: icon
+  product: CrateManufacturingKit
+  cost: 6000
+  category: cargoproduct-category-name-science
+  group: market

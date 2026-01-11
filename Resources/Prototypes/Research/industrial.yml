@@ -83,6 +83,7 @@
   - PortableGeneratorPacmanMachineCircuitboard
   - PortableGeneratorSuperPacmanMachineCircuitboard
   - PortableGeneratorJrPacmanMachineCircuitboard
+  - PortableGeneratorOldmanMachineCircuitboard
   - SolarControlComputerCircuitboard
   - SolarTrackerElectronics
   - EmitterCircuitboard
@@ -135,6 +136,7 @@
   - ThrusterMachineCircuitboard
   - GyroscopeMachineCircuitboard
   - MiniGravityGeneratorCircuitboard
+  - StationAnchorCircuitboard
 
 - type: technology
   id: AdvancedAtmospherics

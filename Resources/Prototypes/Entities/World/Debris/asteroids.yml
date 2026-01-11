@@ -48,11 +48,17 @@
       staticMixture: # IMPORTANT: Use *Mixture instead of air!!
         temperature: 60 # Yall come up with temperature that makes sense
         moles: # Maximum Moles per TILE, factors such as seed upper/lower bound also apply.
-          CarbonDioxide: 212
-          Nitrogen: 248
+          CarbonDioxide: 152
+          Nitrogen: 48
       variableMixture:
         Oxygen:
           moles: 155
+          prob: 0.5
+        Nitrogen:
+          moles: 160
+          prob: 0.5
+        CarbonDioxide:
+          moles: 100
           prob: 0.5
 
 
@@ -152,8 +158,8 @@
       staticMixture: # IMPORTANT: Use *Mixture instead of air!!
         temperature: 60 # Yall come up with temperature that makes sense
         moles: # Maximum Moles per TILE, factors such as seed upper/lower bound also apply.
-          CarbonDioxide: 254
-          Nitrogen: 120
+          CarbonDioxide: 194
+          Nitrogen: 90
       variableMixture:
         Oxygen:
           moles: 80
@@ -214,8 +220,8 @@
       staticMixture: # IMPORTANT: Use *Mixture instead of air!!
         temperature: 60 # Yall come up with temperature that makes sense
         moles: # Maximum Moles per TILE, factors such as seed upper/lower bound also apply.
-          CarbonDioxide: 254
-          Nitrogen: 120
+          CarbonDioxide: 194
+          Nitrogen: 90
       variableMixture:
         Plasma:
           moles: 60
@@ -272,14 +278,14 @@
       staticMixture: # IMPORTANT: Use *Mixture instead of air!!
         temperature: 60 # Yall come up with temperature that makes sense
         moles: # Maximum Moles per TILE, factors such as seed upper/lower bound also apply.
-          CarbonDioxide: 254
+          CarbonDioxide: 194
           Nitrogen: 120
       variableMixture:
         Oxygen:
-          moles: 80
-          prob: 0.3
+          moles: 100
+          prob: 0.5
         Plasma:
-          moles: 60
+          moles: 80
           prob: 0.7
 
 - type: entity
@@ -465,10 +471,10 @@
       variableMixture:
         Nitrogen:
           moles: 60
-          prob: 0.1
+          prob: 0.5
         Plasma:
           moles: 100
-          prob: 0.5
+          prob: 0.3
 
 - type: entity
   id: BaseChromiteDebrisBarren
@@ -521,10 +527,10 @@
       variableMixture:
         Nitrogen:
           moles: 60
-          prob: 0.1
+          prob: 0.5
         Plasma:
           moles: 100
-          prob: 0.5
+          prob: 0.1
 
 - type: entity
   id: BaseChromiteDebrisRich
@@ -574,7 +580,7 @@
       variableMixture:
         Nitrogen:
           moles: 60
-          prob: 0.5
+          prob: 0.6
         Plasma:
           moles: 100
           prob: 0.8
@@ -749,6 +755,9 @@
           - id: WallRockBasaltTin
             prob: 0.2
             orGroup: rock
+          - id: WallRockBasaltCoal
+            prob: 0.15
+            orGroup: rock
           - id: WallRockBasaltUranium
             prob: 0.15
             orGroup: rock
@@ -762,7 +771,7 @@
             prob: 0.2
             orGroup: rock
           - id: WallRockBasaltGibtonite
-            prob: 0.05
+            prob: 0.1
             orGroup: rock
     - type: IFF
       flags: HideLabel
@@ -806,6 +815,9 @@
           - id: WallRockBasaltTin
             prob: 0.1
             orGroup: rock
+          - id: WallRockBasaltCoal
+            prob: 0.1
+            orGroup: rock
           - id: WallRockBasaltUranium
             prob: 0.05
             orGroup: rock
@@ -819,7 +831,7 @@
             prob: 0.1
             orGroup: rock
           - id: WallRockBasaltGibtonite
-            prob: 0.02
+            prob: 0.05
             orGroup: rock
     - type: IFF
       flags: HideLabel
@@ -863,6 +875,9 @@
           - id: WallRockBasaltTin
             prob: 0.25
             orGroup: rock
+          - id: WallRockBasaltCoal
+            prob: 0.2
+            orGroup: rock
           - id: WallRockBasaltUranium
             prob: 0.25
             orGroup: rock
@@ -876,7 +891,7 @@
             prob: 0.3
             orGroup: rock
           - id: WallRockBasaltGibtonite
-            prob: 0.1
+            prob: 0.15
             orGroup: rock
     - type: IFF
       flags: HideLabel
@@ -1085,7 +1100,6 @@
       staticMixture: # IMPORTANT: Use *Mixture instead of air!!
         temperature: 165 # Yall come up with temperature that makes sense
         moles: # Maximum Moles per TILE, factors such as seed upper/lower bound also apply.
-          Nitrogen: 164
           WaterVapor: 50
           Ammonia: 75
       variableMixture:
@@ -1142,7 +1156,6 @@
       staticMixture: # IMPORTANT: Use *Mixture instead of air!!
         temperature: 165 # Yall come up with temperature that makes sense
         moles: # Maximum Moles per TILE, factors such as seed upper/lower bound also apply.
-          Nitrogen: 140
           WaterVapor: 100
           Ammonia: 75
       variableMixture:
@@ -1199,19 +1212,18 @@
       staticMixture: # IMPORTANT: Use *Mixture instead of air!!
         temperature: 165 # Yall come up with temperature that makes sense
         moles: # Maximum Moles per TILE, factors such as seed upper/lower bound also apply.
-          Nitrogen: 164
           WaterVapor: 50
           Ammonia: 75
       variableMixture:
         WaterVapor:
-          moles: 50
-          prob: 0.4
+          moles: 70
+          prob: 0.6
         Plasma:
           moles: 160
           prob: 0.7
         Oxygen:
           moles: 180
-          prob: 0.7
+          prob: 0.5
 
 - type: entity
   id: AndesiteDebrisSmall
@@ -1699,12 +1711,11 @@
         temperature: 60 # Yall come up with temperature that makes sense
         moles: # Maximum Moles per TILE, factors such as seed upper/lower bound also apply.
           Nitrogen: 120
-          CarbonDioxide: 160
           Ammonia: 60
       variableMixture:
         CarbonDioxide:
-          moles: 110
-          prob: 0.1
+          moles: 210
+          prob: 0.7
         Oxygen:
           moles: 120
           prob: 0.3
@@ -1757,12 +1768,11 @@
         temperature: 60 # Yall come up with temperature that makes sense
         moles: # Maximum Moles per TILE, factors such as seed upper/lower bound also apply.
           Nitrogen: 120
-          CarbonDioxide: 200
           Ammonia: 60
       variableMixture:
         CarbonDioxide:
-          moles: 110
-          prob: 0.1
+          moles: 200
+          prob: 0.6
         Nitrogen:
           moles: 180
           prob: 0.1
@@ -1813,11 +1823,11 @@
           Oxygen: 50
           Nitrogen: 120
           CarbonDioxide: 100
-          Ammoia: 75
+          Ammonia: 75
       variableMixture:
         CarbonDioxide:
           moles: 110
-          prob: 0.2
+          prob: 0.5
         Oxygen:
           moles: 120
           prob: 0.4

@@ -87,20 +87,11 @@ public sealed class SimpleFloorPlanPopulatorSystem : BaseWorldSystem
             var spawns = _entityTable.GetSpawns(type);
             foreach (var proto in spawns)
             {
-                EntityCoordinates trueCoords = new EntityCoordinates(uid, Vector2.Zero);
-                var halfWidth = bounds.Width / 2f;
-                var halfHeight = bounds.Height / 2f;
-                var attempt = 0;
-                do
-                {
-                    attempt++;
-                    var xOffset = _random.NextFloat(-halfWidth, halfWidth);
-                    var yOffset = _random.NextFloat(-halfHeight, halfHeight);
-                    trueCoords = trueCoords.Offset(new Vector2(xOffset, yOffset));
-                }
-                while (attempt <= 5 && _physx.TryCollideRect(Box2.FromDimensions(trueCoords.X, trueCoords.Y, 1, 1), _transform.ToMapCoordinates(trueCoords).MapId));
-
-                _ownedEntity.GenerateEntity(proto, trueCoords);
+                var randomCoords = new EntityCoordinates(
+                    map.Value,
+                    bounds.Center + _random.NextAngle().ToVec() * (float)(Math.Ceiling(grid.LocalAABB.MaxDimension / 2f) + _random.Next(1, 4))
+                );
+                _ownedEntity.GenerateEntity(proto, randomCoords);
             }
         }
     }

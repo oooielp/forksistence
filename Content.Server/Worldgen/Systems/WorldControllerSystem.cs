@@ -36,7 +36,12 @@ public sealed class WorldControllerSystem : EntitySystem
 
     private const int PlayerLoadRadius = 2;
 
+    private const uint MaxLoadedChunkUpdatesPerTick = 100;
+    private const uint ChunkLoaderTickDelay = 60; // Every 60 ticks
+
     private ISawmill _sawmill = default!;
+    private Dictionary<EntityUid, Dictionary<Vector2i, List<EntityUid>>> _chunksToLoad = new();
+    private readonly Queue<Entity<LoadedChunkComponent, WorldChunkComponent>> _loadedChunks = new();
 
     /// <inheritdoc />
     public override void Initialize()
@@ -99,16 +104,23 @@ public sealed class WorldControllerSystem : EntitySystem
     /// <inheritdoc />
     public override void Update(float frameTime)
     {
-        //there was a to-do here about every frame alloc but it turns out it's a nothing burger here.
-        var chunksToLoad = new Dictionary<EntityUid, Dictionary<Vector2i, List<EntityUid>>>();
+        CheckChunksToLoad();
+        UpdateLoadedChunks();
+    }
+
+    private void CheckChunksToLoad()
+    {
+        if (_gameTiming.CurTick.Value % ChunkLoaderTickDelay != 0)
+            return;
+        _chunksToLoad = new();
 
         var controllerEnum = EntityQueryEnumerator<WorldControllerComponent>();
         while (controllerEnum.MoveNext(out var uid, out _))
         {
-            chunksToLoad[uid] = new Dictionary<Vector2i, List<EntityUid>>();
+            _chunksToLoad[uid] = new();
         }
 
-        if (chunksToLoad.Count == 0)
+        if (_chunksToLoad.Count == 0)
             return; // Just bail early.
 
         var loaderEnum = EntityQueryEnumerator<WorldLoaderComponent, TransformComponent>();
@@ -119,15 +131,15 @@ public sealed class WorldControllerSystem : EntitySystem
             if (mapOrNull is null)
                 continue;
             var map = mapOrNull.Value;
-            if (!chunksToLoad.ContainsKey(map))
+            if (!_chunksToLoad.ContainsKey(map))
                 continue;
 
             var wc = _xformSys.GetWorldPosition(xform);
             var coords = WorldGen.WorldToChunkCoords(wc);
             var chunks = new GridPointsNearEnumerator(coords.Floored(),
-                (int) Math.Ceiling(worldLoader.Radius / (float) WorldGen.ChunkSize) + 1);
+                (int)Math.Ceiling(worldLoader.Radius / (float)WorldGen.ChunkSize) + 1);
 
-            var set = chunksToLoad[map];
+            var set = _chunksToLoad[map];
 
             while (chunks.MoveNext(out var chunk))
             {
@@ -151,14 +163,14 @@ public sealed class WorldControllerSystem : EntitySystem
             if (mapOrNull is null)
                 continue;
             var map = mapOrNull.Value;
-            if (!chunksToLoad.ContainsKey(map))
+            if (!_chunksToLoad.ContainsKey(map))
                 continue;
 
             var wc = _xformSys.GetWorldPosition(xform);
             var coords = WorldGen.WorldToChunkCoords(wc);
             var chunks = new GridPointsNearEnumerator(coords.Floored(), PlayerLoadRadius);
 
-            var set = chunksToLoad[map];
+            var set = _chunksToLoad[map];
 
             while (chunks.MoveNext(out var chunk))
             {
@@ -168,33 +180,16 @@ public sealed class WorldControllerSystem : EntitySystem
             }
         }
 
-        var loadedEnum = EntityQueryEnumerator<LoadedChunkComponent, WorldChunkComponent>();
-        var chunksUnloaded = 0;
-        TimeSpan chunkUnloadDelay = TimeSpan.FromSeconds(_configurationManager.GetCVar(CCVars.WorldChunkUnloadDelay));
 
-        // Make sure these chunks get unloaded at the end of the tick.
-        while (loadedEnum.MoveNext(out var uid, out var loadedChunkComp, out var chunk))
-        {
-            var coords = chunk.Coordinates;
 
-            if (!chunksToLoad[chunk.Map].ContainsKey(coords) && loadedChunkComp.LoadedOn + chunkUnloadDelay < _gameTiming.CurTime)
-            {
-                RemCompDeferred<LoadedChunkComponent>(uid);
-                chunksUnloaded++;
-            }
-        }
-
-        if (chunksUnloaded > 0)
-            _sawmill.Debug($"Queued {chunksUnloaded} chunks for unload.");
-
-        if (chunksToLoad.All(x => x.Value.Count == 0))
+        if (_chunksToLoad.All(x => x.Value.Count == 0))
             return;
 
         var startTime = _gameTiming.RealTime;
         var count = 0;
         var loadedQuery = GetEntityQuery<LoadedChunkComponent>();
         var controllerQuery = GetEntityQuery<WorldControllerComponent>();
-        foreach (var (map, chunks) in chunksToLoad)
+        foreach (var (map, chunks) in _chunksToLoad)
         {
             var controller = controllerQuery.GetComponent(map);
             foreach (var (chunk, loaders) in chunks)
@@ -220,6 +215,40 @@ public sealed class WorldControllerSystem : EntitySystem
             var timeSpan = _gameTiming.RealTime - startTime;
             _sawmill.Debug($"Loaded {count} chunks in {timeSpan.TotalMilliseconds:N2}ms.");
         }
+    }
+
+    private void UpdateLoadedChunks()
+    {
+        if (_loadedChunks.Count == 0)
+        {
+            var loadedEnum = EntityQueryEnumerator<LoadedChunkComponent, WorldChunkComponent>();
+            while (loadedEnum.MoveNext(out var uid, out var loadedChunkComp, out var chunk))
+                _loadedChunks.Enqueue((uid, loadedChunkComp, chunk));
+            return; // Enqueue only as this is already quite expensive.
+        }
+        var chunkUnloadDelay = TimeSpan.FromSeconds(_configurationManager.GetCVar(CCVars.WorldChunkUnloadDelay));
+        var chunksUnloaded = 0u;
+        var iterations = 0u;
+
+        while (iterations < MaxLoadedChunkUpdatesPerTick && _loadedChunks.TryDequeue(out var ent))
+        {
+            iterations++;
+            if (Exists(ent) && !TerminatingOrDeleted(ent) && !ent.Comp1.Deleted)
+            {
+                ent.Deconstruct(out var uid, out var loadedChunkComp, out var chunk);
+                var coords = chunk.Coordinates;
+
+                if (_chunksToLoad.ContainsKey(chunk.Map) && !_chunksToLoad[chunk.Map].ContainsKey(coords) && loadedChunkComp.LoadedOn + chunkUnloadDelay < _gameTiming.CurTime)
+                {
+                    // Make sure these chunks get unloaded at the end of the tick.
+                    RemCompDeferred<LoadedChunkComponent>(uid);
+                    chunksUnloaded++;
+                }
+            }
+        }
+
+        if (chunksUnloaded > 0)
+            _sawmill.Debug($"Queued {chunksUnloaded} chunks for unload.");
     }
 
     private void DoEntitySpawns(EntityUid uid)

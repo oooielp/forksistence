@@ -102,7 +102,7 @@
     whitelist:
       tags:
       - ClownShoes
-  group: ExplorerBounty
+  group: ExplorationBounty
 
 - type: cargoBounty
   id: BountyCorn
@@ -126,7 +126,7 @@
     whitelist:
       tags:
       - Crayon
-  group: ExplorerBounty
+  group: ExplorationBounty
 
 - type: cargoBounty
   id: BountyCubanCarp
@@ -165,7 +165,7 @@
     whitelist:
       tags:
       - Figurine
-  group: ExplorerBounty
+  group: ExplorationBounty
 
 - type: cargoBounty
   id: BountyFlower
@@ -212,7 +212,7 @@
     whitelist:
       components:
       - Instrument
-  group: ExplorerBounty
+  group: ExplorationBounty
 
 - type: cargoBounty
   id: BountyKnife
@@ -321,7 +321,7 @@
     whitelist:
       tags:
       - PercussionInstrument
-  group: ExplorerBounty
+  group: ExplorationBounty
 
 - type: cargoBounty
   id: BountyPie
@@ -574,6 +574,7 @@
     blacklist:
       components:
       - SliceableFood
+  group: ServiceBounty
 
 - type: cargoBounty
   id: BountyFruit
@@ -593,6 +594,7 @@
       - Bread
       - Pistachios
       - Creamsicle
+  group: ServiceBounty
 
 - type: cargoBounty
   id: BountyVegetable
@@ -610,6 +612,7 @@
       - Cake
       - Pie
       - Bread
+  group: ServiceBounty
 
 - type: cargoBounty
   id: BountyChili
@@ -621,6 +624,7 @@
     whitelist:
       tags:
       - ChiliBowl
+  group: ServiceBounty
 
 - type: cargoBounty
   id: BountyRollerskates
@@ -898,7 +902,7 @@
   description: bounty-description-bananium
   entries:
     - name: bounty-item-bananium
-      amount: 30
+      amount: 20
       whitelist:
         tags:
         - Bananium
@@ -927,6 +931,87 @@
         - Diamond
 
 - type: cargoBounty
+  id: BountyCoins
+  reward: 3000
+  description: bounty-description-coins
+  entries:
+  - name: bounty-item-coins
+    amount: 10
+    whitelist:
+      components:
+      - NFCoin # Coins have no tag but have a unique component
+
+- type: cargoBounty
+  id: BountyCPU
+  reward: 7500
+  description: bounty-description-cpu
+  entries:
+  - name: bounty-item-cpu
+    amount: 5
+    whitelist:
+      tags:
+      - TreasureOldCPU # Supercharged CPU
+  group: ScienceBounty
+
+- type: cargoBounty
+  id: BountyOldComputer
+  reward: 7500
+  description: bounty-description-old-computer
+  entries:
+  - name: bounty-item-old-computer
+    amount: 5
+    whitelist:
+      tags:
+      - TreasureOldComputer # Hard drive, floppy drive, CD drive
+  group: ScienceBounty
+
+- type: cargoBounty
+  id: TreasureDataDisk
+  reward: 3000
+  description: bounty-description-data-disk
+  entries:
+  - name: bounty-item-data-disk
+    amount: 2
+    whitelist:
+      tags:
+      - TreasureDataDisk # Salvage data disk
+  group: ScienceBounty
+
+- type: cargoBounty
+  id: TreasureSampleTube
+  reward: 7500
+  description: bounty-description-sample-tube
+  entries:
+  - name: bounty-item-sample-tube
+    amount: 5
+    whitelist:
+      tags:
+      - TreasureSampleTube # Salvage sample tube
+  group: ScienceBounty
+
+- type: cargoBounty
+  id: BountyAnomalyScience
+  reward: 7500
+  description: bounty-description-anomalyscience
+  entries:
+    - name: bounty-item-anomalyscanner
+      amount: 1
+      whitelist:
+        tags:
+        - AnomalyScanner
+    - name: bounty-item-anomalylocator
+      amount: 1
+      whitelist:
+        tags:
+        - AnomalyLocator
+    - name: bounty-item-apeboard
+      amount: 1
+      whitelist:
+        tags:
+        - ApeCircuitboard
+  group: ScienceBounty
+
+- type: cargoBounty ##Commented out because non functional currently, needs troubleshooting with tags
   id: BountyRipley
   reward: 12500
   description: bounty-description-ripley
@@ -970,7 +1055,7 @@
       amount: 5
       whitelist:
         tags:
-        - SheetSteel
+        - Steel
     - name: bounty-item-rod
       amount: 10
       whitelist:

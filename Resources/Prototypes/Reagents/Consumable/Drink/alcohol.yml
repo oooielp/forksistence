@@ -154,6 +154,7 @@
   id: Ethanol
   name: reagent-name-ethanol
   parent: BaseAlcohol
+  group: Biological
   desc: reagent-desc-ethanol
   physicalDesc: reagent-physical-desc-strong-smelling
   flavor: alcohol

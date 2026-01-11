@@ -345,6 +345,9 @@
         Manipulator: 2
         Cable: 1
         Glass: 1
+    - type: Tag
+      tags:
+      - ApeCircuitboard
 
 - type: entity
   id: ThermomachineFreezerMachineCircuitBoard
@@ -877,6 +880,26 @@
       price: 40
 
 - type: entity
+  id: PortableGeneratorOldmanMachineCircuitboard
+  parent: BaseMachineCircuitboard
+  name: O.L.D.M.A.N.-type portable generator machine board
+  components:
+    - type: Sprite
+      state: engineering
+    - type: MachineBoard
+      prototype: PortableGeneratorOldman
+      stackRequirements:
+        Manipulator: 2
+        Cable: 10
+    - type: PhysicalComposition
+      materialComposition:
+        Glass: 200
+      chemicalComposition:
+        Silicon: 20
+    - type: StaticPrice
+      price: 40
+
+- type: entity
   id: PortableGeneratorJrPacmanMachineCircuitboard
   parent: BaseMachineCircuitboard
   name: J.R.P.A.C.M.A.N.-type portable generator machine board
@@ -1022,6 +1045,19 @@
         Steel: 6
 
 - type: entity
+  id: ShredderMachineCircuitboard
+  parent: BaseMachineCircuitboard
+  name: shredder machine board
+  components:
+  - type: Sprite
+    state: supply
+  - type: MachineBoard
+    prototype: Shredder
+    stackRequirements:
+      Manipulator: 2
+      Steel: 4
+
+- type: entity
   id: MCTNMachineCircuitboard
   parent: BaseMachineCircuitboard
   name: multi-channel transfer node machine board
@@ -1036,7 +1072,7 @@
         CableHV: 5
         Manipulator: 2
         Steel: 10
-        
+
 - type: entity
   id: TrappedFluidExtractorMachineCircuitboard
   parent: BaseMachineCircuitboard
@@ -1093,7 +1129,7 @@
 
 - type: entity
   id: SyndicateMicrowaveMachineCircuitboard
-  parent: BaseMachineCircuitboard
+  parent: [ BaseMachineCircuitboard, BaseSyndicateContraband ]
   name: donk co. microwave machine board
   components:
     - type: Sprite
@@ -1303,6 +1339,20 @@
     state: engineering
   - type: MachineBoard
     prototype: TelecomServer
+    stackRequirements:
+      Steel: 1
+      Cable: 2
+
+- type: entity
+  id: TelecomServer1kCircuitboard
+  parent: BaseMachineCircuitboard
+  name: high tech telecommunication server machine board
+  description: A machine printed circuit board for an high tech telecommunication server.
+  components:
+  - type: Sprite
+    state: engineering
+  - type: MachineBoard
+    prototype: TelecomServer1k
     stackRequirements:
       Steel: 1
       Cable: 2

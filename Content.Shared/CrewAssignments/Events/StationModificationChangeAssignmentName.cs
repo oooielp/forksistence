@@ -17,3 +17,16 @@ public sealed class StationModificationChangeAssignmentName : BoundUserInterface
         Owner = name;
     }
 }
+
+[Serializable, NetSerializable]
+public sealed class StationModificationChangeAssignmentSpendingLimit : BoundUserInterfaceMessage
+{
+    public int AccessID;
+    public int Limit;
+
+    public StationModificationChangeAssignmentSpendingLimit(int id, int limit)
+    {
+        AccessID = id;
+        Limit = limit;
+    }
+}

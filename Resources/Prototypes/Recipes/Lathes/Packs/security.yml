@@ -10,6 +10,13 @@
   - TargetHuman
   - TargetSyndicate
   - Zipties
+  - ClothingBeltTanMilitaryWebbing
+  - ClothingHeadHelmetMilitaryWoodland
+  - ClothingHeadHelmetMilitaryDesert
+  - ClothingHeadHelmetMilitaryArctic
+  - ClothingHeadHelmetRiot
+  - ClothingHeadHelmetBasic
+  - ClothingMaskGasSecurity
 
 # Practice ammo/mags and practice weapons
 - type: latheRecipePack

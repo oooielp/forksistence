@@ -1,3 +1,4 @@
+using Content.Shared.CrewAssignments.Prototypes;
 using Content.Shared.CrewAssignments.Systems;
 using Content.Shared.FixedPoint;
 using Robust.Shared.Prototypes;
@@ -22,8 +23,13 @@ public sealed class JobNetUpdateState : BoundUserInterfaceState
     public List<WorldObjectivesEntry> CurrentObjectives;
     public List<WorldObjectivesEntry> CompletedObjectives;
     public List<CodexEntry> CodexEntries;
+    public ProtoId<NetworkLevelPrototype> Level;
+    public int Balance;
+    public bool SpendAuth;
+    public int Spent;
+    public int Spendable;
 
-    public JobNetUpdateState(Dictionary<int, string>? stations, string? assignmentName, int? wage, int selectedStation, TimeSpan? remainingMinutes, List<WorldObjectivesEntry> currentObjectives, List<WorldObjectivesEntry> completedObjectives, List<CodexEntry> codexEntries)
+    public JobNetUpdateState(Dictionary<int, string>? stations, string? assignmentName, int? wage, int selectedStation, TimeSpan? remainingMinutes, List<WorldObjectivesEntry> currentObjectives, List<WorldObjectivesEntry> completedObjectives, List<CodexEntry> codexEntries, ProtoId<NetworkLevelPrototype> level, int balance, bool spendAuth, int spent, int spendable)
     {
         Stations = stations;
         AssignmentName = assignmentName;
@@ -33,6 +39,11 @@ public sealed class JobNetUpdateState : BoundUserInterfaceState
         CurrentObjectives = currentObjectives;
         CompletedObjectives = completedObjectives;
         CodexEntries = codexEntries;
+        Level = level;
+        Balance = balance;
+        SpendAuth = spendAuth;
+        Spent = spent;
+        Spendable = spendable;
     }
 }
 
@@ -53,3 +64,10 @@ public sealed class JobNetSelectMessage : BoundUserInterfaceMessage
 }
 
 
+[Serializable, NetSerializable]
+public sealed class JobNetPurchaseMessage : BoundUserInterfaceMessage
+{
+    public JobNetPurchaseMessage()
+    {
+    }
+}

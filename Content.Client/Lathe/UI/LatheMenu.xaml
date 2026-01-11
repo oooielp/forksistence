@@ -17,6 +17,7 @@
             HorizontalExpand="True">
             <BoxContainer
                 Orientation="Vertical"
+                MinWidth="550"
                 VerticalExpand="True"
                 HorizontalExpand="True"
                 SeparationOverride="5">

@@ -18,6 +18,8 @@
     color: "#0000ff"
   - type: StaticPrice
     price: 500
+  - type: Tag
+    tags: [ TreasureDataDisk ]
 
 - type: entity
   parent: BaseItem
@@ -40,6 +42,8 @@
         harddisk_micro: ""
   - type: StaticPrice
     price: 275
+  - type: Tag
+    tags: [ TreasureOldComputer ]
 
 - type: entity
   parent: BaseItem
@@ -55,6 +59,8 @@
     storedRotation: -90
   - type: StaticPrice
     price: 350
+  - type: Tag
+    tags: [ TreasureOldComputer ]
 
 - type: entity
   parent: BaseItem
@@ -70,6 +76,8 @@
     storedRotation: -90
   - type: StaticPrice
     price: 300
+  - type: Tag
+    tags: [ TreasureOldComputer ]
 
 - type: entity
   parent: BaseItem
@@ -85,6 +93,8 @@
     size: Tiny
   - type: StaticPrice
     price: 750
+  - type: Tag
+    tags: [ TreasureOldCPU ]
 
 - type: entity
   parent: BaseItem
@@ -108,6 +118,8 @@
         stabilizer: ""
   - type: StaticPrice
     price: 120
+  - type: Tag
+    tags: [ TreasureSampleTube ]
 
 - type: entityTable
   id: TreasureCoinPile
@@ -150,8 +162,12 @@
     state: coin_iron
   - type: Item
     size: Tiny
-  - type: StaticPrice
+  - type: StackPrice # Persistence: Static < Stack
     price: 75
+  - type: Stack # Persistence: Stackable coins
+    stackType: TreasureCoinIron
+    count: 1
+  - type: NFCoin # Persistence: add frontier coin component so wallets can contain coins
 
 - type: entity
   parent: TreasureCoinIron
@@ -159,8 +175,11 @@
   components:
   - type: Sprite
     state: coin_silver
-  - type: StaticPrice
+  - type: StackPrice # Persistence: Static < Stack
     price: 125
+  - type: Stack # Persistence: Stackable coins
+    stackType: TreasureCoinSilver
+    count: 1
 
 - type: entity
   parent: TreasureCoinIron
@@ -168,8 +187,11 @@
   components:
   - type: Sprite
     state: coin_gold
-  - type: StaticPrice
+  - type: StackPrice # Persistence: Static < Stackv
     price: 175
+  - type: Stack # Persistence: Stackable coins
+    stackType: TreasureCoinGold
+    count: 1
 
 - type: entity
   parent: TreasureCoinIron
@@ -177,8 +199,11 @@
   components:
   - type: Sprite
     state: coin_adamantine
-  - type: StaticPrice
+  - type: StackPrice # Persistence: Static < Stack
     price: 250
+  - type: Stack # Persistence: Stackable coins
+    stackType: TreasureCoinAdamantine
+    count: 1
 
 - type: entity
   parent: TreasureCoinIron
@@ -186,6 +211,9 @@
   components:
   - type: Sprite
     state: coin_diamond
-  - type: StaticPrice
+  - type: StackPrice # Persistence: Static < Stack
     price: 500
+  - type: Stack # Persistence: Stackable coins
+    stackType: TreasureCoinDiamond
+    count: 1
 

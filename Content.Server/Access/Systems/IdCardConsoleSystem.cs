@@ -52,6 +52,7 @@ public sealed class IdCardConsoleSystem : SharedIdCardConsoleSystem
         SubscribeLocalEvent<IdCardConsoleComponent, WriteToTargetIdMessage>(OnWriteToTargetIdMessage);
         SubscribeLocalEvent<IdCardConsoleComponent, SearchRecord>(OnSearchRecord);
         SubscribeLocalEvent<IdCardConsoleComponent, ChangeAssignment>(OnChangeAssignment);
+        SubscribeLocalEvent<IdCardConsoleComponent, AccountModResetSpending>(OnResetSpending);
         // one day, maybe bound user interfaces can be shared too.
         SubscribeLocalEvent<IdCardConsoleComponent, ComponentStartup>(UpdateUserInterface);
         SubscribeLocalEvent<IdCardConsoleComponent, EntInsertedIntoContainerMessage>(OnEntInserted);
@@ -102,6 +103,23 @@ public sealed class IdCardConsoleSystem : SharedIdCardConsoleSystem
 
         UpdateUserInterface(uid, component, args);
     }
+
+    private void OnResetSpending(EntityUid uid, IdCardConsoleComponent component, AccountModResetSpending args)
+    {
+        if (args.Actor is not { Valid: true } player)
+            return;
+        if (component.SelectedRecord == null || component.PrivRecord == null) return;
+        var station = _station.GetOwningStation(uid);
+        if (station == null) return;
+        if (_station.CanSpend(component.PrivRecord.Name, station.Value, component.SelectedRecord.Spent))
+        {
+            _station.TrackSpending(component.PrivRecord.Name, station.Value, component.SelectedRecord.Spent);
+            _station.ResetSpending(component.SelectedRecord.Name, station.Value);
+        }
+
+        UpdateUserInterface(uid, component, args);
+    }
+
     private void OnChangeAssignment(EntityUid uid, IdCardConsoleComponent component, ChangeAssignment args)
     {
         if (args.Actor is not { Valid: true } player)
@@ -230,7 +248,8 @@ public sealed class IdCardConsoleSystem : SharedIdCardConsoleSystem
                 assignment,
                 privassignment,
                 possibleAssignments,
-                owner);
+                owner,
+                0);
                 
                 
         }
@@ -250,7 +269,8 @@ public sealed class IdCardConsoleSystem : SharedIdCardConsoleSystem
                 assignment,
                 privassignment,
                 possibleAssignments,
-                owner);
+                owner,
+                component.SelectedRecord.Spent);
 
         }
 

@@ -135,3 +135,6 @@
     sprite: Clothing/Head/Hats/beret_security.rsi
     state: icon
   product: LockerSecurityFilled
+  cost: 6000
+  category: cargoproduct-category-name-security
+  group: market

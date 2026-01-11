@@ -67,11 +67,17 @@
   parent: [ BaseCircuitboardRecipe, BaseEngineeringComputerRecipeCategory ]
   id: SolarControlComputerCircuitboard
   result: SolarControlComputerCircuitboard
+  unlockUses: 4
 
 - type: latheRecipe
   parent: [ BaseCircuitboardRecipe, BaseEngineeringComputerRecipeCategory ]
   id: PowerComputerCircuitboard
   result: PowerComputerCircuitboard
+
+- type: latheRecipe
+  parent: [ BaseGoldCircuitboardRecipe, BaseEngineeringComputerRecipeCategory ]
+  id: GridControlComputerCircuitboard
+  result: GridControlComputerCircuitboard
 
 # Medical
 
@@ -101,21 +107,25 @@
   parent: [ BaseGoldCircuitboardRecipe, BaseResearchComputerRecipeCategory ]
   id: AnalysisComputerCircuitboard
   result: AnalysisComputerCircuitboard
+  unlockUses: 4
 
 - type: latheRecipe
   parent: [ BaseGoldCircuitboardRecipe, BaseResearchComputerRecipeCategory ]
   id: TechDiskComputerCircuitboard
   result: TechDiskComputerCircuitboard
+  unlockUses: 4
 
 - type: latheRecipe
   parent: [ BaseGoldCircuitboardRecipe, BaseResearchComputerRecipeCategory ]
   id: RoboticsConsoleCircuitboard
   result: RoboticsConsoleCircuitboard
+  unlockUses: 4
 
 - type: latheRecipe
   parent: [ BaseSilverCircuitboardRecipe, BaseResearchComputerRecipeCategory ]
   id: ResearchComputerCircuitboard
   result: ResearchComputerCircuitboard
+  unlockUses: 4
 
 # Cameras
 
@@ -123,18 +133,20 @@
   parent: [ BaseCircuitboardRecipe, BaseSecurityComputerRecipeCategory ]
   id: SurveillanceCameraMonitorCircuitboard
   result: SurveillanceCameraMonitorCircuitboard
+  unlockUses: 4
 
 - type: latheRecipe
   parent: [ BaseCircuitboardRecipe, BaseServiceComputerRecipeCategory ]
   id: SurveillanceWirelessCameraMonitorCircuitboard
   result: SurveillanceWirelessCameraMonitorCircuitboard
-
+  unlockUses: 4
 # Service
 
 - type: latheRecipe
   parent: [ BaseCircuitboardRecipe, BaseServiceComputerRecipeCategory ]
   id: MassMediaCircuitboard
   result: ComputerMassMediaCircuitboard
+  unlockUses: 4
 
 - type: latheRecipe
   parent: [ BaseCircuitboardRecipe, BaseServiceComputerRecipeCategory ]
@@ -152,6 +164,7 @@
   parent: [ BaseGoldCircuitboardRecipe, BaseSupplyComputerRecipeCategory ]
   id: ShuttleConsoleCircuitboard
   result: ShuttleConsoleCircuitboard
+  unlockUses: 4
 
 - type: latheRecipe
   parent: [ BaseCircuitboardRecipe, BaseSupplyComputerRecipeCategory ]
@@ -173,11 +186,17 @@
   parent: [ BaseCircuitboardRecipe, BaseGeneralComputerRecipeCategory ]
   id: ComputerTelevisionCircuitboard
   result: ComputerTelevisionCircuitboard
+  unlockUses: 4
 
 - type: latheRecipe
   parent: [ BaseCircuitboardRecipe, BaseGeneralComputerRecipeCategory ]
   id: IdPrinterCircuitboard
   result: IdPrinterCircuitboard
+
+- type: latheRecipe
+  parent: [ BaseCircuitboardRecipe, BaseGeneralComputerRecipeCategory ]
+  id: IDComputerCircuitboard
+  result: IDComputerCircuitboard
 
 - type: latheRecipe
   parent: [ BaseCircuitboardRecipe, BaseGeneralComputerRecipeCategory ]

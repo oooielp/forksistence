@@ -1,4 +1,5 @@
 using Content.Server.Cargo.Systems;
+using Content.Shared.Cargo.BUI;
 using Content.Shared.Stacks;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
 
@@ -9,7 +10,9 @@ namespace Content.Server.Cargo.Components;
 public sealed partial class CargoPalletConsoleComponent : Component
 {
     [DataField]
-    public bool CashMode = false;
+    public CargoSaleMode CashMode = CargoSaleMode.Deposit;
     [DataField]
     public int SelectedStation = 0;
 }
+
+

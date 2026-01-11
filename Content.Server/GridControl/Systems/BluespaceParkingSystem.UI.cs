@@ -1,13 +1,15 @@
-using System.Linq;
 using Content.Server.Cargo.Components;
 using Content.Server.Station.Systems;
 using Content.Shared.Access.Components;
 using Content.Shared.CCVar;
 using Content.Shared.GridControl.Components;
 using Content.Shared.GridControl.Systems;
+using Content.Shared.Station.Components;
 using Robust.Server.GameObjects;
 using Robust.Shared.Configuration;
 using Robust.Shared.Map.Components;
+using Robust.Shared.Prototypes;
+using System.Linq;
 
 namespace Content.Server.GridControl.Systems;
 
@@ -19,7 +21,7 @@ public sealed partial class BluespaceParkingSystem : SharedBluespaceParkingSyste
     [Dependency] private readonly StationSystem _station = default!;
     [Dependency] private readonly IConfigurationManager _cfg = default!;
     [Dependency] private readonly GridConfigSystem _gridConfigSystem = default!;
-
+    [Dependency] private readonly IPrototypeManager _protoMan = default!;
     private void InitializeUI()
     {
         Subs.BuiEvents<BSPAnchorKeyComponent>(BSPAnchorKeyUiKey.Key, subs =>
@@ -71,6 +73,7 @@ public sealed partial class BluespaceParkingSystem : SharedBluespaceParkingSyste
             return null;
 
         var inFilledState = component.State == BSPState.Parked || component.State == BSPState.Unparking;
+        var tileLimit = _cfg.GetCVar(CCVars.BluespaceParkingMaxTiles);
 
         var gridOwnerTotalTiles = 0;
         EntityUid? station = null;
@@ -80,6 +83,14 @@ public sealed partial class BluespaceParkingSystem : SharedBluespaceParkingSyste
             if (station != null)
             {
                 gridOwnerTotalTiles = _station.GetStationTileCount(station.Value);
+                if(TryComp<StationDataComponent>(station, out var stationData) && stationData != null)
+                {
+                    _protoMan.Resolve(stationData.Level, out var prototype);
+                    if(prototype != null)
+                    {
+                        tileLimit = prototype.TileLimit;
+                    }
+                }
             }
         }
         else if (component.SavedOwnerPersonal != null)
@@ -137,7 +148,10 @@ public sealed partial class BluespaceParkingSystem : SharedBluespaceParkingSyste
         var gridTileCount = 0;
         if (TryComp<MapGridComponent>(grid, out var targetGridComp))
             gridTileCount = _mapSystem.GetAllTiles(grid.Value, targetGridComp).Count();
-        var tileLimit = _cfg.GetCVar(CCVars.BluespaceParkingMaxTiles);
+
+
+
+
 
         if (HasComp<TradeStationComponent>(grid))
             errMsg = "Trade stations cannot be parked.";

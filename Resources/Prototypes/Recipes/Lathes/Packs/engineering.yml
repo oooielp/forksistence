@@ -23,6 +23,7 @@
   - ClothingHeadHatWelding
   - ClothingHeadHatCone
   - AccessConfigurator
+  - ToolboxMechanical
 
 - type: latheRecipePack
   id: AtmosStatic
@@ -50,6 +51,7 @@
   - FreezerElectronics
   - MorgueElectronics
   - BarSignElectronics
+  - ShredderMachineCircuitboard
 
 - type: latheRecipePack
   id: EngineeringBoardsStatic
@@ -57,10 +59,10 @@
   - SpaceHeaterMachineCircuitBoard
   - AlertsComputerCircuitboard
   - AtmosMonitoringComputerCircuitboard
-  - SolarControlComputerCircuitboard
   - PowerComputerCircuitboard
   - MCTNMachineCircuitboard
   - TrappedFluidExtractorMachineCircuitboard
+  - GridControlComputerCircuitboard
 
 ## Dynamic
 
@@ -95,7 +97,10 @@
   - PortableGeneratorPacmanMachineCircuitboard
   - PortableGeneratorSuperPacmanMachineCircuitboard
   - PortableGeneratorJrPacmanMachineCircuitboard
+  - PortableGeneratorOldmanMachineCircuitboard
   - EmitterCircuitboard
   - TelecomServerCircuitboard
   - SMESAdvancedMachineCircuitboard
   - HolopadMachineCircuitboard
+  - StationAnchorCircuitboard
+  - TelecomServer1kCircuitboard

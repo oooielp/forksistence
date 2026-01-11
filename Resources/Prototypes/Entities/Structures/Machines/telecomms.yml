@@ -95,6 +95,8 @@
     energy: 3.0
     color: "#39b8ee"
   - type: LitOnPowered
+  - type: ApcPowerReceiver
+    powerLoad: 5000 
   - type: GenericVisualizer
     visuals:
       enum.PowerDeviceVisuals.Powered:
@@ -281,3 +283,16 @@
     containers:
       key_slots:
       - EncryptionKeyCommand
+
+
+- type: entity
+  parent: TelecomServer
+  id: TelecomServer1k
+  name: high tech telecommunication server
+  components:
+  - type: TelecomServer
+    maxRange: 1024
+  - type: ApcPowerReceiver
+    powerLoad: 10000 
+  - type: Machine
+    board: TelecomServer1kCircuitboard

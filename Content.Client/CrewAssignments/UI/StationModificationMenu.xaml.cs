@@ -16,7 +16,6 @@ using Robust.Client.UserInterface.Controls;
 using Robust.Client.UserInterface.XAML;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Timing;
-using Serilog.Parsing;
 using System.Linq;
 using static Robust.Client.UserInterface.Controls.BaseButton;
 
@@ -36,6 +35,7 @@ namespace Content.Client.CrewAssignments.UI
         private EntityUid? _station;
         private int? _lastAssignmentSelected;
         private int? _lastChannelSelected;
+        public string? _lastAssignmentCreated;
         Dictionary<string, CrewAccess>? _accesses;
         Dictionary<int, CrewAssignment>? _assignments;
         public Dictionary<ProtoId<RadioChannelPrototype>, FactionRadioData>? RadioData;
@@ -174,7 +174,7 @@ namespace Content.Client.CrewAssignments.UI
             if (levelProto == null) return;
             FactionLevelPrototype? nextLevelProto = null;
 
-            if(levelProto.Next != string.Empty)
+            if(levelProto.Next != null)
                 _protoManager.Resolve(levelProto.Next, out nextLevelProto);
 
             CurrentFactionLevelLabel.Text = levelProto.Name;
@@ -212,6 +212,7 @@ namespace Content.Client.CrewAssignments.UI
             foreach (var owner in assignments)
             {
                 PossibleAssignments.AddItem(owner.Value.Name, owner.Key);
+                if (_lastAssignmentCreated == owner.Value.Name) _lastAssignmentSelected = owner.Key;
             }
             if(_lastAssignmentSelected != null)
             {
@@ -229,6 +230,8 @@ namespace Content.Client.CrewAssignments.UI
                 AssignmentNameField.Text = assignment.Name;
                 WageSpinBox.Value = assignment.Wage;
                 CLevelSpinBox.Value = assignment.Clevel;
+                SpendingLimitSpinBox.Value = assignment.SpendingLimit;
+
                 if(assignment.CanClaim)
                 {
                     ClaimBtn.Pressed = true;

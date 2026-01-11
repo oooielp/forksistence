@@ -1,3 +1,4 @@
+using Content.Shared.CrewAccesses.Components;
 using Content.Shared.CrewAssignments.Components;
 using Content.Shared.CrewRecords.Components;
 using Content.Shared.GridControl.Components;
@@ -26,6 +27,89 @@ public abstract partial class SharedStationSystem : EntitySystem
 
         _xformQuery = GetEntityQuery<TransformComponent>();
         _stationMemberQuery = GetEntityQuery<StationMemberComponent>();
+    }
+
+    public List<string> GetValidAccesses(List<string> baseAccess, EntityUid station)
+    {
+        List<string> final = new();
+        if(TryComp<CrewAccessesComponent>(station, out var accessComp) && accessComp != null)
+        {
+            foreach (var access in baseAccess)
+            {
+                if (accessComp.CrewAccesses.ContainsKey(access))
+                {
+                    final.Add(access);
+                }
+            }
+        }
+        return final;
+    }
+
+
+    public bool IsOwner(string userName, EntityUid station)
+    {
+        if (TryComp<StationDataComponent>(station, out var sD) && sD != null)
+        {
+            if (sD.Owners.Contains(userName))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public bool HasRecord(string userName, EntityUid station)
+    {
+        if (TryComp<StationDataComponent>(station, out var sD) && sD != null)
+        {
+            if (sD.Owners.Contains(userName))
+            {
+                return true;
+            }
+        }
+        if (TryComp<CrewRecordsComponent>(station, out var crewRecords) && crewRecords != null)
+        {
+            crewRecords.TryGetRecord(userName, out var crewRecord);
+            if (crewRecord != null)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+    public bool CanSpend(string userName, EntityUid station, int toSpend = 0)
+    {
+        if (TryComp<StationDataComponent>(station, out var sD) && sD != null)
+        {
+            if (sD.Owners.Contains(userName))
+            {
+                return true;
+            }
+        }
+        if (TryComp<CrewRecordsComponent>(station, out var crewRecords) && crewRecords != null)
+        {
+            crewRecords.TryGetRecord(userName, out var crewRecord);
+            if (crewRecord != null)
+            {
+                if (TryComp<CrewAssignmentsComponent>(station, out var crewAssignments) && crewAssignments != null)
+                {
+                    if (crewAssignments.TryGetAssignment(crewRecord.AssignmentID, out var assignment) && assignment != null)
+                    {
+                        if (assignment.CanSpend)
+                        {
+                            if (toSpend > 0)
+                            {
+                                var spendable = assignment.SpendingLimit - crewRecord.Spent;
+                                if (spendable >= toSpend) return true;
+                            }
+                            else return true;
+                        }
+                    }
+                }
+
+            }
+        }
+        return false;
     }
 
     /// <summary>

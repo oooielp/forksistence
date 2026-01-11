@@ -361,3 +361,64 @@
           behaviors:
             - !type:SolutionExplosionBehavior
               solution: tank
+
+- type: entity
+  name: O.L.D.M.A.N.-type portable generator
+  description: |-
+    A coal powered generator that has a superior burn time than most, careful of the exhaust fumes!
+  parent: PortableGeneratorBase
+  id: PortableGeneratorOldman
+  suffix: Coal, 15 kW
+  components:
+    - type: Sprite
+      layers:
+        - state: portgen4
+          map: [ "enum.GeneratorVisualLayers.Body" ]
+        - state: portgen_on_unlit
+
+    - type: GenericVisualizer
+      visuals:
+        enum.GeneratorVisuals.Running:
+          enum.GeneratorVisualLayers.Body:
+            True: { state: portgen4on }
+            False: { state: portgen4 }
+
+    - type: Machine
+      board: PortableGeneratorOldmanMachineCircuitboard
+    - type: FuelGenerator
+      minTargetPower: 8000
+      maxTargetPower: 15000
+      targetPower: 15000
+      optimalPower: 15000
+      # 34 minutes at max output
+      optimalBurnRate: 0.015
+      # 54 minutes of burntime if it's at 8kw.
+      fuelEfficiencyConstant: 0.75
+    - type: SolidFuelGeneratorAdapter
+      fuelMaterial: Coal
+      multiplier: 0.01
+    - type: MaterialStorage
+      storageLimit: 3000
+      materialWhiteList: [Coal]
+    - type: PortableGenerator
+      startChance: 0.5
+    - type: GeneratorExhaustGas
+      gasType: CarbonDioxide
+      # 8 moles of gas for every piece of coal.
+      moleRatio: 10
+    - type: PowerMonitoringDevice
+      group: Generator
+      loadNodes:
+        - output_lv
+      sprite: Structures/Power/Generation/portable_generator.rsi
+      state: portgen0
+    - type: NodeContainer
+      examinable: true
+      nodes:
+        output:
+          !type:CableDeviceNode
+          nodeGroupID: Apc
+    - type: PowerSupplier
+      voltage: Apc
+      supplyRampRate: 5000
+      supplyRampTolerance: 1500

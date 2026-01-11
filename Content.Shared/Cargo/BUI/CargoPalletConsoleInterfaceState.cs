@@ -1,5 +1,4 @@
 using Robust.Shared.Serialization;
-
 namespace Content.Shared.Cargo.BUI;
 
 [NetSerializable, Serializable]
@@ -20,7 +19,7 @@ public sealed class CargoPalletConsoleInterfaceState : BoundUserInterfaceState
     /// </summary>
     public bool Enabled;
 
-    public bool CashMode;
+    public CargoSaleMode CashMode;
 
     public int Tax;
 
@@ -36,7 +35,7 @@ public sealed class CargoPalletConsoleInterfaceState : BoundUserInterfaceState
 
     
 
-    public CargoPalletConsoleInterfaceState(int appraisal, int count, bool enabled, bool cashmode, int tax, int taxingStation, string taxingName, Dictionary<int, string> formattedStations, int selectedFaction, string selectedName)
+    public CargoPalletConsoleInterfaceState(int appraisal, int count, bool enabled, CargoSaleMode cashmode, int tax, int taxingStation, string taxingName, Dictionary<int, string> formattedStations, int selectedFaction, string selectedName)
     {
         Appraisal = appraisal;
         Count = count;
@@ -49,4 +48,11 @@ public sealed class CargoPalletConsoleInterfaceState : BoundUserInterfaceState
         TaxingName = taxingName;
         SelectedName = selectedName;
     }
+}
+
+public enum CargoSaleMode : byte
+{
+    Deposit,
+    Cash,
+    Payslip
 }

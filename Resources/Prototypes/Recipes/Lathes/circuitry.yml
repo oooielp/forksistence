@@ -62,7 +62,8 @@
   parent: [ BaseCircuitboardRecipe, BaseCircuitryRecipeCategory ]
   id: SolarTrackerElectronics
   result: SolarTrackerElectronics
-
+  unlockUses: 4
+  
 # Wallmount power
 - type: latheRecipe
   parent: [ BaseCircuitboardRecipe, BaseCircuitryRecipeCategory ]

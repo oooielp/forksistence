@@ -37,6 +37,11 @@
   - type: PhysicalComposition
     materialComposition:
       Gold: 100
+  - type: Tag
+    tags:
+    - Ingot
+    - ConstructionMaterial
+    - Gold
   - type: Stack
     stackType: Gold
     baseLayer: base
@@ -82,6 +87,11 @@
   - type: PhysicalComposition
     materialComposition:
       Silver: 100
+  - type: Tag
+    tags:
+    - Ingot
+    - ConstructionMaterial
+    - Silver
   - type: Stack
     stackType: Silver
     baseLayer: base

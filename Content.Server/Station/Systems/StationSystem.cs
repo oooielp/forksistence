@@ -1,10 +1,13 @@
 using Content.Server.Cargo.Components;
 using Content.Server.Chat.Systems;
+using Content.Server.CrewManifest;
 using Content.Server.CrewRecords.Systems;
 using Content.Server.GameTicking;
 using Content.Server.Station.Components;
 using Content.Server.Station.Events;
 using Content.Server.Worldgen.Components.Debris;
+using Content.Shared.CrewAssignments.Components;
+using Content.Shared.CrewRecords.Components;
 using Content.Shared.GridControl.Components;
 using Content.Shared.Station;
 using Content.Shared.Station.Components;
@@ -41,6 +44,8 @@ public sealed partial class StationSystem : SharedStationSystem
     [Dependency] private readonly EntityManager _entMan = default!;
     [Dependency] private readonly CrewMetaRecordsSystem _metaRecords = default!;
     [Dependency] private readonly MapSystem _mapSystem = default!;
+    [Dependency] private readonly CrewManifestSystem _crewManifest = default!;
+
     private ISawmill _sawmill = default!;
 
     private EntityQuery<MapGridComponent> _gridQuery;
@@ -65,6 +70,8 @@ public sealed partial class StationSystem : SharedStationSystem
         SubscribeLocalEvent<StationDataComponent, ComponentShutdown>(OnStationDeleted);
         SubscribeLocalEvent<StationMemberComponent, ComponentShutdown>(OnStationGridDeleted);
         SubscribeLocalEvent<StationMemberComponent, PostGridSplitEvent>(OnStationSplitEvent);
+        SubscribeLocalEvent<StationMemberComponent, ComponentStartup>(OnStationMemberStartup);
+
 
         SubscribeLocalEvent<StationGridAddedEvent>(OnStationGridAdded);
         SubscribeLocalEvent<StationGridRemovedEvent>(OnStationGridRemoved);
@@ -72,7 +79,67 @@ public sealed partial class StationSystem : SharedStationSystem
         _player.PlayerStatusChanged += OnPlayerStatusChanged;
     }
 
-
+    public int GetStationID(EntityUid station)
+    {
+        if (TryComp<StationDataComponent>(station, out var sD) && sD != null)
+        {
+            return sD.UID;
+        }
+        return 0;
+    }
+    public void ClockOutEmployees(EntityUid station)
+    {
+        var id = GetStationID(station);
+        if (id == 0) return;
+        var query = _entManager.AllEntityQueryEnumerator<JobNetComponent>();
+        while (query.MoveNext(out var uid, out var comp))
+        {
+            if(comp.WorkingFor == id)
+            {
+                comp.WorkingFor = 0;
+            }
+        }
+        _crewManifest.BuildCrewManifest(station);
+    }
+    public bool GetJobNetStatus(EntityUid station)
+    {
+        if (TryComp<StationDataComponent>(station, out var sD) && sD != null)
+        {
+            return sD.JobNetEnabled;
+        }
+        return false;
+    }
+    public void ResetSpending(string userName, EntityUid station)
+    {
+        if (TryComp<CrewRecordsComponent>(station, out var crewRecords) && crewRecords != null)
+        {
+            crewRecords.TryGetRecord(userName, out var crewRecord);
+            if (crewRecord != null)
+            {
+                crewRecord.Spent = 0;
+            }
+        }
+    }
+    public void TrackSpending(string userName, EntityUid station, int toSpend)
+    {
+        if (TryComp<StationDataComponent>(station, out var sD) && sD != null)
+        {
+            if (sD.Owners.Contains(userName))
+            {
+                return;
+            }
+        }
+        if (TryComp<CrewRecordsComponent>(station, out var crewRecords) && crewRecords != null)
+        {
+            crewRecords.TryGetRecord(userName, out var crewRecord);
+            if (crewRecord != null)
+            {
+                crewRecord.Spent += toSpend;
+            }
+        }
+    }
+    
+    
     public int GetPersonalTileCount(string realName)
     {
         var count = 0;
@@ -95,12 +162,12 @@ public sealed partial class StationSystem : SharedStationSystem
         var query = _entManager.AllEntityQueryEnumerator<StationMemberComponent, MapGridComponent>();
         while (query.MoveNext(out var gridUid, out var member, out var mapgrid))
         {
-            if(member.Station == uid)
+            if (member.Station == uid)
             {
                 var tiles = _mapSystem.GetAllTiles(gridUid, mapgrid).Count();
                 count += tiles;
             }
-            
+
         }
         return count;
     }
@@ -161,6 +228,18 @@ public sealed partial class StationSystem : SharedStationSystem
 
     #region Event handlers
 
+    private void OnStationMemberStartup(EntityUid uid, StationMemberComponent component, ComponentStartup args)
+    {
+        if (component.StationUID != null)
+        {
+            var station = GetStationByID(component.StationUID.Value);
+            if (station != null)
+            {
+                component.Station = station.Value;
+            }
+        }
+    }
+
     private void OnStationAdd(EntityUid uid, StationDataComponent component, ComponentStartup args)
     {
         RaiseNetworkEvent(new StationsUpdatedEvent(GetStationNames()), Filter.Broadcast());
@@ -178,7 +257,7 @@ public sealed partial class StationSystem : SharedStationSystem
         {
             var stations = EntityManager.AllComponents<StationDataComponent>();
             int tryUID = 1;
-            while(component.UID == 0)
+            while (component.UID == 0)
             {
                 bool success = true;
                 foreach (var station in stations)
@@ -190,16 +269,14 @@ public sealed partial class StationSystem : SharedStationSystem
                         break;
                     }
                 }
-                if(success) component.UID = tryUID;
+                if (success) component.UID = tryUID;
             }
         }
-        if(_metaRecords.MetaRecords != null)
+
+        _metaRecords.EnsureMetaRecordsAction((metaRecords) =>
         {
-            if(!_metaRecords.MetaRecords.Stations.ContainsKey(component.UID))
-            {
-                _metaRecords.MetaRecords.Stations.Add(component.UID, uid);
-            }
-        }
+            metaRecords.Stations.TryAdd(component.UID, uid);
+        });
     }
 
     private void OnStationDeleted(EntityUid uid, StationDataComponent component, ComponentShutdown args)
@@ -388,7 +465,7 @@ public sealed partial class StationSystem : SharedStationSystem
         // Use overrides for setup.
         var station = EntityManager.SpawnEntity(stationConfig.StationPrototype, MapCoordinates.Nullspace, stationConfig.StationComponentOverrides);
         DebugTools.Assert(HasComp<StationDataComponent>(station), "Stations should have StationData in their prototype.");
-        
+
         var data = Comp<StationDataComponent>(station);
         if (name is not null && data.StationName is null)
             RenameStation(station, name, false);
@@ -429,6 +506,7 @@ public sealed partial class StationSystem : SharedStationSystem
 
         var stationMember = EnsureComp<StationMemberComponent>(mapGrid);
         stationMember.Station = station;
+        stationMember.StationUID = stationData.UID;
         stationData.Grids.Add(mapGrid);
         Dirty(station, stationData);
         Dirty(mapGrid, stationMember);
@@ -506,7 +584,7 @@ public sealed partial class StationSystem : SharedStationSystem
 
         var oldName = metaData.EntityName;
         _metaData.SetEntityName(station, name, metaData);
-        if (EntityManager.TryGetComponent<StationDataComponent>(station,out var data))
+        if (EntityManager.TryGetComponent<StationDataComponent>(station, out var data))
         {
             data.StationName = name;
         }

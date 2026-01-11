@@ -42,9 +42,14 @@ public sealed class JobNetBoundUserInterface : BoundUserInterface
         _menu = this.CreateWindow<JobNetMenu>();
         _menu._owner = this;
         _menu.PossibleJobs.OnItemSelected += OnJobPressed;
-
+        _menu.LevelPurchaseButton.OnPressed += OnLevelPurchase;
         _codexMenu = new();
 
+    }
+
+    public void OnLevelPurchase(ButtonEventArgs args)
+    {
+        SendMessage(new JobNetPurchaseMessage());
     }
 
     public void OnJobPressed(ItemSelectedEventArgs args)

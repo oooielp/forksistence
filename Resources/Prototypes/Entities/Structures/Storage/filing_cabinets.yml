@@ -47,7 +47,7 @@
   components:
   - type: Storage
     grid:
-    - 0,0,9,3
+    - 0,0,9,7
     maxItemSize: Normal
   - type: Sprite
     sprite: Structures/Storage/cabinets.rsi

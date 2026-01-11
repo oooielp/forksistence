@@ -87,6 +87,9 @@
       tags:
       - ChemDispensable
     - type: DnaSubstanceTrace
+    - type: PhysicalComposition
+      materialComposition:
+        Plastic: 200 # 2 sheets cause recycler sucks at its job - Beridot
 
 - type: entity
   parent: Jug

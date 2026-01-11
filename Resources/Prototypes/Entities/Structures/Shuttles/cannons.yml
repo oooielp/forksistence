@@ -312,7 +312,7 @@
   id: ShuttleGunKinetic
   parent: [ ShuttleGunBase, ConstructibleMachine]
   name: PTK-800 "Matter Dematerializer"
-  description: Salvage stationary mining turret. Gradually accumulates charges on its own, extremely effective for asteroid excavation.
+  description: Salvage stationary mining turret. Powered by inserting power cells. Extremely effective for asteroid excavation.
   categories: [ DoNotMap ]
   components:
   - type: Sprite
@@ -336,7 +336,7 @@
           acts: ["Destruction"]
   - type: Gun
     projectileSpeed: 20
-    fireRate: 2
+    fireRate: .5
     selectedMode: SemiAuto
     angleDecay: 45
     minAngle: 5
@@ -347,19 +347,23 @@
       path: /Audio/Weapons/Guns/Gunshots/kinetic_accel.ogg
       params:
         variation: 0.12
-  - type: RechargeBasicEntityAmmo
-    rechargeCooldown: 2
-    rechargeSound:
-      path: /Audio/Weapons/Guns/Bolt/lmg_bolt_closed.ogg
-      params:
-        pitch: 1.2
-        variation: 0.08
-  - type: BasicEntityAmmoProvider
-    proto: BulletKineticShuttle
-    capacity: 5
-    count: 5
   - type: Machine
     board: ShuttleGunKineticCircuitboard
+  - type: PowerCellSlot
+    cellSlotId: cell_slot
+  - type: ItemSlots
+    slots:
+      cell_slot:
+        name: Magazine
+        insertSound: /Audio/Weapons/Guns/MagIn/batrifle_magin.ogg
+        ejectSound: /Audio/Weapons/Guns/MagOut/batrifle_magout.ogg
+        whitelist:
+          tags:
+            - PowerCell
+            - PowerCellSmall
+  - type: BatteryAmmoProvider
+    proto: BulletKineticShuttle
+    fireCost: 25
 
 - type: entity
   parent: ShuttleGunBase

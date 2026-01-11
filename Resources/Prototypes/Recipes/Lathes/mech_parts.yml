@@ -14,6 +14,7 @@
   materials:
     Steel: 1000
     Glass: 750
+  unlockUses: 1
 
 - type: latheRecipe
   abstract: true

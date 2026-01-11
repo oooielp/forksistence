@@ -1,11 +1,11 @@
 meta:
   format: 7
   category: Map
-  engineVersion: 268.0.0
+  engineVersion: 270.0.0
   forkId: ""
   forkVersion: ""
-  time: 12/19/2025 21:34:58
-  entityCount: 7318
+  time: 12/29/2025 23:15:09
+  entityCount: 7365
 maps:
 - 1
 grids:
@@ -41,8 +41,8 @@ entities:
     - type: Broadphase
     - type: OccluderTree
     - type: SolarLocation
-      sunAngularVelocity: 0.0021687739236299812 rad
-      towardsSun: 0.30518354907803097 rad
+      sunAngularVelocity: 0.0018834432629909726 rad
+      towardsSun: 0.1517512675052175 rad
   - uid: 2
     components:
     - type: MetaData
@@ -170,7 +170,7 @@ entities:
           version: 7
         2,-2:
           ind: 2,-2
-          tiles: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAEAAAAAAAAAgAAAAAAAAIAAAAAAAACAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAYAAAAAAAAGAAAAAAAABgAAAAAAAAYAAAAAAAAGAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAGAAAAAAAABgAAAAAAAAYAAAAAAAAGAAAAAAAABgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAABgAAAAAAAAYAAAAAAAAGAAAAAAAABgAAAAAAAAYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAgAAAAAAAAIAAAAAAAACAAAAAAAAAgAAAAAAAAIAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAACAAAAAAAAAgAAAAAAAAIAAAAAAAACAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAgAAAAAAAAIAAAAAAAAEAAAAAAAABAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAIAAAAAAAACAAAAAAAABAAAAAAAAAQAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAACAAAAAAAAAgAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAgAAAAAAAAIAAAAAAAAEAAAAAAAABAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAACAAAAAAAAAgAAAAAAAAIAAAAAAAACAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAACAAAAAAAAAgAAAAAAAAIAAAAAAAACAAAAAAAAAgAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAIAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAACAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAA==
+          tiles: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAEAAAAAAAAAgAAAAAAAAIAAAAAAAACAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAABAAAAAAAAAQAAAAAAAACAAAAAAAABAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAYAAAAAAAAGAAAAAAAABgAAAAAAAAYAAAAAAAAGAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAGAAAAAAAABgAAAAAAAAYAAAAAAAAGAAAAAAAABgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAABgAAAAAAAAYAAAAAAAAGAAAAAAAABgAAAAAAAAYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAgAAAAAAAAIAAAAAAAACAAAAAAAAAgAAAAAAAAIAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAACAAAAAAAAAgAAAAAAAAIAAAAAAAACAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAgAAAAAAAAIAAAAAAAAEAAAAAAAABAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAIAAAAAAAACAAAAAAAABAAAAAAAAAQAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAACAAAAAAAAAgAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAgAAAAAAAAIAAAAAAAAEAAAAAAAABAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAQAAAAAAAAEAAAAAAAABAAAAAAAAAQAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAACAAAAAAAAAgAAAAAAAAIAAAAAAAACAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAQAAAAAAAAEAAAAAAAACAAAAAAAAAgAAAAAAAAIAAAAAAAACAAAAAAAAAgAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAIAAAAAAAADAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAACAAAAAAAAAwAAAAAAAAMAAAAAAAADAAAAAAAAAwAAAAAAAA==
           version: 7
         3,-3:
           ind: 3,-3
@@ -1164,6 +1164,7 @@ entities:
     - type: RadiationGridResistance
     - type: BecomesStation
       id: Genesis
+    - type: ExplosionAirtightGrid
 - proto: ActionToggleInternals
   entities:
   - uid: 662
@@ -5232,6 +5233,13 @@ entities:
         Blunt: 0
         Slash: 0
         Piercing: 0
+- proto: AmeJar
+  entities:
+  - uid: 7365
+    components:
+    - type: Transform
+      pos: 46.553627,-27.409222
+      parent: 2
 - proto: AmmoniaCanister
   entities:
   - uid: 2175
@@ -7347,6 +7355,14 @@ entities:
     components:
     - type: Transform
       pos: -1.4725657,19.49521
+      parent: 2
+- proto: ButtonFrameCautionSecurity
+  entities:
+  - uid: 7336
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 43.5,9.5
       parent: 2
 - proto: CableApcExtension
   entities:
@@ -24898,6 +24914,30 @@ entities:
         Piercing: 0
 - proto: CableMV
   entities:
+  - uid: 771
+    components:
+    - type: Transform
+      pos: 20.5,12.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 772
+    components:
+    - type: Transform
+      pos: 20.5,11.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
   - uid: 779
     components:
     - type: Transform
@@ -29830,6 +29870,270 @@ entities:
         Blunt: 0
         Slash: 0
         Piercing: 0
+  - uid: 7340
+    components:
+    - type: Transform
+      pos: 16.5,13.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 7343
+    components:
+    - type: Transform
+      pos: 21.5,11.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 7344
+    components:
+    - type: Transform
+      pos: 22.5,11.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 7345
+    components:
+    - type: Transform
+      pos: 23.5,11.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 7346
+    components:
+    - type: Transform
+      pos: 23.5,12.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 7347
+    components:
+    - type: Transform
+      pos: 24.5,12.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 7348
+    components:
+    - type: Transform
+      pos: 25.5,12.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 7349
+    components:
+    - type: Transform
+      pos: 25.5,13.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 7350
+    components:
+    - type: Transform
+      pos: 25.5,14.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 7351
+    components:
+    - type: Transform
+      pos: 25.5,15.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 7352
+    components:
+    - type: Transform
+      pos: 20.5,10.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 7353
+    components:
+    - type: Transform
+      pos: 19.5,10.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 7354
+    components:
+    - type: Transform
+      pos: 18.5,10.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 7355
+    components:
+    - type: Transform
+      pos: 17.5,10.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 7356
+    components:
+    - type: Transform
+      pos: 16.5,10.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 7357
+    components:
+    - type: Transform
+      pos: 15.5,10.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 7358
+    components:
+    - type: Transform
+      pos: 14.5,10.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 7359
+    components:
+    - type: Transform
+      pos: 15.5,13.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 7360
+    components:
+    - type: Transform
+      pos: 14.5,13.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 7361
+    components:
+    - type: Transform
+      pos: 13.5,13.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 7362
+    components:
+    - type: Transform
+      pos: 15.5,15.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 7363
+    components:
+    - type: Transform
+      pos: 15.5,14.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
 - proto: CableTerminal
   entities:
   - uid: 1555
@@ -33121,8 +33425,8 @@ entities:
     - type: Transform
       parent: 634
     - type: Clothing
-      inSlotFlag: BACK
       inSlot: back
+      inSlotFlag: BACK
     - type: Physics
       canCollide: False
 - proto: ClothingBackpackDuffelSurgeryFilled
@@ -33153,8 +33457,8 @@ entities:
     - type: Transform
       parent: 634
     - type: Clothing
-      inSlotFlag: EYES
       inSlot: eyes
+      inSlotFlag: EYES
     - type: Physics
       canCollide: False
 - proto: ClothingEyesGlassesSecurity
@@ -33164,8 +33468,8 @@ entities:
     - type: Transform
       parent: 1441
     - type: Clothing
-      inSlotFlag: EYES
       inSlot: eyes
+      inSlotFlag: EYES
     - type: Physics
       canCollide: False
 - proto: ClothingHeadHatBeretCmo
@@ -33175,8 +33479,8 @@ entities:
     - type: Transform
       parent: 1878
     - type: Clothing
-      inSlotFlag: HEAD
       inSlot: head
+      inSlotFlag: HEAD
     - type: Physics
       canCollide: False
 - proto: ClothingHeadHatBeretEngineering
@@ -33186,8 +33490,8 @@ entities:
     - type: Transform
       parent: 2301
     - type: Clothing
-      inSlotFlag: HEAD
       inSlot: head
+      inSlotFlag: HEAD
     - type: Physics
       canCollide: False
 - proto: ClothingHeadHatBeretHoS
@@ -33197,8 +33501,8 @@ entities:
     - type: Transform
       parent: 1441
     - type: Clothing
-      inSlotFlag: HEAD
       inSlot: head
+      inSlotFlag: HEAD
     - type: Physics
       canCollide: False
 - proto: ClothingHeadHatBeretQM
@@ -33208,8 +33512,8 @@ entities:
     - type: Transform
       parent: 1292
     - type: Clothing
-      inSlotFlag: HEAD
       inSlot: head
+      inSlotFlag: HEAD
     - type: Physics
       canCollide: False
 - proto: ClothingHeadHatCapcap
@@ -33219,8 +33523,19 @@ entities:
     - type: Transform
       parent: 634
     - type: Clothing
-      inSlotFlag: HEAD
       inSlot: head
+      inSlotFlag: HEAD
+    - type: Physics
+      canCollide: False
+- proto: ClothingHeadHatCatEars
+  entities:
+  - uid: 174
+    components:
+    - type: Transform
+      parent: 93
+    - type: Clothing
+      inSlot: head
+      inSlotFlag: HEAD
     - type: Physics
       canCollide: False
 - proto: ClothingHeadHatCone
@@ -33312,8 +33627,8 @@ entities:
     - type: Transform
       parent: 634
     - type: Clothing
-      inSlotFlag: MASK
       inSlot: mask
+      inSlotFlag: MASK
     - type: Physics
       canCollide: False
 - proto: ClothingMaskGasSwat
@@ -33323,8 +33638,8 @@ entities:
     - type: Transform
       parent: 1441
     - type: Clothing
-      inSlotFlag: MASK
       inSlot: mask
+      inSlotFlag: MASK
     - type: Physics
       canCollide: False
 - proto: ClothingNeckMantleCap
@@ -33334,8 +33649,8 @@ entities:
     - type: Transform
       parent: 634
     - type: Clothing
-      inSlotFlag: NECK
       inSlot: neck
+      inSlotFlag: NECK
     - type: Physics
       canCollide: False
 - proto: ClothingNeckMantleCMO
@@ -33345,8 +33660,8 @@ entities:
     - type: Transform
       parent: 1878
     - type: Clothing
-      inSlotFlag: NECK
       inSlot: neck
+      inSlotFlag: NECK
     - type: Physics
       canCollide: False
 - proto: ClothingNeckMantleHOS
@@ -33356,8 +33671,8 @@ entities:
     - type: Transform
       parent: 1441
     - type: Clothing
-      inSlotFlag: NECK
       inSlot: neck
+      inSlotFlag: NECK
     - type: Physics
       canCollide: False
 - proto: ClothingNeckMantleQM
@@ -33367,8 +33682,8 @@ entities:
     - type: Transform
       parent: 1292
     - type: Clothing
-      inSlotFlag: NECK
       inSlot: neck
+      inSlotFlag: NECK
     - type: Physics
       canCollide: False
 - proto: ClothingNeckMantleRD
@@ -33378,8 +33693,8 @@ entities:
     - type: Transform
       parent: 2220
     - type: Clothing
-      inSlotFlag: NECK
       inSlot: neck
+      inSlotFlag: NECK
     - type: Physics
       canCollide: False
 - proto: ClothingOuterHardsuitCap
@@ -33389,8 +33704,8 @@ entities:
     - type: Transform
       parent: 634
     - type: Clothing
-      inSlotFlag: OUTERCLOTHING
       inSlot: outerClothing
+      inSlotFlag: OUTERCLOTHING
     - type: Physics
       canCollide: False
     - type: Geiger
@@ -33403,8 +33718,8 @@ entities:
     - type: Transform
       parent: 2301
     - type: Clothing
-      inSlotFlag: OUTERCLOTHING
       inSlot: outerClothing
+      inSlotFlag: OUTERCLOTHING
     - type: Physics
       canCollide: False
     - type: Geiger
@@ -33417,8 +33732,8 @@ entities:
     - type: Transform
       parent: 1878
     - type: Clothing
-      inSlotFlag: OUTERCLOTHING
       inSlot: outerClothing
+      inSlotFlag: OUTERCLOTHING
     - type: Physics
       canCollide: False
     - type: Geiger
@@ -33431,8 +33746,8 @@ entities:
     - type: Transform
       parent: 2220
     - type: Clothing
-      inSlotFlag: OUTERCLOTHING
       inSlot: outerClothing
+      inSlotFlag: OUTERCLOTHING
     - type: GroupExamine
       group:
       - hoverMessage: ""
@@ -33476,8 +33791,8 @@ entities:
     - type: Transform
       parent: 1441
     - type: Clothing
-      inSlotFlag: OUTERCLOTHING
       inSlot: outerClothing
+      inSlotFlag: OUTERCLOTHING
     - type: Physics
       canCollide: False
     - type: Geiger
@@ -33495,8 +33810,14 @@ entities:
   - uid: 6937
     components:
     - type: Transform
-      pos: 56.50147,25.441887
-      parent: 2
+      parent: 93
+    - type: Clothing
+      inSlot: jumpsuit
+      inSlotFlag: INNERCLOTHING
+    - type: SuitSensor
+      user: 93
+    - type: Physics
+      canCollide: False
     - type: DeviceNetwork
       address: 024F-1EE0
       transmitFrequency: 1262
@@ -33507,8 +33828,8 @@ entities:
     - type: Transform
       parent: 1292
     - type: Clothing
-      inSlotFlag: INNERCLOTHING
       inSlot: jumpsuit
+      inSlotFlag: INNERCLOTHING
     - type: SuitSensor
       user: 1292
     - type: DeviceNetwork
@@ -33718,6 +34039,51 @@ entities:
         Blunt: 0
         Slash: 0
         Piercing: 0
+  - uid: 7320
+    components:
+    - type: Transform
+      pos: 57.5,0.5
+      parent: 2
+    - type: Wires
+      wireSeed: 1285568725
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 7321
+    components:
+    - type: Transform
+      pos: 57.5,7.5
+      parent: 2
+    - type: Wires
+      wireSeed: 1532534912
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 7322
+    components:
+    - type: Transform
+      pos: 47.5,28.5
+      parent: 2
+    - type: Wires
+      wireSeed: 1126607753
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
 - proto: ComputerCargoBounty
   entities:
   - uid: 1268
@@ -33864,6 +34230,23 @@ entities:
       receiveFrequency: 1261
     - type: Wires
       wireSeed: 1702811098
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+- proto: ComputerGridControl
+  entities:
+  - uid: 7342
+    components:
+    - type: Transform
+      pos: 20.5,16.5
+      parent: 2
+    - type: Wires
+      wireSeed: 1970977857
     - type: Damageable
       damageDictCopy:
         Heat: 0
@@ -34076,6 +34459,24 @@ entities:
       parent: 2
     - type: Wires
       wireSeed: 105804802
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+- proto: ComputerStationModification
+  entities:
+  - uid: 7341
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 18.5,14.5
+      parent: 2
+    - type: Wires
+      wireSeed: 2077301254
     - type: Damageable
       damageDictCopy:
         Heat: 0
@@ -35023,6 +35424,19 @@ entities:
         Piercing: 0
 - proto: CrateMaterialBasicResource
   entities:
+  - uid: 92
+    components:
+    - type: Transform
+      pos: -19.5,11.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
   - uid: 508
     components:
     - type: Transform
@@ -35107,19 +35521,6 @@ entities:
         Piercing: 0
 - proto: CrateMaterialSteel
   entities:
-  - uid: 465
-    components:
-    - type: Transform
-      pos: -19.5,11.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
   - uid: 2825
     components:
     - type: Transform
@@ -65633,6 +66034,22 @@ entities:
         Blunt: 0
         Slash: 0
         Piercing: 0
+- proto: GasRecycler
+  entities:
+  - uid: 7364
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 51.5,-40.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
 - proto: GasThermoMachineHeater
   entities:
   - uid: 6606
@@ -76856,13 +77273,13 @@ entities:
     - type: GasTank
       toggleActionEntity: 662
     - type: Clothing
-      inSlotFlag: SUITSTORAGE
       inSlot: suitstorage
+      inSlotFlag: SUITSTORAGE
     - type: UseDelay
       delays:
         gasTank:
-          endTime: 153.0230103
-          startTime: 152.0230103
+          endTime: 17.4000285
+          startTime: 16.4000285
           length: 1
     - type: Jetpack
       toggleActionEntity: 661
@@ -76884,13 +77301,13 @@ entities:
     - type: GasTank
       toggleActionEntity: 6934
     - type: Clothing
-      inSlotFlag: BACK
       inSlot: back
+      inSlotFlag: BACK
     - type: UseDelay
       delays:
         gasTank:
-          endTime: 153.0230103
-          startTime: 152.0230103
+          endTime: 17.4000285
+          startTime: 16.4000285
           length: 1
     - type: Jetpack
       toggleActionEntity: 6933
@@ -76995,6 +77412,31 @@ entities:
         Blunt: 0
         Slash: 0
         Piercing: 0
+- proto: LockableButtonResearch
+  entities:
+  - uid: 7337
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 43.5,9.5
+      parent: 2
+    - type: DeviceNetwork
+      address: 17D6-97F9
+    - type: DeviceLinkSource
+      linkedPorts:
+        2157:
+        - - Pressed
+          - Toggle
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+    - type: Fixtures
+      fixtures: {}
 - proto: LockerAtmosphericsFilledHardsuit
   entities:
   - uid: 2287
@@ -77763,6 +78205,60 @@ entities:
         Piercing: 0
 - proto: Mannequin
   entities:
+  - uid: 93
+    components:
+    - type: MetaData
+      name: mannequin (Stinky Mannequin)
+    - type: Transform
+      pos: 56.5,25.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+    - type: ContainerContainer
+      containers:
+        jumpsuit: !type:ContainerSlot
+          showEnts: False
+          occludes: False
+          ent: 6937
+        outerClothing: !type:ContainerSlot
+          showEnts: False
+          occludes: False
+          ent: null
+        neck: !type:ContainerSlot
+          showEnts: False
+          occludes: False
+          ent: null
+        mask: !type:ContainerSlot
+          showEnts: False
+          occludes: False
+          ent: null
+        eyes: !type:ContainerSlot
+          showEnts: False
+          occludes: False
+          ent: null
+        head: !type:ContainerSlot
+          showEnts: False
+          occludes: False
+          ent: 174
+        suitstorage: !type:ContainerSlot
+          showEnts: False
+          occludes: False
+          ent: null
+        back: !type:ContainerSlot
+          showEnts: False
+          occludes: False
+          ent: null
+    - type: Label
+      currentLabel: Stinky Mannequin
+    - type: OwOAccent
+    - type: NameModifier
+      baseName: mannequin
   - uid: 634
     components:
     - type: Transform
@@ -78058,6 +78554,8 @@ entities:
     - type: Transform
       pos: 43.5,-51.5
       parent: 2
+    - type: Physics
+      canCollide: False
     - type: Damageable
       damageDictCopy:
         Heat: 0
@@ -78235,7 +78733,7 @@ entities:
   - uid: 7292
     components:
     - type: Transform
-      pos: 38.278267,8.947557
+      pos: 37.682514,9.31583
       parent: 2
 - proto: NitrogenCanister
   entities:
@@ -78694,6 +79192,81 @@ entities:
     components:
     - type: Transform
       pos: -3.5,-8.5
+      parent: 2
+  - uid: 7323
+    components:
+    - type: Transform
+      pos: -5.5,14.5
+      parent: 2
+  - uid: 7324
+    components:
+    - type: Transform
+      pos: -6.5,29.5
+      parent: 2
+  - uid: 7325
+    components:
+    - type: Transform
+      pos: 4.5,28.5
+      parent: 2
+  - uid: 7326
+    components:
+    - type: Transform
+      pos: 16.5,30.5
+      parent: 2
+  - uid: 7327
+    components:
+    - type: Transform
+      pos: 17.5,27.5
+      parent: 2
+  - uid: 7328
+    components:
+    - type: Transform
+      pos: 34.5,28.5
+      parent: 2
+  - uid: 7329
+    components:
+    - type: Transform
+      pos: 38.5,34.5
+      parent: 2
+  - uid: 7330
+    components:
+    - type: Transform
+      pos: 47.5,34.5
+      parent: 2
+  - uid: 7331
+    components:
+    - type: Transform
+      pos: 43.5,28.5
+      parent: 2
+  - uid: 7332
+    components:
+    - type: Transform
+      pos: 46.5,18.5
+      parent: 2
+  - uid: 7333
+    components:
+    - type: Transform
+      pos: 55.5,14.5
+      parent: 2
+  - uid: 7334
+    components:
+    - type: Transform
+      pos: 51.5,1.5
+      parent: 2
+  - uid: 7335
+    components:
+    - type: Transform
+      pos: 55.5,-5.5
+      parent: 2
+  - uid: 7338
+    components:
+    - type: Transform
+      pos: 5.5,35.5
+      parent: 2
+  - uid: 7339
+    components:
+    - type: Transform
+      pos: -0.5,34.5
       parent: 2
 - proto: PowerCellRecharger
   entities:
@@ -84351,6 +84924,8 @@ entities:
     - type: Transform
       pos: 47.5,5.5
       parent: 2
+    - type: ResearchServer
+      id: 3
     - type: Damageable
       damageDictCopy:
         Heat: 0
@@ -88705,34 +89280,6 @@ entities:
         Blunt: 0
         Slash: 0
         Piercing: 0
-  - uid: 771
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 18.5,15.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 772
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 18.5,14.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
   - uid: 776
     components:
     - type: Transform
@@ -89378,22 +89925,6 @@ entities:
         Heat: 0
         Shock: 0
         Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-- proto: TargetStrange
-  entities:
-  - uid: 6936
-    components:
-    - type: Transform
-      pos: 56.5,25.5
-      parent: 2
-    - type: DamagePopup
-      damagePopupType: Total
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
         Blunt: 0
         Slash: 0
         Piercing: 0
@@ -90620,34 +91151,6 @@ entities:
         Blunt: 0
         Slash: 0
         Piercing: 0
-  - uid: 92
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: -7.5,9.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 93
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: -4.5,9.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
   - uid: 95
     components:
     - type: Transform
@@ -91145,20 +91648,6 @@ entities:
         Blunt: 0
         Slash: 0
         Piercing: 0
-  - uid: 174
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: -8.5,14.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
   - uid: 175
     components:
     - type: Transform
@@ -91239,48 +91728,6 @@ entities:
         Blunt: 0
         Slash: 0
         Piercing: 0
-  - uid: 185
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: -2.5,14.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 186
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: -4.5,14.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 187
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: -8.5,17.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
   - uid: 193
     components:
     - type: Transform
@@ -91309,65 +91756,10 @@ entities:
         Blunt: 0
         Slash: 0
         Piercing: 0
-  - uid: 195
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: -8.5,15.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
   - uid: 198
     components:
     - type: Transform
       pos: 3.5,21.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 201
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: -3.5,14.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 208
-    components:
-    - type: Transform
-      pos: -7.5,25.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 215
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: -8.5,21.5
       parent: 2
     - type: Damageable
       damageDictCopy:
@@ -91382,48 +91774,6 @@ entities:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: -1.5,17.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 223
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: -8.5,16.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 224
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: -8.5,18.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 225
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: -8.5,19.5
       parent: 2
     - type: Damageable
       damageDictCopy:
@@ -91472,109 +91822,11 @@ entities:
         Blunt: 0
         Slash: 0
         Piercing: 0
-  - uid: 239
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: -8.5,20.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 240
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: -8.5,13.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 243
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: -8.5,11.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 244
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: -4.5,21.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 245
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: -7.5,21.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
   - uid: 248
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: -1.5,16.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 249
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: -1.5,15.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 254
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: -8.5,12.5
       parent: 2
     - type: Damageable
       damageDictCopy:
@@ -91710,59 +91962,6 @@ entities:
         Blunt: 0
         Slash: 0
         Piercing: 0
-  - uid: 278
-    components:
-    - type: Transform
-      pos: -3.5,31.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 279
-    components:
-    - type: Transform
-      pos: -2.5,31.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 280
-    components:
-    - type: Transform
-      pos: -1.5,31.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 285
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: -7.5,24.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
   - uid: 290
     components:
     - type: Transform
@@ -91815,51 +92014,10 @@ entities:
         Blunt: 0
         Slash: 0
         Piercing: 0
-  - uid: 297
-    components:
-    - type: Transform
-      pos: -7.5,22.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
   - uid: 298
     components:
     - type: Transform
       pos: -3.5,22.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 301
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 0.5,31.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 302
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 2.5,31.5
       parent: 2
     - type: Damageable
       damageDictCopy:
@@ -91874,34 +92032,6 @@ entities:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 3.5,27.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 305
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 1.5,31.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 306
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 3.5,31.5
       parent: 2
     - type: Damageable
       damageDictCopy:
@@ -91939,229 +92069,6 @@ entities:
         Blunt: 0
         Slash: 0
         Piercing: 0
-  - uid: 309
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: -7.5,23.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 310
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: -0.5,31.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 316
-    components:
-    - type: Transform
-      pos: -9.5,-7.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 317
-    components:
-    - type: Transform
-      pos: -8.5,-7.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 318
-    components:
-    - type: Transform
-      pos: -7.5,-7.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 319
-    components:
-    - type: Transform
-      pos: -4.5,-7.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 320
-    components:
-    - type: Transform
-      pos: -4.5,-8.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 321
-    components:
-    - type: Transform
-      pos: -4.5,-14.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 322
-    components:
-    - type: Transform
-      pos: -7.5,-14.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 323
-    components:
-    - type: Transform
-      pos: -4.5,-10.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 324
-    components:
-    - type: Transform
-      pos: -4.5,-9.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 328
-    components:
-    - type: Transform
-      pos: -4.5,-12.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 329
-    components:
-    - type: Transform
-      pos: -7.5,-12.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 331
-    components:
-    - type: Transform
-      pos: -7.5,-9.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 332
-    components:
-    - type: Transform
-      pos: -7.5,-10.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 333
-    components:
-    - type: Transform
-      pos: -7.5,-8.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 334
-    components:
-    - type: Transform
-      pos: -4.5,-13.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
   - uid: 335
     components:
     - type: Transform
@@ -92179,19 +92086,6 @@ entities:
     components:
     - type: Transform
       pos: -2.5,-7.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 338
-    components:
-    - type: Transform
-      pos: -7.5,-13.5
       parent: 2
     - type: Damageable
       damageDictCopy:
@@ -92578,32 +92472,6 @@ entities:
         Blunt: 0
         Slash: 0
         Piercing: 0
-  - uid: 496
-    components:
-    - type: Transform
-      pos: -4.5,34.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 497
-    components:
-    - type: Transform
-      pos: -5.5,34.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
   - uid: 498
     components:
     - type: Transform
@@ -92643,192 +92511,10 @@ entities:
         Blunt: 0
         Slash: 0
         Piercing: 0
-  - uid: 501
-    components:
-    - type: Transform
-      pos: -4.5,33.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 502
-    components:
-    - type: Transform
-      pos: 5.5,31.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 503
-    components:
-    - type: Transform
-      pos: 5.5,32.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 504
-    components:
-    - type: Transform
-      pos: 5.5,34.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 505
-    components:
-    - type: Transform
-      pos: 5.5,33.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 506
-    components:
-    - type: Transform
-      pos: 4.5,34.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 507
-    components:
-    - type: Transform
-      pos: 3.5,34.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 509
-    components:
-    - type: Transform
-      pos: 1.5,34.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 510
-    components:
-    - type: Transform
-      pos: 1.5,33.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 511
-    components:
-    - type: Transform
-      pos: 0.5,33.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 512
-    components:
-    - type: Transform
-      pos: -0.5,33.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 513
-    components:
-    - type: Transform
-      pos: -1.5,33.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 514
-    components:
-    - type: Transform
-      pos: -1.5,34.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 515
-    components:
-    - type: Transform
-      pos: -2.5,34.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
   - uid: 516
     components:
     - type: Transform
-      pos: -3.5,34.5
+      pos: 16.5,21.5
       parent: 2
     - type: Damageable
       damageDictCopy:
@@ -93203,20 +92889,6 @@ entities:
         Blunt: 0
         Slash: 0
         Piercing: 0
-  - uid: 622
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 16.5,21.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
   - uid: 623
     components:
     - type: Transform
@@ -93527,194 +93199,11 @@ entities:
         Blunt: 0
         Slash: 0
         Piercing: 0
-  - uid: 1154
-    components:
-    - type: Transform
-      pos: -6.5,37.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 1155
-    components:
-    - type: Transform
-      pos: -6.5,38.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 1156
-    components:
-    - type: Transform
-      pos: -6.5,39.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 1157
-    components:
-    - type: Transform
-      pos: -6.5,40.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 1158
-    components:
-    - type: Transform
-      pos: -5.5,40.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 1159
-    components:
-    - type: Transform
-      pos: -4.5,40.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 1160
-    components:
-    - type: Transform
-      pos: -3.5,40.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 1161
-    components:
-    - type: Transform
-      pos: -2.5,40.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 1162
-    components:
-    - type: Transform
-      pos: -2.5,39.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 1163
-    components:
-    - type: Transform
-      pos: -2.5,38.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 1164
-    components:
-    - type: Transform
-      pos: -2.5,37.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
   - uid: 1168
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 2.5,44.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 1170
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: -1.5,44.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 1171
-    components:
-    - type: Transform
-      pos: 0.5,40.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 1172
-    components:
-    - type: Transform
-      pos: -0.5,40.5
       parent: 2
     - type: Damageable
       damageDictCopy:
@@ -93754,45 +93243,6 @@ entities:
     components:
     - type: Transform
       pos: 2.5,40.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 1176
-    components:
-    - type: Transform
-      pos: 2.5,39.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 1177
-    components:
-    - type: Transform
-      pos: 2.5,38.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 1178
-    components:
-    - type: Transform
-      pos: 2.5,37.5
       parent: 2
     - type: Damageable
       damageDictCopy:
@@ -94210,20 +93660,6 @@ entities:
         Blunt: 0
         Slash: 0
         Piercing: 0
-  - uid: 1219
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: -9.5,41.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
   - uid: 1220
     components:
     - type: Transform
@@ -94266,34 +93702,6 @@ entities:
         Blunt: 0
         Slash: 0
         Piercing: 0
-  - uid: 1224
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: -7.5,44.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 1228
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: -2.5,44.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
   - uid: 1246
     components:
     - type: Transform
@@ -94322,19 +93730,6 @@ entities:
         Blunt: 0
         Slash: 0
         Piercing: 0
-  - uid: 1250
-    components:
-    - type: Transform
-      pos: -7.5,50.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
   - uid: 1251
     components:
     - type: Transform
@@ -94352,48 +93747,8 @@ entities:
   - uid: 1252
     components:
     - type: Transform
-      pos: -6.5,50.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 1256
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
+      rot: -1.5707963267948966 rad
       pos: -11.5,50.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 1257
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: -10.5,50.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 1263
-    components:
-    - type: Transform
-      pos: -6.5,49.5
       parent: 2
     - type: Damageable
       damageDictCopy:
@@ -94417,53 +93772,11 @@ entities:
         Blunt: 0
         Slash: 0
         Piercing: 0
-  - uid: 1270
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: -1.5,46.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
   - uid: 1271
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 2.5,43.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 1272
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: -1.5,45.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 1273
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: -2.5,47.5
       parent: 2
     - type: Damageable
       damageDictCopy:
@@ -94664,20 +93977,6 @@ entities:
         Blunt: 0
         Slash: 0
         Piercing: 0
-  - uid: 1320
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 2.5,50.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
   - uid: 1321
     components:
     - type: Transform
@@ -94815,66 +94114,11 @@ entities:
         Blunt: 0
         Slash: 0
         Piercing: 0
-  - uid: 1405
-    components:
-    - type: Transform
-      pos: -1.5,40.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 1408
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: -9.5,39.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 1419
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: -9.5,40.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
   - uid: 1421
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: -12.5,41.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 1422
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: -9.5,38.5
       parent: 2
     - type: Damageable
       damageDictCopy:
@@ -94911,52 +94155,11 @@ entities:
         Blunt: 0
         Slash: 0
         Piercing: 0
-  - uid: 1437
-    components:
-    - type: Transform
-      pos: 1.5,40.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
   - uid: 1439
     components:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: -11.5,42.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 1460
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: -9.5,37.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 1461
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: -9.5,36.5
       parent: 2
     - type: Damageable
       damageDictCopy:
@@ -95427,19 +94630,6 @@ entities:
         Blunt: 0
         Slash: 0
         Piercing: 0
-  - uid: 1541
-    components:
-    - type: Transform
-      pos: -10.5,39.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
   - uid: 1551
     components:
     - type: Transform
@@ -95775,202 +94965,6 @@ entities:
         Blunt: 0
         Slash: 0
         Piercing: 0
-  - uid: 1642
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 29.5,33.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 1643
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 29.5,32.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 1644
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 28.5,31.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 1645
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 29.5,31.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 1646
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 30.5,33.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 1647
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 31.5,33.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 1648
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 32.5,33.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 1649
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 33.5,33.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 1650
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 34.5,33.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 1651
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 37.5,32.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 1652
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 37.5,31.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 1653
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 37.5,33.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 1654
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 37.5,34.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 1655
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 37.5,35.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
   - uid: 1656
     components:
     - type: Transform
@@ -96139,48 +95133,6 @@ entities:
         Blunt: 0
         Slash: 0
         Piercing: 0
-  - uid: 1670
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 35.5,31.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 1671
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 34.5,31.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 1672
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 34.5,32.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
   - uid: 1675
     components:
     - type: Transform
@@ -96213,48 +95165,6 @@ entities:
     components:
     - type: Transform
       pos: 38.5,40.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 1695
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 37.5,38.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 1697
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 40.5,39.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 1700
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 37.5,37.5
       parent: 2
     - type: Damageable
       damageDictCopy:
@@ -96319,76 +95229,6 @@ entities:
         Blunt: 0
         Slash: 0
         Piercing: 0
-  - uid: 1715
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 41.5,35.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 1716
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 41.5,36.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 1718
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 43.5,36.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 1719
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 44.5,36.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 1720
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 45.5,36.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
   - uid: 1721
     components:
     - type: Transform
@@ -96417,104 +95257,6 @@ entities:
         Blunt: 0
         Slash: 0
         Piercing: 0
-  - uid: 1724
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 47.5,36.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 1725
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 46.5,36.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 1731
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 48.5,28.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 1734
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 54.5,39.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 1735
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 54.5,34.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 1736
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 54.5,38.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 1737
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 54.5,36.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
   - uid: 1738
     components:
     - type: Transform
@@ -96529,176 +95271,11 @@ entities:
         Blunt: 0
         Slash: 0
         Piercing: 0
-  - uid: 1739
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 54.5,35.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 1740
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 48.5,35.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 1741
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 54.5,37.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 1742
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 48.5,32.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 1743
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 48.5,33.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 1744
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 54.5,33.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 1745
-    components:
-    - type: Transform
-      pos: 55.5,26.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 1746
-    components:
-    - type: Transform
-      pos: 56.5,26.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 1747
-    components:
-    - type: Transform
-      pos: 57.5,26.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 1748
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 54.5,27.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
   - uid: 1749
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 54.5,26.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 1751
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 54.5,29.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 1754
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 54.5,28.5
       parent: 2
     - type: Damageable
       damageDictCopy:
@@ -96755,34 +95332,6 @@ entities:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 50.5,40.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 1761
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 48.5,34.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 1762
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 48.5,36.5
       parent: 2
     - type: Damageable
       damageDictCopy:
@@ -96900,20 +95449,6 @@ entities:
         Blunt: 0
         Slash: 0
         Piercing: 0
-  - uid: 1783
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 48.5,27.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
   - uid: 1784
     components:
     - type: Transform
@@ -96942,73 +95477,6 @@ entities:
         Blunt: 0
         Slash: 0
         Piercing: 0
-  - uid: 1786
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 50.5,36.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 1787
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 51.5,36.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 1790
-    components:
-    - type: Transform
-      pos: 51.5,33.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 1791
-    components:
-    - type: Transform
-      pos: 51.5,35.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 1794
-    components:
-    - type: Transform
-      pos: 51.5,34.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
   - uid: 1821
     components:
     - type: Transform
@@ -97027,32 +95495,6 @@ entities:
     components:
     - type: Transform
       pos: 58.5,33.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 1823
-    components:
-    - type: Transform
-      pos: 57.5,33.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 1824
-    components:
-    - type: Transform
-      pos: 56.5,33.5
       parent: 2
     - type: Damageable
       damageDictCopy:
@@ -97387,58 +95829,6 @@ entities:
         Blunt: 0
         Slash: 0
         Piercing: 0
-  - uid: 1886
-    components:
-    - type: Transform
-      pos: 39.5,17.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 1887
-    components:
-    - type: Transform
-      pos: 42.5,17.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 1888
-    components:
-    - type: Transform
-      pos: 38.5,17.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 1889
-    components:
-    - type: Transform
-      pos: 37.5,22.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
   - uid: 1890
     components:
     - type: Transform
@@ -97458,19 +95848,6 @@ entities:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 58.5,25.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 1892
-    components:
-    - type: Transform
-      pos: 37.5,18.5
       parent: 2
     - type: Damageable
       damageDictCopy:
@@ -97620,87 +95997,6 @@ entities:
         Blunt: 0
         Slash: 0
         Piercing: 0
-  - uid: 1931
-    components:
-    - type: Transform
-      pos: 37.5,27.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 1932
-    components:
-    - type: Transform
-      pos: 47.5,27.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 1933
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 44.5,21.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 1937
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 46.5,21.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 1938
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 45.5,21.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 1939
-    components:
-    - type: Transform
-      pos: 37.5,17.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
   - uid: 1940
     components:
     - type: Transform
@@ -97715,89 +96011,10 @@ entities:
         Blunt: 0
         Slash: 0
         Piercing: 0
-  - uid: 1941
-    components:
-    - type: Transform
-      pos: 40.5,17.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
   - uid: 1942
     components:
     - type: Transform
       pos: 33.5,27.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 1943
-    components:
-    - type: Transform
-      pos: 37.5,19.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 1944
-    components:
-    - type: Transform
-      pos: 46.5,17.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 1945
-    components:
-    - type: Transform
-      pos: 53.5,17.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 1946
-    components:
-    - type: Transform
-      pos: 41.5,17.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 1947
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 50.5,14.5
       parent: 2
     - type: Damageable
       damageDictCopy:
@@ -97851,21 +96068,7 @@ entities:
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
-      pos: 47.5,21.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 1953
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 43.5,21.5
+      pos: 46.5,14.5
       parent: 2
     - type: Damageable
       damageDictCopy:
@@ -97889,64 +96092,11 @@ entities:
         Blunt: 0
         Slash: 0
         Piercing: 0
-  - uid: 1955
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 46.5,14.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
   - uid: 1956
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 58.5,17.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 1957
-    components:
-    - type: Transform
-      pos: 37.5,23.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 1958
-    components:
-    - type: Transform
-      pos: 44.5,17.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 1959
-    components:
-    - type: Transform
-      pos: 43.5,17.5
       parent: 2
     - type: Damageable
       damageDictCopy:
@@ -98009,131 +96159,11 @@ entities:
         Blunt: 0
         Slash: 0
         Piercing: 0
-  - uid: 1965
-    components:
-    - type: Transform
-      pos: 37.5,21.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
   - uid: 1966
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 46.5,13.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 1967
-    components:
-    - type: Transform
-      pos: 37.5,20.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 1968
-    components:
-    - type: Transform
-      pos: 54.5,17.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 1970
-    components:
-    - type: Transform
-      pos: 37.5,24.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 1971
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 46.5,16.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 1972
-    components:
-    - type: Transform
-      pos: 37.5,25.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 1974
-    components:
-    - type: Transform
-      pos: 37.5,26.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 1975
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 42.5,21.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 1976
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 41.5,21.5
       parent: 2
     - type: Damageable
       damageDictCopy:
@@ -98162,138 +96192,6 @@ entities:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 59.5,16.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 1979
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 46.5,15.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 1980
-    components:
-    - type: Transform
-      pos: 43.5,27.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 1981
-    components:
-    - type: Transform
-      pos: 41.5,27.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 1982
-    components:
-    - type: Transform
-      pos: 42.5,27.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 1983
-    components:
-    - type: Transform
-      pos: 46.5,27.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 1984
-    components:
-    - type: Transform
-      pos: 44.5,27.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 1985
-    components:
-    - type: Transform
-      pos: 45.5,27.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 1986
-    components:
-    - type: Transform
-      pos: 51.5,17.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 1987
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 50.5,17.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 1988
-    components:
-    - type: Transform
-      pos: 52.5,17.5
       parent: 2
     - type: Damageable
       damageDictCopy:
@@ -98373,39 +96271,11 @@ entities:
         Blunt: 0
         Slash: 0
         Piercing: 0
-  - uid: 1994
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 54.5,16.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
   - uid: 1995
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 58.5,24.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 1996
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 47.5,14.5
       parent: 2
     - type: Damageable
       damageDictCopy:
@@ -98457,89 +96327,6 @@ entities:
         Blunt: 0
         Slash: 0
         Piercing: 0
-  - uid: 2005
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 53.5,6.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 2006
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 54.5,-4.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 2007
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 54.5,-3.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 2008
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 54.5,6.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 2009
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 54.5,1.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 2010
-    components:
-    - type: Transform
-      pos: 46.5,11.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
   - uid: 2014
     components:
     - type: Transform
@@ -98581,81 +96368,11 @@ entities:
         Blunt: 0
         Slash: 0
         Piercing: 0
-  - uid: 2017
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 54.5,-2.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 2018
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 54.5,-0.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 2019
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 54.5,0.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 2020
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 54.5,-1.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
   - uid: 2024
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 57.5,-8.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 2026
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 51.5,6.5
       parent: 2
     - type: Damageable
       damageDictCopy:
@@ -98748,39 +96465,11 @@ entities:
         Blunt: 0
         Slash: 0
         Piercing: 0
-  - uid: 2033
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 42.5,15.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
   - uid: 2034
     components:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 43.5,14.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 2035
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 43.5,15.5
       parent: 2
     - type: Damageable
       damageDictCopy:
@@ -98865,34 +96554,6 @@ entities:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: 59.5,10.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 2042
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 54.5,7.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 2044
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 54.5,10.5
       parent: 2
     - type: Damageable
       damageDictCopy:
@@ -99053,20 +96714,6 @@ entities:
         Blunt: 0
         Slash: 0
         Piercing: 0
-  - uid: 2063
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 50.5,6.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
   - uid: 2064
     components:
     - type: Transform
@@ -99199,20 +96846,6 @@ entities:
         Blunt: 0
         Slash: 0
         Piercing: 0
-  - uid: 2078
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 54.5,-7.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
   - uid: 2079
     components:
     - type: Transform
@@ -99241,192 +96874,11 @@ entities:
         Blunt: 0
         Slash: 0
         Piercing: 0
-  - uid: 2081
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 54.5,12.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 2082
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 54.5,9.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 2083
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 54.5,11.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 2084
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 54.5,15.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 2085
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 54.5,-5.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 2086
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 54.5,-6.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 2087
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 54.5,14.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 2088
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 52.5,6.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 2089
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 54.5,13.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
   - uid: 2090
     components:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 43.5,5.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 2091
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: 49.5,6.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 2092
-    components:
-    - type: Transform
-      pos: 47.5,11.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 2094
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 40.5,15.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 2096
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 39.5,15.5
       parent: 2
     - type: Damageable
       damageDictCopy:
@@ -99478,20 +96930,6 @@ entities:
         Blunt: 0
         Slash: 0
         Piercing: 0
-  - uid: 2100
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 54.5,8.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
   - uid: 2101
     components:
     - type: Transform
@@ -99511,48 +96949,6 @@ entities:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 46.5,-18.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 2105
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 37.5,15.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 2108
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 36.5,15.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 2110
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 38.5,15.5
       parent: 2
     - type: Damageable
       damageDictCopy:
@@ -99842,19 +97238,6 @@ entities:
         Blunt: 0
         Slash: 0
         Piercing: 0
-  - uid: 2146
-    components:
-    - type: Transform
-      pos: 50.5,11.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
   - uid: 2150
     components:
     - type: Transform
@@ -100065,32 +97448,6 @@ entities:
         Blunt: 0
         Slash: 0
         Piercing: 0
-  - uid: 2169
-    components:
-    - type: Transform
-      pos: 39.5,11.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 2170
-    components:
-    - type: Transform
-      pos: 39.5,14.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
   - uid: 2180
     components:
     - type: Transform
@@ -100110,19 +97467,6 @@ entities:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 43.5,6.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 2182
-    components:
-    - type: Transform
-      pos: 43.5,8.5
       parent: 2
     - type: Damageable
       damageDictCopy:
@@ -100244,19 +97588,6 @@ entities:
     components:
     - type: Transform
       pos: 48.5,1.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 2194
-    components:
-    - type: Transform
-      pos: 48.5,0.5
       parent: 2
     - type: Damageable
       damageDictCopy:
@@ -100390,59 +97721,6 @@ entities:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 43.5,-5.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 2208
-    components:
-    - type: Transform
-      pos: 48.5,-9.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 2209
-    components:
-    - type: Transform
-      pos: 47.5,-9.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 2210
-    components:
-    - type: Transform
-      pos: 44.5,-9.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 2212
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 48.5,-8.5
       parent: 2
     - type: Damageable
       damageDictCopy:
@@ -100606,49 +97884,10 @@ entities:
         Blunt: 0
         Slash: 0
         Piercing: 0
-  - uid: 2248
-    components:
-    - type: Transform
-      pos: 48.5,-2.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
   - uid: 2249
     components:
     - type: Transform
       pos: 43.5,-9.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 2255
-    components:
-    - type: Transform
-      pos: 48.5,-0.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 2257
-    components:
-    - type: Transform
-      pos: 48.5,-1.5
       parent: 2
     - type: Damageable
       damageDictCopy:
@@ -100691,84 +97930,6 @@ entities:
     - type: Transform
       rot: 1.5707963267948966 rad
       pos: 43.5,-7.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 2261
-    components:
-    - type: Transform
-      pos: 48.5,-3.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 2267
-    components:
-    - type: Transform
-      pos: 47.5,-2.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 2268
-    components:
-    - type: Transform
-      pos: 44.5,-2.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 2275
-    components:
-    - type: Transform
-      pos: 48.5,-10.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 2276
-    components:
-    - type: Transform
-      pos: 48.5,-11.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 2277
-    components:
-    - type: Transform
-      pos: 48.5,-12.5
       parent: 2
     - type: Damageable
       damageDictCopy:
@@ -101042,58 +98203,6 @@ entities:
     components:
     - type: Transform
       pos: 42.5,-27.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 2335
-    components:
-    - type: Transform
-      pos: 43.5,9.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 2338
-    components:
-    - type: Transform
-      pos: 49.5,-3.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 2339
-    components:
-    - type: Transform
-      pos: 50.5,-3.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 2340
-    components:
-    - type: Transform
-      pos: 51.5,-3.5
       parent: 2
     - type: Damageable
       damageDictCopy:
@@ -101429,20 +98538,6 @@ entities:
     components:
     - type: Transform
       pos: 42.5,-34.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 2421
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: 48.5,-22.5
       parent: 2
     - type: Damageable
       damageDictCopy:
@@ -102532,46 +99627,6 @@ entities:
         Blunt: 0
         Slash: 0
         Piercing: 0
-  - uid: 2871
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: 55.5,21.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 3134
-    components:
-    - type: Transform
-      pos: 50.5,12.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 3136
-    components:
-    - type: Transform
-      pos: 50.5,13.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
 - proto: WallReinforcedDiagonal
   entities:
   - uid: 9
@@ -102753,52 +99808,10 @@ entities:
         Blunt: 0
         Slash: 0
         Piercing: 0
-  - uid: 287
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: -1.5,14.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
   - uid: 299
     components:
     - type: Transform
       pos: -3.5,27.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 325
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: -4.5,-15.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
-  - uid: 326
-    components:
-    - type: Transform
-      rot: 3.141592653589793 rad
-      pos: -7.5,-15.5
       parent: 2
     - type: Damageable
       damageDictCopy:
@@ -103042,20 +100055,6 @@ entities:
         Blunt: 0
         Slash: 0
         Piercing: 0
-  - uid: 1274
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: -1.5,47.5
-      parent: 2
-    - type: Damageable
-      damageDictCopy:
-        Heat: 0
-        Shock: 0
-        Structural: 0
-        Blunt: 0
-        Slash: 0
-        Piercing: 0
   - uid: 1343
     components:
     - type: Transform
@@ -103170,6 +100169,3664 @@ entities:
     - type: Transform
       rot: 3.141592653589793 rad
       pos: 58.5,-26.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+- proto: WallSolid
+  entities:
+  - uid: 185
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -7.5,9.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 186
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -4.5,9.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 187
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -8.5,14.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 195
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -2.5,14.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 201
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -4.5,14.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 208
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -8.5,17.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 215
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -8.5,15.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 223
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -3.5,14.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 224
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -7.5,25.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 225
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -8.5,21.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 239
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -8.5,16.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 240
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -8.5,18.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 243
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -8.5,19.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 244
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -8.5,20.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 245
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -8.5,13.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 249
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -8.5,11.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 254
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -4.5,21.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 278
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -7.5,21.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 279
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -1.5,15.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 280
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -8.5,12.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 285
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -3.5,31.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 287
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -2.5,31.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 297
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -1.5,31.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 301
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -7.5,24.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 302
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -7.5,22.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 305
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 0.5,31.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 306
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 2.5,31.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 309
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 1.5,31.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 310
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 3.5,31.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 316
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -7.5,23.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 317
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -0.5,31.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 318
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -9.5,-7.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 319
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -8.5,-7.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 320
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -7.5,-7.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 321
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -4.5,-7.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 322
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -4.5,-8.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 323
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -4.5,-14.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 324
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -7.5,-14.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 325
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -4.5,-10.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 326
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -4.5,-9.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 328
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -4.5,-12.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 329
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -7.5,-12.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 331
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -7.5,-9.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 332
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -7.5,-10.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 333
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -7.5,-8.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 334
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -4.5,-13.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 338
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -7.5,-13.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 465
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -4.5,34.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 496
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -5.5,34.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 497
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -4.5,33.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 501
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 5.5,31.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 502
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 5.5,32.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 503
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 5.5,34.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 504
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 5.5,33.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 505
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 4.5,34.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 506
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 3.5,34.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 507
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 1.5,34.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 509
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 1.5,33.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 510
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 0.5,33.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 511
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -0.5,33.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 512
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -1.5,33.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 513
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -1.5,34.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 514
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -2.5,34.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 515
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -3.5,34.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 622
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -6.5,37.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 1154
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -6.5,38.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 1155
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -6.5,39.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 1156
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -6.5,40.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 1157
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -5.5,40.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 1158
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -4.5,40.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 1159
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -3.5,40.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 1160
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -2.5,40.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 1161
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -2.5,39.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 1162
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -2.5,38.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 1163
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -2.5,37.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 1164
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -1.5,44.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 1170
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 0.5,40.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 1171
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -0.5,40.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 1172
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 2.5,39.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 1176
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 2.5,38.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 1177
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 2.5,37.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 1178
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -9.5,41.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 1219
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -7.5,44.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 1224
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -2.5,44.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 1228
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -7.5,50.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 1250
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -6.5,50.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 1256
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -10.5,50.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 1257
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -6.5,49.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 1263
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -1.5,46.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 1270
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -1.5,45.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 1272
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -2.5,47.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 1273
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 2.5,50.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 1274
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -1.5,40.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 1320
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -9.5,39.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 1405
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -9.5,40.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 1408
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -9.5,38.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 1419
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: 1.5,40.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 1422
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -9.5,37.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 1437
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -9.5,36.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 1460
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -10.5,39.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 1461
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 29.5,33.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 1541
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 29.5,32.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 1642
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 28.5,31.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 1643
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 29.5,31.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 1644
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 30.5,33.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 1645
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 31.5,33.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 1646
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 32.5,33.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 1647
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 33.5,33.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 1648
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 34.5,33.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 1649
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 37.5,32.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 1650
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 37.5,31.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 1651
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 37.5,33.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 1652
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 37.5,34.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 1653
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 37.5,35.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 1654
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 35.5,31.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 1655
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 34.5,31.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 1670
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 34.5,32.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 1671
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 37.5,38.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 1672
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 40.5,39.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 1695
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 37.5,37.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 1697
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 41.5,35.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 1700
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 41.5,36.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 1715
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 43.5,36.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 1716
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 44.5,36.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 1718
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 45.5,36.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 1719
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 47.5,36.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 1720
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 46.5,36.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 1724
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 48.5,28.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 1725
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 54.5,39.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 1731
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 54.5,34.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 1734
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 54.5,38.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 1735
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 54.5,36.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 1736
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 54.5,35.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 1737
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 48.5,35.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 1739
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 54.5,37.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 1740
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 48.5,32.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 1741
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 48.5,33.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 1742
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 54.5,33.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 1743
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 55.5,26.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 1744
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 56.5,26.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 1745
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 57.5,26.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 1746
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 54.5,27.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 1747
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 54.5,29.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 1748
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 54.5,28.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 1751
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 48.5,34.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 1754
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 48.5,36.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 1761
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 48.5,27.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 1762
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 50.5,36.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 1783
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 51.5,36.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 1786
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 51.5,33.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 1787
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 51.5,35.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 1790
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 51.5,34.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 1791
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 57.5,33.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 1794
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 56.5,33.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 1823
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 39.5,17.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 1824
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 42.5,17.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 1886
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 38.5,17.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 1887
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 37.5,22.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 1888
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 37.5,18.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 1889
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 37.5,27.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 1892
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 47.5,27.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 1931
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 44.5,21.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 1932
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 46.5,21.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 1933
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 45.5,21.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 1937
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 37.5,17.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 1938
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 40.5,17.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 1939
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 37.5,19.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 1941
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 46.5,17.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 1943
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 53.5,17.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 1944
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 41.5,17.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 1945
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 50.5,14.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 1946
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 47.5,21.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 1947
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 43.5,21.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 1953
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 37.5,23.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 1955
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 44.5,17.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 1957
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 43.5,17.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 1958
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 37.5,21.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 1959
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 37.5,20.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 1965
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 54.5,17.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 1967
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 37.5,24.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 1968
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 46.5,16.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 1970
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 37.5,25.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 1971
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 37.5,26.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 1972
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 42.5,21.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 1974
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 41.5,21.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 1975
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 46.5,15.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 1976
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 43.5,27.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 1979
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 41.5,27.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 1980
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 42.5,27.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 1981
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 46.5,27.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 1982
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 44.5,27.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 1983
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 45.5,27.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 1984
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 51.5,17.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 1985
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 50.5,17.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 1986
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 52.5,17.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 1987
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 54.5,16.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 1988
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 47.5,14.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 1994
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 53.5,6.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 1996
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 54.5,-4.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 2005
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 54.5,-3.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 2006
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 54.5,6.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 2007
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 54.5,1.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 2008
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 46.5,11.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 2009
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 54.5,-2.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 2010
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 54.5,-0.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 2017
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 54.5,0.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 2018
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 54.5,-1.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 2019
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 51.5,6.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 2020
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 42.5,15.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 2026
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 43.5,15.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 2033
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 54.5,7.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 2035
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 54.5,10.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 2042
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 50.5,6.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 2044
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 54.5,-7.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 2063
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 54.5,12.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 2078
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 54.5,9.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 2081
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 54.5,11.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 2082
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 54.5,15.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 2083
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 54.5,-5.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 2084
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 54.5,-6.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 2085
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 54.5,14.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 2086
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 52.5,6.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 2087
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 54.5,13.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 2088
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 49.5,6.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 2089
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 47.5,11.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 2091
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 40.5,15.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 2092
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 39.5,15.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 2094
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 54.5,8.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 2096
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 37.5,15.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 2100
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 36.5,15.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 2105
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 38.5,15.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 2108
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 50.5,11.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 2110
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 39.5,11.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 2146
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 39.5,14.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 2169
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 43.5,8.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 2170
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 48.5,0.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 2182
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 48.5,-9.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 2194
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 47.5,-9.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 2208
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 44.5,-9.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 2209
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 48.5,-8.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 2210
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 48.5,-2.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 2212
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 48.5,-0.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 2248
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 48.5,-1.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 2255
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 48.5,-3.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 2257
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 47.5,-2.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 2261
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 44.5,-2.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 2267
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 48.5,-10.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 2268
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 48.5,-11.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 2275
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 48.5,-12.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 2276
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 43.5,9.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 2277
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 49.5,-3.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 2335
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 50.5,-3.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 2338
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 51.5,-3.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 2339
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 48.5,-22.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 2340
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 55.5,21.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 2421
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 50.5,12.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 2871
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: 50.5,13.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+- proto: WallSolidDiagonal
+  entities:
+  - uid: 3134
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -1.5,14.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 3136
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -4.5,-15.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 6936
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -7.5,-15.5
+      parent: 2
+    - type: Damageable
+      damageDictCopy:
+        Heat: 0
+        Shock: 0
+        Structural: 0
+        Blunt: 0
+        Slash: 0
+        Piercing: 0
+  - uid: 7319
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -1.5,47.5
       parent: 2
     - type: Damageable
       damageDictCopy:

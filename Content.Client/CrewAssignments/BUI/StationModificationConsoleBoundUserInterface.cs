@@ -69,6 +69,7 @@ public sealed class StationModificationConsoleBoundUserInterface : BoundUserInte
         _menu.CommandLevelConfirm.OnPressed += ChangeCommandLevel;
         _menu.AssignmentWageConfirm.OnPressed += ChangeWage;
         _menu.AssignmentNameConfirm.OnPressed += ChangeAssignmentName;
+        _menu.SpendingLimitConfirm.OnPressed += ChangeAssignmentSpendingLimit;
         _menu.DeleteAssignment.OnPressed += DeleteAssignment;
         _menu.DefaultAccessCreate.OnPressed += DefaultAccessCreate;
         _menu.ClaimBtn.OnPressed += ToggleClaim;
@@ -80,6 +81,8 @@ public sealed class StationModificationConsoleBoundUserInterface : BoundUserInte
         _menu.LevelPurchaseButton.OnPressed += PurchaseUpgrade;
         _menu.ChannelEnable.OnPressed += OnChannelEnable;
         _menu.ChannelDisable.OnPressed += OnChannelDisable;
+        _menu.JobNetOn.OnPressed += OnJobNetOn;
+        _menu.JobNetOff.OnPressed += OnJobNetOff;
         _menu.OpenCentered();
     }
 
@@ -108,8 +111,28 @@ public sealed class StationModificationConsoleBoundUserInterface : BoundUserInte
             _menu.ETaxSpinBox.Value = cState.ExportTax;
             _menu.ITaxSpinBox.Value = cState.ImportTax;
             _menu.STaxSpinBox.Value = cState.SalesTax;
+            if (cState.TradeStationClaimed)
+            {
+                _menu.TaxOptions.Visible = true;
+                _menu.ClaimTradeStationLabel.Visible = false;
+            }
+            else
+            {
+                _menu.TaxOptions.Visible = false;
+                _menu.ClaimTradeStationLabel.Visible = true;
+            }
+            if(cState.JobNetEnabled)
+            {
+                _menu.JobNetOff.Pressed = false;
+                _menu.JobNetOn.Pressed = true;
+            }
+            else
+            {
+                _menu.JobNetOff.Pressed = true;
+                _menu.JobNetOn.Pressed = false;
+            }
         }
-
+        
     }
 
     protected override void Dispose(bool disposing)
@@ -122,6 +145,14 @@ public sealed class StationModificationConsoleBoundUserInterface : BoundUserInte
         _menu?.Dispose();
     }
 
+    private void OnJobNetOff(ButtonEventArgs args)
+    {
+        SendMessage(new StationModificationJobNetOff());
+    }
+    private void OnJobNetOn(ButtonEventArgs args)
+    {
+        SendMessage(new StationModificationJobNetOn());
+    }
     private void PurchaseUpgrade(ButtonEventArgs args)
     {
         if (_menu == null) return;
@@ -172,6 +203,8 @@ public sealed class StationModificationConsoleBoundUserInterface : BoundUserInte
         string newName = _menu.NewAssignmentNameField.Text;
         if (newName == null || newName == "") return;
         SendMessage(new StationModificationCreateAssignment(newName));
+        _menu._lastAssignmentCreated = newName;
+        _menu.NewAssignmentNameField.Text = "";
     }
 
     private void ToggleChannelAccess(ButtonToggledEventArgs args)
@@ -277,6 +310,14 @@ public sealed class StationModificationConsoleBoundUserInterface : BoundUserInte
         string newName = _menu.AssignmentNameField.Text;
         if (newName == null || newName == "") return;
         SendMessage(new StationModificationChangeAssignmentName(assignment, newName));
+    }
+    private void ChangeAssignmentSpendingLimit(ButtonEventArgs args)
+    {
+        if (_menu == null) return;
+        var assignment = _menu.PossibleAssignments.SelectedId;
+        int newLimit = _menu.SpendingLimitSpinBox.Value;
+        if (newLimit < 0) return;
+        SendMessage(new StationModificationChangeAssignmentSpendingLimit(assignment, newLimit));
     }
 
     private void DeleteAssignment(ButtonEventArgs args)

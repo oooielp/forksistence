@@ -12,7 +12,7 @@
   unit: materials-unit-bar
   icon: { sprite: Objects/Materials/ingots.rsi, state: gold }
   color: "#FFD700"
-  price: 0.85 # $85 for 1 unit
+  price: 0.55 # $55 for 1 unit
 
 - type: material
   id: Silver
@@ -21,7 +21,7 @@
   unit: materials-unit-bar
   icon: { sprite: Objects/Materials/ingots.rsi, state: silver }
   color: "#C0C0C0"
-  price: 0.75 # $75 for 1 unit
+  price: 0.45 # $45 for 1 unit
 
 - type: material
   id: Brass
@@ -29,7 +29,7 @@
   name: materials-brass
   icon: { sprite: Objects/Materials/Sheets/metal.rsi, state: brass }
   color: "#b18b25"
-  price: 0.30 # $30 for 1 unit
+  price: 0.20 # $20 for 1 unit
 
 - type: material
   id: Plasteel
@@ -37,4 +37,4 @@
   name: materials-plasteel
   icon: { sprite: Objects/Materials/Sheets/metal.rsi, state: plasteel }
   color: "#696969" #Okay, this is epic
-  price: 0.85 # 1-1 mix of plasma and steel.
+  price: 0.65 # 1-1 mix of plasma and steel.

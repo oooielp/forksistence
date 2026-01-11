@@ -54,9 +54,7 @@ public sealed class IdCardSystem : SharedIdCardSystem
                 {
                     if(record != null && id.CreatedTime < record.LatestIDTime)
                     {
-                        id.FullName = "*Expired*";
-                        id.LocalizedJobTitle = "*Expired*";
-                        UpdateEntityName(uid, id);
+                        QueueDel(uid);
                     }
                 }
             }
@@ -64,6 +62,7 @@ public sealed class IdCardSystem : SharedIdCardSystem
         if(id.FullName != "*Expired*" && id.FullName != null && id.FullName != "")
         {
             RebuildJob(uid, id);
+            UpdateEntityName(uid, id);
         }
         
     }
@@ -143,10 +142,23 @@ public sealed class IdCardSystem : SharedIdCardSystem
             {
                 if(comp.CreatedTime < DateTime.Now)
                 {
-                    comp.FullName = "*Expired*";
-                    comp.LocalizedJobTitle = "*Expired*";
-                    UpdateEntityName(uid, comp);
+                    QueueDel(uid);
                 }
+            }
+
+        }
+    }
+
+    public void UpdateIDAssignment(string name, int station)
+    {
+        var query = EntityQueryEnumerator<IdCardComponent>();
+        while (query.MoveNext(out var uid, out var comp))
+        {
+            if (comp.FullName == name)
+            {
+                comp.stationID = station;
+                RebuildJob(uid, comp);
+                UpdateEntityName(uid, comp);
             }
 
         }
@@ -182,9 +194,19 @@ public sealed class IdCardSystem : SharedIdCardSystem
 
     public void RebuildJob(EntityUid card, IdCardComponent comp)
     {
-        if (comp.FullName == null || comp.stationID == null) return;
+        if (comp.FullName == null || comp.stationID == null)
+        {
+            comp.LocalizedJobTitle = "Off Duty";
+            return;
+        }
         var station = _station.GetStationByID(comp.stationID.Value);
-        if (station == null) return;
+        if (station == null)
+        {
+            comp.LocalizedJobTitle = "Off Duty";
+            return;
+        }
+        bool found = false;
+
         if (TryComp<CrewRecordsComponent>(station, out var crewRecords))
         {
             if (crewRecords.TryGetRecord(comp.FullName, out var crewRecord) && crewRecord != null)
@@ -194,9 +216,15 @@ public sealed class IdCardSystem : SharedIdCardSystem
                     if (crewAssignments.TryGetAssignment(crewRecord.AssignmentID, out var crewAssignment) && crewAssignment != null)
                     {
                         comp.LocalizedJobTitle = crewAssignment.Name;
+                        found = true;
                     }
                 }
             }
+        }
+        if(!found)
+        {
+            comp.LocalizedJobTitle = "Off Duty";
+            return;
         }
     }
 }

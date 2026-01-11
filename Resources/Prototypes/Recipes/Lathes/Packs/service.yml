@@ -26,6 +26,7 @@
   - Holoprojector
   - WetFloorSign
   - WireBrush
+  - BSPAnchorKey
 
 - type: latheRecipePack
   id: ServiceBoardsStatic
@@ -42,7 +43,7 @@
   - BlockGameArcadeComputerCircuitboard
   - SpaceVillainArcadeComputerCircuitboard
   - InvoicePrinterCircuitboard
-  - ComputerTelevisionCircuitboard
+  - IDComputerCircuitboard
 
 ## Dynamic
 
@@ -71,3 +72,4 @@
   - ReagentGrinderIndustrialMachineCircuitboard
   - JukeboxCircuitBoard
   - DawInstrumentMachineCircuitboard
+  - ComputerTelevisionCircuitboard

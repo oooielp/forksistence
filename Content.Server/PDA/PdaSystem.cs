@@ -296,7 +296,7 @@ namespace Content.Server.PDA
         private void UpdateStationName(EntityUid uid, PdaComponent pda)
         {
             var station = _station.GetOwningStation(uid);
-            pda.StationName = station is null ? null : Name(station.Value);
+            pda.StationName = station is null || !station.Value.IsValid() ? null : Name(station.Value);
         }
 
         private void UpdateAlertLevel(EntityUid uid, PdaComponent pda)

@@ -51,8 +51,8 @@
 - type: entity
   parent: ClothingHeadBase
   id: ClothingHeadHatBeretSecurity
-  name: security beret
-  description: A beret with the security department's insignia. For officers that are more inclined towards style than safety.
+  name: classic security beret
+  description: A beret with the security department's insignia. For officers that are more inclined towards style than safety. A true classic.
   components:
   - type: Sprite
     sprite: Clothing/Head/Hats/beret_security.rsi
@@ -66,6 +66,66 @@
     - CorgiWearable
     - HamsterWearable
     - WhitelistChameleon
+
+- type: entity
+  parent: ClothingHeadBase
+  id: ClothingHeadHatBeretSecurityBlack
+  name: black security beret
+  description: A beret with the security department's insignia. For officers that are more inclined towards style than safety.
+  components:
+  - type: Sprite
+    sprite: Clothing/Head/Hats/beret_security_black.rsi
+  - type: Clothing
+    sprite: Clothing/Head/Hats/beret_security_black.rsi
+  - type: Tag
+    tags:
+    - ClothMade
+    - Recyclable
+    - WhitelistChameleon
+
+- type: entity
+  parent: ClothingHeadHatBeretSecurityBlack
+  id: ClothingHeadHatBeretSecurityDarkBlue
+  name: dark blue security beret
+  description: A beret with the security department's insignia. For officers that are more inclined towards style than safety.
+  components:
+  - type: Sprite
+    sprite: Clothing/Head/Hats/beret_security_darkblue.rsi
+  - type: Clothing
+    sprite: Clothing/Head/Hats/beret_security_darkblue.rsi
+
+- type: entity
+  parent: ClothingHeadHatBeretSecurityBlack
+  id: ClothingHeadHatBeretSecurityDarkRed
+  name: dark red security beret
+  description: A beret with the security department's insignia. For officers that are more inclined towards style than safety.
+  components:
+  - type: Sprite
+    sprite: Clothing/Head/Hats/beret_security_darkred.rsi
+  - type: Clothing
+    sprite: Clothing/Head/Hats/beret_security_darkred.rsi
+
+- type: entity
+  parent: ClothingHeadHatBeretSecurityBlack
+  id: ClothingHeadHatBeretSecurityLightBlue
+  name: light blue security beret
+  description: A beret with the security department's insignia. For officers that are more inclined towards style than safety.
+  components:
+  - type: Sprite
+    sprite: Clothing/Head/Hats/beret_security_lightblue.rsi
+  - type: Clothing
+    sprite: Clothing/Head/Hats/beret_security_lightblue.rsi
+
+- type: entity
+  parent: ClothingHeadHatBeretSecurityBlack
+  id: ClothingHeadHatBeretSecurityLightRed
+  name: light red security beret
+  description: A beret with the security department's insignia. For officers that are more inclined towards style than safety.
+  components:
+  - type: Sprite
+    sprite: Clothing/Head/Hats/beret_security_lightred.rsi
+  - type: Clothing
+    sprite: Clothing/Head/Hats/beret_security_lightred.rsi
 
 - type: entity
   parent: ClothingHeadBase

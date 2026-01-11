@@ -226,7 +226,7 @@
 - type: construction
   id: DiagonalShuttleWall
   name: construction-recipe-diagonal-shuttle-wall
-  graph: Girder
+  graph: GirderDiagonal
   startNode: start
   targetNode: diagonalshuttleWall
   category: construction-category-structures

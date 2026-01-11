@@ -218,9 +218,9 @@ public sealed partial class CargoSystem
         label.Id = bounty.Id;
         label.AssociatedStationId = stationId;
         var msg = new FormattedMessage();
-        msg.AddText(Loc.GetString("bounty-manifest-header", ("id", bounty.Id)));
+        msg.AddMarkupOrThrow(Loc.GetString("bounty-manifest-header", ("id", bounty.Id)));
         msg.PushNewline();
-        msg.AddText(Loc.GetString("bounty-manifest-list-start"));
+        msg.AddMarkupOrThrow(Loc.GetString("bounty-manifest-list-start"));
         msg.PushNewline();
         foreach (var entry in prototype.Entries)
         {
@@ -571,8 +571,8 @@ public sealed partial class CargoSystem
         if (!Resolve(uid, ref component))
             return false;
 
-        if (component.Bounties.Count >= component.MaxBounties)
-            return false;
+ //       if (component.Bounties.Count >= component.MaxBounties)
+ //           return false;
 
         _nameIdentifier.GenerateUniqueName(uid, BountyNameIdentifierGroup, out var randomVal);
         var newBounty = new CargoBountyData(bounty, randomVal);

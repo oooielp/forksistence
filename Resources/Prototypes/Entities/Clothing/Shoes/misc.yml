@@ -121,6 +121,9 @@
     sprite: Clothing/Shoes/Misc/snakeskin.rsi
   - type: Clothing
     sprite: Clothing/Shoes/Misc/snakeskin.rsi
+  - type: Tag
+    tags:
+    - SnakeBoots
 
 - type: entity
   parent: [ClothingShoesBase, PowerCellSlotSmallItem, BaseToggleClothing]

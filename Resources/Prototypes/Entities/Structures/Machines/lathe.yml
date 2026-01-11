@@ -133,6 +133,7 @@
     - ServiceStatic
     - PowerCellsStatic
     - ElectronicsStatic
+    - CassetteTape
   - type: EmagLatheRecipes
     emagStaticPacks:
     - SecurityAmmoStatic
@@ -507,14 +508,21 @@
     - ClothingScience
     - ClothingSecurity
     - ClothingService
+    - ClothingMilitary
+    - ClothingLabCoats
+    - ClothingCentComm
+    - ClothingAssortedHats
+    - ClothingAssortedOversuits
+    - Cloaks
+    - Mantles
     - WinterCoats
     - Ties
     - Scarves
     - Carpets
     - Bedsheets
+    - NFWallets # Frontier
   - type: EmagLatheRecipes
     emagStaticPacks:
-    - ClothingCentComm
     - ClothingSyndie
   - type: MaterialStorage
     whitelist: *StandardMaterialWhitelist

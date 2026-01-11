@@ -289,7 +289,7 @@
     - id: ClothingBeltUtilityFilled
     - id: ClothingHeadsetAltScience
     - id: DoorRemoteResearch
-    - id: HandTeleporter
+#    - id: HandTeleporter # removed because brawler doesnt want it -Beridot
     - id: RubberStampRd
 
 # No teleporter table

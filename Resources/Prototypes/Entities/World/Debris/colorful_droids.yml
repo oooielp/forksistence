@@ -1,15 +1,23 @@
+- type: spaceBiome
+  priority: 0 # This probably shouldn't get selected.
+  id: BaseBiome
+  noiseRanges:
+    BiomeBaseMask: # | 0.1,1 = Abundant | 0.35,1 = Common | 0.5,1 = Rare | 0.9,1 = Desolate |
+      - 0.4,1
+  debrisEntityTable: 'BaseSpaceMobTable'
+
 # Minimal mob table for all space biomes (except void) - Based on SalvageMagnetMobTable
 - type: entityTable
   id: BaseSpaceMobTable
   table: !type:GroupSelector
     children:
     - !type:GroupSelector # normal theats
-      weight: 95
+      weight: 70
       children:
       - id: MobCarpSalvage
         weight: 2
     - !type:GroupSelector # scary monsters
-      weight: 5
+      weight: 30
       children:
       - !type:AllSelector
         children:
@@ -18,24 +26,132 @@
           amount: 2
 
 - type: entityTable
-  id: SpaceMobCreaturesTable
+  id: DarkSpaceMobTable
   table: !type:GroupSelector
     children:
     - !type:GroupSelector # normal theats
-      weight: 95
+      weight: 60
       children:
-      - id: MobCarpSalvage
+      - id: MobBasilisk
         amount: 2
         weight: 2
     - !type:GroupSelector # scary monsters
-      weight: 5
+      weight: 20
       children:
       - !type:AllSelector
         children:
-        - id: MobGoliath
-        - id: MobCarpSalvage
-          amount: 2
+        - id: MobSharkSalvage
         - id: MobBasilisk
+          amount: 3
+        - id: MobGoliath
+    - !type:GroupSelector # scary monsters
+      weight: 20
+      children:
+      - !type:AllSelector
+        children:
+        - id: MobHivelord
+          amount: 2
+        - id: MobGoliath
+        - id: MobSharkSalvage
+
+- type: entityTable
+  id: XenoMobTable
+  table: !type:GroupSelector
+    children:
+    - !type:GroupSelector # normal theats
+      weight: 60
+      children:
+      - id: MobXeno
+        amount: 2
+      - id: MobXenoDrone
+        weight: 2
+    - !type:GroupSelector # scary monsters
+      weight: 20
+      children:
+      - !type:AllSelector
+        children:
+        - id: MobXenoDrone
+          amount: 2
+        - id: MobXenoPraetorian
+        - id: MobXenoQueen
+        - id: MobXenoSpitter
+        - id: MobSmallPurpleSnake
+          amount: 2
+    - !type:GroupSelector # scary monsters
+      weight: 20
+      children:
+      - !type:AllSelector
+        children:
+        - id: MobXeno
+          amount: 2
+        - id: MobXenoRunner
+        - id: MobXenoPraetorian
+        - id: MobXenoRavager
+        - id: MobPurpleSnake
+
+- type: entityTable
+  id: CarpMobCreaturesTable
+  table: !type:GroupSelector
+    children:
+    - !type:GroupSelector # normal theats
+      weight: 60
+      children:
+      - id: MobCarpSalvage
+        amount: 3
+        weight: 2
+    - !type:GroupSelector # scary monsters
+      weight: 20
+      children:
+      - !type:AllSelector
+        children:
+        - id: MobCarpSalvage
+          amount: 4
+        - id: MobSharkSalvage
+          amount: 2
+        - id: MobCarpHolo
+    - !type:GroupSelector # scary monsters
+      weight: 20
+      children:
+      - !type:AllSelector
+        children:
+        - id: MobCarpMagic
+        - id: MobCarpHolo
+          amount: 2
+        - id: MobCarpRainbow
+        - id: MobCarpDragon
+
+- type: entityTable
+  id: BluespaceMobCreaturesTable
+  table: !type:GroupSelector
+    children:
+    - !type:GroupSelector # normal theats
+      weight: 60
+      children:
+      - id: MobBearSpace
+      - id: MobCobraSpace
+      - id: MobKangarooSpace
+      - id: MobSpiderSpace
+        weight: 2
+    - !type:GroupSelector # scary monsters
+      weight: 20
+      children:
+      - !type:AllSelector
+        children:
+        - id: MobBearSpace
+          amount: 3
+        - id: MobSpiderSpace
+          amount: 3
+    - !type:GroupSelector # scary monsters
+      weight: 20
+      children:
+      - !type:AllSelector
+        children:
+        - id: MobCobraSpace
+          amount: 3
+        - id: MobSpiderSpace
+          amount: 1
+        - id: MobKangarooSpace
+          amount: 2
 
 
 - type: entityTable
@@ -44,14 +160,6 @@
     children:
     - id: MobSharkSalvage
       amount: 100
-
-- type: spaceBiome
-  priority: 0 # This probably shouldn't get selected.
-  id: BaseBiome
-  noiseRanges:
-    BiomeBaseMask: # | 0.1,1 = Abundant | 0.35,1 = Common | 0.5,1 = Rare | 0.9,1 = Desolate |
-      - 0.35,1
-  debrisEntityTable: 'BaseSpaceMobTable'
 
 - type: spaceBiome
   parent: BaseBiome

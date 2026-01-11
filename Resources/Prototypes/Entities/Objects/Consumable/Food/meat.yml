@@ -42,6 +42,7 @@
   - type: AtmosExposed
   - type: Temperature
     currentTemperature: 290
+  - type: TemperatureDamage
   # required for cooking to work
   - type: InternalTemperature
     thickness: 0.02
@@ -211,6 +212,11 @@
   name: raw bear meat
   description: A very manly slab of raw bear meat.
   components:
+  - type: Tag
+    tags:
+    - Raw
+    - Meat
+    - BearMeat
   - type: Sprite
     state: bear
   - type: SolutionContainerManager
@@ -419,6 +425,9 @@
       - state: plain-inhand-left
       right:
       - state: plain-inhand-right
+  - type: Tag
+    tags:
+    - GoliathMeat
 
 - type: entity
   parent: FoodMeatBase
@@ -584,6 +593,11 @@
   - type: Item
     storedOffset: 0,2
     heldPrefix: spider
+  - type: Tag
+    tags:
+    - Raw
+    - Meat
+    - SpiderMeat
 
 - type: entity
   parent: FoodMeatBase
@@ -652,6 +666,7 @@
     tags:
     - Raw
     - Meat
+    - SnakeMeat
   - type: Sprite
     state: snake
   - type: SolutionContainerManager
@@ -685,6 +700,7 @@
     tags:
     - Raw
     - Meat
+    - XenoMeat
   - type: Sprite
     state: xeno
   - type: SolutionContainerManager
@@ -1082,6 +1098,7 @@
   components:
   - type: Tag
     tags:
+    - BearMeat
     - Cooked
     - Meat
     - Steak

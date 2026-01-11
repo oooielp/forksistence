@@ -4,7 +4,16 @@ using Content.Server.Database;
 using Content.Server.GameTicking;
 using Content.Server.Popups;
 using Content.Server.Preferences.Managers;
+using Content.Server.Radio.EntitySystems;
+using Content.Shared.AcceptDeath;
+using Content.Shared.Administration;
+using Content.Shared.CCVar;
 using Content.Shared.Chat;
+using Content.Shared.CrewAssignments;
+using Content.Shared.CrewAssignments.Components;
+using Content.Shared.CrewAssignments.Prototypes;
+using Content.Shared.CrewAssignments.Systems;
+using Content.Shared.CrewRecords.Components;
 using Content.Shared.Mind;
 using Content.Shared.Mobs;
 using Content.Shared.Mobs.Components;
@@ -12,8 +21,13 @@ using Content.Shared.Mobs.Systems;
 using Content.Shared.Players;
 using Content.Shared.Preferences;
 using Content.Shared.Speech.Muting;
+using Content.Shared.Station.Components;
 using Robust.Server.Console;
+using Robust.Server.GameObjects;
+using Robust.Shared.Configuration;
 using Robust.Shared.Player;
+using Robust.Shared.Prototypes;
+using Robust.Shared.Timing;
 
 namespace Content.Server.Mobs;
 
@@ -30,7 +44,11 @@ public sealed class CritMobActionsSystem : EntitySystem
     [Dependency] private readonly QuickDialogSystem _quickDialog = default!;
     [Dependency] private readonly GameTicker _ticker = default!;
     [Dependency] private readonly IServerPreferencesManager _prefsManager = default!;
-
+    [Dependency] private readonly UserInterfaceSystem _ui = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly RadioSystem _radio = default!;
+    [Dependency] private readonly SharedTransformSystem _transform = default!;
+    [Dependency] private readonly IConfigurationManager _configurationManager = default!;
     private const int MaxLastWordsLength = 30;
 
     public override void Initialize()
@@ -41,7 +59,11 @@ public sealed class CritMobActionsSystem : EntitySystem
         SubscribeLocalEvent<MobStateActionsComponent, CritFakeDeathEvent>(OnFakeDeath);
         SubscribeLocalEvent<MobStateActionsComponent, CritLastWordsEvent>(OnLastWords);
         SubscribeLocalEvent<MobStateActionsComponent, AcceptDeathEvent>(OnAcceptDeath);
+        SubscribeLocalEvent<MobStateActionsComponent, AcceptDeathFinalizeMessage>(FinalizeAcceptDeath);
+        SubscribeLocalEvent<MobStateActionsComponent, AcceptDeathSOSMessage>(TriggerSOS);
     }
+
+
 
     private void OnSuccumb(EntityUid uid, MobStateActionsComponent component, CritSuccumbEvent args)
     {
@@ -96,8 +118,70 @@ public sealed class CritMobActionsSystem : EntitySystem
         args.Handled = true;
     }
 
+    public void ToggleUi(EntityUid user, EntityUid jobnetEnt, MobStateActionsComponent? component = null)
+    {
+        if (!Resolve(user, ref component))
+            return;
+
+        if (!TryComp<ActorComponent>(user, out var actor))
+            return;
+
+        if (!_ui.TryToggleUi(user, AcceptDeathUiKey.Key, actor.PlayerSession))
+            return;
+
+        UpdateUserInterface(user, jobnetEnt, component);
+    }
+    public void UpdateUserInterface(EntityUid? user, EntityUid jobnet, MobStateActionsComponent? component = null)
+    {
+        if (!Resolve(jobnet, ref component) || user == null || component == null)
+            return;
+
+        var state = new AcceptDeathUpdateState(component.AcceptDeathCooldown-_timing.CurTime, component.SOSCooldown-_timing.CurTime);
+        _ui.SetUiState(jobnet, AcceptDeathUiKey.Key, state);
+    }
     private void OnAcceptDeath(EntityUid uid, MobStateActionsComponent component, AcceptDeathEvent args)
     {
+        ToggleUi(args.Performer, uid, component);
+    }
+
+    public bool ValidateAcceptDeath(EntityUid uid, MobStateActionsComponent component)
+    {
+        if (component.AcceptDeathCooldown > _timing.CurTime) return false;
+        TryComp<MobStateComponent>(uid, out var state);
+        if (state == null) return false;
+        if (state.CurrentState != MobState.Dead) return false;
+        return true;
+    }
+    public bool ValidateSOS(EntityUid uid, MobStateActionsComponent component)
+    {
+        if (component.SOSCooldown > _timing.CurTime) return false;
+        TryComp<MobStateComponent>(uid, out var state);
+        if (state == null) return false;
+        if (state.CurrentState != MobState.Dead) return false;
+        return true;
+    }
+
+    private void TriggerSOS(EntityUid uid, MobStateActionsComponent component, AcceptDeathSOSMessage args)
+    {
+        if (!ValidateSOS(uid, component))
+        {
+            return;
+        }
+        var xform = Transform(uid);
+        var mapPos = _transform.GetWorldPosition(xform);
+        _radio.SendRadioMessage(uid, $"{Name(uid)} has died at ({mapPos.X:F1}, {mapPos.Y:F1}) and is broadcasting an SOS.", "Common", uid, true, false);
+        var respawnTime = TimeSpan.FromSeconds(_configurationManager.GetCVar(CCVars.AcceptDeathTime));
+        component.SOSCooldown = _timing.CurTime + respawnTime;
+        UpdateUserInterface(uid, uid, component);
+    }
+
+    private void FinalizeAcceptDeath(EntityUid uid, MobStateActionsComponent component, AcceptDeathFinalizeMessage args)
+    {
+        if(!ValidateAcceptDeath(uid, component))
+        {
+            return;
+        }
+
         if (!TryComp<ActorComponent>(uid, out var actor))
             return;
 
@@ -112,10 +196,13 @@ public sealed class CritMobActionsSystem : EntitySystem
 
                 if (actor.PlayerSession.AttachedEntity != uid)
                     return;
-
+                if (!ValidateAcceptDeath(uid, component))
+                {
+                    return;
+                }
                 var foundSlot = 0;
                 PlayerPreferences playerPrefs = _prefsManager.GetPreferences(actor.PlayerSession.UserId);
-                var mind =  actor.PlayerSession.GetMind();
+                var mind = actor.PlayerSession.GetMind();
                 string charName = "";
                 if (TryComp<MindComponent>(mind, out var mindComp))
                 {
@@ -136,12 +223,7 @@ public sealed class CritMobActionsSystem : EntitySystem
                 }
                 _prefsManager.DeleteCharacter(foundSlot, actor.PlayerSession.UserId, actor.PlayerSession);
                 _ticker.Respawn(actor.PlayerSession);
-                // TODO PERSISTENCE
-                
-
-                
             });
 
-        args.Handled = true;
     }
 }

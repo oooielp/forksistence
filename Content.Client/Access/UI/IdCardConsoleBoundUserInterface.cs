@@ -27,7 +27,6 @@ namespace Content.Client.Access.UI
         public IdCardConsoleBoundUserInterface(EntityUid owner, Enum uiKey) : base(owner, uiKey)
         {
             _idCardConsoleSystem = EntMan.System<SharedIdCardConsoleSystem>();
-
             _maxNameLength =_cfgManager.GetCVar(CCVars.MaxNameLength);
             _maxIdJobLength = _cfgManager.GetCVar(CCVars.MaxIdJobLength);
         }
@@ -54,7 +53,6 @@ namespace Content.Client.Access.UI
             _window.CrewManifestButton.OnPressed += _ => SendMessage(new CrewManifestOpenUiMessage());
             _window.PrivilegedIdButton.OnPressed += _ => SendMessage(new ItemSlotButtonPressedEvent(PrivilegedIdCardSlotId));
             _window.TargetIdButton.OnPressed += _ => SendMessage(new ItemSlotButtonPressedEvent(TargetIdCardSlotId));
-
             _window.OnClose += Close;
             _window.OpenCentered();
         }
@@ -79,6 +77,11 @@ namespace Content.Client.Access.UI
         {
             SendMessage(new SearchRecord(
                 newFullName));
+        }
+
+        public void ResetSpending()
+        {
+            SendMessage(new AccountModResetSpending());
         }
 
 

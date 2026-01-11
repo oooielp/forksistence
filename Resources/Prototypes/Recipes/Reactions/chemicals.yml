@@ -542,3 +542,30 @@
       amount: 1
   products:
     Lye: 2
+
+- type: reaction # moved this from drinks.yml -beridot
+  id: EthanolBreakdown
+  source: true
+  requiredMixerCategories:
+  - Electrolysis
+  reactants:
+    Ethanol:
+      amount: 9
+  products:
+    Hydrogen: 6
+    Carbon: 2
+    Oxygen: 1
+
+- type: reaction # moved this from drinks.yml -beridot
+  id: EthanolCreation
+  requiredMixerCategories:
+  - Stir
+  reactants:
+    Hydrogen:
+      amount: 6
+    Carbon:
+      amount: 2
+    Oxygen:
+      amount: 1
+  products:
+    Ethanol: 9

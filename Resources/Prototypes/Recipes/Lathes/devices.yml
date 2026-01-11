@@ -2,16 +2,19 @@
   parent: BasePartRecipe
   id: TimerTrigger
   result: TimerTrigger
+  unlockUses: 4
 
 - type: latheRecipe
   parent: BasePartRecipe
   id: SignalTrigger
   result: SignalTrigger
+  unlockUses: 4
 
 - type: latheRecipe
   parent: BasePartRecipe
   id: VoiceTrigger
   result: VoiceTrigger
+  unlockUses: 4
 
 - type: latheRecipe
   parent: BasePartRecipe
@@ -29,6 +32,7 @@
   materials:
     Steel: 200
     Plastic: 300
+  unlockUses: 4
 
 - type: latheRecipe
   parent: BaseWeaponRecipe
@@ -39,6 +43,7 @@
     Plastic: 100
     Glass: 50
     #one fourth of what making a flash would cost
+  unlockUses: 4
 
 - type: latheRecipe
   id: ExplosivePayload
@@ -52,6 +57,7 @@
     Glass: 50
     Plasma: 50
     Silver: 50
+  unlockUses: 4
 
 - type: latheRecipe
   parent: BasePartRecipe
@@ -79,6 +85,7 @@
     Steel: 100
     Plastic: 200
     Plasma: 100
+  unlockUses: 4
 
 - type: latheRecipe
   id: AnomalyLocator
@@ -99,6 +106,7 @@
   materials:
     Steel: 400
     Glass: 100
+  unlockUses: 4
 
 - type: latheRecipe
   parent: BaseToolRecipe
@@ -107,6 +115,7 @@
   materials:
     Plastic: 200
     Glass: 150
+  unlockUses: 4
 
 - type: latheRecipe
   id: WeaponPistolCHIMP
@@ -117,6 +126,7 @@
   materials:
     Steel: 500
     Glass: 400
+  unlockUses: 3
 
 - type: latheRecipe
   id: WeaponGauntletGorilla
@@ -130,6 +140,7 @@
     Glass: 500
     Plasma: 500
     Silver: 250
+  unlockUses: 4
 
 - type: latheRecipe
   id: ClothingBackpackHolding
@@ -155,6 +166,7 @@
   parent: ClothingBackpackHolding
   id: OreBagOfHolding
   result: OreBagOfHolding
+  unlockUses: 3
 
 - type: latheRecipe
   id: ClothingMaskWeldingGas
@@ -163,6 +175,7 @@
   materials:
     Steel: 600
     Glass: 200
+  unlockUses: 4
 
 - type: latheRecipe
   id: WeaponForceGun
@@ -174,6 +187,7 @@
     Steel: 500
     Glass: 400
     Silver: 200
+  unlockUses: 3
 
 - type: latheRecipe
   id: DeviceQuantumSpinInverter
@@ -203,6 +217,7 @@
     Steel: 1000
     Glass: 500
     Silver: 100
+  unlockUses: 4
 
 - type: latheRecipe
   id: WeaponTetherGun
@@ -225,6 +240,7 @@
     Steel: 500
     Glass: 400
     Gold: 100
+  unlockUses: 4
 
 - type: latheRecipe
   id: CableDetStack1
@@ -236,6 +252,7 @@
     Plastic: 50
     Plasma: 25
     Gold: 20
+  unlockUses: 15
 
 - type: latheRecipe
   id: EmptyDetonator
@@ -245,3 +262,4 @@
   completetime: 3
   materials:
     Steel: 100
+  unlockUses: 4

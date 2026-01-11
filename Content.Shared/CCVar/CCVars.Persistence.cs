@@ -6,6 +6,15 @@ namespace Content.Shared.CCVar;
 public sealed partial class CCVars
 {
     public static readonly CVarDef<int>
+        YearOffset = CVarDef.Create("lore.year_offset", 120, CVar.ARCHIVE);
+
+    public static readonly CVarDef<int>
+        AcceptDeathTime = CVarDef.Create("acceptdeath.time", 60 * 30, CVar.ARCHIVE);
+
+    public static readonly CVarDef<int>
+        AcceptDeathSOSTime = CVarDef.Create("acceptdeath.sostime", 60 * 30, CVar.ARCHIVE);
+
+    public static readonly CVarDef<int>
         GridClaimPersonalMaxTiles = CVarDef.Create("gridconfig.claim_personal_max_tiles", 150, CVar.ARCHIVE);
 
     #region Bluespace Parking

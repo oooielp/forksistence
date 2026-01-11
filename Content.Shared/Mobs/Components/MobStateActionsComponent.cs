@@ -1,4 +1,5 @@
 using Content.Shared.Mobs.Systems;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Shared.Mobs.Components;
 
@@ -22,6 +23,11 @@ public sealed partial class MobStateActionsComponent : Component
     ///   Alive:
     ///   - ActionAnimalLayEgg
     /// </example>
+    ///
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer))]
+    public TimeSpan AcceptDeathCooldown = TimeSpan.Zero;
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer))]
+    public TimeSpan SOSCooldown = TimeSpan.Zero;
     [DataField("actions")]
     public Dictionary<MobState, List<string>> Actions = new();
 

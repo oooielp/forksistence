@@ -1,5 +1,6 @@
 using Content.Server.Cargo.Components;
 using Content.Server.Construction.Completions;
+using Content.Server.CrewRecords.Systems;
 using Content.Server.Popups;
 using Content.Server.Station.Systems;
 using Content.Shared.Access;
@@ -59,7 +60,7 @@ public sealed class GridConfigSystem : SharedGridConfigSystem
     [Dependency] private readonly MapSystem _mapSystem = default!;
     [Dependency] private readonly IConfigurationManager _cfg = default!;
     [Dependency] private readonly IPrototypeManager _protoMan = default!;
-
+    [Dependency] private readonly CrewMetaRecordsSystem _crewMeta = default!;
     public override void Initialize()
     {
         base.Initialize();
@@ -170,6 +171,74 @@ public sealed class GridConfigSystem : SharedGridConfigSystem
         UpdateUserInterface(uid, component, args);
     }
 
+    private bool ValidateFactionClaim(EntityUid uid, GridConfigComponent component, bool requireTarget = true)
+    {
+        if (component.ConnectedStation == null) return false;
+        var targetGrid = _transform.GetGrid(uid);
+        var targetStation = _station.GetStationByID(component.ConnectedStation.Value);
+        bool tradeStationGrid = false;
+        if (TryComp<TradeStationComponent>(targetGrid, out var tradeStation))
+        {
+            tradeStationGrid = true;
+        }
+        if (TryComp<StationDataComponent>(targetStation, out var owningSD) && owningSD != null)
+        {
+            _protoMan.Resolve(owningSD.Level, out var levelProto);
+            if (levelProto != null)
+            {
+                if (tradeStationGrid)
+                {
+                    if (!levelProto.TradestationClaim)
+                    {
+                        return false;
+                    }
+                }
+                if (targetGrid.HasValue && TryComp<MapGridComponent>(targetGrid, out var targetGridComp))
+                {
+                    var tiles = _mapSystem.GetAllTiles(targetGrid.Value, targetGridComp);
+                    var currentTiles = _station.GetStationTileCount(targetStation.Value);
+                    if (tiles.Count() + currentTiles > levelProto.TileLimit)
+                        return false;
+                }
+                else
+                    return false;
+            }
+        }
+        return true;
+    }
+    private bool ValidatePersonalClaim(EntityUid uid, GridConfigComponent component, bool requireTarget = true)
+    {
+        var privilegedName = string.Empty;
+        if (component.PrivilegedIdSlot.Item is { Valid: true } idCard)
+        {
+            if (TryComp<IdCardComponent>(idCard, out var id) && id.FullName != null)
+            {
+                privilegedName = id.FullName;
+            }
+        }
+        if (privilegedName == string.Empty) return false;
+        if (_crewMeta.MetaRecords == null) return false;
+        if (!_crewMeta.MetaRecords.TryGetRecord(privilegedName, out var record) || record == null) return false;
+        int limit = 0;
+        _protoMan.Resolve(record.Level, out var levelProto);
+        if (levelProto == null) return false;
+        limit = levelProto.TileLimit;
+        if (limit < 1) return false;
+        var targetGrid = _transform.GetGrid(uid);
+        bool tradeStationGrid = false;
+        if (tradeStationGrid) return false;
+        if (targetGrid.HasValue && TryComp<MapGridComponent>(targetGrid, out var targetGridComp))
+        {
+            var tiles = _mapSystem.GetAllTiles(targetGrid.Value, targetGridComp);
+            var currentTiles = _station.GetPersonalTileCount(privilegedName);
+            if (tiles.Count() + currentTiles > limit)
+                return false;
+        }
+        else
+            return false;
+
+        return true;
+    }
     private bool Validate(EntityUid uid, GridConfigComponent component, bool requireTarget = true)
     {
         EntityUid? owningStation = _station.GetOwningStation(uid);
@@ -195,21 +264,6 @@ public sealed class GridConfigSystem : SharedGridConfigSystem
             }
 
         }
-        if (component.PersonalMode)
-        {
-            if (tradeStationGrid) return false;
-            if (targetGrid.HasValue && TryComp<MapGridComponent>(targetGrid, out var targetGridComp))
-            {
-                var tiles = _mapSystem.GetAllTiles(targetGrid.Value, targetGridComp);
-                var currentTiles = _station.GetPersonalTileCount(privilegedName);
-                if (tiles.Count() + currentTiles > _cfg.GetCVar(CCVars.GridClaimPersonalMaxTiles))
-                    return false;
-            }
-            else
-                return false;
-        }
-
-
         if (!idPresent) return false;
         if (owningStation == null)
         {
@@ -279,23 +333,6 @@ public sealed class GridConfigSystem : SharedGridConfigSystem
             if (targetStation == null) return false;
             if (TryComp<StationDataComponent>(targetStation, out var owningSD) && owningSD != null)
             {
-                _protoMan.Resolve(owningSD.Level, out var levelProto);
-                if (levelProto != null)
-                {
-                    if (!levelProto.TradestationClaim)
-                    {
-                        return false;
-                    }
-                    if (targetGrid.HasValue && TryComp<MapGridComponent>(targetGrid, out var targetGridComp))
-                    {
-                        var tiles = _mapSystem.GetAllTiles(targetGrid.Value, targetGridComp);
-                        var currentTiles = _station.GetStationTileCount(targetStation.Value);
-                        if (tiles.Count() + currentTiles > levelProto.TileLimit)
-                            return false;
-                    }
-                    else
-                        return false;
-                }
                 if (owningSD.Owners.Contains(privilegedName))
                 {
                     isAuth = true;
@@ -339,7 +376,21 @@ public sealed class GridConfigSystem : SharedGridConfigSystem
     {
         if (Validate(uid, component))
         {
-            var grid = _transform.GetGrid(uid);
+            if(component.PersonalMode)
+            {
+                if(!ValidatePersonalClaim(uid, component, true))
+                {
+                    return;
+                }
+            }
+            else
+            {
+                if(!ValidateFactionClaim(uid, component, true))
+                {
+                    return;
+                }
+            }
+                var grid = _transform.GetGrid(uid);
             if (TryComp<TradeStationComponent>(grid, out _))
             {
                 if (component.PersonalMode) return;
@@ -564,7 +615,7 @@ public sealed class GridConfigSystem : SharedGridConfigSystem
 
         }
 
-        int tileLimit = _cfg.GetCVar(CCVars.GridClaimPersonalMaxTiles);
+        int tileLimit = 0;
         String? targetName = null;
         int? targetStation = null;
         Dictionary<int, string>? possibleStations = null;
@@ -576,13 +627,26 @@ public sealed class GridConfigSystem : SharedGridConfigSystem
             targetStation = SD.UID;
             _protoMan.Resolve(SD.Level, out var levelProto);
             factionLevel = levelProto;
-            tileLimit = factionLevel?.TileLimit ?? tileLimit;
+            if(!component.PersonalMode)
+            {
+                tileLimit = factionLevel?.TileLimit ?? tileLimit;
+            }
+            
         }
 
         if (component.PersonalMode)
         {
             targetName = privilegedName;
             currentTileCount = _station.GetPersonalTileCount(targetName);
+            if(_crewMeta.MetaRecords != null)
+            {
+                if(_crewMeta.MetaRecords.TryGetRecord(privilegedName, out var record) && record != null)
+                {
+                    _protoMan.Resolve(record.Level, out var levelProto);
+                    if(levelProto != null)
+                        tileLimit = levelProto.TileLimit;
+                }
+            }
         }
         else
         {
