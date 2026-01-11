@@ -263,7 +263,7 @@
   placementMode: SnapgridCenter
   objectType: Structure
   canRotate: true
-  
+
 - type: construction
   id: StorageCanisterConstruction
   name: construction-recipe-storagecanister
@@ -914,7 +914,7 @@
   startNode: start
   targetNode: heatpump
   category: construction-category-utilities
-  placementMode: SnapgridCenter
+  placementMode: AlignAtmosPipeLayers
   canBuildInImpassable: false
   icon:
     sprite: Structures/Piping/Atmospherics/pump.rsi
@@ -926,6 +926,42 @@
     state: pumpHeat
   conditions:
     - !type:NoUnstackableInTile
+  alternativePrototypes:
+  - HeatPump
+  - HeatPumpAlt1
+  - HeatPumpAlt2
+
+- type: construction
+  id: HeatPumpAlt1
+  hide: true
+  graph: GasBinary
+  startNode: start
+  targetNode: heatpumpAlt1
+  category: construction-category-utilities
+  placementMode: AlignAtmosPipeLayers
+  canBuildInImpassable: false
+  conditions:
+  - !type:NoUnstackableInTile
+  alternativePrototypes:
+  - HeatPump
+  - HeatPumpAlt1
+  - HeatPumpAlt2
+
+- type: construction
+  id: HeatPumpAlt2
+  hide: true
+  graph: GasBinary
+  startNode: start
+  targetNode: heatpumpAlt2
+  category: construction-category-utilities
+  placementMode: AlignAtmosPipeLayers
+  canBuildInImpassable: false
+  conditions:
+  - !type:NoUnstackableInTile
+  alternativePrototypes:
+  - HeatPump
+  - HeatPumpAlt1
+  - HeatPumpAlt2
 
 # ATMOS TRINARY
 - type: construction
