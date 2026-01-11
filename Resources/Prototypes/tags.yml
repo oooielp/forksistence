@@ -1278,6 +1278,9 @@
   id: Sheet # MaterialStorage whitelist for many machines and lathes. Storage whitelist: MaterialBag
 
 - type: Tag
+  id: SheetPaper # MaterialStorage whitelist for many machines and lathes. Applied to SheetPaper, but not wrtitten/writable papers
+
+- type: Tag
   id: ShellShotgun # Ammo: AmmoProviderShotgunShell, ClothingBeltBandolier, BaseMagazineShotgun, BaseWeaponShotgun, WeaponFlareGunSecurity
 
 - type: Tag
