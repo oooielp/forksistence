@@ -195,5 +195,10 @@
 
 - type: latheRecipe
   parent: [ BaseCircuitboardRecipe, BaseGeneralComputerRecipeCategory ]
+  id: IDComputerCircuitboard
+  result: IDComputerCircuitboard
+
+- type: latheRecipe
+  parent: [ BaseCircuitboardRecipe, BaseGeneralComputerRecipeCategory ]
   id: InvoicePrinterCircuitboard
   result: InvoicePrinterCircuitboard
