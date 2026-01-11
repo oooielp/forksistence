@@ -6,7 +6,7 @@
     ClothingBackpackDuffelScience: 3
     ClothingUniformJumpsuitScientist: 3
     ClothingUniformJumpskirtScientist: 3
-    ClothingUniformJumpsuitScientistFormal: 3
+#    ClothingUniformJumpsuitScientistFormal: 3 # This item doesn't  exist, pleasing the linter
     ClothingOuterCoatRnd: 3
     ClothingShoesColorWhite: 3
     ClothingNeckTieSci: 3
@@ -16,4 +16,4 @@
     ClothingNeckScarfStripedPurple: 3
     ClothingShoesBootsWinterSci: 2
   contrabandInventory:
-    ToyFigurineResearchDirector: 1  
+    ToyFigurineResearchDirector: 1
