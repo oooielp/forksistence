@@ -205,6 +205,24 @@
   recipeUnlocks:
   - ClothingBackpackHarmpack
 
+- type: technology
+  id: SecurityEVA
+  name: research-technology-security-eva
+  icon:
+    sprite: Clothing/Head/Hardsuits/security.rsi
+    state: icon
+  discipline: Arsenal
+  tier: 2
+  cost: 15000
+  recipeUnlocks:
+  - Securityhardsuit
+  - Brigmedichardsuit
+  - Wardensecurityhardsuit
+  - Headofsecurityhardsuit
+  technologyPrerequisites:
+  - EVAManufacturing
+  - SpecializedEVA
+
 # Tier 3
 
 - type: technology
