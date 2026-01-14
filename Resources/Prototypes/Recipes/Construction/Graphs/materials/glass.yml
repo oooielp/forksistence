@@ -82,6 +82,28 @@
             - material: Brass
               amount: 1
 
+        - to: SheetPhoronGlass
+          completed:
+            - !type:SetStackCount
+              amount: 1
+          steps:
+            - material: Glass
+              amount: 1
+            - material: Phoron
+              amount: 1
+
+        - to: SheetRPhoronGlass
+          completed:
+            - !type:SetStackCount
+              amount: 1
+          steps:
+            - material: Glass
+              amount: 1
+            - material: Phoron
+              amount: 1
+            - material: MetalRod
+              amount: 1
+
         - to: SheetRUGlass0
           completed:
             - !type:SetStackCount
@@ -125,7 +147,7 @@
 
     - node: SheetRUGlass
       entity: SheetRUGlass
-      
+
     - node: SheetClockworkGlass
       entity: SheetClockworkGlass
 
@@ -134,3 +156,9 @@
 
     - node: SheetRUGlass1
       entity: SheetRUGlass
+
+    - node: SheetPhoronGlass
+      entity: SheetPhoronGlass
+
+    - node: SheetRPhoronGlass
+      entity: SheetRPhoronGlass

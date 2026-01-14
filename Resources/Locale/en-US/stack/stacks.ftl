@@ -8,13 +8,23 @@ stack-silver = silver
 stack-gold = gold
 stack-reinforced-glass = reinforced glass
 stack-plasma-glass = plasma glass
+stack-phoron = phoron
 stack-uranium = uranium
 stack-uranium-glass = uranium glass
 stack-clockwork-glass = clockwork glass
 stack-reinforced-plasma-glass = reinforced plasma glass
+stack-phoron-glass = phoron glass
+stack-reinforced-phoron-glass = reinforced phoron glass
 stack-reinforced-uranium-glass = reinforced uranium glass
 stack-gunpowder = gunpowder
 stack-cardboard = cardboard
+stack-titanium = titanium
+stack-aluminium = aluminum
+stack-copper-ore = copper ore
+stack-tin-ore = tin ore
+stack-copper = copper
+stack-tin = tin
+stack-bronze = bronze
 
 stack-bones = {$amount ->
     [1] bone

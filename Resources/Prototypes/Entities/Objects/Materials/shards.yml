@@ -188,6 +188,54 @@
 
 - type: entity
   parent: ShardBase
+  id: ShardGlassPhoron
+  name: phoron glass shard
+  description: A small piece of phoron glass.
+  components:
+  - type: Sprite
+    layers:
+      - sprite: Objects/Materials/Shards/shard.rsi
+        state: shard1
+        color: "#FF8833"
+        map: [ "enum.DamageStateVisualLayers.Base" ]
+  - type: RandomSprite
+    available:
+      - enum.DamageStateVisualLayers.Base:
+          shard1: ""
+          shard2: ""
+          shard3: ""
+  - type: MeleeWeapon
+    damage:
+      types:
+        Slash: 6
+  - type: ToolRefinable
+    refineResult:
+    - id: SheetGlass1
+    - id: SheetPhoronGlass1
+  - type: DamageOnTrigger
+    damage:
+      types:
+        Piercing: 7
+  - type: Tag
+    tags:
+      - PhoronGlassShard
+      - Trash
+  - type: Extractable
+    grindableSolutionName: shardphglass
+  - type: SolutionContainerManager
+    solutions:
+      shardphglass:
+        reagents:
+        - ReagentId: Silicon
+          Quantity: 5
+        - ReagentId: Phoron
+          Quantity: 5
+  - type: Construction
+    graph: PhoronShivConstruct
+    node: start
+
+- type: entity
+  parent: ShardBase
   id: ShardGlassUranium
   name: uranium glass shard
   description: A small piece of uranium glass.

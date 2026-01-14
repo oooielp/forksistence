@@ -92,14 +92,21 @@
   result: FoodPlateTin
   completetime: 0.4
   materials:
-    Steel: 100
+    Aluminium: 100
 
 - type: latheRecipe
   parent: FoodPlateTin
   id: FoodPlateMuffinTin
   result: FoodPlateMuffinTin
   materials:
-    Steel: 50
+    Aluminium: 50
+
+- type: latheRecipe
+  id: EmptyCan
+  result: EmptyCan
+  completetime: 0.4
+  materials:
+    Aluminium: 50
 
 - type: latheRecipe
   id: FoodKebabSkewer

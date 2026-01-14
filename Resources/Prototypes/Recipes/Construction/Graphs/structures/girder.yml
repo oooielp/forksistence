@@ -13,6 +13,15 @@
               amount: 2
               doAfter: 1
 
+        - to: bronzeGirder
+          completed:
+            - !type:SnapToGrid
+              southRotation: true
+          steps:
+            - material: Bronze
+              amount: 2
+              doAfter: 1
+
     - node: girder
       entity: Girder
       edges:
@@ -133,6 +142,30 @@
             - material: MeatSheets
               amount: 2
               doAfter: 2
+
+        - to: titaniumWall
+          completed:
+            - !type:SnapToGrid
+              southRotation: true
+          conditions:
+            - !type:EntityAnchored {}
+          steps:
+            - material: Titanium
+              amount: 2
+              doAfter: 2
+            - tool: Welding
+              doAfter: 10
+
+        - to: bronzeGirder
+          completed:
+            - !type:SnapToGrid
+              southRotation: true
+          conditions:
+            - !type:EntityAnchored {}
+          steps:
+            - material: Bronze
+              amount: 2
+              doAfter: 1
 
     - node: wall
       entity: WallSolid
@@ -266,6 +299,17 @@
               amount: 2
               doAfter: 1
 
+        - to: titaniumWall
+          completed:
+            - !type:SnapToGrid
+              southRotation: true
+          conditions:
+            - !type:EntityAnchored { }
+          steps:
+            - material: Titanium
+              amount: 2
+              doAfter: 1
+
         - to: shuttleWall
           completed:
             - !type:SnapToGrid
@@ -346,6 +390,57 @@
                   data: 0
             - tool: Cutting
               doAfter: 1
+
+    - node: titaniumWall
+      entity: WallTitanium
+      edges:
+        - to: reinforcedGirder
+          completed:
+            - !type:SpawnPrototype
+              prototype: SheetTitanium1
+              amount: 2
+          steps:
+            - tool: Welding
+              doAfter: 10
+            - tool: Prying
+              doAfter: 10
+
+    - node: bronzeGirder
+      entity: BronzeGirder
+      edges:
+        - to: girder
+          completed:
+            - !type:GivePrototype
+              prototype: SheetBronze1
+              amount: 1
+          steps:
+            - tool: Prying
+              doAfter: 5
+
+        - to: bronzeWall
+          completed:
+            - !type:SnapToGrid
+              southRotation: true
+          conditions:
+            - !type:EntityAnchored {}
+          steps:
+            - material: Bronze
+              amount: 2
+              doAfter: 1
+
+    - node: bronzeWall
+      entity: WallBronze
+      edges:
+        - to: bronzeGirder
+          completed:
+            - !type:GivePrototype
+              prototype: SheetBronze1
+              amount: 2
+          steps:
+            - tool: Welding
+              doAfter: 8
+            - tool: Prying
+              doAfter: 8
 
     - node: reinforcedWallChitin
       entity: WallReinforcedChitin

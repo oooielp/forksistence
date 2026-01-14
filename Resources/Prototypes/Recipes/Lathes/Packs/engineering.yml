@@ -24,6 +24,8 @@
   - ClothingHeadHatCone
   - AccessConfigurator
   - ToolboxMechanical
+  - VoiceSensorCopper
+  - SignallerCopper
 
 - type: latheRecipePack
   id: AtmosStatic
@@ -96,6 +98,7 @@
   - GasRecyclerMachineCircuitboard
   - PortableGeneratorPacmanMachineCircuitboard
   - PortableGeneratorSuperPacmanMachineCircuitboard
+  - PortableGeneratorMegamanMachineCircuitboard
   - PortableGeneratorJrPacmanMachineCircuitboard
   - PortableGeneratorOldmanMachineCircuitboard
   - EmitterCircuitboard

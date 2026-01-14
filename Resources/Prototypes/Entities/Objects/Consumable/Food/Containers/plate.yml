@@ -196,7 +196,15 @@
     - Trash
   - type: PhysicalComposition
     materialComposition:
-      Steel: 50
+      Aluminium: 50
+  - type: Extractable
+    grindableSolutionName: grindable
+  - type: SolutionContainerManager
+    solutions:
+      grindable:
+        reagents:
+        - ReagentId: Aluminium
+          Quantity: 10
   - type: SpaceGarbage
 
 # Muffin Tin
@@ -220,5 +228,13 @@
     - Trash
   - type: PhysicalComposition
     materialComposition:
-      Steel: 25
+      Aluminium: 25
+  - type: Extractable
+    grindableSolutionName: grindable
+  - type: SolutionContainerManager
+    solutions:
+      grindable:
+        reagents:
+        - ReagentId: Aluminium
+          Quantity: 5
   - type: SpaceGarbage

@@ -22,6 +22,28 @@
     minPressureDelta: 25000
     scalingType: Threshold
 
+## For phoron glass windows (2x better than plasma)
+- type: entity
+  abstract: true
+  id: BaseDeltaPressurePhoronGlass
+  components:
+  - type: DeltaPressure
+    minPressure: 150000
+    minPressureDelta: 100000
+    scalingType: Linear
+    scalingPower: 0.0005
+
+## For reinforced phoron glass windows (2x better than reinforced plasma)
+- type: entity
+  abstract: true
+  id: BaseDeltaPressureReinforcedPhoronGlass
+  components:
+  - type: DeltaPressure
+    minPressure: 300000
+    minPressureDelta: 200000
+    scalingType: Linear
+    scalingPower: 0.0001
+
 ## For plasma windows
 - type: entity
   abstract: true

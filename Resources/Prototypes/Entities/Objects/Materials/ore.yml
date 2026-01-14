@@ -419,14 +419,13 @@
     solutions:
       aluminumore:
         reagents:
-        - ReagentId: Aluminum
+        - ReagentId: Aluminium
           Quantity: 10
   - type: Item
     heldPrefix: aluminum
   - type: Tag
     tags:
     - Ore
-    - OreAluminum
 
 - type: entity
   parent: AluminumOre
@@ -463,7 +462,6 @@
   - type: Tag
     tags:
     - Ore
-    - OreCopper
 
 - type: entity
   parent: CopperOre
@@ -500,7 +498,6 @@
   - type: Tag
     tags:
     - Ore
-    - OreTin
 
 - type: entity
   parent: TinOre

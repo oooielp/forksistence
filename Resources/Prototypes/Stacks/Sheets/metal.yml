@@ -18,3 +18,17 @@
   name: stack-brass
   icon: { sprite: /Textures/Objects/Materials/Sheets/metal.rsi, state: brass }
   spawn: SheetBrass1
+
+- type: stack
+  parent: BaseSheetStack
+  id: Titanium
+  name: stack-titanium
+  icon: { sprite: /Textures/Objects/Materials/Sheets/metal.rsi, state: plastitanium }
+  spawn: SheetTitanium1
+
+- type: stack
+  parent: BaseSheetStack
+  id: Bronze
+  name: stack-bronze
+  icon: { sprite: /Textures/Objects/Materials/Sheets/metal.rsi, state: bronze }
+  spawn: SheetBronze1

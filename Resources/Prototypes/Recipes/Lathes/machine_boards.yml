@@ -195,6 +195,12 @@
   result: PortableGeneratorJrPacmanMachineCircuitboard
   unlockUses: 4
 
+- type: latheRecipe
+  parent: PortableGeneratorSuperPacmanMachineCircuitboard
+  id: PortableGeneratorMegamanMachineCircuitboard
+  result: PortableGeneratorMegamanMachineCircuitboard
+  unlockUses: 4
+
 ## Medical
 
 - type: latheRecipe

@@ -4,6 +4,9 @@
   id: MaterialsStatic
   recipes:
   - SheetRGlass
+  - SheetRPGlassAlloy
+  - SheetRPhoronGlassAlloy
+  - SheetRUGlassAlloy
   - MaterialDurathread
 
 - type: latheRecipePack
@@ -13,6 +16,7 @@
   - ModularReceiver
   - MicroManipulatorStockPart
   - ConveyorBeltAssembly
+  - IgniterCopper
 
 - type: latheRecipePack
   id: LightsStatic
@@ -38,6 +42,9 @@
   - CableStack
   - CableMVStack
   - CableHVStack
+  - CableCopperStack
+  - CableMVCopperStack
+  - CableHVCopperStack
 
 - type: latheRecipePack
   id: PaperworkStatic
