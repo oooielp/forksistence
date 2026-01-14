@@ -82,6 +82,7 @@
   recipeUnlocks:
   - PortableGeneratorPacmanMachineCircuitboard
   - PortableGeneratorSuperPacmanMachineCircuitboard
+  - PortableGeneratorMegamanMachineCircuitboard
   - PortableGeneratorJrPacmanMachineCircuitboard
   - PortableGeneratorOldmanMachineCircuitboard
   - SolarControlComputerCircuitboard

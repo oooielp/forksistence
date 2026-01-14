@@ -7,10 +7,16 @@
   - SheetGlass1
   - SheetPlasma1
   - SheetUranium1
+  - SheetTitanium1
+  - SheetAluminium1
+  - IngotCopper1
+  - IngotTin1
+  - SheetBronze
   - IngotGold1
   - IngotSilver1
   - MaterialBananium1
   - MaterialDiamond
+  - MaterialPhoron1
 
 - type: latheRecipePack
   id: RGlassSmelting
@@ -25,3 +31,6 @@
   - SheetPlasteel1
   - SheetUGlass1
   - SheetRUGlass1
+  - SheetPhoronGlass1
+  - SheetRPhoronGlass1
+

@@ -20,6 +20,45 @@
           types:
             Poison: 4
 
+
+- type: reagent
+  id: Phoron
+  name: reagent-name-phoron
+  group: Toxins
+  desc: reagent-desc-phoron
+  physicalDesc: reagent-physical-desc-gaseous
+  flavor: bitter
+  color: "#c45a9e"
+  recognizable: true
+  boilingPoint: -127.3
+  meltingPoint: -186.4
+  plantMetabolism:
+  - !type:PlantAdjustToxins
+    amount: 40
+  metabolisms:
+    Poison:
+      effects:
+      - !type:HealthChange
+        damage:
+          types:
+            Poison: 3
+      - !type:AdjustAlert
+        alertType: Toxins
+        minScale: 2.0
+        time: 10
+    Gas:
+      effects:
+      - !type:HealthChange
+        ignoreResistances: true
+        damage:
+          types:
+            Poison: 0.5
+  reactiveEffects:
+    Flammable:
+      methods: [ Touch ]
+      effects:
+      - !type:Flammable
+
 - type: reagent
   id: CarpoToxin
   name: reagent-name-carpotoxin
@@ -430,7 +469,7 @@
   physicalDesc: reagent-physical-desc-grainy
   color: "#ffffff"
   meltingPoint: 351
-  boilingPoint: 554 
+  boilingPoint: 554
   metabolisms:
     Poison:
       metabolismRate: 0.05

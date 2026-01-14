@@ -1,4 +1,4 @@
-reagent-name-aluminium = aluminium
+reagent-name-aluminium = aluminum
 reagent-desc-aluminium = A silver, soft, non-magnetic, and ductile metal.
 
 reagent-name-ash = ash
@@ -63,3 +63,9 @@ reagent-desc-uranium = A grey metallic chemical element in the actinide series, 
 
 reagent-name-zinc = zinc
 reagent-desc-zinc = A silvery, brittle metal, often used in batteries to carry charge.
+
+reagent-name-titanium = titanium
+reagent-desc-titanium = A lustrous transition metal with a silver color, known for its strength and low density.
+
+reagent-name-bananium = bananium
+reagent-desc-bananium = A mysterious, bananas-colored metal with strange properties.

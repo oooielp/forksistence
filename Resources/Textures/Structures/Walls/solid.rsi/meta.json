@@ -103,6 +103,44 @@
     },
     {
       "name": "reinforced_wall_girder"
+    },
+    {
+      "name": "fullbronze"
+    },
+    {
+      "name": "solidbronze0",
+      "directions": 4
+    },
+    {
+      "name": "solidbronze1",
+      "directions": 4
+    },
+    {
+      "name": "solidbronze2",
+      "directions": 4
+    },
+    {
+      "name": "solidbronze3",
+      "directions": 4
+    },
+    {
+      "name": "solidbronze4",
+      "directions": 4
+    },
+    {
+      "name": "solidbronze5",
+      "directions": 4
+    },
+    {
+      "name": "solidbronze6",
+      "directions": 4
+    },
+    {
+      "name": "solidbronze7",
+      "directions": 4
+    },
+    {
+      "name": "wall_girder_bronze"
     }
   ]
 }

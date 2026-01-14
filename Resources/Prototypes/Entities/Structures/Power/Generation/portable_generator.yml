@@ -422,3 +422,63 @@
       voltage: Apc
       supplyRampRate: 5000
       supplyRampTolerance: 1500
+
+- type: entity
+  name: M.E.G.A.M.A.N.-type portable generator
+  description: |-
+    A top-of-the-line generator for extreme power demands.
+    Runs off exotic Phoron sheets and is rated for up to 75 kW.
+    WARNING: Significantly higher fuel consumption. Use only when necessary.
+  parent: PortableGeneratorBase
+  id: PortableGeneratorMegaman
+  suffix: Phoron, 75 kW
+  components:
+    - type: Sprite
+      layers:
+        - state: portgen2
+          map: [ "enum.GeneratorVisualLayers.Body" ]
+        - state: portgen_on_unlit
+          map: [ "enum.GeneratorVisualLayers.Unlit" ]
+          shader: unshaded
+          visible: false
+    - type: GenericVisualizer
+      visuals:
+        enum.GeneratorVisuals.Running:
+          enum.GeneratorVisualLayers.Body:
+            True: { state: portgen2on }
+            False: { state: portgen2 }
+          enum.GeneratorVisualLayers.Unlit:
+            True: { visible: true }
+            False: { visible: false }
+
+    - type: Machine
+      board: PortableGeneratorMegamanMachineCircuitboard
+    - type: FuelGenerator
+      minTargetPower: 20000
+      maxTargetPower: 75000
+      targetPower: 75000
+      optimalPower: 75000
+      # 20 minutes at max output (1.5x S.U.P.E.R.P.A.C.M.A.N. depletion rate)
+      optimalBurnRate: 0.025
+      # Reasonable efficiency curve
+      fuelEfficiencyConstant: 0.5
+    - type: SolidFuelGeneratorAdapter
+      fuelMaterial: Phoron
+      multiplier: 0.01
+    - type: MaterialStorage
+      storageLimit: 3000
+      materialWhiteList: [Phoron]
+    - type: PortableGenerator
+      startChance: 0.95
+    - type: PowerMonitoringDevice
+      group: Generator
+      loadNode: output
+      sprite: Structures/Power/Generation/portable_generator.rsi
+      state: portgen2
+    - type: PowerSupplier
+      supplyRampRate: 10000
+      supplyRampTolerance: 3000
+    - type: GeneratorExhaustGas
+      gasType: Plasma
+      # 25 moles of plasma for every sheet of Phoron
+      moleRatio: 25

@@ -263,3 +263,32 @@
   materials:
     Steel: 100
   unlockUses: 4
+
+# Copper variants for common parts
+
+- type: latheRecipe
+  parent: BasePartRecipe
+  id: SignallerCopper
+  result: RemoteSignaller
+  materials:
+    Copper: 150
+    Plastic: 200
+    Glass: 100
+
+- type: latheRecipe
+  parent: BasePartRecipe
+  id: VoiceSensorCopper
+  result: voicesensor
+  materials:
+    Copper: 150
+    Plastic: 200
+    Glass: 100
+
+- type: latheRecipe
+  parent: BasePartRecipe
+  id: IgniterCopper
+  result: Igniter
+  materials:
+    Copper: 300
+    Plastic: 100
+    Glass: 100

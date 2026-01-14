@@ -1,0 +1,66 @@
+- type: paintableGroup
+  id: ItemContainers
+  time: 1.2
+  cost: 1
+  defaultStyle: cola
+  styles:
+    blank: EmptyCan
+    cola: DrinkColaCan
+    lemon-lime: DrinkLemonLimeCan
+    lemon-lime-cranberry: DrinkLemonLimeCranberryCan
+    iced-tea: DrinkIcedTeaCan
+    grape: DrinkGrapeCan
+    root-beer: DrinkRootBeerCan
+    soda-water: DrinkSodaWaterCan
+    space-mountain-wind: DrinkSpaceMountainWindCan
+    space-up: DrinkSpaceUpCan
+    sol-dry: DrinkSolDryCan
+    starkist: DrinkStarkistCan
+    tonic-water: DrinkTonicWaterCan
+    fourteen-loko: DrinkFourteenLokoCan
+    changeling-sting: DrinkChangelingStingCan
+    dr-gibb: DrinkDrGibbCan
+    nukie: DrinkNukieCan
+    energy: DrinkEnergyDrinkCan
+    shamblers: DrinkShamblersJuiceCan
+    pwr-game: DrinkPwrGameCan
+    beer: DrinkBeerCan
+    wine: DrinkWineCan
+
+- type: paintableGroup
+  id: ItemPDAs
+  time: 1.2
+  cost: 1
+  defaultStyle: passenger
+  styles:
+    passenger: PassengerPDA
+    captain: CaptainPDA
+    clown: ClownPDA
+    mime: MimePDA
+    medical: MedicalInternPDA
+    security: SecurityPDA
+    cargo: CargoPDA
+    research: ResearchAssistantPDA
+
+- type: paintableGroup
+  id: ItemHeadsets
+  time: 1.2
+  cost: 1
+  defaultStyle: general
+  styles:
+    general: ClothingHeadsetGrey
+    cargo: ClothingHeadsetCargo
+    mining: ClothingHeadsetMining
+    engineering: ClothingHeadsetEngineering
+    medical: ClothingHeadsetMedical
+    medical-science: ClothingHeadsetMedicalScience
+    robotics: ClothingHeadsetRobotics
+    science: ClothingHeadsetScience
+    security: ClothingHeadsetSecurity
+    brigmedic: ClothingHeadsetBrigmedic
+    service: ClothingHeadsetService
+    command: ClothingHeadsetCommand
+    centcom: ClothingHeadsetCentCom
+    freelance: ClothingHeadsetFreelance
+    wizard: ClothingHeadsetWizard
+    ninja: ClothingHeadsetNinja

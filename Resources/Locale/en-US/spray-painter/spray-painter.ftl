@@ -45,6 +45,7 @@ spray-painter-tab-category-airlocks = Airlocks
 spray-painter-tab-category-canisters = Canisters
 spray-painter-tab-category-crates = Crates
 spray-painter-tab-category-lockers = Lockers
+spray-painter-tab-category-items = Items
 spray-painter-tab-category-pipes = Pipes
 spray-painter-tab-category-decals = Decals
 
@@ -60,6 +61,10 @@ spray-painter-tab-group-closet = Unlocked
 spray-painter-tab-group-locker = Secure
 spray-painter-tab-group-wallcloset = Unlocked (Wall)
 spray-painter-tab-group-walllocker = Secure (Wall)
+
+spray-painter-tab-group-itemcontainers = Containers
+spray-painter-tab-group-itempdas = PDAs
+spray-painter-tab-group-itemheadsets = Headsets
 
 # Airlocks
 spray-painter-style-airlockstandard-atmospherics = Atmospheric
@@ -192,3 +197,55 @@ spray-painter-style-canisters-plasma = Plasma
 spray-painter-style-canisters-storage = Storage
 spray-painter-style-canisters-tritium = Tritium
 spray-painter-style-canisters-water-vapor = Water vapor
+
+# Items - Containers
+spray-painter-style-itemcontainers-blank = Blank
+spray-painter-style-itemcontainers-cola = Cola
+spray-painter-style-itemcontainers-lemon-lime = Lemon Lime
+spray-painter-style-itemcontainers-lemon-lime-cranberry = Lemon Lime Cranberry
+spray-painter-style-itemcontainers-iced-tea = Iced Tea
+spray-painter-style-itemcontainers-grape = Grape
+spray-painter-style-itemcontainers-root-beer = Root Beer
+spray-painter-style-itemcontainers-soda-water = Soda Water
+spray-painter-style-itemcontainers-space-mountain-wind = Space Mountain Wind
+spray-painter-style-itemcontainers-space-up = Space-Up
+spray-painter-style-itemcontainers-sol-dry = Sol Dry
+spray-painter-style-itemcontainers-starkist = Starkist
+spray-painter-style-itemcontainers-tonic-water = Tonic Water
+spray-painter-style-itemcontainers-fourteen-loko = Fourteen Loko
+spray-painter-style-itemcontainers-changeling-sting = Changeling Sting
+spray-painter-style-itemcontainers-dr-gibb = Dr. Gibb
+spray-painter-style-itemcontainers-nukie = Blood-Red Brew
+spray-painter-style-itemcontainers-energy = Energy Drink
+spray-painter-style-itemcontainers-shamblers = Shambler's Juice
+spray-painter-style-itemcontainers-pwr-game = PWR Game
+spray-painter-style-itemcontainers-beer = Beer
+spray-painter-style-itemcontainers-wine = Wine
+
+# Items - PDAs
+spray-painter-style-itempdas-passenger = Passenger
+spray-painter-style-itempdas-captain = Captain
+spray-painter-style-itempdas-clown = Clown
+spray-painter-style-itempdas-mime = Mime
+spray-painter-style-itempdas-medical = Medical
+spray-painter-style-itempdas-security = Security
+spray-painter-style-itempdas-cargo = Cargo
+spray-painter-style-itempdas-research = Research
+
+# Items - Headsets
+spray-painter-style-itemheadsets-general = General
+spray-painter-style-itemheadsets-cargo = Cargo
+spray-painter-style-itemheadsets-mining = Mining
+spray-painter-style-itemheadsets-engineering = Engineering
+spray-painter-style-itemheadsets-medical = Medical
+spray-painter-style-itemheadsets-medical-science = Medical Science
+spray-painter-style-itemheadsets-robotics = Robotics
+spray-painter-style-itemheadsets-science = Science
+spray-painter-style-itemheadsets-security = Security
+spray-painter-style-itemheadsets-brigmedic = Brigmedic
+spray-painter-style-itemheadsets-service = Service
+spray-painter-style-itemheadsets-command = Command
+spray-painter-style-itemheadsets-centcom = CentCom
+spray-painter-style-itemheadsets-freelance = Freelance
+spray-painter-style-itemheadsets-wizard = Wizard
+spray-painter-style-itemheadsets-ninja = Ninja

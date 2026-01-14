@@ -6,6 +6,9 @@
   description: An updated, modular intercom that fits over the head. Channel access is determined by the faction you target.
   components:
   - type: Headset
+  - type: Appearance
+  - type: Paintable
+    group: ItemHeadsets
   - type: Sprite
     state: icon
   - type: Item

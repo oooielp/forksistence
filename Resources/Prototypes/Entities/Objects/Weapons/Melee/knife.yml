@@ -308,6 +308,26 @@
     sprite: Objects/Weapons/Melee/plasma_shiv.rsi
 
 - type: entity
+  name: phoron shiv
+  parent: Shiv
+  id: PhoronShiv
+  description: A crude weapon fashioned from a piece of cloth and a phoron glass shard.
+  components:
+  - type: Construction
+    graph: PhoronShiv
+    node: icon
+  - type: MeleeWeapon
+    attackRate: 1.5
+    damage:
+      types:
+        Slash: 10
+  - type: Item
+    sprite: Objects/Weapons/Melee/plasma_shiv.rsi
+  - type: Sprite
+    sprite: Objects/Weapons/Melee/plasma_shiv.rsi
+    color: "#FF8833"
+
+- type: entity
   name: uranium shiv
   parent: Shiv
   id: UraniumShiv

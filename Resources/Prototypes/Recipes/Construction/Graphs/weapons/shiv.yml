@@ -104,6 +104,25 @@
     entity: PlasmaShiv
 
 - type: constructionGraph
+  id: PhoronShivConstruct
+  start: start
+  graph:
+  - node: start
+    entity: ShardGlassPhoron
+    edges:
+    - to: icon
+      completed:
+      - !type:AdminLog
+        message: "Construction"
+        impact: High
+      steps:
+      - material: Cloth
+        amount: 1
+        doAfter: 1
+  - node: icon
+    entity: PhoronShiv
+
+- type: constructionGraph
   id: PlasmaShiv
   start: start
   graph:

@@ -36,6 +36,14 @@
         "directions": 4
     },
     {
+        "name": "phoron_window",
+        "directions": 4
+    },
+    {
+        "name": "phoron_reinforced_window",
+        "directions": 4
+    },
+    {
         "name": "uranium_window",
         "directions": 4
     },

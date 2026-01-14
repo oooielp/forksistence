@@ -200,3 +200,42 @@
             - !type:PlaySoundBehavior
               sound:
                 collection: MetalBreak
+- type: entity
+  id: BronzeGirder
+  parent: Girder
+  name: bronze girder
+  description: A structural girder made from bronze; It requires bronze plating before it can be considered a wall.
+  components:
+    - type: Sprite
+      sprite: Structures/Walls/solid.rsi
+      state: wall_girder_bronze
+    - type: Construction
+      graph: Girder
+      node: bronzeGirder
+    - type: Destructible
+      thresholds:
+        - trigger:
+            !type:DamageTrigger
+            damage: 200
+          behaviors:
+            - !type:DoActsBehavior
+              acts: [ "Destruction" ]
+            - !type:PlaySoundBehavior
+              sound:
+                collection: MetalBreak
+        - trigger:
+            !type:DamageTrigger
+            damage: 50
+          behaviors:
+            - !type:SpawnEntitiesBehavior
+              spawn:
+                SheetBronze1:
+                  min: 1
+                  max: 1
+            - !type:DoActsBehavior
+              acts: [ "Destruction" ]
+            - !type:PlaySoundBehavior
+              sound:
+                collection: MetalBreak
+    - type: StaticPrice
+      price: 40

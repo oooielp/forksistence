@@ -25,6 +25,19 @@
     - !type:TileNotBlocked
 
 - type: construction
+  id: BronzeGirder
+  graph: Girder
+  startNode: start
+  targetNode: bronzeGirder
+  category: construction-category-structures
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canRotate: false
+  canBuildInImpassable: false
+  conditions:
+    - !type:TileNotBlocked
+
+- type: construction
   id: ClockworkGirder
   graph: ClockworkGirder
   startNode: start
@@ -49,7 +62,7 @@
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
-  
+
 - type: construction
   id: GirderDiagonal
   name: construction-recipe-diagonal-girder
@@ -211,6 +224,19 @@
     - !type:TileNotBlocked
 
 - type: construction
+  id: BronzeWall
+  graph: Girder
+  startNode: start
+  targetNode: bronzeWall
+  category: construction-category-structures
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canRotate: false
+  canBuildInImpassable: false
+  conditions:
+    - !type:TileNotBlocked
+
+- type: construction
   id: ShuttleWall
   graph: Girder
   startNode: start
@@ -242,6 +268,19 @@
   graph: Girder
   startNode: start
   targetNode: bananiumWall
+  category: construction-category-structures
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canRotate: false
+  canBuildInImpassable: false
+  conditions:
+    - !type:TileNotBlocked
+
+- type: construction
+  id: TitaniumWall
+  graph: Girder
+  startNode: start
+  targetNode: titaniumWall
   category: construction-category-structures
   objectType: Structure
   placementMode: SnapgridCenter
@@ -453,6 +492,34 @@
   canRotate: false
 
 - type: construction
+  id: PhoronGlassWindow
+  graph: Window
+  startNode: start
+  targetNode: phoronGlassWindow
+  category: construction-category-structures
+  canBuildInImpassable: true
+  conditions:
+    - !type:EmptyOrWindowValidInTile
+    - !type:NoWindowsInTile
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canRotate: false
+
+- type: construction
+  id: ReinforcedPhoronGlassWindow
+  graph: Window
+  startNode: start
+  targetNode: reinforcedPhoronGlassWindow
+  category: construction-category-structures
+  canBuildInImpassable: true
+  conditions:
+    - !type:EmptyOrWindowValidInTile
+    - !type:NoWindowsInTile
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canRotate: false
+
+- type: construction
   id: ShuttleWindow
   graph: Window
   startNode: start
@@ -565,6 +632,32 @@
   graph: WindowDirectional
   startNode: start
   targetNode: plasmaReinforcedWindowDirectional
+  category: construction-category-structures
+  canBuildInImpassable: true
+  conditions:
+    - !type:EmptyOrWindowValidInTile
+    - !type:NoWindowsInTile
+  objectType: Structure
+  placementMode: SnapgridCenter
+
+- type: construction
+  id: PhoronGlassWindowDirectional
+  graph: WindowDirectional
+  startNode: start
+  targetNode: phoronGlassWindowDirectional
+  category: construction-category-structures
+  canBuildInImpassable: true
+  conditions:
+    - !type:EmptyOrWindowValidInTile
+    - !type:NoWindowsInTile
+  objectType: Structure
+  placementMode: SnapgridCenter
+
+- type: construction
+  id: ReinforcedPhoronGlassWindowDirectional
+  graph: WindowDirectional
+  startNode: start
+  targetNode: reinforcedPhoronGlassWindowDirectional
   category: construction-category-structures
   canBuildInImpassable: true
   conditions:

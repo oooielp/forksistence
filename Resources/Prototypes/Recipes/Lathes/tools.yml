@@ -80,6 +80,29 @@
   result: CableHVStack1
 
 - type: latheRecipe
+  parent: CableStack
+  id: CableCopperStack
+  result: CableApcStack1
+  categories:
+  - Parts
+  materials:
+    Copper: 30
+
+- type: latheRecipe
+  parent: CableMVStack
+  id: CableMVCopperStack
+  result: CableMVStack1
+  materials:
+    Copper: 50
+
+- type: latheRecipe
+  parent: CableHVStack
+  id: CableHVCopperStack
+  result: CableHVStack1
+  materials:
+    Copper: 80
+
+- type: latheRecipe
   parent: BaseToolRecipe
   id: CrowbarGreen
   result: CrowbarGreen

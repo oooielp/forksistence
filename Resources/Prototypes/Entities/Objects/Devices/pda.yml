@@ -5,6 +5,8 @@
   name: PDA
   description: Personal Data Assistant.
   components:
+  - type: Paintable
+    group: ItemPDAs
   - type: Appearance
     appearanceDataInit:
      enum.PdaVisuals.PdaType:
