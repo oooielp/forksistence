@@ -834,6 +834,26 @@
       price: 40
 
 - type: entity
+  id: PortableGeneratorMegamanMachineCircuitboard
+  parent: BaseMachineCircuitboard
+  name: M.E.G.A.M.A.N.-type portable generator machine board
+  components:
+    - type: Sprite
+      state: engineering
+    - type: MachineBoard
+      prototype: PortableGeneratorMegaman
+      stackRequirements:
+        Manipulator: 2
+        CableHV: 8
+    - type: PhysicalComposition
+      materialComposition:
+        Glass: 300
+      chemicalComposition:
+        Silicon: 30
+    - type: StaticPrice
+      price: 60
+
+- type: entity
   id: ThrusterMachineCircuitboard
   parent: BaseMachineCircuitboard
   name: thruster machine board
