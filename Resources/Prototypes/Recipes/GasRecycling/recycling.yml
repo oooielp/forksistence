@@ -1,0 +1,29 @@
+# Gas Recycling Recipes
+# These recipes define how gases can be recycled through a gas recycler.
+# Each recipe specifies:
+# - inputGas: The waste gas to be recycled
+# - outputGas: The useful gas produced
+# - conversionRatio: The ratio of input to output (1.0 = 1:1 conversion)
+# - minTemp: Minimum temperature (in K) required for recycling
+# - minPressure: Minimum pressure (in kPa) required for recycling
+# - scrubbedReagents: (Optional) Reagents that can be scrubbed from the gas into containers
+
+- type: gasRecyclingRecipe
+  id: RecycleCarbonDioxide
+  inputGas: CarbonDioxide
+  outputGas: Oxygen
+  conversionRatio: 1.0
+  minTemp: 673.15  # 400°C (CO2 decomposition)
+  minPressure: 2000  # 20 atmospheres
+  scrubbedReagents:
+    Carbon: 0.01  # 0.01 moles of Carbon per mole of CO2 when container is present
+
+- type: gasRecyclingRecipe
+  id: RecycleNitrousOxide
+  inputGas: NitrousOxide
+  outputGas: Nitrogen
+  conversionRatio: 1.0
+  minTemp: 523.15  # 250°C (N2O catalytic decomposition)
+  minPressure: 1500  # 15 atmospheres
+  scrubbedReagents:
+    Oxygen: 0.01  # 0.01 moles of Oxygen per mole of N2O when container is present
