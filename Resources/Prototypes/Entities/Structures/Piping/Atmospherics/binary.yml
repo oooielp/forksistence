@@ -507,7 +507,7 @@
   parent: [ BaseMachine, ConstructibleMachine ]
   id: GasRecycler
   name: gas recycler
-  description: Recycles carbon dioxide and nitrous oxide. Heater and compressor not included.
+  description: Recycles waste gases into useful gases. Can hold a beaker to collect reagents skimmed from the gas stream. Requires high temperature and pressure to operate.
   placement:
     mode: SnapgridCenter
   components:
@@ -539,6 +539,17 @@
   - type: PipeColorVisuals
   - type: Rotatable
   - type: GasRecycler
+  - type: ItemSlots
+    slots:
+      beaker_slot:
+        name: Beaker
+        ejectOnInteract: true
+        whitelist:
+          components:
+          - FitsInDispenser
+  - type: ContainerContainer
+    containers:
+      beaker_slot: !type:ContainerSlot
   - type: PipeRestrictOverlap
   - type: NodeContainer
     nodes:
