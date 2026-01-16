@@ -116,6 +116,7 @@
   components:
   - type: VendingMachineRestock
     canRestock:
+    - AutoDrobeInventory
     - ClothesMateInventory
     - AtmosDrobeInventory
     - BarDrobeInventory
@@ -338,7 +339,7 @@
     - SpaceUpInventory
     - SodaInventory
     - DrGibbInventory
-    - SmiteInventory 
+    - SmiteInventory
   - type: Sprite
     layers:
     - state: base
