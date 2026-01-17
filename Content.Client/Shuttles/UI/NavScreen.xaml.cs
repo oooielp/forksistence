@@ -6,6 +6,7 @@ using Robust.Client.UserInterface.Controls;
 using Robust.Client.UserInterface.XAML;
 using Robust.Shared.Map;
 using Robust.Shared.Physics.Components;
+using Content.Shared.Shuttles.Components;
 
 namespace Content.Client.Shuttles.UI;
 
@@ -18,6 +19,8 @@ public sealed partial class NavScreen : BoxContainer
     private EntityUid? _consoleEntity; // Entity of controlling console
     private EntityUid? _shuttleEntity;
 
+    public Action<ShuttleDampingMode>? OnDampingModeChanged;
+
     public NavScreen()
     {
         RobustXamlLoader.Load(this);
@@ -29,6 +32,11 @@ public sealed partial class NavScreen : BoxContainer
 
         DockToggle.OnToggled += OnDockTogglePressed;
         DockToggle.Pressed = NavRadar.ShowDocks;
+
+        DampingModeButton.AddItem(Loc.GetString("shuttle-console-damping-cruise"), (int) ShuttleDampingMode.Cruise);
+        DampingModeButton.AddItem(Loc.GetString("shuttle-console-damping-normal"), (int) ShuttleDampingMode.Normal);
+        DampingModeButton.AddItem(Loc.GetString("shuttle-console-damping-anchor"), (int) ShuttleDampingMode.Anchor);
+        DampingModeButton.OnItemSelected += OnDampingSelected;
     }
 
     public void SetShuttle(EntityUid? shuttle)
@@ -57,6 +65,7 @@ public sealed partial class NavScreen : BoxContainer
     public void UpdateState(NavInterfaceState scc)
     {
         NavRadar.UpdateState(scc);
+        DampingModeButton.SelectId((int) scc.DampingMode);
     }
 
     public void SetMatrix(EntityCoordinates? coordinates, Angle? angle)
@@ -95,5 +104,11 @@ public sealed partial class NavScreen : BoxContainer
             ("Y", $"{gridVelocity.Y + 10f * float.Epsilon:0.0}"));
         GridAngularVelocity.Text = Loc.GetString("shuttle-console-angular-velocity-value",
             ("angularVelocity", $"{-MathHelper.RadiansToDegrees(gridBody.AngularVelocity) + 10f * float.Epsilon:0.0}"));
+    }
+
+    private void OnDampingSelected(OptionButton.ItemSelectedEventArgs args)
+    {
+        DampingModeButton.SelectId(args.Id);
+        OnDampingModeChanged?.Invoke((ShuttleDampingMode) args.Id);
     }
 }

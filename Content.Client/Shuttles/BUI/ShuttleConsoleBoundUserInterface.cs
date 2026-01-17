@@ -1,5 +1,6 @@
 using Content.Client.Shuttles.UI;
 using Content.Shared.Shuttles.BUIStates;
+using Content.Shared.Shuttles.Components;
 using Content.Shared.Shuttles.Events;
 using JetBrains.Annotations;
 using Robust.Client.UserInterface;
@@ -27,6 +28,15 @@ public sealed class ShuttleConsoleBoundUserInterface : BoundUserInterface
         _window.DockRequest += OnDockRequest;
         _window.UndockRequest += OnUndockRequest;
         _window.UndockAllRequest += OnUndockAllRequest;
+        _window.OnDampingModeChanged += OnDampingModeChanged;
+    }
+
+    private void OnDampingModeChanged(ShuttleDampingMode mode)
+    {
+        SendMessage(new ShuttleConsoleDampingMessage()
+        {
+            DampingMode = mode,
+        });
     }
 
     private void OnUndockRequest(NetEntity entity)

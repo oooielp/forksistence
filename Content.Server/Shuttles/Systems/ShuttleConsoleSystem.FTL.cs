@@ -164,4 +164,14 @@ public sealed partial class ShuttleConsoleSystem
 
         _shuttle.FTLToCoordinates(shuttleUid.Value, shuttleComp, adjustedCoordinates, targetAngle);
     }
+
+    private void OnDampingMessage(Entity<ShuttleConsoleComponent> ent, ref ShuttleConsoleDampingMessage args)
+    {
+        var xform = _xformQuery.GetComponent(ent);
+        if (xform.GridUid is not { } gridUid)
+            return;
+
+        _shuttle.SetDampingMode(gridUid, args.DampingMode);
+        RefreshShuttleConsoles(gridUid);
+    }
 }

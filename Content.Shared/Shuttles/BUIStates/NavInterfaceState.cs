@@ -1,5 +1,6 @@
 using Robust.Shared.Map;
 using Robust.Shared.Serialization;
+using Content.Shared.Shuttles.Components;
 
 namespace Content.Shared.Shuttles.BUIStates;
 
@@ -22,16 +23,19 @@ public sealed class NavInterfaceState
 
     public bool RotateWithEntity = true;
 
+    public readonly ShuttleDampingMode DampingMode;
+
     public NavInterfaceState(
         float maxRange,
         NetCoordinates? coordinates,
         Angle? angle,
-        Dictionary<NetEntity, List<DockingPortState>> docks)
+        Dictionary<NetEntity, List<DockingPortState>> docks, ShuttleDampingMode dampingMode)
     {
         MaxRange = maxRange;
         Coordinates = coordinates;
         Angle = angle;
         Docks = docks;
+        DampingMode = dampingMode;
     }
 }
 

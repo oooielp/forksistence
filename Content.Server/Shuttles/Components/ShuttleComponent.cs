@@ -1,4 +1,5 @@
 using System.Numerics;
+using Content.Shared.Shuttles.Components;
 
 namespace Content.Server.Shuttles.Components
 {
@@ -64,9 +65,12 @@ namespace Content.Server.Shuttles.Components
 
         /// <summary>
         /// Final Damping Modifier for a shuttle.
-        /// This value is set to 0 during FTL. And to BodyModifier when not in FTL.
+        /// This value is set to 0 during FTL.
         /// </summary>
         [DataField]
         public float DampingModifier;
+
+        [ViewVariables(VVAccess.ReadWrite), DataField]
+        public ShuttleDampingMode DampingMode = ShuttleDampingMode.Normal;
     }
 }
