@@ -29,6 +29,7 @@ public sealed partial class DockingScreen : BoxContainer
 
     public event Action<NetEntity, NetEntity>? DockRequest;
     public event Action<NetEntity>? UndockRequest;
+    public event Action? UndockAllRequest;
 
     public DockingScreen()
     {
@@ -44,6 +45,10 @@ public sealed partial class DockingScreen : BoxContainer
         DockingControl.UndockRequest += entity =>
         {
             UndockRequest?.Invoke(entity);
+        };
+        UndockAllButton.OnPressed += _ =>
+        {
+            UndockAllRequest?.Invoke();
         };
     }
 

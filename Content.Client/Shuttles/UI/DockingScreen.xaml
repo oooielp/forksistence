@@ -20,6 +20,8 @@
         <controls1:StripeBack MinSize="48 48">
             <controls:Label Name="DockingPortsLabel" Text="{controls:Loc 'shuttle-console-docks-label'}" HorizontalAlignment="Center"/>
         </controls1:StripeBack>
+        <controls:Button Name="UndockAllButton" StyleClasses="negative" MinSize="32 32" Text="{controls:Loc 'shuttle-console-undock-all'}"/>
+        <controls:PanelContainer StyleClasses="LowDivider" MinHeight="2" Margin="0 10"/>
         <controls:ScrollContainer VerticalExpand="True" HScrollEnabled="False"
                                   ReturnMeasure="True">
             <controls:BoxContainer Name="DockPorts" Orientation="Vertical"/>
