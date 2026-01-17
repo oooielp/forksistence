@@ -104,7 +104,7 @@
   name: Tactical Cigarette Infuser
   parent: [BaseWeaponShotgun, BaseGunWieldable, BaseSecurityContraband]
   id: WeaponRifleCiggyLauncher
-  description: A battered launcher that fires loose cigarettes. Load them by hand and try not to inhale.
+  description: The pinnacle of big tobacco marketing.
   components:
   - type: Item
     size: Huge
@@ -123,7 +123,6 @@
       - Cigarette
     capacity: 30
     proto: Cigarette
-  - type: GunRequiresWield
   - type: Gun
     fireRate: 5
     selectedMode: SemiAuto
