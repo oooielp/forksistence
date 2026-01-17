@@ -65,7 +65,7 @@ namespace Content.Server.Shuttles.Components
 
         /// <summary>
         /// Final Damping Modifier for a shuttle.
-        /// This value is set to 0 during FTL.
+        /// This value is set to 0 during FTL, and otherwise is managed by ShuttleSystem based on the state of DampingMode
         /// </summary>
         [DataField]
         public float DampingModifier;
