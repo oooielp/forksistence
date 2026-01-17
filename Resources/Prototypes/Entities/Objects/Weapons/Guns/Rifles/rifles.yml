@@ -133,6 +133,7 @@
     soundGunshot:
       path: /Audio/Items/Lighters/lighter1.ogg
   - type: LightSmokableOnShoot
+  - type: AddAutoEquipToProjectile
 
 - type: entity
   name: M90 GL
