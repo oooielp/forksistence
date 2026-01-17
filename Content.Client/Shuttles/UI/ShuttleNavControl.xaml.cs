@@ -132,7 +132,6 @@ public sealed partial class ShuttleNavControl : BaseShuttleControl
 
         DrawBacking(handle);
         DrawCircles(handle);
-        // DrawNorthPointer(handle);
 
         // No data
         if (_coordinates == null || _rotation == null)
