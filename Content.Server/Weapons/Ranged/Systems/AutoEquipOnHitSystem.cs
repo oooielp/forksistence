@@ -6,7 +6,7 @@ namespace Content.Server.Weapons.Ranged.Systems;
 
 /// <summary>
 ///     Auto-equip items that have AutoEquipOnHitComponent when they hit people.
-///     Removes AutoEquipOnHitComponent component if the item is equipped, or misses a target
+///     Removes AutoEquipOnHitComponent when the item equips successfully or lands.
 /// </summary>
 public sealed class AutoEquipOnHitSystem : EntitySystem
 {
@@ -32,7 +32,10 @@ public sealed class AutoEquipOnHitSystem : EntitySystem
                 continue;
 
             if (_inventory.TryEquip(args.Target, args.Target, ent.Owner, slot.Name, silent: true))
+            {
+                RemCompDeferred<AutoEquipOnHitComponent>(ent.Owner);
                 break;
+            }
         }
     }
 
