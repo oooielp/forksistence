@@ -19,3 +19,11 @@ paper-ui-fill-level = {$currentLength}/{$maxLength}
 paper-ui-save-button = Save ({$keybind})
 
 paper-tamper-proof-modified-message = This page was written using tamper-proof ink.
+
+# Starlight-Compatible - Form and signature buttons
+paper-form-fill-button = Fill
+paper-signature-sign-button = Sign
+paper-form-dialog-ok = OK
+paper-form-dialog-cancel = Cancel
+paper-signature-unknown = Unknown
+# 

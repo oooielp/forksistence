@@ -59,6 +59,12 @@ public sealed partial class PaperComponent : Component
     }
 
     [Serializable, NetSerializable]
+    public sealed class PaperSignatureRequestMessage(int signatureIndex) : BoundUserInterfaceMessage
+    {
+        public readonly int SignatureIndex = signatureIndex;
+    }
+    
+    [Serializable, NetSerializable]
     public enum PaperUiKey
     {
         Key
