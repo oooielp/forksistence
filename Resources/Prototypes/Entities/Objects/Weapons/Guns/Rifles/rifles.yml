@@ -101,7 +101,7 @@
   - type: Appearance
 
 - type: entity
-  name: CiggyLauncher
+  name: Tactical Cigarette Infuser
   parent: [BaseWeaponShotgun, BaseGunWieldable, BaseSecurityContraband]
   id: WeaponRifleCiggyLauncher
   description: A battered launcher that fires loose cigarettes. Load them by hand and try not to inhale.
