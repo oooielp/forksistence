@@ -221,6 +221,7 @@ public sealed partial class ShuttleSystem : SharedShuttleSystem
 
     private void OnFTLCompleted(Entity<ShuttleComponent> ent, ref FTLCompletedEvent args)
     {
+        // ent.Comp.DampingModifier = ent.Comp.BodyModifier;
         UpdateDamping(ent, ent.Comp);
     }
 }
