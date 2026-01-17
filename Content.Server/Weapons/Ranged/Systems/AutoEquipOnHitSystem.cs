@@ -21,8 +21,6 @@ public sealed class AutoEquipOnHitSystem : EntitySystem
 
     private void OnThrowDoHit(Entity<AutoEquipOnHitComponent> ent, ref ThrowDoHitEvent args)
     {
-        RemCompDeferred<AutoEquipOnHitComponent>(ent.Owner);
-
         //Try to grab their InventoryComponent
         if (!_inventory.TryGetSlots(args.Target, out var slots))
             return;
