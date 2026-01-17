@@ -102,10 +102,14 @@
 
 - type: entity
   name: CiggyLauncher
-  parent: [BaseWeaponRifle, BaseSecurityContraband]
+  parent: [BaseWeaponShotgun, BaseGunWieldable, BaseSecurityContraband]
   id: WeaponRifleCiggyLauncher
-  description: A somewhat battered combat rifle of a design originating from old Earth. Favored by criminals, militias, and terrorists due to its famed reliability and easy-to-manufacture design. Feeds from .30 rifle magazines.
+  description: A battered launcher that fires loose cigarettes. Load them by hand and try not to inhale.
   components:
+  - type: Item
+    size: Huge
+    shape:
+    - 0,0,3,2
   - type: Sprite
     sprite: Objects/Weapons/Guns/Rifles/ciggylauncher.rsi
     layers:
@@ -113,35 +117,22 @@
         map: ["enum.GunVisualLayers.Base"]
   - type: Clothing
     sprite: Objects/Weapons/Guns/Rifles/ciggylauncher.rsi
+  - type: BallisticAmmoProvider
+    whitelist:
+      tags:
+      - Cigarette
+    capacity: 30
+    proto: Cigarette
+  - type: GunRequiresWield
   - type: Gun
+    fireRate: 5
+    selectedMode: SemiAuto
+    availableModes:
+      - FullAuto
+      - SemiAuto
     soundGunshot:
-      path: /Audio/Weapons/Guns/Gunshots/rifle2.ogg
-  - type: ChamberMagazineAmmoProvider
-    soundRack:
-      path: /Audio/Weapons/Guns/Cock/ltrifle_cock.ogg
-  - type: ItemSlots
-    slots:
-      gun_magazine:
-        name: Magazine
-        startingItem: MagazineLightRifle
-        insertSound: /Audio/Weapons/Guns/MagIn/ltrifle_magin.ogg
-        ejectSound: /Audio/Weapons/Guns/MagOut/ltrifle_magout.ogg
-        priority: 2
-        whitelist:
-          tags:
-            - MagazineLightRifle
-        whitelistFailPopup: gun-magazine-whitelist-fail
-      gun_chamber:
-        name: Chamber
-        priority: 1
-        whitelist:
-          tags:
-            - CartridgeLightRifle
-  - type: ContainerContainer
-    containers:
-      gun_magazine: !type:ContainerSlot
-      gun_chamber: !type:ContainerSlot
-  - type: Appearance
+      path: /Audio/Items/Lighters/lighter1.ogg
+  - type: LightSmokableOnShoot
 
 - type: entity
   name: M90 GL
