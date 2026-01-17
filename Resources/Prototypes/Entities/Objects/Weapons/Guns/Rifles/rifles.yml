@@ -104,7 +104,7 @@
   name: Tactical Cigarette Infuser
   parent: [BaseWeaponShotgun, BaseGunWieldable, BaseSecurityContraband]
   id: WeaponRifleCiggyLauncher
-  description: The pinnacle of big tobacco marketing.
+  description: An aggressive marketing strategy.
   components:
   - type: Item
     size: Huge
