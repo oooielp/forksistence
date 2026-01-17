@@ -25,7 +25,7 @@ You can create interactive forms with fillable fields, signatures, and checkboxe
 
 - [color=tan]\[form\][/color] — creates a fillable text field (click to fill)
 - [color=tan]\[signature\][/color] — creates a signature field (signs with your character's name)
-- [color=tan]\[check\][/color] — creates a checkbox (click to toggle ☐/☑)
+- [color=tan]\[check\][/color] — creates a checkbox (click to cycle ☐/✔/✖)
 
 These are useful for creating official documents, contracts, and paperwork that require multiple people to fill in or sign.
 
