@@ -29,6 +29,7 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
 using Content.Shared.Maps;
+using Content.Shared.Shuttles.Components;
 
 namespace Content.Server.Shuttles.Systems;
 
@@ -130,6 +131,36 @@ public sealed partial class ShuttleSystem : SharedShuttleSystem
         }
 
         component.DampingModifier = component.BodyModifier;
+
+        UpdateDamping(uid, component);
+    }
+
+    public void SetDampingMode(EntityUid uid, ShuttleDampingMode mode, ShuttleComponent? component = null)
+    {
+        if (!Resolve(uid, ref component))
+            return;
+
+        component.DampingMode = mode;
+        UpdateDamping(uid, component);
+    }
+
+    private void UpdateDamping(EntityUid uid, ShuttleComponent component)
+    {
+        float modifier = component.BodyModifier;
+        switch (component.DampingMode)
+        {
+            case ShuttleDampingMode.Cruise:
+                modifier = 0f;
+                break;
+            case ShuttleDampingMode.Anchor:
+                modifier = 2.0f; // Significantly higher damping
+                break;
+            case ShuttleDampingMode.Normal:
+                modifier = component.BodyModifier;
+                break;
+        }
+
+        component.DampingModifier = modifier;
     }
 
     public void Toggle(EntityUid uid, ShuttleComponent component)
@@ -190,6 +221,6 @@ public sealed partial class ShuttleSystem : SharedShuttleSystem
 
     private void OnFTLCompleted(Entity<ShuttleComponent> ent, ref FTLCompletedEvent args)
     {
-        ent.Comp.DampingModifier = ent.Comp.BodyModifier;
+        UpdateDamping(ent, ent.Comp);
     }
 }
