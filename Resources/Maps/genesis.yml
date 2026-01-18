@@ -66468,8 +66468,6 @@ entities:
       pos: 61.5,13.5
       parent: 2
     - type: DeviceNetwork
-      configurators:
-      - invalid
       deviceLists:
       - 6939
       address: VNT-63BE-39FA
@@ -68490,8 +68488,6 @@ entities:
       pos: 60.5,13.5
       parent: 2
     - type: DeviceNetwork
-      configurators:
-      - invalid
       deviceLists:
       - 6939
       address: SCR-73CC-67BD
@@ -68893,8 +68889,6 @@ entities:
       pos: 1.5,17.5
       parent: 2
     - type: DeviceNetwork
-      configurators:
-      - invalid
       deviceLists:
       - 6825
       address: SCR-4009-778F
