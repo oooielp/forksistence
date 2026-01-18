@@ -15,7 +15,7 @@
 - type: oreDunGen
   id: OreIron
   replacement: AsteroidRock
-  entity: AsteroidRockTin
+  entity: AsteroidRockIron
   count: 5
   minGroupSize: 5
   maxGroupSize: 7

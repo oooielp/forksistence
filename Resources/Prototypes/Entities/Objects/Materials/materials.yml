@@ -453,7 +453,6 @@
   - type: Tag
     tags:
     - RawMaterial
-    - Alloy
     - Phoron
 
 - type: entity

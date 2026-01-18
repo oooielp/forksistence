@@ -218,7 +218,6 @@
         Piercing: 7
   - type: Tag
     tags:
-      - PhoronGlassShard
       - Trash
   - type: Extractable
     grindableSolutionName: shardphglass

@@ -432,27 +432,6 @@
     RawTitanium: 6000
 
 - type: latheRecipe
-  id: MaterialTitanium1
-  result: MaterialTitanium1
-  completetime: 0
-  materials:
-    RawTitanium: 200
-
-- type: latheRecipe
-  id: MaterialTitanium10
-  result: MaterialTitanium
-  completetime: 1
-  materials:
-    RawTitanium: 2000
-
-- type: latheRecipe
-  id: MaterialTitanium30
-  result: MaterialTitanium
-  completetime: 2
-  materials:
-    RawTitanium: 6000
-
-- type: latheRecipe
   id: MaterialSheetMeat
   result: MaterialSheetMeat1
   completetime: 6.4
