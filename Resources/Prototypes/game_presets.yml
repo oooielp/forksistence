@@ -266,3 +266,14 @@
   - KesslerSyndromeScheduler
   - SpaceTrafficControlEventScheduler
   - BasicRoundstartVariation
+
+- type: gamePreset
+  id: Persist
+  alias:
+  - persist
+  - westayinbaybee
+  name: persist-title
+  showInVote: false
+  description: persist-description
+  rules:
+  - PersistRoundstartVariation
