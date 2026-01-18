@@ -30,7 +30,7 @@
 
 - type: gameMap
   id: PersistDev
-  mapName: Dev
+  mapName: PersistDev
   mapPath: /Maps/Test/dev_map_persist.yml
   minPlayers: 0
   stations:
