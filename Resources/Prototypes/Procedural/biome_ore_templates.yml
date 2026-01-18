@@ -2,7 +2,7 @@
 - type: biomeMarkerLayer
   id: OreIron
   entityMask:
-    AsteroidRock: AsteroidRockTin
+    AsteroidRock: AsteroidRockIron
     WallRock: WallRockTin
     WallRockBasalt: WallRockBasaltTin
     WallRockChromite: WallRockChromiteTin

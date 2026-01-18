@@ -67,5 +67,8 @@ reagent-desc-zinc = A silvery, brittle metal, often used in batteries to carry c
 reagent-name-titanium = titanium
 reagent-desc-titanium = A lustrous transition metal with a silver color, known for its strength and low density.
 
+reagent-name-tin = tin
+reagent-desc-tin = A soft, malleable, and ductile metal with a silvery-white appearance.
+
 reagent-name-bananium = bananium
 reagent-desc-bananium = A mysterious, bananas-colored metal with strange properties.
