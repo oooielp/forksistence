@@ -29,6 +29,21 @@
             Captain: [ -1, -1 ]
 
 - type: gameMap
+  id: PersistDev
+  mapName: Dev
+  mapPath: /Maps/Test/dev_map_persist.yml
+  minPlayers: 0
+  stations:
+    Dev:
+      stationProto: StandardPersistStation
+      components:
+      - type: StationNameSetup
+        mapNameTemplate: "PersistDev"
+      - type: StationJobs
+        availableJobs:
+          Captain: [ -1, -1 ]
+
+- type: gameMap
   id: TestTeg
   mapName: Test TEG
   mapPath: /Maps/Test/test_teg.yml
