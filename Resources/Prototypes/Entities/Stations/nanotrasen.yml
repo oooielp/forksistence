@@ -32,6 +32,28 @@
     - type: Transform
 
 - type: entity
+  id: StandardPersistStation
+  parent:
+  - BaseStation
+  - BaseStationNews
+  - BaseStationCargo
+  - BaseStationJobsSpawning
+  - BaseStationRecords
+  - BaseStationGateway
+  - BaseStationShuttles
+  - BaseStationAlertLevels
+  - BaseStationMagnet
+  - BaseStationExpeditions
+  - BaseStationSalvageJobs
+  - BaseStationSiliconLawCrewsimov
+  - BaseStationAllEventsEligible
+  - BaseStationNanotrasen
+  - BaseStationDeliveries
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Transform
+
+- type: entity
   id: NanotrasenCentralCommand
   parent:
     - BaseStation
