@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using Content.Server.Atmos.Components;
 using Content.Server.NodeContainer.EntitySystems;
 using Content.Server.NodeContainer.NodeGroups;
@@ -19,6 +18,8 @@ namespace Content.Server.Atmos.EntitySystems;
 /// </summary>
 public sealed class PipeNetGasSnapshotSystem : EntitySystem
 {
+    [Dependency] private readonly NodeContainerSystem _nodeContainer = default!;
+
     public override void Initialize()
     {
         base.Initialize();
@@ -77,7 +78,7 @@ public sealed class PipeNetGasSnapshotSystem : EntitySystem
         foreach (var (nodeName, snapshotAir) in component.NodeAir)
         {
             // Just in-case the component has been broken from a map edit somehow - Shouldn't be necessary
-            if (!TryGetPipeNode(nodeContainer, nodeName, out var pipeNode))
+            if (!_nodeContainer.TryGetNode(nodeContainer, nodeName, out PipeNode? pipeNode))
             {
                 // Snapshot owner no longer has this node.
                 toRemove.Add(nodeName);
@@ -100,17 +101,6 @@ public sealed class PipeNetGasSnapshotSystem : EntitySystem
 
         if (component.NodeAir.Count == 0)
             RemComp<PipeNetGasSnapshotComponent>(uid);
-    }
-
-    private static bool TryGetPipeNode(NodeContainerComponent nodeContainer, string nodeName,
-        [NotNullWhen(true)] out PipeNode? pipeNode)
-    {
-        pipeNode = null;
-        if (!nodeContainer.Nodes.TryGetValue(nodeName, out var node))
-            return false;
-
-        pipeNode = node as PipeNode;
-        return pipeNode != null;
     }
 
     private bool TrySelectSnapshotNode(IPipeNet pipeNet, out EntityUid owner, out string nodeName)
