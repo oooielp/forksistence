@@ -17,6 +17,10 @@ shuttle-console-linear-velocity = Linear velocity:
 shuttle-console-linear-velocity-value = {$X}, {$Y}
 shuttle-console-angular-velocity = Angular velocity:
 shuttle-console-angular-velocity-value = {$angularVelocity}
+shuttle-console-damping-label = Damping
+shuttle-console-damping-cruise = Cruise
+shuttle-console-damping-normal = Normal
+shuttle-console-damping-anchor = Anchor
 
 shuttle-console-unknown = Unknown
 shuttle-console-iff-label = {$name} ({$distance}m)
@@ -50,6 +54,7 @@ shuttle-console-docked = Docked objects
 
 shuttle-console-view = View
 shuttle-console-undock = Undock
+shuttle-console-undock-all = Undock All
 shuttle-console-dock = Dock
 shuttle-console-docks-label = Docks
 

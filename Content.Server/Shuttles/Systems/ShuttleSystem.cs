@@ -29,6 +29,7 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
 using Content.Shared.Maps;
+using Content.Shared.Shuttles.Components;
 
 namespace Content.Server.Shuttles.Systems;
 
@@ -63,6 +64,8 @@ public sealed partial class ShuttleSystem : SharedShuttleSystem
     [Dependency] private readonly ThrusterSystem _thruster = default!;
     [Dependency] private readonly UserInterfaceSystem _uiSystem = default!;
     [Dependency] private readonly TurfSystem _turf = default!;
+
+    private bool _inFTL = false;
 
     private EntityQuery<BuckleComponent> _buckleQuery;
     private EntityQuery<MapGridComponent> _gridQuery;
@@ -130,6 +133,42 @@ public sealed partial class ShuttleSystem : SharedShuttleSystem
         }
 
         component.DampingModifier = component.BodyModifier;
+
+        UpdateDamping(uid, component);
+    }
+
+    public void SetDampingMode(EntityUid uid, ShuttleDampingMode mode, ShuttleComponent? component = null)
+    {
+        if (!Resolve(uid, ref component))
+            return;
+
+        component.DampingMode = mode;
+        UpdateDamping(uid, component);
+    }
+
+    private void UpdateDamping(EntityUid uid, ShuttleComponent component)
+    {
+        float modifier = component.BodyModifier;
+        if(!component.InFTL)
+        {
+            switch (component.DampingMode)
+            {
+                case ShuttleDampingMode.Cruise:
+                    modifier = 0f;
+                    break;
+                case ShuttleDampingMode.Anchor:
+                    modifier = 5f; // Significantly higher damping
+                    break;
+                case ShuttleDampingMode.Normal:
+                    modifier = component.BodyModifier; // 0.25f
+                    break;
+            }
+        }
+        else // this was set to 0 during FTL, keeping that behavior
+        {
+            modifier = 0f;
+        }
+        component.DampingModifier = modifier;
     }
 
     public void Toggle(EntityUid uid, ShuttleComponent component)
@@ -185,11 +224,15 @@ public sealed partial class ShuttleSystem : SharedShuttleSystem
 
     private void OnFTLStarted(Entity<ShuttleComponent> ent, ref FTLStartedEvent args)
     {
-        ent.Comp.DampingModifier = 0f;
+        // ent.Comp.DampingModifier = 0f;
+        ent.Comp.InFTL = true;
+        UpdateDamping(ent, ent.Comp);
     }
 
     private void OnFTLCompleted(Entity<ShuttleComponent> ent, ref FTLCompletedEvent args)
     {
-        ent.Comp.DampingModifier = ent.Comp.BodyModifier;
+        // ent.Comp.DampingModifier = ent.Comp.BodyModifier;
+        ent.Comp.InFTL = false;
+        UpdateDamping(ent, ent.Comp);
     }
 }
