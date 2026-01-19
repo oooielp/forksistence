@@ -39,7 +39,6 @@
   - BaseStationCargo
   - BaseStationJobsSpawning
   - BaseStationRecords
-  - BaseStationGateway
   - BaseStationShuttles
   - BaseStationAlertLevels
   - BaseStationMagnet

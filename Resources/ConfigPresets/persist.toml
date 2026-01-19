@@ -40,3 +40,6 @@ arrivals = false # don't spawn arrivals
 grid_fill = false # don't spawn escape shuttles
 emergency = false # emergency shuttle disabled
 auto_call_time = 0
+
+[misc]
+generator_enabled = false # disable gateway generator, don't spawn planets
