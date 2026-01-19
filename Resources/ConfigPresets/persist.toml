@@ -33,6 +33,9 @@ enabled_crit = true
 flavor_text = true
 punctuation = true
 
+[atmos]
+max_explosion_range = 4
+
 [admin]
 new_player_threshold = 600
 alert.min_players_sharing_connection = 2
