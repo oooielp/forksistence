@@ -40,7 +40,8 @@ public abstract class SharedSolutionContainerMixerSystem : EntitySystem
 
     private void OnRemoveAttempt(Entity<SolutionContainerMixerComponent> ent, ref ContainerIsRemovingAttemptEvent args)
     {
-        if (args.Container.ID == ent.Comp.ContainerId && ent.Comp.Mixing)
+        // Check if the removed container is in the list of containers to mix
+        if (ent.Comp.ContainerIds.Contains(args.Container.ID) && ent.Comp.Mixing)
             args.Cancel();
     }
 
@@ -62,7 +63,18 @@ public abstract class SharedSolutionContainerMixerSystem : EntitySystem
             return;
         }
 
-        if (!_container.TryGetContainer(uid, comp.ContainerId, out var container) || container.Count == 0)
+        // Check all configured containers to see if any have contents
+        var hasContents = false;
+        foreach (var containerId in comp.ContainerIds)
+        {
+            if (_container.TryGetContainer(uid, containerId, out var container) && container.Count > 0)
+            {
+                hasContents = true;
+                break;
+            }
+        }
+
+        if (!hasContents)
         {
             if (user != null)
                 _popup.PopupClient(Loc.GetString("solution-container-mixer-popup-nothing-to-mix"), entity, user.Value);
@@ -96,16 +108,22 @@ public abstract class SharedSolutionContainerMixerSystem : EntitySystem
             return;
         StopMix(entity);
 
-        if (!TryComp<ReactionMixerComponent>(entity, out var reactionMixer)
-            || !_container.TryGetContainer(uid, comp.ContainerId, out var container))
+        if (!TryComp<ReactionMixerComponent>(entity, out var reactionMixer))
             return;
 
-        foreach (var ent in container.ContainedEntities)
+        // Process mixing reactions for all configured containers
+        foreach (var containerId in comp.ContainerIds)
         {
-            if (!_solution.TryGetFitsInDispenser(ent, out var soln, out _))
+            if (!_container.TryGetContainer(uid, containerId, out var container))
                 continue;
 
-            _solution.UpdateChemicals(soln.Value, true, reactionMixer);
+            foreach (var ent in container.ContainedEntities)
+            {
+                if (!_solution.TryGetFitsInDispenser(ent, out var soln, out _))
+                    continue;
+
+                _solution.UpdateChemicals(soln.Value, true, reactionMixer);
+            }
         }
     }
 

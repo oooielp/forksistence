@@ -84,6 +84,11 @@
   description: Around and around it goes...
   components:
   - type: SolutionContainerMixer
+    containerIds:
+      - "mixer"
+      - "mixer2"
+      - "mixer3"
+      - "mixer4"
     mixDuration: 10
     mixingSound:
       path: /Audio/Machines/spinning.ogg
@@ -118,6 +123,18 @@
   - type: ItemSlots
     slots:
       mixer:
+        whitelist:
+          tags:
+            - CentrifugeCompatible
+      mixer2:
+        whitelist:
+          tags:
+            - CentrifugeCompatible
+      mixer3:
+        whitelist:
+          tags:
+            - CentrifugeCompatible
+      mixer4:
         whitelist:
           tags:
             - CentrifugeCompatible
