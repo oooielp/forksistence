@@ -8,7 +8,7 @@ public sealed partial class CCVars
     ///     Whether or not world generation is enabled.
     /// </summary>
     public static readonly CVarDef<bool> WorldgenEnabled =
-        CVarDef.Create("worldgen.enabled", false, CVar.SERVERONLY);
+        CVarDef.Create("worldgen.enabled", true, CVar.SERVERONLY); // can't be enabled in .toml config
 
     /// <summary>
     ///     The worldgen config to use.

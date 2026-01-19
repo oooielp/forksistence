@@ -1,0 +1,35 @@
+# Base configuration preset for SS14 Persistence. This contains everything you need for persistence to _work_,
+# but is probably lacking in things that you want for long-term hosting
+# Related docs https://docs.spacestation14.com/en/general-development/tips/config-file-reference.html
+
+[game]
+hostname = "[NRP] Persistence Test Server"
+desc = "Don't mind me, just using the base ConfigPreset!"
+fallbackpreset = false
+defaultpreset = "persist"
+map_pool = "PersistMapPool"
+role_timers = false
+cryo_sleep_rejoining = true
+soft_max_players = 30
+autosaveenabled = false
+autosaveinterval = 60
+
+[hub]
+tags = "rp:none"
+
+[infolinks]
+bug_report = "https://github.com/michaelchessall/SS14-Persistence/issues/new/choose"
+discord    = "https://discord.gg/PRjRkAN5NU"
+github     = "https://github.com/michaelchessall/SS14-Persistence"
+
+[server]
+id = "Persistence"
+
+[shuttle]
+arrivals = false # don't spawn arrivals
+grid_fill = false # don't spawn escape shuttles
+emergency = false # emergency shuttle disabled
+auto_call_time = 0 # evac is never auto-called
+
+[misc]
+generator_enabled = false # disable gateway generator, don't spawn planets

@@ -12,7 +12,7 @@ public sealed partial class CCVars
     ///     Should we pre-load all of the procgen atlasses.
     /// </summary>
     public static readonly CVarDef<bool> ProcgenPreload =
-        CVarDef.Create("procgen.preload", true, CVar.SERVERONLY);
+        CVarDef.Create("procgen.preload", false, CVar.SERVERONLY); // Persistence: procgen is not in use & preload was loading a bunch of unused dungeon
 
     /// <summary>
     ///     Enabled: Cloning has 70% cost and reclaimer will refuse to reclaim corpses with souls. (For LRP).

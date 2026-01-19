@@ -856,7 +856,7 @@ namespace Content.Server.GameTicking
         int warnings = 3;
         private void UpdateRoundFlow(float frameTime)
         {
-            if (RunLevel == GameRunLevel.InRound)
+            if (_cfg.GetCVar(CCVars.AutoSaveEnabled) && RunLevel == GameRunLevel.InRound)
             {
                 RoundLengthMetric.Inc(frameTime);
 
