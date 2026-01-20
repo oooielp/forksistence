@@ -1,4 +1,6 @@
-﻿namespace Content.Server.Atmos;
+﻿using Content.Shared.Atmos;
+
+namespace Content.Server.Atmos;
 
 /// <summary>
 /// Internal Atmospherics struct that stores data about a hotspot in a tile.
@@ -54,4 +56,11 @@ public struct Hotspot
     /// </summary>
     [ViewVariables]
     public byte State;
+
+    /// <summary>
+    /// The primary fuel gas that is burning in this hotspot.
+    /// Used to determine fire color visuals.
+    /// </summary>
+    [ViewVariables]
+    public Gas PrimaryFuel;
 }
