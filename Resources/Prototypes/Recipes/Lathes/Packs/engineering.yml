@@ -96,6 +96,7 @@
   - SolarControlComputerCircuitboard
   - SolarTrackerElectronics
   - GasRecyclerMachineCircuitboard
+  - GasGeneratorMachineCircuitboard
   - PortableGeneratorPacmanMachineCircuitboard
   - PortableGeneratorSuperPacmanMachineCircuitboard
   - PortableGeneratorMegamanMachineCircuitboard

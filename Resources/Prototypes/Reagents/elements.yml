@@ -45,7 +45,19 @@
       - !type:HealthChange
         damage:
           types:
+            Poison: 3
+    Gas:
+      effects:
+      - !type:HealthChange
+        damage:
+          types:
+            Asphyxiation: 0.5
             Poison: 2
+      - !type:AdjustAlert
+        alertType: Toxins
+        minScale: 1.5
+        clear: True
+        time: 5
 
 - type: reagent
   id: Copper
@@ -102,8 +114,22 @@
       - !type:HealthChange
         damage:
           types:
-            Caustic: 0.5
-            Poison: 0.5
+            Caustic: 1.5
+            Poison: 1.5
+    Gas:
+      effects:
+      - !type:HealthChange
+        damage:
+          types:
+            Asphyxiation: 0.5
+            Poison: 2
+            Caustic: 2
+      - !type:AdjustAlert
+        alertType: Toxins
+        minScale: 1.5
+        clear: True
+        time: 5
+
 - type: reagent
   id: Gold
   name: reagent-name-gold
@@ -125,6 +151,19 @@
   color: "#cccccc"
   boilingPoint: -253.0
   meltingPoint: -259.2
+  metabolisms:
+    Gas:
+      effects:
+      - !type:HealthChange
+        damage:
+          types:
+            Asphyxiation: 0.5
+            Poison: 0.2
+      - !type:AdjustAlert
+        alertType: Toxins
+        minScale: 1.5
+        clear: True
+        time: 5
 
 - type: reagent
   id: Iodine
