@@ -27,7 +27,7 @@ namespace Content.Server.Atmos.Reactions
                 mixture.AdjustMoles(Gas.Chlorine, decompositionRate * 0.5f);
                 mixture.AdjustMoles(Gas.Fluorine, decompositionRate * 1.5f);
 
-                energyReleased = Atmospherics.FirePlasmaEnergyReleased * decompositionRate * 2f;
+                energyReleased = 315000f * decompositionRate;
                 energyReleased /= heatScale;
                 mixture.ReactionResults[(byte)GasReaction.Fire] = decompositionRate * 1.5f;
             }
