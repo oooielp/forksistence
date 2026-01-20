@@ -31,8 +31,6 @@ namespace Content.Server.Atmos.Reactions
                 mixture.AdjustMoles(Gas.Methane, extent * 1f);
                 mixture.AdjustMoles(Gas.WaterVapor, extent * 2f);
 
-                // Reduce heat release significantly to avoid igniting newly-produced methane.
-                // Apply a 10x reduction (was 0.2f -> now 0.02f).
                 energyReleased = Atmospherics.FireMethaneEnergyReleased * extent * 0.02f;
                 energyReleased /= heatScale;
             }
