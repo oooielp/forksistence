@@ -2,6 +2,7 @@ using Content.Shared.Chemistry.Components;
 using Content.Shared.Chemistry.Reaction;
 using Content.Shared.Interaction;
 using Content.Shared.Popups;
+using Content.Shared.Fluids;
 using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Network;
@@ -21,12 +22,14 @@ public abstract class SharedSolutionContainerMixerSystem : EntitySystem
     [Dependency] private readonly SharedContainerSystem _container = default!;
     [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly SharedSolutionContainerSystem _solution = default!;
+    [Dependency] private readonly SharedPuddleSystem _puddle = default!;
 
     /// <inheritdoc/>
     public override void Initialize()
     {
         SubscribeLocalEvent<SolutionContainerMixerComponent, ActivateInWorldEvent>(OnActivateInWorld);
         SubscribeLocalEvent<SolutionContainerMixerComponent, ContainerIsRemovingAttemptEvent>(OnRemoveAttempt);
+        SubscribeLocalEvent<SolutionContainerMixerComponent, ContainerIsInsertingAttemptEvent>(OnInsertAttempt);
     }
 
     private void OnActivateInWorld(Entity<SolutionContainerMixerComponent> entity, ref ActivateInWorldEvent args)
@@ -42,6 +45,12 @@ public abstract class SharedSolutionContainerMixerSystem : EntitySystem
     {
         // Check if the removed container is in the list of containers to mix
         if (ent.Comp.ContainerIds.Contains(args.Container.ID) && ent.Comp.Mixing)
+            args.Cancel();
+    }
+
+    private void OnInsertAttempt(Entity<SolutionContainerMixerComponent> ent, ref ContainerIsInsertingAttemptEvent args)
+    {
+        if (ent.Comp.Mixing)
             args.Cancel();
     }
 
@@ -64,17 +73,14 @@ public abstract class SharedSolutionContainerMixerSystem : EntitySystem
         }
 
         // Check all configured containers to see if any have contents
-        var hasContents = false;
+        int insertedContainers = 0;
         foreach (var containerId in comp.ContainerIds)
         {
             if (_container.TryGetContainer(uid, containerId, out var container) && container.Count > 0)
-            {
-                hasContents = true;
-                break;
-            }
+                insertedContainers++;
         }
 
-        if (!hasContents)
+        if (insertedContainers == 0)
         {
             if (user != null)
                 _popup.PopupClient(Loc.GetString("solution-container-mixer-popup-nothing-to-mix"), entity, user.Value);
@@ -84,7 +90,7 @@ public abstract class SharedSolutionContainerMixerSystem : EntitySystem
         comp.Mixing = true;
         if (_net.IsServer)
             comp.MixingSoundEntity = _audio.PlayPvs(comp.MixingSound, entity, comp.MixingSound?.Params.WithLoop(true));
-        comp.MixTimeEnd = _timing.CurTime + comp.MixDuration;
+        comp.MixTimeEnd = _timing.CurTime + comp.MixDuration * insertedContainers;
         _appearance.SetData(entity, SolutionContainerMixerVisuals.Mixing, true);
         Dirty(uid, comp);
     }
@@ -112,6 +118,7 @@ public abstract class SharedSolutionContainerMixerSystem : EntitySystem
             return;
 
         // Process mixing reactions for all configured containers
+        Dictionary<Entity<SolutionComponent>, int> insertedContainerSolutions = new();
         foreach (var containerId in comp.ContainerIds)
         {
             if (!_container.TryGetContainer(uid, containerId, out var container))
@@ -119,11 +126,33 @@ public abstract class SharedSolutionContainerMixerSystem : EntitySystem
 
             foreach (var ent in container.ContainedEntities)
             {
-                if (!_solution.TryGetFitsInDispenser(ent, out var soln, out _))
+                if (!_solution.TryGetFitsInDispenser(ent, out var solnComp, out var soln))
                     continue;
 
-                _solution.UpdateChemicals(soln.Value, true, reactionMixer);
+                insertedContainerSolutions.Add(solnComp.Value, soln.Volume.Value);
             }
+        }
+
+        if (insertedContainerSolutions.Count == 0)
+            return;
+
+        // Spill the contents if the inserted vials are not balanced.
+        // If I were a real programmer this would use some kind of math to figure out
+        // if a given number of vials can be balanced given some quantity of maximum slots
+        // ...but I'm not, so it's hardcoded for 6 slots.
+        if (insertedContainerSolutions.Count == 1 || insertedContainerSolutions.Count == 5)
+        {
+            foreach (var pair in insertedContainerSolutions)
+            {
+                var puddleSolution = _solution.SplitSolution(pair.Key, pair.Value);
+                _puddle.TrySpillAt(entity, puddleSolution, out _);
+            }
+            return;
+        }
+
+        foreach (var pair in insertedContainerSolutions)
+        {
+            _solution.UpdateChemicals(pair.Key, true, reactionMixer);
         }
     }
 
