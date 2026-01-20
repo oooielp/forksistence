@@ -5,6 +5,7 @@ lobbyenabled = false
 map = "PersistDev"
 role_timers = false
 role_loadout_timers = false
+autosaveenabled = false # only save when asked
 
 [events]
 enabled = false
