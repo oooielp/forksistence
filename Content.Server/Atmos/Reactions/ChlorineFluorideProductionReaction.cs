@@ -31,7 +31,7 @@ namespace Content.Server.Atmos.Reactions
                 mixture.AdjustMoles(Gas.Fluorine, -extent * 3f);
                 mixture.AdjustMoles(Gas.ChlorineTrifluoride, extent * 2f);
 
-                energyReleased = Atmospherics.FirePlasmaEnergyReleased * extent * 0.05f;
+                energyReleased = -325000f * extent * 2f;
                 energyReleased /= heatScale;
             }
 
