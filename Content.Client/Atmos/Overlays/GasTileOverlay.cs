@@ -51,10 +51,8 @@ namespace Content.Client.Atmos.Overlays
         // Fire colors for different gas types
         private static readonly Dictionary<Gas, Color> FireColors = new()
         {
-            [Gas.Plasma] = Color.FromHex("#FF66FF"), // Pink/Magenta
-            [Gas.Tritium] = Color.FromHex("#FF66FF"), // Pink/Magenta (same as plasma)
             [Gas.Methane] = Color.FromHex("#4488FF"), // Blue
-            [Gas.Hydrogen] = Color.FromHex("#AACCFF"), // Pale blue/cyan
+            [Gas.Hydrogen] = Color.FromHex("#C0E0FF"), // Pale blue/cyan
             [Gas.ChlorineTrifluoride] = Color.FromHex("#FFFF00"), // Pale yellow-green - characteristic of ClF3 combustion
         };
 
