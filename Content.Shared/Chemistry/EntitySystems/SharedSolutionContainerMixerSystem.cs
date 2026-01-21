@@ -7,6 +7,7 @@ using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Network;
 using Robust.Shared.Timing;
+using System.Collections;
 
 namespace Content.Shared.Chemistry.EntitySystems;
 
@@ -52,6 +53,24 @@ public abstract class SharedSolutionContainerMixerSystem : EntitySystem
     {
         if (ent.Comp.Mixing)
             args.Cancel();
+    }
+
+    private bool IsPrime(int number)
+    {
+        if (number == 1)
+            return false;
+        if (number == 2)
+            return true;
+
+        var limit = Math.Ceiling(Math.Sqrt(number));
+
+        for (int i = 2; i <= limit; i++)
+        {
+            if (number % i == 0)
+                return false;
+        }
+        return true;
+
     }
 
     protected virtual bool HasPower(Entity<SolutionContainerMixerComponent> entity)
@@ -140,7 +159,10 @@ public abstract class SharedSolutionContainerMixerSystem : EntitySystem
         // If I were a real programmer this would use some kind of math to figure out
         // if a given number of vials can be balanced given some quantity of maximum slots
         // ...but I'm not, so it's hardcoded for 6 slots.
-        if (insertedContainerSolutions.Count == 1 || insertedContainerSolutions.Count == 5)
+        // Thanks, Iswar! ( https://mattbaker.blog/2018/06/25/the-balanced-centrifuge-problem/ )
+        int n = comp.ContainerIds.Count;
+        int k = insertedContainerSolutions.Count;
+        if (IsPrime(n) && n != k)
         {
             foreach (var pair in insertedContainerSolutions)
             {
@@ -149,7 +171,40 @@ public abstract class SharedSolutionContainerMixerSystem : EntitySystem
             }
             return;
         }
-
+        ArrayList<int> primeDivisors = new();
+        for (int i = 1; i < n; i += 2)
+        {
+            if (IsPrime(i) && n % i == 0)
+            {
+                primeDivisors.Add(i);
+            }
+        }
+        int nCopy = n;
+        int kCopy = k;
+        for (int i = 0; i < primeDivisors.Count; i++)
+        {
+            for (int j = i; j < primeDivisors.Count; j++)
+            {
+                int left = primeDivisors[i];
+                int right = primeDivisors[j];
+                int sum = left + right;
+                if (sum == nCopy)
+                    n = 0;
+                if (sum == nCopy - kCopy)
+                    k = 0;
+                if (n == 0 && k == 0)
+                    break;
+            }
+        }
+        if (n != 0 || k != 0)
+        {
+            foreach (var pair in insertedContainerSolutions)
+            {
+                var puddleSolution = _solution.SplitSolution(pair.Key, pair.Value);
+                _puddle.TrySpillAt(entity, puddleSolution, out _);
+            }
+            return;
+        }
         foreach (var pair in insertedContainerSolutions)
         {
             _solution.UpdateChemicals(pair.Key, true, reactionMixer);
