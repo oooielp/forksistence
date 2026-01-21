@@ -136,7 +136,6 @@ public abstract class SharedSolutionContainerMixerSystem : EntitySystem
         if (!TryComp<ReactionMixerComponent>(entity, out var reactionMixer))
             return;
 
-        // Process mixing reactions for all configured containers
         Dictionary<Entity<SolutionComponent>, int> insertedContainerSolutions = new();
         foreach (var containerId in comp.ContainerIds)
         {
@@ -216,6 +215,7 @@ public abstract class SharedSolutionContainerMixerSystem : EntitySystem
                 }
             }
 
+            // if unbalanced spill contents
             if (n != 0 || k != 0)
             {
                 foreach (var pair in insertedContainerSolutions)
@@ -228,6 +228,7 @@ public abstract class SharedSolutionContainerMixerSystem : EntitySystem
             }
         }
 
+        // Process mixing reactions for all configured containers
         foreach (var pair in insertedContainerSolutions)
         {
             _solution.UpdateChemicals(pair.Key, true, reactionMixer);
