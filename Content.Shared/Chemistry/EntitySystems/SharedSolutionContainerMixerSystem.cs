@@ -7,7 +7,7 @@ using Robust.Shared.Audio.Systems;
 using Robust.Shared.Containers;
 using Robust.Shared.Network;
 using Robust.Shared.Timing;
-using System.Collections;
+// using System.Collections;
 
 namespace Content.Shared.Chemistry.EntitySystems;
 
@@ -55,7 +55,7 @@ public abstract class SharedSolutionContainerMixerSystem : EntitySystem
             args.Cancel();
     }
 
-    private bool IsPrime(int number)
+    private bool IsPrime(int number) // this should probably be implemented somewhere that isn't here
     {
         if (number == 1)
             return false;
@@ -155,56 +155,79 @@ public abstract class SharedSolutionContainerMixerSystem : EntitySystem
         if (insertedContainerSolutions.Count == 0)
             return;
 
-        // Spill the contents if the inserted vials are not balanced.
-        // If I were a real programmer this would use some kind of math to figure out
-        // if a given number of vials can be balanced given some quantity of maximum slots
-        // ...but I'm not, so it's hardcoded for 6 slots.
         // Thanks, Iswar! ( https://mattbaker.blog/2018/06/25/the-balanced-centrifuge-problem/ )
+        // & thanks Brooks!
         int n = comp.ContainerIds.Count;
-        int k = insertedContainerSolutions.Count;
-        if (IsPrime(n) && n != k)
+        int k = insertedContainerSolutions.Count; // using n and k here to be consistent with Iswar's conjecture
+        if (n != k && n > 1 && !(n % 2 == 0 && k % 2 == 0)) // n & k don't match, n > 1, and both n & k are even
         {
-            foreach (var pair in insertedContainerSolutions)
+            if (k == 1) // if k is 1 (and n is not, see above), spill
             {
-                var puddleSolution = _solution.SplitSolution(pair.Key, pair.Value);
-                _puddle.TrySpillAt(entity, puddleSolution, out _);
+                foreach (var pair in insertedContainerSolutions)
+                {
+                    var puddleSolution = _solution.SplitSolution(pair.Key, pair.Value);
+                    _puddle.TrySpillAt(entity, puddleSolution, out _);
+                }
+                return;
             }
-            return;
-        }
-        ArrayList<int> primeDivisors = new();
-        for (int i = 1; i < n; i += 2)
-        {
-            if (IsPrime(i) && n % i == 0)
+
+            if (IsPrime(n) && n != k)
             {
-                primeDivisors.Add(i);
+                foreach (var pair in insertedContainerSolutions)
+                {
+                    var puddleSolution = _solution.SplitSolution(pair.Key, pair.Value);
+                    _puddle.TrySpillAt(entity, puddleSolution, out _);
+                }
+
+                return;
             }
-        }
-        int nCopy = n;
-        int kCopy = k;
-        for (int i = 0; i < primeDivisors.Count; i++)
-        {
-            for (int j = i; j < primeDivisors.Count; j++)
+
+            List<int> primeDivisors = new();
+            primeDivisors.Add(0); // totally a valid prime divisor, source: trust me bro
+            primeDivisors.Add(2);
+            for (var i = 3; i < n; i += 2)
             {
-                int left = primeDivisors[i];
-                int right = primeDivisors[j];
-                int sum = left + right;
-                if (sum == nCopy)
-                    n = 0;
-                if (sum == nCopy - kCopy)
-                    k = 0;
-                if (n == 0 && k == 0)
-                    break;
+                if (IsPrime(i) && n % i == 0)
+                {
+                    primeDivisors.Add(i);
+                }
             }
-        }
-        if (n != 0 || k != 0)
-        {
-            foreach (var pair in insertedContainerSolutions)
+
+            var nCopy = n;
+            var kCopy = k;
+            for (var i = 0; i < primeDivisors.Count; i++)
             {
-                var puddleSolution = _solution.SplitSolution(pair.Key, pair.Value);
-                _puddle.TrySpillAt(entity, puddleSolution, out _);
+                for (var j = i; j < primeDivisors.Count; j++)
+                {
+                    var left = primeDivisors[i] as int?;
+                    var right = primeDivisors[j] as int?;
+                    if (left > 1 || right > 1)
+                    {
+                        // this logic doesn't work for anything with a large 'n' value but works for this
+                        // application (also nothing is going to have enough slots for this to matter)
+                        var sum = left + right;
+                        if (sum == nCopy) // nCopy is the # of container slots
+                            n = 0;
+                        if (sum == nCopy - kCopy) // kCopy is the # of inserted containers
+                            k = 0;
+                        if (n == 0 && k == 0)
+                            break;
+                    }
+                }
             }
-            return;
+
+            if (n != 0 || k != 0)
+            {
+                foreach (var pair in insertedContainerSolutions)
+                {
+                    var puddleSolution = _solution.SplitSolution(pair.Key, pair.Value);
+                    _puddle.TrySpillAt(entity, puddleSolution, out _);
+                }
+
+                return;
+            }
         }
+
         foreach (var pair in insertedContainerSolutions)
         {
             _solution.UpdateChemicals(pair.Key, true, reactionMixer);
