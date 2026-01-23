@@ -1029,6 +1029,12 @@
   id: OreBananium # CargoBounty: BountySalvageOreBananium
 
 - type: Tag
+  id: OreAluminum # CargoBounty: BountySalvageOreAluminum
+
+- type: Tag
+  id: OreCopper # CargoBounty: BountySalvageOreCopper
+
+- type: Tag
   id: OreGold # CargoBounty: BountySalvageOreGold
 
 - type: Tag
@@ -1036,6 +1042,12 @@
 
 - type: Tag
   id: OreSilver # CargoBounty: BountySalvageOreSilver
+
+- type: Tag
+  id: OreTin # CargoBounty: BountySalvageOreTin
+
+- type: Tag
+  id: OreTitanium # CargoBounty: BountySalvageOreTitanium
 
 - type: Tag
   id: OreUranium # CargoBounty: BountySalvageOreUranium
@@ -1056,6 +1068,9 @@
 
 - type: Tag
   id: ParadoxCloneObjectiveBlacklist # objective entities with this tag don't get copied to paradox clones
+
+- type: Tag
+  id: Phoron # Material tag for Phoron
 
 - type: Tag
   id: ParcelWrapBlacklist # Tagged entities can't be wrapped in ParcelWrap.
@@ -1276,6 +1291,9 @@
 
 - type: Tag
   id: Sheet # MaterialStorage whitelist for many machines and lathes. Storage whitelist: MaterialBag
+
+- type: Tag
+  id: SheetPaper # MaterialStorage whitelist for many machines and lathes. Applied to SheetPaper, but not wrtitten/writable papers
 
 - type: Tag
   id: ShellShotgun # Ammo: AmmoProviderShotgunShell, ClothingBeltBandolier, BaseMagazineShotgun, BaseWeaponShotgun, WeaponFlareGunSecurity
@@ -1612,6 +1630,9 @@
   id: Brass
 
 - type: Tag
+  id: Bronze
+
+- type: Tag
   id: Plasma
 
 - type: Tag
@@ -1625,6 +1646,18 @@
 
 - type: Tag
   id: Plasteel
+
+- type: Tag
+  id: Titanium
+
+- type: Tag
+  id: Copper
+
+- type: Tag
+  id: Aluminum
+
+- type: Tag
+  id: Tin
 
 ##Persistence Bounty Tags
 

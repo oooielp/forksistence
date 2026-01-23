@@ -117,5 +117,18 @@
       "name": "diamond-inhand-right",
       "directions": 4
     }
+    ,
+    {
+      "name": "aluminum"
+    },
+    {
+      "name": "copper"
+    },
+    {
+      "name": "tin"
+    },
+    {
+      "name": "titanium"
+    }
   ]
 }

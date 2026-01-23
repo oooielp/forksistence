@@ -13,7 +13,6 @@
     gridPath: /Maps/Shuttles/trading_outpost.yml
     stationGrid: True
     addComponents:
-      - type: ProtectedGrid
       - type: TradeStation
       - type: StationCargoBountyDatabase
 
@@ -62,7 +61,6 @@
     gridPath: /Maps/Shuttles/trading_outpost_science.yml
     stationGrid: True
     addComponents:
-      - type: ProtectedGrid
       - type: TradeStation
         levels:
           - ILevelScience1
@@ -92,7 +90,6 @@
     gridPath: /Maps/Shuttles/trading_outpost_hunter.yml
     stationGrid: True
     addComponents:
-      - type: ProtectedGrid
       - type: TradeStation
         levels:
           - ILevelHunter1
@@ -122,7 +119,6 @@
     gridPath: /Maps/Shuttles/trading_outpost_engineering.yml
     stationGrid: True
     addComponents:
-      - type: ProtectedGrid
       - type: TradeStation
         levels:
           - ILevelEngineer1
@@ -151,7 +147,6 @@
     gridPath: /Maps/Shuttles/trading_outpost_explore.yml
     stationGrid: True
     addComponents:
-      - type: ProtectedGrid
       - type: TradeStation
         levels:
           - ILevelExploration1

@@ -82,3 +82,4 @@ research-technology-clowning-utilities = Clowning Utilities
 research-technology-quantum-fiber-weaving = Quantum Fiber Weaving
 research-technology-bluespace-chemistry = Bluespace Chemistry
 research-technology-cremation = Crematorium
+research-technology-advanced-telecommunications = Advanced Telecommunications

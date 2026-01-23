@@ -12,6 +12,9 @@ using Robust.Shared.Audio.Systems;
 using static Content.Shared.Paper.PaperComponent;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
+using Content.Shared.IdentityManagement;
+using Content.Shared.Mind.Components;
+using Content.Shared.Roles.Jobs;
 
 namespace Content.Shared.Paper;
 
@@ -47,6 +50,7 @@ public sealed class PaperSystem : EntitySystem
         SubscribeLocalEvent<RandomPaperContentComponent, MapInitEvent>(OnRandomPaperContentMapInit);
 
         SubscribeLocalEvent<ActivateOnPaperOpenedComponent, PaperWriteEvent>(OnPaperWrite);
+        SubscribeLocalEvent<PaperComponent, PaperSignatureRequestMessage>(OnSignatureRequest);
 
         _paperQuery = GetEntityQuery<PaperComponent>();
     }
@@ -250,6 +254,11 @@ public sealed class PaperSystem : EntitySystem
         if (!entity.Comp.StampedBy.Contains(stampInfo))
         {
             entity.Comp.StampedBy.Add(stampInfo);
+
+            var cleanedContent = PaperTagUtility.CleanUnfilledTags(entity.Comp.Content);
+            if (cleanedContent != entity.Comp.Content)
+                SetContent(entity, cleanedContent);
+
             Dirty(entity);
             if (entity.Comp.StampState == null && TryComp<AppearanceComponent>(entity, out var appearance))
             {
@@ -308,6 +317,43 @@ public sealed class PaperSystem : EntitySystem
     {
         _uiSystem.SetUiState(entity.Owner, PaperUiKey.Key, new PaperBoundUserInterfaceState(entity.Comp.Content, entity.Comp.StampedBy, entity.Comp.Mode));
     }
+
+    private void OnSignatureRequest(Entity<PaperComponent> entity, ref PaperSignatureRequestMessage args)
+    {
+        var signature = GetPlayerSignature(args.Actor);
+        var newText = PaperTagUtility.ReplaceNthTag(entity.Comp.Content, "[signature]", args.SignatureIndex, signature);
+        SetContent(entity, newText);
+
+        entity.Comp.EditingDisabled = true;
+        Dirty(entity);
+
+        _adminLogger.Add(LogType.Chat, LogImpact.Low,
+            $"{ToPrettyString(args.Actor):player} signed {ToPrettyString(entity):entity} with signature: {signature}");
+    }
+
+    private string GetPlayerSignature(EntityUid player)
+    {
+        var role = string.Empty;
+        var name = Identity.Name(player, EntityManager);
+
+        if (string.IsNullOrEmpty(name))
+            name = MetaData(player).EntityName;
+
+        if (TryComp<MindContainerComponent>(player, out var mindContainer) && mindContainer.Mind != null)
+        {
+            var jobSystem = EntityManager.System<SharedJobSystem>();
+            if (jobSystem.MindTryGetJobName(mindContainer.Mind.Value, out var jobName))
+                role = jobName;
+        }
+
+        string? signature;
+        if (!string.IsNullOrEmpty(name) && !string.IsNullOrEmpty(role))
+            signature = $"{name}, {role}";
+        else
+            signature = name;
+
+        return signature;
+    }
 }
 
 /// <summary>
@@ -322,3 +368,10 @@ public record struct PaperWriteEvent(EntityUid User, EntityUid Paper);
 /// <param name="paper">The paper that the writing will take place on.</param>
 [ByRefEvent]
 public record struct PaperWriteAttemptEvent(EntityUid Paper, string? FailReason = null, bool Cancelled = false);
+
+/// <summary>
+/// Event fired when a player signs a piece of paper.
+/// </summary>
+/// <param name="Signer">The entity that signed the paper.</param>
+[ByRefEvent]
+public record struct PaperSignedEvent(EntityUid Signer);

@@ -82,8 +82,10 @@
   recipeUnlocks:
   - PortableGeneratorPacmanMachineCircuitboard
   - PortableGeneratorSuperPacmanMachineCircuitboard
+  - PortableGeneratorMegamanMachineCircuitboard
   - PortableGeneratorJrPacmanMachineCircuitboard
   - PortableGeneratorOldmanMachineCircuitboard
+  - GasGeneratorMachineCircuitboard
   - SolarControlComputerCircuitboard
   - SolarTrackerElectronics
   - EmitterCircuitboard
@@ -150,6 +152,7 @@
   - ThrusterMachineCircuitboard
   - GyroscopeMachineCircuitboard
   - MiniGravityGeneratorCircuitboard
+  - StationAnchorCircuitboard
 
 - type: technology
   id: AdvancedAtmospherics

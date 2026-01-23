@@ -23,6 +23,7 @@
   - type: Icon
     sprite: Objects/Specific/Medical/Morgue/bodybags.rsi
     state: bag
+  - type: GravityAffected
   - type: Tag
     tags:
     - BodyBag

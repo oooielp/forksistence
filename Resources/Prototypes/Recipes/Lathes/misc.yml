@@ -192,7 +192,7 @@
   materials:
     Steel: 300
     Plastic: 100
-    
+
 - type: latheRecipe
   id: BSPAnchorKey
   result: BSPAnchorKey
@@ -230,7 +230,7 @@
   result: Ashtray
   completetime: 1
   materials:
-    Steel: 30
+    Aluminium: 30
 
 - type: latheRecipe
   id: BoxFolderClipboardEmpty
@@ -247,6 +247,13 @@
   materials:
     Plastic: 100
     Steel: 50
+
+- type: latheRecipe
+  id: BlankPaper
+  result: Paper
+  completetime: 2
+  materials:
+    Paper: 50
 
 - type: latheRecipe
   id: TowelColorWhite

@@ -42,6 +42,15 @@
       "directions": 4
     },
     {
+      "name": "phoronglass"
+    },
+    {
+      "name": "phoronglass_2"
+    },
+    {
+      "name": "phoronglass_3"
+    },
+    {
       "name": "plastitaniumglass"
     },
     {
@@ -91,6 +100,15 @@
     {
       "name": "rglass-inhand-right",
       "directions": 4
+    },
+    {
+      "name": "rphoronglass"
+    },
+    {
+      "name": "rphoronglass_2"
+    },
+    {
+      "name": "rphoronglass_3"
     },
     {
       "name": "titaniumglass"

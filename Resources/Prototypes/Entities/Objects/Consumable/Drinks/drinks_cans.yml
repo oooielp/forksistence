@@ -1,20 +1,69 @@
 # When adding new drinks also add to random spawner located in Resources\Prototypes\Entities\Markers\Spawners\Random\Food_Drinks\drinks_soda.yml
+
+## Empty Can - Craftable by lathe
+
+- type: entity
+  parent: [ DrinkBaseMaterialMetal, DrinkBase, DrinkBaseOpenableOpen, DrinkVisualsOpenable ]
+  id: EmptyCan
+  name: aluminum can
+  description: A lightweight, resealable aluminum can ready to be filled with your choice of beverage.
+  suffix: Empty
+  components:
+  - type: Paintable
+    group: ItemContainers
+  - type: Openable
+    opened: true
+    closeable: true
+  - type: SolutionContainerManager
+    solutions:
+      drink:
+        maxVol: 30
+      grindable: &emptyCanGrindable
+        reagents:
+        - ReagentId: Aluminium
+          Quantity: 5
+  - type: SolutionTransfer
+    canChangeTransferAmount: true
+    maxTransferAmount: 15
+  - type: Extractable
+    grindableSolutionName: grindable
+  - type: FitsInDispenser
+    solution: drink
+  - type: Tool
+    qualities:
+    - Rolling
+    speedModifier: 0.25
+  - type: SpaceGarbage
+  - type: PhysicalComposition
+    materialComposition:
+      Aluminium: 50
+  - type: Tag
+    tags:
+    - DrinkCan
+  - type: Sprite
+    sprite: Objects/Consumable/Drinks/blank_can.rsi
+    state: icon
+  - type: Item
+    sprite: Objects/Consumable/Drinks/blank_can.rsi
+
+## Full Cans
+
 - type: entity
   abstract: true
   parent: [ DrinkBaseMaterialMetal, DrinkBase, DrinkBaseOpenable, DrinkVisualsOpenable ]
   id: DrinkCanBaseFull
   suffix: Full
   components:
+  - type: Paintable
+    group: ItemContainers
   - type: SolutionContainerManager
     solutions:
       drink:
         maxVol: 30
       grindable: &grindable
-        reagents: # 5u -> 1/2 steel sheet (10u)
-        - ReagentId: Aluminium # Fun fact: soda can makeup is approx. 75% aluminium and 25% tin/iron.
-          Quantity: 4
-        - ReagentId: Iron
-          Quantity: 1
+        reagents: # 5u aluminium per can
+        - ReagentId: Aluminium
+          Quantity: 5
   - type: SolutionTransfer
     canChangeTransferAmount: true
     maxTransferAmount: 15

@@ -8,6 +8,15 @@
     - Genetic
 
 - type: damageContainer
+  id: BiologicalNoBloodPacks # Biological type that isn't whitelisted for bloodpacks, used by Reagent Slimes to prevent chem duplication
+  supportedGroups:
+  - Brute
+  - Burn
+  - Toxin
+  - Airloss
+  - Genetic
+
+- type: damageContainer
   id: Inorganic
   supportedGroups:
     - Brute

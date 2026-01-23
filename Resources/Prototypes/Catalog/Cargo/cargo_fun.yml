@@ -377,3 +377,13 @@
   cost: 1000
   category: cargoproduct-category-name-fun
   group: market
+
+- type: cargoProduct
+  id: TapeRecorderKit
+  icon:
+    sprite: DeltaV/Objects/Storage/boxes.rsi
+    state: recorder
+  product: BoxTapeRecorder
+  cost: 750
+  category: cargoproduct-category-name-fun
+  group: market

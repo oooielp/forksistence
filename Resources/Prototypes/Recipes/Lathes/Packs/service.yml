@@ -18,6 +18,7 @@
   - FoodBowlBig
   - FoodPlateTin
   - FoodPlateMuffinTin
+  - EmptyCan
   - FoodKebabSkewer
   - SprayBottle
   - TrashBag
@@ -43,7 +44,7 @@
   - BlockGameArcadeComputerCircuitboard
   - SpaceVillainArcadeComputerCircuitboard
   - InvoicePrinterCircuitboard
-  - ComputerTelevisionCircuitboard
+  - IDComputerCircuitboard
 
 ## Dynamic
 
@@ -72,3 +73,4 @@
   - ReagentGrinderIndustrialMachineCircuitboard
   - JukeboxCircuitBoard
   - DawInstrumentMachineCircuitboard
+  - ComputerTelevisionCircuitboard

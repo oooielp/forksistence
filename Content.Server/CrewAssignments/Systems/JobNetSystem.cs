@@ -165,7 +165,16 @@ public sealed partial class JobNetSystem : EntitySystem
         if (currentWorkingFor != 0 && currentWorkingFor != null)
         {
             var sId = _station.GetStationByID(currentWorkingFor.Value);
-            if (sId != null) _crewManifest.BuildCrewManifest(sId.Value);
+            if (sId == null) return;
+            var jobNetEnabled = _station.GetJobNetStatus(sId.Value);
+            if (!jobNetEnabled)
+            {
+                component.WorkingFor = 0;
+            }
+            else
+            {
+                _crewManifest.BuildCrewManifest(sId.Value);
+            }
         }
     }
 

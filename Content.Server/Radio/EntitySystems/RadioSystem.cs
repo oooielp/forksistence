@@ -182,6 +182,7 @@ public sealed class RadioSystem : EntitySystem
         }
         while (canSend && radioQuery.MoveNext(out var receiver, out var radio, out var transform))
         {
+            if (TryComp<IntercomComponent>(receiver, out _)) continue;
             if (encryptionID == 0 && !channel.Encrypted) ;
 
             else if (TryComp<HeadsetComponent>(receiver, out var targetHeadset) && targetHeadset != null)

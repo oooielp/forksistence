@@ -112,7 +112,7 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: SpawnOnDespawn
-    prototype: AsteroidRockTinCrab
+    prototype: AsteroidRockIronCrab
 
 - type: entity
   id: WallSpawnAsteroidIron
@@ -120,7 +120,7 @@
   categories: [ HideSpawnMenu ]
   components:
   - type: SpawnOnDespawn
-    prototype: AsteroidRockTin
+    prototype: AsteroidRockIron
 
 - type: entity
   id: WallSpawnAsteroidCoalCrab

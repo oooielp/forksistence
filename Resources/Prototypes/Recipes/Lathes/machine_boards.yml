@@ -134,6 +134,12 @@
 
 - type: latheRecipe
   parent: [ BaseGoldCircuitboardRecipe, BaseEngineeringMachineRecipeCategory ]
+  id: StationAnchorCircuitboard
+  result: StationAnchorCircuitboard
+  unlockUses: 2
+
+- type: latheRecipe
+  parent: [ BaseGoldCircuitboardRecipe, BaseEngineeringMachineRecipeCategory ]
   id: SpaceHeaterMachineCircuitBoard
   result: SpaceHeaterMachineCircuitBoard
 
@@ -193,6 +199,18 @@
   parent: PortableGeneratorPacmanMachineCircuitboard
   id: PortableGeneratorJrPacmanMachineCircuitboard
   result: PortableGeneratorJrPacmanMachineCircuitboard
+  unlockUses: 4
+
+- type: latheRecipe
+  parent: PortableGeneratorSuperPacmanMachineCircuitboard
+  id: PortableGeneratorMegamanMachineCircuitboard
+  result: PortableGeneratorMegamanMachineCircuitboard
+  unlockUses: 4
+
+- type: latheRecipe
+  parent: [ BaseGoldCircuitboardRecipe, BaseEngineeringMachineRecipeCategory ]
+  id: GasGeneratorMachineCircuitboard
+  result: GasGeneratorMachineCircuitboard
   unlockUses: 4
 
 ## Medical
@@ -517,6 +535,12 @@
   id: TelecomServerCircuitboard
   result: TelecomServerCircuitboard
   unlockUses: 4
+
+- type: latheRecipe
+  parent: [ BaseCircuitboardRecipe, BaseEngineeringMachineRecipeCategory ]
+  id: TelecomServer1kCircuitboard
+  result: TelecomServer1kCircuitboard
+  unlockUses: 1
 
 - type: latheRecipe
   parent: [ BaseCircuitboardRecipe, BaseSecurityMachineRecipeCategory ]

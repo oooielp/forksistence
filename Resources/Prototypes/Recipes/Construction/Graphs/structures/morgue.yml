@@ -79,6 +79,7 @@
              - !type:SpawnPrototype
                prototype: MorgueElectronics
                amount: 1
+             - !type:EmptyAllContainers
            steps:
              - tool: Prying
                doAfter: 2
@@ -200,6 +201,8 @@
       entity: Crematorium
       edges:
          - to: crematorwelding
+           completed:
+             - !type:EmptyAllContainers
            steps:
              - tool: Screwing
                doAfter: 2

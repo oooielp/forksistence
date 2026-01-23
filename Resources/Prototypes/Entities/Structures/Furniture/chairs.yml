@@ -49,6 +49,7 @@
           collection: MetalBreak
   - type: StaticPrice
     price: 50
+  - type: GravityAffected
 
 #Starts unanchored, cannot be rotated while anchored
 - type: entity

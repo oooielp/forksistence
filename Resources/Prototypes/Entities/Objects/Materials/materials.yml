@@ -412,6 +412,69 @@
 
 - type: entity
   parent: MaterialBase
+  id: MaterialPhoron
+  name: phoron alloy
+  description: A refined alloy of plasma, bananium, and titanium.
+  suffix: Full
+  components:
+  - type: Stack
+    stackType: Phoron
+    baseLayer: base
+    layerStates:
+    - phoron
+    - phoron_2
+    - phoron_3
+  - type: Sprite
+    sprite: Objects/Materials/Sheets/other.rsi
+    state: phoron_3
+    layers:
+    - state: phoron_3
+      map: ["base"]
+  - type: Appearance
+  - type: Item
+    heldPrefix: phoron
+  - type: Extractable
+    grindableSolutionName: phoronalloy
+  - type: SolutionContainerManager
+    solutions:
+      phoronalloy:
+        reagents:
+        - ReagentId: Plasma
+          Quantity: 20
+        - ReagentId: Bananium
+          Quantity: 20
+        - ReagentId: Titanium
+          Quantity: 10
+        canReact: false
+  - type: Material
+  - type: PhysicalComposition
+    materialComposition:
+      Phoron: 100
+  - type: Tag
+    tags:
+    - RawMaterial
+    - Phoron
+
+- type: entity
+  parent: MaterialPhoron
+  id: MaterialPhoron1
+  suffix: Single
+  components:
+  - type: Stack
+    count: 1
+
+- type: entity
+  parent: MaterialPhoron
+  id: MaterialPhoron10
+  suffix: 10
+  components:
+  - type: Sprite
+    state: phoron_2
+  - type: Stack
+    count: 10
+
+- type: entity
+  parent: MaterialBase
   id: MaterialCotton
   name: cotton
   suffix: Full

@@ -14,3 +14,8 @@
     storage: StorageCanister
     tritium: TritiumCanister
     water-vapor: WaterVaporCanister
+    methane: MethaneCanister
+    hydrogen: HydrogenCanister
+    fluorine: FluorineCanister
+    chlorine: ChlorineCanister
+    chlorine-trifluoride: ChlorineTrifluorideCanister

@@ -17,3 +17,8 @@ ui-info-subheader-gridoptions = Grid aligned options:
 ui-info-header-feedback = Feedback
 
 ui-info-button-controls = Options Menu
+
+ui-info-header-intro-persist = The Threshold
+ui-info-header-intro-persist-basics = The Basics
+ui-info-header-intro-persist-ins-outs = The Ins & Outs
+ui-info-header-intro-persist-independence-interdependence = Independence & Interdependence

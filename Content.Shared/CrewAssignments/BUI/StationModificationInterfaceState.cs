@@ -23,8 +23,10 @@ public sealed class StationModificationInterfaceState : BoundUserInterfaceState
     public ProtoId<FactionLevelPrototype> Level;
     public int AccountBalance;
     public Dictionary<ProtoId<RadioChannelPrototype>, FactionRadioData> RadioData;
+    public bool JobNetEnabled;
+    public bool TradeStationClaimed;
 
-    public StationModificationInterfaceState(string name, NetEntity station, List<string> owners, Dictionary<string, CrewAccess> crewAccess, Dictionary<int, CrewAssignment> crewAssignments, int importTax, int exportTax, int salesTax, ProtoId<FactionLevelPrototype> level, int accountBalance, Dictionary<ProtoId<RadioChannelPrototype>, FactionRadioData> radioData)
+    public StationModificationInterfaceState(string name, NetEntity station, List<string> owners, Dictionary<string, CrewAccess> crewAccess, Dictionary<int, CrewAssignment> crewAssignments, int importTax, int exportTax, int salesTax, ProtoId<FactionLevelPrototype> level, int accountBalance, Dictionary<ProtoId<RadioChannelPrototype>, FactionRadioData> radioData, bool jobNetEnabled, bool tradeStationClaimed)
     {
         Name = name;
         Station = station;
@@ -37,5 +39,7 @@ public sealed class StationModificationInterfaceState : BoundUserInterfaceState
         Level = level;
         AccountBalance = accountBalance;
         RadioData = radioData;
+        JobNetEnabled = jobNetEnabled;
+        TradeStationClaimed = tradeStationClaimed;
     }
 }

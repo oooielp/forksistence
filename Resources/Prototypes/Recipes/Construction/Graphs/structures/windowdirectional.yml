@@ -28,6 +28,19 @@
             - material: ReinforcedPlasmaGlass
               amount: 1
               doAfter: 3
+
+        - to: phoronGlassWindowDirectional
+          steps:
+            - material: PhoronGlass
+              amount: 1
+              doAfter: 2
+
+        - to: reinforcedPhoronGlassWindowDirectional
+          steps:
+            - material: ReinforcedPhoronGlass
+              amount: 1
+              doAfter: 3
+
         - to: uraniumWindowDirectional
           steps:
             - material: UraniumGlass
@@ -162,6 +175,44 @@
           completed:
             - !type:GivePrototype
               prototype: SheetRUGlass1
+              amount: 1
+            - !type:DeleteEntity {}
+          steps:
+            - tool: Screwing
+              doAfter: 2
+            - tool: Prying
+              doAfter: 3
+            - tool: Screwing
+              doAfter: 2
+            - tool: Anchoring
+              doAfter: 3
+
+    - node: phoronGlassWindowDirectional
+      entity: PhoronGlassWindowDirectional
+      edges:
+        - to: start
+          completed:
+            - !type:GivePrototype
+              prototype: SheetPhoronGlass1
+              amount: 1
+            - !type:DeleteEntity {}
+          steps:
+            - tool: Screwing
+              doAfter: 2
+            - tool: Prying
+              doAfter: 3
+            - tool: Screwing
+              doAfter: 2
+            - tool: Anchoring
+              doAfter: 3
+
+    - node: reinforcedPhoronGlassWindowDirectional
+      entity: ReinforcedPhoronGlassWindowDirectional
+      edges:
+        - to: start
+          completed:
+            - !type:GivePrototype
+              prototype: SheetRPhoronGlass1
               amount: 1
             - !type:DeleteEntity {}
           steps:

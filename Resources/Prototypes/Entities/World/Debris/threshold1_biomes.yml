@@ -141,13 +141,29 @@
       debrisTable:
         - id: AsteroidDebrisSmall
         - id: ConglomerateDebrisSmall
-          prob: 0.7
-        - id: ConglomerateDebrisMedium
+          prob: 0.9
+        - id: ConglomerateDebrisSmallBarren
           prob: 0.5
-        - id: ConglomerateDebrisLarge
+        - id: ConglomerateDebrisSmallRich
           prob: 0.3
-        - id: ConglomerateDebrisHuge
+        - id: ConglomerateDebrisMedium
+          prob: 0.7
+        - id: ConglomerateDebrisMediumBarren
+          prob: 0.4
+        - id: ConglomerateDebrisMediumRich
           prob: 0.2
+        - id: ConglomerateDebrisLarge
+          prob: 0.5
+        - id: ConglomerateDebrisLargeBarren
+          prob: 0.3
+        - id: ConglomerateDebrisLargeRich
+          prob: 0.15
+        - id: ConglomerateDebrisHuge
+          prob: 0.3
+        - id: ConglomerateDebrisHugeBarren
+          prob: 0.15
+        - id: ConglomerateDebrisHugeRich
+          prob: 0.1
         - id: IronrockDebrisMediumBarren
           prob: 0.4
         - id: AsteroidDebrisHuge
@@ -167,19 +183,51 @@
     - type: SimpleDebrisSelector
       debrisTable:
         - id: BasaltDebrisSmall
+        - id: BasaltDebrisSmallBarren
+          prob: 0.6
+        - id: BasaltDebrisSmallRich
+          prob: 0.4
         - id: BasaltDebrisMedium
           prob: 0.5
+        - id: BasaltDebrisMediumBarren
+          prob: 0.3
+        - id: BasaltDebrisMediumRich
+          prob: 0.2
         - id: BasaltDebrisLarge
           prob: 0.3
+        - id: BasaltDebrisLargeBarren
+          prob: 0.15
+        - id: BasaltDebrisLargeRich
+          prob: 0.1
         - id: BasaltDebrisHuge
           prob: 0.1
+        - id: BasaltDebrisHugeBarren
+          prob: 0.05
+        - id: BasaltDebrisHugeRich
+          prob: 0.03
         - id: AndesiteDebrisSmall
+        - id: AndesiteDebrisSmallBarren
+          prob: 0.6
+        - id: AndesiteDebrisSmallRich
+          prob: 0.4
         - id: AndesiteDebrisMedium
           prob: 0.5
+        - id: AndesiteDebrisMediumBarren
+          prob: 0.3
+        - id: AndesiteDebrisMediumRich
+          prob: 0.2
         - id: AndesiteDebrisLarge
           prob: 0.3
+        - id: AndesiteDebrisLargeBarren
+          prob: 0.15
+        - id: AndesiteDebrisLargeRich
+          prob: 0.1
         - id: AndesiteDebrisHuge
           prob: 0.1
+        - id: AndesiteDebrisHugeBarren
+          prob: 0.05
+        - id: AndesiteDebrisHugeRich
+          prob: 0.03
         - id: ChromiteDebrisMediumRich
           prob: 0.1
 

@@ -196,6 +196,10 @@
   description: A sheet of translucent plasma.
   suffix: Full
   components:
+  - type: Tag
+    tags:
+    - Sheet
+    - ConstructionMaterial
   - type: PhysicalComposition
     materialComposition:
       PlasmaGlass: 100
@@ -240,6 +244,17 @@
             max: 1
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
+  - type: Extractable
+    grindableSolutionName: pglass
+  - type: SolutionContainerManager
+    solutions:
+      pglass:
+        reagents:
+        - ReagentId: Silicon
+          Quantity: 10
+        - ReagentId: Plasma
+          Quantity: 10
+        canReact: false
 
 - type: entity
   parent: SheetPGlass
@@ -319,6 +334,174 @@
     stackType: ReinforcedPlasmaGlass
     count: 1
 
+# Phoron glass (alloy variant)
+
+- type: entity
+  parent: SheetGlassBase
+  id: SheetPhoronGlass
+  name: phoron glass
+  description: A sheet of phoron alloy-infused glass.
+  suffix: Full
+  components:
+  - type: Tag
+    tags:
+    - Sheet
+    - ConstructionMaterial
+  - type: PhysicalComposition
+    materialComposition:
+      PhoronGlass: 100
+  - type: Stack
+    stackType: PhoronGlass
+    baseLayer: base
+    layerStates:
+    - phoronglass
+    - phoronglass_2
+    - phoronglass_3
+  - type: Sprite
+    state: phoronglass_3
+    layers:
+    - state: phoronglass_3
+      map: ["base"]
+  - type: Item
+    heldPrefix: phoronglass
+  - type: Construction
+    graph: Glass
+    node: SheetPhoronGlass
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: GlassBreak
+          params:
+            volume: -4
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          ShardGlassPlasma:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: Extractable
+    grindableSolutionName: phoronglass
+  - type: SolutionContainerManager
+    solutions:
+      phoronglass:
+        reagents:
+        - ReagentId: Silicon
+          Quantity: 10
+        - ReagentId: Plasma
+          Quantity: 8
+        - ReagentId: Bananium
+          Quantity: 8
+        - ReagentId: Titanium
+          Quantity: 4
+        canReact: false
+
+- type: entity
+  parent: SheetPhoronGlass
+  id: SheetPhoronGlass1
+  name: phoron glass
+  suffix: Single
+  components:
+  - type: Sprite
+    state: phoronglass
+  - type: Stack
+    stackType: PhoronGlass
+    count: 1
+
+- type: entity
+  parent: SheetPhoronGlass
+  id: SheetRPhoronGlass
+  name: reinforced phoron glass
+  description: A reinforced sheet of phoron alloy-infused glass.
+  suffix: Full
+  components:
+  - type: PhysicalComposition
+    materialComposition:
+      ReinforcedPhoronGlass: 100
+  - type: Stack
+    stackType: ReinforcedPhoronGlass
+    baseLayer: base
+    layerStates:
+    - rphoronglass
+    - rphoronglass_2
+    - rphoronglass_3
+  - type: Sprite
+    state: rphoronglass_3
+    layers:
+    - state: rphoronglass_3
+      map: ["base"]
+  - type: Item
+    heldPrefix: rphoronglass
+  - type: Construction
+    graph: Glass
+    node: SheetRPhoronGlass
+  - type: Destructible
+    thresholds:
+    - trigger:
+        !type:DamageTrigger
+        damage: 100
+      behaviors:
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+    - trigger:
+        !type:DamageTrigger
+        damage: 50
+      behaviors:
+      - !type:PlaySoundBehavior
+        sound:
+          collection: GlassBreak
+          params:
+            volume: -4
+      - !type:SpawnEntitiesBehavior
+        spawn:
+          ShardGlassPlasma:
+            min: 1
+            max: 1
+      - !type:DoActsBehavior
+        acts: [ "Destruction" ]
+  - type: Extractable
+    grindableSolutionName: rphoronglass
+  - type: SolutionContainerManager
+    solutions:
+      rphoronglass:
+        reagents:
+        - ReagentId: Silicon
+          Quantity: 10
+        - ReagentId: Plasma
+          Quantity: 8
+        - ReagentId: Bananium
+          Quantity: 8
+        - ReagentId: Titanium
+          Quantity: 4
+        - ReagentId: Iron
+          Quantity: 4.5
+        - ReagentId: Carbon
+          Quantity: 0.5
+        canReact: false
+
+- type: entity
+  parent: SheetRPhoronGlass
+  id: SheetRPhoronGlass1
+  name: reinforced phoron glass
+  suffix: Single
+  components:
+  - type: Sprite
+    state: rphoronglass
+  - type: Stack
+    stackType: ReinforcedPhoronGlass
+    count: 1
+
 - type: entity
   parent: SheetGlassBase
   id: SheetUGlass
@@ -326,6 +509,10 @@
   description: A sheet of uranium glass.
   suffix: Full
   components:
+  - type: Tag
+    tags:
+    - Sheet
+    - ConstructionMaterial
   - type: PhysicalComposition
     materialComposition:
       UraniumGlass: 100
@@ -393,6 +580,17 @@
   - type: Stack
     stackType: UraniumGlass
     count: 1
+  - type: Extractable
+    grindableSolutionName: uglass
+  - type: SolutionContainerManager
+    solutions:
+      uglass:
+        reagents:
+        - ReagentId: Silicon
+          Quantity: 10
+        - ReagentId: Uranium
+          Quantity: 10
+        canReact: false
 
 - type: entity
   parent: SheetUGlass

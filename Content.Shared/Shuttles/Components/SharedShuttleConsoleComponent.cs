@@ -17,4 +17,12 @@ namespace Content.Shared.Shuttles.Components
     {
         Key,
     }
+
+    [Serializable, NetSerializable]
+    public enum ShuttleDampingMode : byte
+    {
+        Cruise,
+        Normal,
+        Anchor,
+    }
 }

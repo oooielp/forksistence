@@ -112,6 +112,7 @@
         - Sheet
         - RawMaterial
         - Ingot
+        - SheetPaper
   - type: OreSiloClient
   - type: Lathe
     idleState: icon
@@ -133,6 +134,7 @@
     - ServiceStatic
     - PowerCellsStatic
     - ElectronicsStatic
+    - CassetteTape
   - type: EmagLatheRecipes
     emagStaticPacks:
     - SecurityAmmoStatic
@@ -511,6 +513,12 @@
     - ClothingSecurity
     - ClothingService
     - ClothingMilitary
+    - ClothingLabCoats
+    - ClothingCentComm
+    - ClothingAssortedHats
+    - ClothingAssortedOversuits
+    - Cloaks
+    - Mantles
     - WinterCoats
     - Ties
     - Scarves
@@ -519,7 +527,6 @@
     - NFWallets # Frontier
   - type: EmagLatheRecipes
     emagStaticPacks:
-    - ClothingCentComm
     - ClothingSyndie
   - type: MaterialStorage
     whitelist: *StandardMaterialWhitelist
@@ -606,22 +613,40 @@
       - RGlassSmelting
 
 - type: entity
-  parent: OreProcessor
+  parent: BaseLathe
   id: OreProcessorIndustrial
   name: industrial ore processor
   description: An ore processor specifically designed for mass-producing metals in industrial applications.
   components:
-  - type: Sprite
-    sprite: Structures/Machines/ore_processor_industrial.rsi
-  - type: Machine
-    board: OreProcessorIndustrialMachineCircuitboard
-  - type: Lathe
-    materialUseMultiplier: 0.75
-    timeMultiplier: 0.5
-    staticPacks:
-    - OreSmelting
-    - RGlassSmelting
-    - AdvancedSmelting
+    - type: Sprite
+      sprite: Structures/Machines/ore_processor_industrial.rsi
+      layers:
+        - state: icon
+          map: ["enum.LatheVisualLayers.IsRunning"]
+        - state: unlit
+          shader: unshaded
+          map: ["enum.PowerDeviceVisualLayers.Powered"]
+        - state: inserting
+          map: ["enum.MaterialStorageVisualLayers.Inserting"]
+        - state: panel
+          map: ["enum.WiresVisualLayers.MaintenancePanel"]
+    - type: Machine
+      board: OreProcessorIndustrialMachineCircuitboard
+    - type: MaterialStorage
+      ignoreColor: true
+      whitelist:
+        tags:
+          - Ore
+    - type: Lathe
+      idleState: icon
+      runningState: building
+      defaultProductionAmount: 10
+      materialUseMultiplier: 0.75
+      timeMultiplier: 0.5
+      staticPacks:
+      - OreSmelting
+      - RGlassSmelting
+      - AdvancedSmelting
 
 - type: entity
   parent: BaseLathe

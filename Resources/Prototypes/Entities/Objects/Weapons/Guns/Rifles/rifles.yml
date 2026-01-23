@@ -101,6 +101,40 @@
   - type: Appearance
 
 - type: entity
+  name: Tactical Cigarette Infuser
+  parent: [BaseWeaponShotgun, BaseGunWieldable, BaseSecurityContraband]
+  id: WeaponRifleCiggyLauncher
+  description: An aggressive marketing strategy.
+  components:
+  - type: Item
+    size: Large
+    shape:
+    - 0,0,1,1
+  - type: Sprite
+    sprite: Objects/Weapons/Guns/Rifles/ciggylauncher.rsi
+    layers:
+      - state: base
+        map: ["enum.GunVisualLayers.Base"]
+  - type: Clothing
+    sprite: Objects/Weapons/Guns/Rifles/ciggylauncher.rsi
+  - type: BallisticAmmoProvider
+    whitelist:
+      tags:
+      - Cigarette
+    capacity: 30
+    proto: Cigarette
+  - type: Gun
+    fireRate: 5
+    selectedMode: SemiAuto
+    availableModes:
+      - FullAuto
+      - SemiAuto
+    soundGunshot:
+      path: /Audio/Items/Lighters/lighter1.ogg
+  - type: LightSmokableOnShoot
+  - type: AddAutoEquipToProjectile
+
+- type: entity
   name: M90 GL
   parent: [BaseWeaponRifle, BaseSyndicateContraband]
   id: WeaponRifleM90GrenadeLauncher

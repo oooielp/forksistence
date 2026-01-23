@@ -507,7 +507,7 @@
   parent: [ BaseMachine, ConstructibleMachine ]
   id: GasRecycler
   name: gas recycler
-  description: Recycles carbon dioxide and nitrous oxide. Heater and compressor not included.
+  description: Recycles waste gases into useful gases. Can hold a beaker to collect reagents skimmed from the gas stream. Requires high temperature and pressure to operate.
   placement:
     mode: SnapgridCenter
   components:
@@ -539,6 +539,17 @@
   - type: PipeColorVisuals
   - type: Rotatable
   - type: GasRecycler
+  - type: ItemSlots
+    slots:
+      beaker_slot:
+        name: Beaker
+        ejectOnInteract: true
+        whitelist:
+          components:
+          - FitsInDispenser
+  - type: ContainerContainer
+    containers:
+      beaker_slot: !type:ContainerSlot
   - type: PipeRestrictOverlap
   - type: NodeContainer
     nodes:
@@ -666,13 +677,19 @@
   name: heat pump
   description: A pump that moves heat from one side to the other.
   placement:
-    mode: SnapgridCenter
+    mode: AlignAtmosPipeLayers
   components:
     - type: ExtensionCableReceiver
     - type: LightningTarget
       priority: 1
     - type: ApcPowerReceiver
       powerLoad: 200
+    - type: Rotatable
+    - type: Transform
+      noRot: false
+    - type: SubFloorHide
+      visibleLayers:
+      - enum.SubfloorLayers.FirstLayer
     - type: Sprite
       sprite: Structures/Piping/Atmospherics/pump.rsi
       layers:
@@ -681,6 +698,11 @@
           map: [ "enum.PipeVisualLayers.Pipe" ]
         - state: pumpHeat
           map: [ "enum.SubfloorLayers.FirstLayer", "enabled" ]
+    - type: AtmosPipeLayers
+      alternativePrototypes:
+        Primary: HeatPump
+        Secondary: HeatPumpAlt1
+        Tertiary: HeatPumpAlt2
     - type: Appearance
     - type: PipeColorVisuals
     - type: HeatPump
@@ -714,3 +736,9 @@
     - type: GuideHelp
       guides:
       - ManualValve
+    - type: GenericVisualizer
+      visuals:
+        enum.HeatPumpVisuals.Enabled:
+          enabled:
+            True: { state: pumpHeatOn }
+            False: { state: pumpHeat }

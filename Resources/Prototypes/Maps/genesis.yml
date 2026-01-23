@@ -6,15 +6,13 @@
   maxPlayers: 7
   stations:
     Genesis:
-      stationProto: StandardNanotrasenStation
+      stationProto: StandardPersistStation
       components:
         - type: StationNameSetup
           mapNameTemplate: '{0} Genesis-Station {1}'
           nameGenerator:
             !type:NanotrasenNameGenerator
             prefixCreator: 'SL2'
-        - type: StationEmergencyShuttle
-          emergencyShuttlePath: /Maps/Shuttles/emergency.yml
         - type: StationJobs
           availableJobs: # 15 jobs total w/o latejoins, 19 jobs total w/ latejoins
             #civilian (1+)

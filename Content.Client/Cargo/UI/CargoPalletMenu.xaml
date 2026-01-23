@@ -5,7 +5,7 @@
                       Title="{Loc 'cargo-pallet-console-menu-title'}">
     <BoxContainer Orientation="Vertical" Margin="5">
         <BoxContainer Orientation="Horizontal" Name="ConnectedBC">
-            <Label Text="Connected Station: "
+            <Label Text="Connected Faction: "
                    StyleClasses="LabelKeyText" />
             <Label Name="StationLabel"
                        Text="Not Connected" />
@@ -16,7 +16,7 @@
             <Label Text="Payment Type: "
                    StyleClasses="LabelKeyText" />
             <Button Name="PaymentType"
-                Text="Direct To Station"/>
+                Text="Direct To Faction"/>
             <Control HorizontalExpand="True"/>
             <BoxContainer Name="TaxContainer" Orientation="Horizontal">
                 <Label Text="Tax %: "

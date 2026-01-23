@@ -24,6 +24,8 @@
   - ClothingHeadHatCone
   - AccessConfigurator
   - ToolboxMechanical
+  - VoiceSensorCopper
+  - SignallerCopper
 
 - type: latheRecipePack
   id: AtmosStatic
@@ -51,6 +53,7 @@
   - FreezerElectronics
   - MorgueElectronics
   - BarSignElectronics
+  - ShredderMachineCircuitboard
 
 - type: latheRecipePack
   id: EngineeringBoardsStatic
@@ -58,7 +61,6 @@
   - SpaceHeaterMachineCircuitBoard
   - AlertsComputerCircuitboard
   - AtmosMonitoringComputerCircuitboard
-  - SolarControlComputerCircuitboard
   - PowerComputerCircuitboard
   - MCTNMachineCircuitboard
   - TrappedFluidExtractorMachineCircuitboard
@@ -94,11 +96,15 @@
   - SolarControlComputerCircuitboard
   - SolarTrackerElectronics
   - GasRecyclerMachineCircuitboard
+  - GasGeneratorMachineCircuitboard
   - PortableGeneratorPacmanMachineCircuitboard
   - PortableGeneratorSuperPacmanMachineCircuitboard
+  - PortableGeneratorMegamanMachineCircuitboard
   - PortableGeneratorJrPacmanMachineCircuitboard
   - PortableGeneratorOldmanMachineCircuitboard
   - EmitterCircuitboard
   - TelecomServerCircuitboard
   - SMESAdvancedMachineCircuitboard
   - HolopadMachineCircuitboard
+  - StationAnchorCircuitboard
+  - TelecomServer1kCircuitboard

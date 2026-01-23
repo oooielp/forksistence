@@ -11,6 +11,9 @@
             "name": "shredder-base"
         },
         {
+            "name": "shredder-powered"
+        },
+        {
             "name": "shredder-ready"
         },
         {
