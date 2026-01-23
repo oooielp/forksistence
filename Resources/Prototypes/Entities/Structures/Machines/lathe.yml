@@ -209,6 +209,7 @@
     - Janitor
     - Instruments
     - Equipment
+    - Hardsuits
   - type: EmagLatheRecipes
     emagDynamicPacks:
     - SecurityAmmo
@@ -397,6 +398,7 @@
     - SecurityAmmo
     - SecurityWeapons
     - SecurityDisablers
+    - SecurityHardsuits
   - type: EmagLatheRecipes
     emagStaticPacks:
     - SyndicateAmmoStatic
@@ -470,6 +472,7 @@
     - EmptyMedkitsStatic
     - SurgeryStatic
     dynamicPacks:
+    - MedicalHardsuits
     - Chemistry
   - type: Machine
     board: MedicalTechFabCircuitboard

@@ -36,6 +36,8 @@ namespace Content.Client.Options.UI.Tabs
 
         private readonly List<Action> _deferCommands = new();
 
+        private string _searchText = "";
+
         private void HandleToggleUSQWERTYCheckbox(BaseButton.ButtonToggledEventArgs args)
         {
             _cfg.SetCVar(CVars.DisplayUSQWERTYHotkeys, args.Pressed);
@@ -117,38 +119,23 @@ namespace Content.Client.Options.UI.Tabs
                 });
             };
 
+            SearchInput.OnTextChanged += _ =>
+            {
+                _searchText = SearchInput.Text.TrimStart();
+                PopulateOptions();
+            };
+            PopulateOptions();
+        }
+
+        private void PopulateOptions()
+        {
+            KeybindsContainer.RemoveAllChildren();
+            _keyControls.Clear();
+
             var first = true;
-
-            void AddHeader(string headerContents)
-            {
-                if (!first)
-                {
-                    KeybindsContainer.AddChild(new Control { MinSize = new Vector2(0, 8) });
-                }
-
-                first = false;
-                KeybindsContainer.AddChild(new Label
-                {
-                    Text = Loc.GetString(headerContents),
-                    StyleClasses = { StyleClass.LabelKeyText }
-                });
-            }
-
-            void AddButton(BoundKeyFunction function)
-            {
-                var control = new KeyControl(this, function);
-                KeybindsContainer.AddChild(control);
-                _keyControls.Add(function, control);
-            }
-
-            void AddCheckBox(string checkBoxName, bool currentState, Action<BaseButton.ButtonToggledEventArgs>? callBackOnClick)
-            {
-                CheckBox newCheckBox = new CheckBox() { Text = Loc.GetString(checkBoxName) };
-                newCheckBox.Pressed = currentState;
-                newCheckBox.OnToggled += callBackOnClick;
-
-                KeybindsContainer.AddChild(newCheckBox);
-            }
+            var currentHeader = "";
+            Dictionary<string, int> headerCount = new();
+            Dictionary<string, Control> headerSpacers = new();
 
             AddHeader("ui-options-header-general");
             AddCheckBox("ui-options-hotkey-keymap", _cfg.GetCVar(CVars.DisplayUSQWERTYHotkeys), HandleToggleUSQWERTYCheckbox);
@@ -321,6 +308,104 @@ namespace Content.Client.Options.UI.Tabs
             foreach (var control in _keyControls.Values)
             {
                 UpdateKeyControl(control);
+            }
+
+            CleanupHeaders();
+
+            return;
+
+            void AddCheckBox(string checkBoxName, bool currentState, Action<BaseButton.ButtonToggledEventArgs>? callBackOnClick)
+            {
+                if (!ShouldDisplayCheckBox(checkBoxName))
+                    return;
+
+                var newCheckBox = new CheckBox() { Text = Loc.GetString(checkBoxName) };
+                newCheckBox.Pressed = currentState;
+                newCheckBox.OnToggled += callBackOnClick;
+
+                KeybindsContainer.AddChild(newCheckBox);
+                if (headerCount.ContainsKey(currentHeader))
+                    headerCount[currentHeader] += 1;
+            }
+
+            void AddButton(BoundKeyFunction function)
+            {
+                if (!ShouldDisplayButton(function))
+                    return;
+
+                var control = new KeyControl(this, function);
+                KeybindsContainer.AddChild(control);
+                _keyControls.Add(function, control);
+                if (headerCount.ContainsKey(currentHeader))
+                    headerCount[currentHeader] += 1;
+            }
+
+            void AddHeader(string headerName)
+            {
+                Control? spacer = null;
+
+                if (!first)
+                {
+                    spacer = new Control { MinSize = new Vector2(0, 8) };
+                    KeybindsContainer.AddChild(spacer);
+                }
+
+                first = false;
+
+                var text = Loc.GetString(headerName);
+                Control label = new Label
+                {
+                    Text = text,
+                    StyleClasses = { StyleClass.LabelKeyText },
+                };
+                KeybindsContainer.AddChild(label);
+
+                headerCount[text] = 0;
+                currentHeader = text;
+                if (spacer != null)
+                    headerSpacers[text] = spacer;
+            }
+
+            void CleanupHeaders()
+            {
+                var toRemove = new List<Control>();
+                foreach (var item in KeybindsContainer.Children)
+                {
+                    // Only mark to remove headers without any entries assigned to it.
+                    if (item is not Label { Text: not null } label || headerCount[label.Text] > 0)
+                        continue;
+                    toRemove.Add(item);
+                    // Try and find if this header has a spacer, if so, mark for removal as well.
+                    if (headerSpacers.TryGetValue(label.Text, out var value))
+                        toRemove.Add(value);
+                }
+
+                foreach (var item in toRemove)
+                {
+                    KeybindsContainer.RemoveChild(item);
+                }
+            }
+
+            bool ShouldDisplayButton(BoundKeyFunction function)
+            {
+                if (_searchText == string.Empty)
+                    return true;
+
+                var optionText =
+                    Loc.GetString($"ui-options-function-{CaseConversion.PascalToKebab(function.FunctionName)}");
+                return optionText.StartsWith(_searchText, StringComparison.OrdinalIgnoreCase)
+                       || _searchText.Contains(optionText, StringComparison.OrdinalIgnoreCase);
+
+            }
+
+            bool ShouldDisplayCheckBox(string checkBoxName)
+            {
+                if (_searchText == string.Empty)
+                    return true;
+
+                var optionText = Loc.GetString(checkBoxName);
+                return optionText.StartsWith(_searchText, StringComparison.OrdinalIgnoreCase)
+                       || _searchText.Contains(optionText, StringComparison.OrdinalIgnoreCase);
             }
         }
 
