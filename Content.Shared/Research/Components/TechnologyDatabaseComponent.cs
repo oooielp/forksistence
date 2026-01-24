@@ -19,7 +19,7 @@ public sealed partial class TechnologyDatabaseComponent : Component
 
     [AutoNetworkedField]
     [DataField("currentTechnologyCards")]
-    public List<string> CurrentTechnologyCards = new();
+    public List<ProtoId<TechnologyPrototype>> CurrentTechnologyCards = new();
 
     /// <summary>
     /// Which research disciplines are able to be unlocked
@@ -42,7 +42,7 @@ public sealed partial class TechnologyDatabaseComponent : Component
     /// todo: if you unlock all the recipes in a tech, it doesn't count as unlocking the tech. sadge
     [AutoNetworkedField]
     [DataField]
-    public List<ProtoId<LatheRecipePrototype>> UnlockedRecipes = new();
+    public Dictionary<ProtoId<LatheRecipePrototype>, int> UnlockedRecipes = new();
 }
 
 /// <summary>

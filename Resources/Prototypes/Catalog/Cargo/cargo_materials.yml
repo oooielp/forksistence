@@ -44,7 +44,7 @@
     sprite: Objects/Materials/Sheets/metal.rsi
     state: plasteel_3
   product: CrateMaterialPlasteel
-  cost: 1600
+  cost: 2000
   category: cargoproduct-category-name-materials
   group: market
 
@@ -54,7 +54,7 @@
     sprite: Objects/Materials/ingots.rsi
     state: gold_3
   product: CrateMaterialGold
-  cost: 3225
+  cost: 4000
   category: cargoproduct-category-name-materials
   group: market
 
@@ -64,7 +64,7 @@
     sprite: Objects/Materials/ingots.rsi
     state: silver_3
   product: CrateMaterialSilver
-  cost: 2580
+  cost: 3500
   category: cargoproduct-category-name-materials
   group: market
 
@@ -84,7 +84,7 @@
     sprite: Objects/Materials/Sheets/other.rsi
     state: plasma_3
   product: CrateMaterialPlasma
-  cost: 1500
+  cost: 5000
   category: cargoproduct-category-name-materials
   group: market
 
@@ -157,3 +157,4 @@
   cost: 2500
   category: cargoproduct-category-name-atmospherics
   group: market
+

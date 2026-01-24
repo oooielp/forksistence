@@ -56,5 +56,15 @@ public abstract class BaseWorldSystem : EntitySystem
     {
         return _worldController.GetOrCreateChunk(chunk, map, controller);
     }
+
+    [Pure]
+    public EntityUid? GetOrCreateChunkAt(EntityUid ent, TransformComponent? xform = null, WorldControllerComponent? controller = null)
+    {
+        if (!Resolve(ent, ref xform))
+            throw new Exception("Failed to resolve transform, somehow.");
+        if (!xform.MapUid.HasValue)
+            return null;
+        return GetOrCreateChunk(GetChunkCoords(ent), xform.MapUid.Value, controller);
+    }
 }
 

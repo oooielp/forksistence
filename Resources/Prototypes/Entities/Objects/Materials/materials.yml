@@ -254,8 +254,9 @@
     heldPrefix: wood
   - type: Tag
     tags:
-    - Wooden
     - RawMaterial
+    - Wood
+    - Wooden
     - ConstructionMaterial
   - type: Extractable
     grindableSolutionName: wood
@@ -338,6 +339,10 @@
     energy: 2.7
     color: "#4faffb"
     slots:
+      - HEAD
+  - type: Tag
+    tags:
+    - BearHide
 
 - type: entity
   parent: MaterialBase
@@ -354,7 +359,7 @@
     sprite: Clothing/Head/Misc/hides.rsi
     equippedPrefix: corgi2
     slots:
-    - HEAD
+      - HEAD
   - type: Tag
     tags:
     - HideCorgi
@@ -404,6 +409,69 @@
   components:
   - type: Stack
     count: 1
+
+- type: entity
+  parent: MaterialBase
+  id: MaterialPhoron
+  name: phoron alloy
+  description: A refined alloy of plasma, bananium, and titanium.
+  suffix: Full
+  components:
+  - type: Stack
+    stackType: Phoron
+    baseLayer: base
+    layerStates:
+    - phoron
+    - phoron_2
+    - phoron_3
+  - type: Sprite
+    sprite: Objects/Materials/Sheets/other.rsi
+    state: phoron_3
+    layers:
+    - state: phoron_3
+      map: ["base"]
+  - type: Appearance
+  - type: Item
+    heldPrefix: phoron
+  - type: Extractable
+    grindableSolutionName: phoronalloy
+  - type: SolutionContainerManager
+    solutions:
+      phoronalloy:
+        reagents:
+        - ReagentId: Plasma
+          Quantity: 20
+        - ReagentId: Bananium
+          Quantity: 20
+        - ReagentId: Titanium
+          Quantity: 10
+        canReact: false
+  - type: Material
+  - type: PhysicalComposition
+    materialComposition:
+      Phoron: 100
+  - type: Tag
+    tags:
+    - RawMaterial
+    - Phoron
+
+- type: entity
+  parent: MaterialPhoron
+  id: MaterialPhoron1
+  suffix: Single
+  components:
+  - type: Stack
+    count: 1
+
+- type: entity
+  parent: MaterialPhoron
+  id: MaterialPhoron10
+  suffix: 10
+  components:
+  - type: Sprite
+    state: phoron_2
+  - type: Stack
+    count: 10
 
 - type: entity
   parent: MaterialBase
@@ -528,6 +596,9 @@
   - type: PhysicalComposition
     materialComposition:
       Bananium: 150
+  - type: Tag
+    tags:
+    - Bananium
   - type: Sprite
     state: bananium_1
     layers:
@@ -749,6 +820,9 @@
           Quantity: 3
   - type: Item
     heldPrefix: bones
+  - type: Tag
+    tags:
+      - Bone
 
 - type: entity
   parent: MaterialBones

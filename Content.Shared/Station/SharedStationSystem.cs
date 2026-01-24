@@ -1,8 +1,12 @@
-using System.Linq;
+using Content.Shared.CrewAccesses.Components;
+using Content.Shared.CrewAssignments.Components;
+using Content.Shared.CrewRecords.Components;
+using Content.Shared.GridControl.Components;
 using Content.Shared.Station.Components;
 using JetBrains.Annotations;
 using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
+using System.Linq;
 
 namespace Content.Shared.Station;
 
@@ -23,6 +27,89 @@ public abstract partial class SharedStationSystem : EntitySystem
 
         _xformQuery = GetEntityQuery<TransformComponent>();
         _stationMemberQuery = GetEntityQuery<StationMemberComponent>();
+    }
+
+    public List<string> GetValidAccesses(List<string> baseAccess, EntityUid station)
+    {
+        List<string> final = new();
+        if(TryComp<CrewAccessesComponent>(station, out var accessComp) && accessComp != null)
+        {
+            foreach (var access in baseAccess)
+            {
+                if (accessComp.CrewAccesses.ContainsKey(access))
+                {
+                    final.Add(access);
+                }
+            }
+        }
+        return final;
+    }
+
+
+    public bool IsOwner(string userName, EntityUid station)
+    {
+        if (TryComp<StationDataComponent>(station, out var sD) && sD != null)
+        {
+            if (sD.Owners.Contains(userName))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public bool HasRecord(string userName, EntityUid station)
+    {
+        if (TryComp<StationDataComponent>(station, out var sD) && sD != null)
+        {
+            if (sD.Owners.Contains(userName))
+            {
+                return true;
+            }
+        }
+        if (TryComp<CrewRecordsComponent>(station, out var crewRecords) && crewRecords != null)
+        {
+            crewRecords.TryGetRecord(userName, out var crewRecord);
+            if (crewRecord != null)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+    public bool CanSpend(string userName, EntityUid station, int toSpend = 0)
+    {
+        if (TryComp<StationDataComponent>(station, out var sD) && sD != null)
+        {
+            if (sD.Owners.Contains(userName))
+            {
+                return true;
+            }
+        }
+        if (TryComp<CrewRecordsComponent>(station, out var crewRecords) && crewRecords != null)
+        {
+            crewRecords.TryGetRecord(userName, out var crewRecord);
+            if (crewRecord != null)
+            {
+                if (TryComp<CrewAssignmentsComponent>(station, out var crewAssignments) && crewAssignments != null)
+                {
+                    if (crewAssignments.TryGetAssignment(crewRecord.AssignmentID, out var assignment) && assignment != null)
+                    {
+                        if (assignment.CanSpend)
+                        {
+                            if (toSpend > 0)
+                            {
+                                var spendable = assignment.SpendingLimit - crewRecord.Spent;
+                                if (spendable >= toSpend) return true;
+                            }
+                            else return true;
+                        }
+                    }
+                }
+
+            }
+        }
+        return false;
     }
 
     /// <summary>
@@ -87,12 +174,12 @@ public abstract partial class SharedStationSystem : EntitySystem
     /// <remarks>
     /// This does not remember what station an entity started on, it simply checks where it is currently located.
     /// </remarks>
-    public EntityUid? GetOwningStation(EntityUid entity, TransformComponent? xform = null)
+    public EntityUid? GetOwningStation(EntityUid entity, TransformComponent? xform = null, bool gridOwner = false)
     {
         if (!Resolve(entity, ref xform))
             throw new ArgumentException("Tried to use an abstract entity!", nameof(entity));
 
-        if (TryComp<StationTrackerComponent>(entity, out var stationTracker))
+        if (TryComp<StationTrackerComponent>(entity, out var stationTracker) && !gridOwner)
         {
             // We have a specific station we are tracking and are tethered to.
             return stationTracker.Station;
@@ -106,7 +193,7 @@ public abstract partial class SharedStationSystem : EntitySystem
 
         if (HasComp<MapGridComponent>(entity))
         {
-            // We are the station, just check ourselves.
+            // We are the grid, just check ourselves.
             return CompOrNull<StationMemberComponent>(entity)?.Station;
         }
 
@@ -117,6 +204,104 @@ public abstract partial class SharedStationSystem : EntitySystem
         }
 
         return CompOrNull<StationMemberComponent>(xform.GridUid)?.Station;
+    }
+
+    public string? GetOwningStationPersonal(EntityUid entity, TransformComponent? xform = null)
+    {
+        if (!Resolve(entity, ref xform))
+            throw new ArgumentException("Tried to use an abstract entity!", nameof(entity));
+
+        if (HasComp<MapGridComponent>(entity))
+        {
+            // We are the grid, just check ourselves.
+            return CompOrNull<PersonalMemberComponent>(entity)?.OwnerName;
+        }
+
+        if (xform.GridUid == EntityUid.Invalid)
+        {
+            Log.Debug("Unable to get owning station - GridUid invalid.");
+            return null;
+        }
+
+        return CompOrNull<PersonalMemberComponent>(xform.GridUid)?.OwnerName;
+    }
+
+    /// <summary>
+    /// Return the owning Station and/or person for the specified entity.
+    /// </summary>
+    /// <param name="uid"></param>
+    /// <param name="owningStation"></param>
+    /// <param name="owningPerson"></param>
+    public void GetOwning(EntityUid uid, out EntityUid? owningStation, out string? owningPerson)
+    {
+        owningStation = GetOwningStation(uid);
+        owningPerson = null;
+        if (owningStation == null)
+        {
+            owningPerson = GetOwningStationPersonal(uid);
+        }
+        else
+        {
+            if (TryComp<StationDataComponent>(owningStation, out var oSD) && oSD != null)
+            {
+                owningPerson = oSD.StationName;
+            }
+        }
+    }
+
+    public bool GetGridAccess(
+        EntityUid? grid, string privilegedName, EntityUid? owningStation, string? owningPerson, bool ignoreGrid = false
+    )
+    {
+        var isAuth = false;
+        if (privilegedName != "")
+        {
+            if (owningStation != null)
+            {
+                if (TryComp<StationDataComponent>(owningStation, out var owningSD) && owningSD != null)
+                {
+                    if (owningSD.Owners.Contains(privilegedName))
+                    {
+                        isAuth = true;
+                    }
+                    else
+                    {
+                        if (TryComp<CrewRecordsComponent>(owningStation, out var owningCrew) && owningCrew != null)
+                        {
+                            if (owningCrew.TryGetRecord(privilegedName, out var crewRecord) && crewRecord != null)
+                            {
+                                if (TryComp<CrewAssignmentsComponent>(owningStation, out var crewAssignments) && crewAssignments != null)
+                                {
+                                    if (crewAssignments.TryGetAssignment(crewRecord.AssignmentID, out var crewAssignment) && crewAssignment != null)
+                                    {
+                                        if (crewAssignment.CanClaim)
+                                        {
+                                            isAuth = true;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            else if (owningPerson != null)
+            {
+                if (owningPerson == privilegedName)
+                {
+                    isAuth = true;
+                }
+            }
+            else
+            {
+                if (grid != null || ignoreGrid)
+                {
+                    isAuth = true;
+                }
+            }
+
+        }
+        return isAuth;
     }
 
     public List<EntityUid> GetStations()
@@ -131,6 +316,45 @@ public abstract partial class SharedStationSystem : EntitySystem
         return stations;
     }
 
+    public List<EntityUid> GetStationsAvailableTo(string realName)
+    {
+        var stations = GetStations();
+        List<EntityUid> possibleStations = new();
+        foreach (var iStation in stations)
+        {
+            if (TryComp<StationDataComponent>(iStation, out var owningSD) && owningSD != null)
+            {
+                if (owningSD.Owners.Contains(realName))
+                {
+                    possibleStations.Add(iStation);
+                }
+                else
+                {
+                    if (TryComp<CrewRecordsComponent>(iStation, out var owningCrew) && owningCrew != null)
+                    {
+                        if (owningCrew.TryGetRecord(realName, out var crewRecord) && crewRecord != null)
+                        {
+                            possibleStations.Add(iStation);
+                        }
+                    }
+                }
+            }
+        }
+        return possibleStations;
+    }
+
+    public EntityUid? GetStationByID(int uid)
+    {
+        var stations = GetStations();
+        foreach (var station in stations)
+        {
+            if(TryComp<StationDataComponent>(station, out var stationData))
+            {
+                if (stationData.UID == uid) return station;
+            }
+        }
+        return null;
+    }
     public HashSet<EntityUid> GetStationsSet()
     {
         var stations = new HashSet<EntityUid>();

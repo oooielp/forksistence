@@ -159,7 +159,7 @@ namespace Content.Server.PDA
             if (!_containerSystem.TryGetContainingContainer((ent, null, null), out var container)
                 || !TryComp<ActorComponent>(container.Owner, out var actor))
                 return;
-
+            if (actor.PlayerSession == null) return;
             var message = FormattedMessage.EscapeText(args.Message);
             var wrappedMessage = Loc.GetString("pda-notification-message",
                 ("header", args.Header),
@@ -296,7 +296,7 @@ namespace Content.Server.PDA
         private void UpdateStationName(EntityUid uid, PdaComponent pda)
         {
             var station = _station.GetOwningStation(uid);
-            pda.StationName = station is null ? null : Name(station.Value);
+            pda.StationName = station is null || !station.Value.IsValid() ? null : Name(station.Value);
         }
 
         private void UpdateAlertLevel(EntityUid uid, PdaComponent pda)

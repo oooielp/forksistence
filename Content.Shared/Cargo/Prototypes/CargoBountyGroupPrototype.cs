@@ -11,4 +11,8 @@ public sealed partial class CargoBountyGroupPrototype : IPrototype
     /// <inheritdoc/>
     [IdDataField]
     public string ID { get; private set; } = default!;
+
+    [DataField]
+
+    public string Name { get; private set; } = "Unnamed";
 }

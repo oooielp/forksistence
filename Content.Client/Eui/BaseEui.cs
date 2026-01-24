@@ -1,4 +1,4 @@
-﻿using Content.Shared.Eui;
+using Content.Shared.Eui;
 using Robust.Shared.IoC;
 using Robust.Shared.Network;
 
@@ -53,7 +53,7 @@ namespace Content.Client.Eui
         /// <summary>
         ///     Send a message to the server-side implementation.
         /// </summary>
-        protected void SendMessage(EuiMessageBase msg)
+        public void SendMessage(EuiMessageBase msg)
         {
             var netMsg = new MsgEuiMessage();
             netMsg.Id = Id;

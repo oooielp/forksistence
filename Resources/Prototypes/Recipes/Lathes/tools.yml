@@ -45,6 +45,16 @@
 
 - type: latheRecipe
   parent: BaseToolRecipe
+  id: AccessConfigurator
+  result: AccessConfigurator
+  completetime: 2
+  materials:
+    Steel: 600
+    Plastic: 800
+    Glass: 400
+
+- type: latheRecipe
+  parent: BaseToolRecipe
   id: Wrench
   result: Wrench
   materials:
@@ -68,6 +78,29 @@
   parent: CableStack
   id: CableHVStack
   result: CableHVStack1
+
+- type: latheRecipe
+  parent: CableStack
+  id: CableCopperStack
+  result: CableApcStack1
+  categories:
+  - Parts
+  materials:
+    Copper: 30
+
+- type: latheRecipe
+  parent: CableMVStack
+  id: CableMVCopperStack
+  result: CableMVStack1
+  materials:
+    Copper: 50
+
+- type: latheRecipe
+  parent: CableHVStack
+  id: CableHVCopperStack
+  result: CableHVStack1
+  materials:
+    Copper: 80
 
 - type: latheRecipe
   parent: BaseToolRecipe
@@ -113,6 +146,7 @@
   materials:
     Steel: 600
     Plastic: 200
+  unlockUses: 2
 
 - type: latheRecipe
   parent: BaseToolRecipe
@@ -135,6 +169,7 @@
   parent: BaseBigToolRecipe
   id: HandHeldMassScanner
   result: HandHeldMassScannerEmpty
+  unlockUses: 4
 
 - type: latheRecipe
   parent: BaseBigToolRecipe
@@ -184,6 +219,14 @@
     Steel: 300
     Glass: 50
     Plastic: 50
+  unlockUses: 3
+
+- type: latheRecipe
+  parent: BaseToolRecipe
+  id: ToolboxMechanical
+  result: ToolboxMechanical
+  materials:
+    Steel: 600
 
 - type: latheRecipe
   parent: BaseToolRecipe
@@ -193,6 +236,7 @@
   materials:
     Steel: 800
     Plasma: 200
+  unlockUses: 3
 
 - type: latheRecipe
   parent: BaseToolRecipe
@@ -204,6 +248,7 @@
     Glass: 500
     Plasma: 300
     Gold: 50
+  unlockUses: 3
 
 - type: latheRecipe
   parent: BaseToolRecipe
@@ -214,6 +259,7 @@
     Steel: 500
     Plasma: 300
     Glass: 100
+  unlockUses: 3
 
 - type: latheRecipe
   parent: BaseToolRecipe
@@ -224,3 +270,4 @@
     Steel: 750
     Plasma: 150
     Uranium: 150
+  unlockUses: 3

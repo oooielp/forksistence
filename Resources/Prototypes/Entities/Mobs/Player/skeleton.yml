@@ -1,4 +1,5 @@
 - type: entity
+  save: true
   name: skeleton pirate
   parent: MobSkeletonPerson
   id: MobSkeletonPirate

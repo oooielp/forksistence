@@ -19,6 +19,11 @@ public sealed partial class IdCardComponent : Component
 
     [DataField]
     [AutoNetworkedField]
+    public int? stationID = 0;
+
+
+    [DataField]
+    [AutoNetworkedField]
     [Access(typeof(SharedIdCardSystem), typeof(SharedPdaSystem), typeof(SharedAgentIdCardSystem), Other = AccessPermissions.ReadWrite)]
     public LocId? JobTitle;
 
@@ -26,8 +31,9 @@ public sealed partial class IdCardComponent : Component
     [AutoNetworkedField]
     private string? _jobTitle;
 
+    [DataField]
     [Access(typeof(SharedIdCardSystem), typeof(SharedPdaSystem), typeof(SharedAgentIdCardSystem), Other = AccessPermissions.ReadWriteExecute)]
-    public string? LocalizedJobTitle { set => _jobTitle = value; get => _jobTitle ?? Loc.GetString(JobTitle ?? string.Empty); }
+    public string? LocalizedJobTitle;
 
     /// <summary>
     /// The state of the job icon rsi.
@@ -64,4 +70,6 @@ public sealed partial class IdCardComponent : Component
 
     [DataField]
     public bool CanMicrowave = true;
+    [DataField]
+    public DateTime? CreatedTime;
 }

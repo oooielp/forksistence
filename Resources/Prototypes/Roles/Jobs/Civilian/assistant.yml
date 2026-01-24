@@ -8,15 +8,18 @@
   supervisors: job-supervisors-everyone
   access:
   - Maintenance
+  special:
+  - !type:AddImplantSpecial
+    implants: [ JobNetworkImplant ]
 
 - type: startingGear
   id: PassengerGear
   equipment:
     id: PassengerPDA
     ears: ClothingHeadsetGrey
-  #storage:
-    #back:
-    #- Stuff
+  storage:
+    back:
+    - BookThresholdHandbook
 
 - type: chameleonOutfit
   id: PassengerChameleonOutfit

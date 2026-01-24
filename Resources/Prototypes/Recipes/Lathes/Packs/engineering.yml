@@ -22,6 +22,10 @@
   - HandheldStationMap
   - ClothingHeadHatWelding
   - ClothingHeadHatCone
+  - AccessConfigurator
+  - ToolboxMechanical
+  - VoiceSensorCopper
+  - SignallerCopper
 
 - type: latheRecipePack
   id: AtmosStatic
@@ -47,11 +51,20 @@
   - CellRechargerCircuitboard
   - WeaponCapacitorRechargerCircuitboard
   - FreezerElectronics
+  - MorgueElectronics
+  - BarSignElectronics
+  - ShredderMachineCircuitboard
 
 - type: latheRecipePack
   id: EngineeringBoardsStatic
   recipes:
   - SpaceHeaterMachineCircuitBoard
+  - AlertsComputerCircuitboard
+  - AtmosMonitoringComputerCircuitboard
+  - PowerComputerCircuitboard
+  - MCTNMachineCircuitboard
+  - TrappedFluidExtractorMachineCircuitboard
+  - GridControlComputerCircuitboard
 
 ## Dynamic
 
@@ -83,10 +96,15 @@
   - SolarControlComputerCircuitboard
   - SolarTrackerElectronics
   - GasRecyclerMachineCircuitboard
+  - GasGeneratorMachineCircuitboard
   - PortableGeneratorPacmanMachineCircuitboard
   - PortableGeneratorSuperPacmanMachineCircuitboard
+  - PortableGeneratorMegamanMachineCircuitboard
   - PortableGeneratorJrPacmanMachineCircuitboard
+  - PortableGeneratorOldmanMachineCircuitboard
   - EmitterCircuitboard
   - TelecomServerCircuitboard
   - SMESAdvancedMachineCircuitboard
   - HolopadMachineCircuitboard
+  - StationAnchorCircuitboard
+  - TelecomServer1kCircuitboard

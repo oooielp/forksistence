@@ -392,7 +392,7 @@ namespace Content.Server.Chemistry.EntitySystems
                 }
             }
 
-            if (!TryComp(container, out StorageComponent? storage))
+            if (!TryComp(container, out StorageComponent? storage) || storage.Container == null)
                 return null;
 
             var pills = storage.Container.ContainedEntities.Select((Func<EntityUid, (string, FixedPoint2 quantity)>) (pill =>

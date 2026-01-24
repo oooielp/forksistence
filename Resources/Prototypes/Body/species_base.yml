@@ -1,5 +1,6 @@
 - type: entity
   abstract: true
+  save: true
   parent:
   - BaseMob
   - MobCombat
@@ -8,7 +9,6 @@
   - StripableInventoryBase
   - BaseSpeciesAppearance
   id: BaseSpeciesMob
-  save: false
   components:
   - type: DamageVisuals
     thresholds: [ 10, 20, 30, 50, 70, 100 ]
@@ -135,6 +135,9 @@
         type: HumanoidMarkingModifierBoundUserInterface
       enum.StrippingUiKey.Key:
         type: StrippableBoundUserInterface
+      enum.AcceptDeathUiKey.Key:
+        type: AcceptDeathBoundUserInterface
+        requireInputValidation: false
   - type: Puller
   - type: Speech
     speechSounds: Alto
@@ -162,6 +165,7 @@
 
 - type: entity
   abstract: true
+  save: true
   parent:
   - MobBloodstream
   - MobRespirator
@@ -169,7 +173,6 @@
   - MobFlammable
   - BaseSpeciesMob
   id: BaseSpeciesMobOrganic
-  save: false
   components:
   - type: Hunger
   - type: Thirst

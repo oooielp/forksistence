@@ -44,26 +44,5 @@ public sealed partial class BountyEntry : BoxContainer
         IdLabel.SetMarkup(Loc.GetString("bounty-console-id-label", ("id", bounty.Id)));
 
         PrintButton.OnPressed += _ => OnLabelButtonPressed?.Invoke();
-        SkipButton.OnPressed += _ => OnSkipButtonPressed?.Invoke();
-    }
-
-    private void UpdateSkipButton(float deltaSeconds)
-    {
-        UntilNextSkip -= TimeSpan.FromSeconds(deltaSeconds);
-        if (UntilNextSkip > TimeSpan.Zero)
-        {
-            SkipButton.Label.Text = UntilNextSkip.ToString("mm\\:ss");
-            SkipButton.Disabled = true;
-            return;
-        }
-
-        SkipButton.Label.Text = Loc.GetString("bounty-console-skip-button-text");
-        SkipButton.Disabled = false;
-    }
-
-    protected override void FrameUpdate(FrameEventArgs args)
-    {
-        base.FrameUpdate(args);
-        UpdateSkipButton(args.DeltaSeconds);
     }
 }

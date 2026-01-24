@@ -9,11 +9,19 @@ public abstract partial class SharedStationSystem
     private void InitializeTracker()
     {
         SubscribeLocalEvent<StationTrackerComponent, MapInitEvent>(OnTrackerMapInit);
+        SubscribeLocalEvent<StationTrackerComponent, ComponentInit>(OnTrackerCompInit);
         SubscribeLocalEvent<StationTrackerComponent, ComponentRemove>(OnTrackerRemove);
         SubscribeLocalEvent<StationTrackerComponent, GridUidChangedEvent>(OnTrackerGridChanged);
         SubscribeLocalEvent<StationTrackerComponent, MetaFlagRemoveAttemptEvent>(OnMetaFlagRemoveAttempt);
     }
 
+    private void OnTrackerCompInit(Entity<StationTrackerComponent> ent, ref ComponentInit args)
+    {
+        if(ent.Comp.stationUID != 0)
+        {
+            ent.Comp.Station = GetStationByID(ent.Comp.stationUID);
+        }
+    }
     private void OnTrackerMapInit(Entity<StationTrackerComponent> ent, ref MapInitEvent args)
     {
         _meta.AddFlag(ent, MetaDataFlags.ExtraTransformEvents);
@@ -27,6 +35,7 @@ public abstract partial class SharedStationSystem
 
     private void OnTrackerGridChanged(Entity<StationTrackerComponent> ent, ref GridUidChangedEvent args)
     {
+        if (ent.Comp.locked) return;
         UpdateStationTracker((ent, ent.Comp, args.Transform));
     }
 
@@ -76,13 +85,19 @@ public abstract partial class SharedStationSystem
     [PublicAPI]
     public void SetStation(Entity<StationTrackerComponent?> ent, EntityUid? station)
     {
+        
         if (!Resolve(ent, ref ent.Comp))
             return;
-
+        if (ent.Comp.locked) return;
         if (ent.Comp.Station == station)
             return;
 
         ent.Comp.Station = station;
+        if(TryComp<StationDataComponent>(station, out var sD) && sD != null)
+        {
+            ent.Comp.stationUID = sD.UID;
+        }
+        
         Dirty(ent);
     }
 }

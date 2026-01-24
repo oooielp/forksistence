@@ -386,6 +386,9 @@
     solution: bloodstream
   - type: DrainableSolution
     solution: bloodstream
+  - type: Damageable # override BaseMobAdultSlimes' Biological damageContainer, so reagent slimes can't be healed by bloodpacks
+    damageContainer: BiologicalNoBloodPacks
+    damageModifierSet: Slime
 
 - type: entity
   parent: MarkerBase

@@ -1,4 +1,4 @@
-﻿using Robust.Shared.GameStates;
+using Robust.Shared.GameStates;
 using Robust.Shared.Serialization;
 using Robust.Shared.Utility;
 
@@ -19,7 +19,7 @@ public sealed partial class CartridgeComponent : Component
     [DataField]
     public SpriteSpecifier? Icon;
 
-    [AutoNetworkedField]
+    [DataField, AutoNetworkedField]
     public InstallationStatus InstallationStatus = InstallationStatus.Cartridge;
 }
 

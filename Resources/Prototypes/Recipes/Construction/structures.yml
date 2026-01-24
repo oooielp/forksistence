@@ -25,6 +25,19 @@
     - !type:TileNotBlocked
 
 - type: construction
+  id: BronzeGirder
+  graph: Girder
+  startNode: start
+  targetNode: bronzeGirder
+  category: construction-category-structures
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canRotate: false
+  canBuildInImpassable: false
+  conditions:
+    - !type:TileNotBlocked
+
+- type: construction
   id: ClockworkGirder
   graph: ClockworkGirder
   startNode: start
@@ -51,6 +64,48 @@
     - !type:TileNotBlocked
 
 - type: construction
+  id: GirderDiagonal
+  name: construction-recipe-diagonal-girder
+  graph: GirderDiagonal
+  startNode: start
+  targetNode: girder
+  category: construction-category-structures
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canRotate: true
+  canBuildInImpassable: false
+  conditions:
+    - !type:TileNotBlocked
+
+- type: construction
+  id: ReinforcedGirderDiagonal
+  name: construction-recipe-diagonal-reinforced-girder
+  graph: GirderDiagonal
+  startNode: start
+  targetNode: reinforcedGirder
+  category: construction-category-structures
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canRotate: true
+  canBuildInImpassable: false
+  conditions:
+    - !type:TileNotBlocked
+
+- type: construction
+  id: DiagonalWall
+  name: construction-recipe-diagonal-solid-wall
+  graph: GirderDiagonal
+  startNode: start
+  targetNode: wallDiagonal
+  category: construction-category-structures
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canRotate: true
+  canBuildInImpassable: false
+  conditions:
+    - !type:TileNotBlocked
+
+- type: construction
   id: ReinforcedWall
   graph: Girder
   startNode: start
@@ -59,6 +114,20 @@
   objectType: Structure
   placementMode: SnapgridCenter
   canRotate: false
+  canBuildInImpassable: false
+  conditions:
+    - !type:TileNotBlocked
+
+- type: construction
+  id: WallReinforcedDiagonal
+  name: construction-recipe-diagonal-reinforced-wall
+  graph: GirderDiagonal
+  startNode: start
+  targetNode: reinforcedWallDiagonal
+  category: construction-category-structures
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canRotate: true
   canBuildInImpassable: false
   conditions:
     - !type:TileNotBlocked
@@ -155,6 +224,19 @@
     - !type:TileNotBlocked
 
 - type: construction
+  id: BronzeWall
+  graph: Girder
+  startNode: start
+  targetNode: bronzeWall
+  category: construction-category-structures
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canRotate: false
+  canBuildInImpassable: false
+  conditions:
+    - !type:TileNotBlocked
+
+- type: construction
   id: ShuttleWall
   graph: Girder
   startNode: start
@@ -170,7 +252,7 @@
 - type: construction
   id: DiagonalShuttleWall
   name: construction-recipe-diagonal-shuttle-wall
-  graph: Girder
+  graph: GirderDiagonal
   startNode: start
   targetNode: diagonalshuttleWall
   category: construction-category-structures
@@ -186,6 +268,19 @@
   graph: Girder
   startNode: start
   targetNode: bananiumWall
+  category: construction-category-structures
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canRotate: false
+  canBuildInImpassable: false
+  conditions:
+    - !type:TileNotBlocked
+
+- type: construction
+  id: TitaniumWall
+  graph: Girder
+  startNode: start
+  targetNode: titaniumWall
   category: construction-category-structures
   objectType: Structure
   placementMode: SnapgridCenter
@@ -397,6 +492,34 @@
   canRotate: false
 
 - type: construction
+  id: PhoronGlassWindow
+  graph: Window
+  startNode: start
+  targetNode: phoronGlassWindow
+  category: construction-category-structures
+  canBuildInImpassable: true
+  conditions:
+    - !type:EmptyOrWindowValidInTile
+    - !type:NoWindowsInTile
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canRotate: false
+
+- type: construction
+  id: ReinforcedPhoronGlassWindow
+  graph: Window
+  startNode: start
+  targetNode: reinforcedPhoronGlassWindow
+  category: construction-category-structures
+  canBuildInImpassable: true
+  conditions:
+    - !type:EmptyOrWindowValidInTile
+    - !type:NoWindowsInTile
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canRotate: false
+
+- type: construction
   id: ShuttleWindow
   graph: Window
   startNode: start
@@ -437,6 +560,20 @@
     - !type:NoWindowsInTile
   objectType: Structure
   placementMode: SnapgridCenter
+
+- type: construction
+  id: ShuttleWindowDiagonal
+  graph: WindowDiagonal
+  startNode: start
+  targetNode: shuttleWindowDiagonal
+  category: construction-category-structures
+  canBuildInImpassable: true
+  conditions:
+    - !type:EmptyOrWindowValidInTile
+    - !type:NoWindowsInTile
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canRotate: true
 
 - type: construction
   id: WindowDirectional
@@ -495,6 +632,32 @@
   graph: WindowDirectional
   startNode: start
   targetNode: plasmaReinforcedWindowDirectional
+  category: construction-category-structures
+  canBuildInImpassable: true
+  conditions:
+    - !type:EmptyOrWindowValidInTile
+    - !type:NoWindowsInTile
+  objectType: Structure
+  placementMode: SnapgridCenter
+
+- type: construction
+  id: PhoronGlassWindowDirectional
+  graph: WindowDirectional
+  startNode: start
+  targetNode: phoronGlassWindowDirectional
+  category: construction-category-structures
+  canBuildInImpassable: true
+  conditions:
+    - !type:EmptyOrWindowValidInTile
+    - !type:NoWindowsInTile
+  objectType: Structure
+  placementMode: SnapgridCenter
+
+- type: construction
+  id: ReinforcedPhoronGlassWindowDirectional
+  graph: WindowDirectional
+  startNode: start
+  targetNode: reinforcedPhoronGlassWindowDirectional
   category: construction-category-structures
   canBuildInImpassable: true
   conditions:
@@ -1354,3 +1517,41 @@
   canBuildInImpassable: false
   conditions:
   - !type:TileNotBlocked
+
+# Persistence14 stuff
+- type: construction
+  id: Morgue
+  graph: MorgueGraph
+  startNode: start
+  targetNode: morgue
+  category: construction-category-furniture
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+  conditions:
+    - !type:TileNotBlocked
+
+- type: construction
+  id: Crematorium
+  graph: CrematoriumGraph
+  startNode: start
+  targetNode: crematorium
+  category: construction-category-furniture
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: false
+  conditions:
+    - !type:TileNotBlocked
+
+- type: construction
+  id: BarSignDefault
+  graph: BarSignGraph
+  startNode: start
+  targetNode: bar_sign
+  category: construction-category-furniture
+  description: recipes-bar-sign
+  objectType: Structure
+  placementMode: SnapgridCenter
+  canBuildInImpassable: true
+  conditions:
+    - !type:WallmountCondition

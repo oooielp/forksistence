@@ -1,10 +1,11 @@
-using System.Linq;
+using Content.Server.Database;
 using Content.Shared.Cargo.Components;
 using Content.Shared.CCVar;
 using Content.Shared.Database;
 using Content.Shared.Emag.Systems;
 using Content.Shared.IdentityManagement;
 using Content.Shared.UserInterface;
+using System.Linq;
 
 namespace Content.Server.Cargo.Systems;
 
@@ -37,8 +38,8 @@ public sealed partial class CargoSystem
 
         if (Timing.CurTime < ent.Comp.NextAccountActionTime)
             return;
-
-        if (!_accessReaderSystem.IsAllowed(args.Actor, ent))
+        var player = args.Actor;
+        if (!_accessReaderSystem.IsAllowed(player, ent) || !_accessReaderSystem.CanSpend(player, ent, null, args.Amount))
         {
             ConsolePopup(args.Actor, Loc.GetString("cargo-console-order-not-allowed"));
             PlayDenySound(ent, ent.Comp);
@@ -47,6 +48,11 @@ public sealed partial class CargoSystem
 
         ent.Comp.NextAccountActionTime = Timing.CurTime + ent.Comp.AccountActionDelay;
         UpdateBankAccount((station, bank), -args.Amount,  ent.Comp.Account, dirty: false);
+        var idName = _accessReaderSystem.GetIdName(player);
+        if(idName != null)
+        {
+            _station.TrackSpending(idName, station, args.Amount);
+        }
         _audio.PlayPvs(ApproveSound, ent);
 
         var tryGetIdentityShortInfoEvent = new TryGetIdentityShortInfoEvent(ent, args.Actor);

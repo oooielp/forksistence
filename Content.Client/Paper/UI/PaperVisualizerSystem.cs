@@ -10,7 +10,18 @@ public sealed class PaperVisualizerSystem : VisualizerSystem<PaperVisualsCompone
     {
         if (args.Sprite == null)
             return;
+        if (AppearanceSystem.TryGetData<string>(uid, PaperVisuals.Invoice, out var invState, args.Component))
+        {
+            if (invState != string.Empty)
+            {
+                SpriteSystem.LayerSetRsiState((uid, args.Sprite), 0, "invoicepaid");
+            }
+            else
+            {
+                SpriteSystem.LayerSetRsiState((uid, args.Sprite), 0, "invoiceunpaid");
+            }
 
+        }
         if (AppearanceSystem.TryGetData<PaperStatus>(uid, PaperVisuals.Status, out var writingStatus, args.Component))
             SpriteSystem.LayerSetVisible((uid, args.Sprite), PaperVisualLayers.Writing, writingStatus == PaperStatus.Written);
 

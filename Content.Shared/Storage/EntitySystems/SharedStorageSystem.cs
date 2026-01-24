@@ -171,6 +171,7 @@ public abstract class SharedStorageSystem : EntitySystem
         CommandBinds.Builder
             .Bind(ContentKeyFunctions.OpenBackpack, InputCmdHandler.FromDelegate(HandleOpenBackpack, handle: false))
             .Bind(ContentKeyFunctions.OpenBelt, InputCmdHandler.FromDelegate(HandleOpenBelt, handle: false))
+            .Bind(ContentKeyFunctions.OpenWallet, InputCmdHandler.FromDelegate(HandleOpenWallet, handle: false)) // Frontier
             .Register<SharedStorageSystem>();
 
         Subs.CVar(_cfg, CCVars.NestedStorage, OnNestedStorageCvar, true);
@@ -1219,7 +1220,7 @@ public abstract class SharedStorageSystem : EntitySystem
             if (!_stackQuery.TryGetComponent(ent, out var containedStack))
                 continue;
 
-            if (!_stack.TryMergeStacks((insertEnt, insertStack), (ent, containedStack), out var _))
+            if (!_stack.TryMergeStacks(insertEnt, ent, out var _))
                 continue;
 
             stackedEntity = ent;
@@ -1873,7 +1874,12 @@ public abstract class SharedStorageSystem : EntitySystem
     {
         HandleToggleSlotUI(session, "belt");
     }
-
+    // Frontier: open wallet
+    private void HandleOpenWallet(ICommonSession? session)
+    {
+        HandleToggleSlotUI(session, "wallet");
+    }
+    // End Frontier: open wallet
     private void HandleToggleSlotUI(ICommonSession? session, string slot)
     {
         if (session is not { } playerSession)

@@ -1,20 +1,25 @@
-﻿using Content.Server.Administration;
+using Content.Server.Administration;
+using Content.Server.Body.Systems;
 using Content.Server.Cargo.Components;
-using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Administration;
 using Content.Shared.Cargo;
+using Content.Shared.CCVar;
 using Content.Shared.Chemistry.Components.SolutionManager;
+using Content.Shared.Chemistry.EntitySystems;
 using Content.Shared.Chemistry.Reagent;
 using Content.Shared.Materials;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Mobs.Systems;
+using Content.Shared.Research.Prototypes;
 using Content.Shared.Stacks;
+using Robust.Shared.Configuration;
 using Robust.Shared.Console;
 using Robust.Shared.Containers;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Utility;
 using Content.Shared.Research.Prototypes;
+using System.Linq;
 
 namespace Content.Server.Cargo.Systems;
 
@@ -23,6 +28,7 @@ namespace Content.Server.Cargo.Systems;
 /// </summary>
 public sealed class PricingSystem : EntitySystem
 {
+    [Dependency] private readonly IConfigurationManager _configurationManager = default!;
     [Dependency] private readonly IConsoleHost _consoleHost = default!;
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
     [Dependency] private readonly MobStateSystem _mobStateSystem = default!;
@@ -190,7 +196,7 @@ public sealed class PricingSystem : EntitySystem
         {
             price += GetStaticPrice(prototype);
         }
-
+        price *= _configurationManager.GetCVar(CCVars.PriceMult);
         // TODO: Proper container support.
 
         return price;
@@ -227,7 +233,7 @@ public sealed class PricingSystem : EntitySystem
         {
             price += GetStaticPrice(uid);
         }
-
+        price *= _configurationManager.GetCVar(CCVars.PriceMult);
         if (includeContents && TryComp<ContainerManagerComponent>(uid, out var containers))
         {
             foreach (var container in containers.Containers.Values)

@@ -34,6 +34,30 @@
   maxOreYield: 3
 
 - type: ore
+  id: OreTitanium
+  oreEntity: TitaniumOre1
+  minOreYield: 1
+  maxOreYield: 3
+
+- type: ore
+  id: OreAluminum
+  oreEntity: AluminumOre1
+  minOreYield: 1
+  maxOreYield: 3
+
+- type: ore
+  id: OreCopper
+  oreEntity: CopperOre1
+  minOreYield: 1
+  maxOreYield: 3
+
+- type: ore
+  id: OreTin
+  oreEntity: TinOre1
+  minOreYield: 1
+  maxOreYield: 3
+
+- type: ore
   id: OreSalt
   oreEntity: Salt1
   minOreYield: 1
@@ -110,6 +134,10 @@
     OreUranium: 1
     OreBananium: 0.5
     OreArtifactFragment: 0.5
+    OreCopper: 6
+    OreAluminum: 5
+    OreTin: 7
+    OreTitanium: 1
 
 - type: weightedRandomOre
   id: OreCrab

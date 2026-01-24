@@ -125,7 +125,6 @@
       output_mv:
         !type:CableDeviceNode
         nodeGroupID: MVPower
-        enabled: false
 
 - type: entity
   name: P.A.C.M.A.N.-type portable generator
@@ -248,11 +247,11 @@
   name: J.R.P.A.C.M.A.N.-type portable generator
   description: |-
     A small generator capable of powering individual rooms, in case of emergencies.
-    Runs off welding fuel and is rated for up to 8 kW.
-    Rated ages 3 and up.
+    Runs off welding fuel and is rated for up to 10 kW.
+    Rated ages 5 and up.
   parent: PortableGeneratorBase
   id: PortableGeneratorJrPacman
-  suffix: Welding Fuel, 8 kW
+  suffix: Welding Fuel, 10 kW
   components:
     - type: AmbientSound
       range: 4
@@ -294,10 +293,10 @@
       targetPower: 5000
       minTargetPower: 4000
       optimalPower: 8000
-      maxTargetPower: 8000
-      # 7.5 minutes at full tank.
+      maxTargetPower: 10000
+      # 15~ minutes at full tank.
       optimalBurnRate: 0.11111111
-      # Shallow curve that allows you to just barely eek out 12 minutes at lowest.
+      # Shallow curve that allows you to just barely eek out 24 minutes at lowest.
       fuelEfficiencyConstant: 0.3
     - type: ChemicalFuelGeneratorAdapter
       solution: tank
@@ -306,7 +305,7 @@
     - type: SolutionContainerManager
       solutions:
         tank:
-          maxVol: 50
+          maxVol: 100
     - type: RefillableSolution
       solution: tank
     - type: PortableGenerator
@@ -329,7 +328,7 @@
       supplyRampTolerance: 2000
     - type: GeneratorExhaustGas
       gasType: CarbonDioxide
-      # Full tank is 25 moles of gas
+      # Full tank is 50 moles of gas
       moleRatio: 0.5
     - type: Explosive
       explosionType: Default
@@ -362,3 +361,124 @@
           behaviors:
             - !type:SolutionExplosionBehavior
               solution: tank
+
+- type: entity
+  name: O.L.D.M.A.N.-type portable generator
+  description: |-
+    A coal powered generator that has a superior burn time than most, careful of the exhaust fumes!
+  parent: PortableGeneratorBase
+  id: PortableGeneratorOldman
+  suffix: Coal, 15 kW
+  components:
+    - type: Sprite
+      layers:
+        - state: portgen4
+          map: [ "enum.GeneratorVisualLayers.Body" ]
+        - state: portgen_on_unlit
+
+    - type: GenericVisualizer
+      visuals:
+        enum.GeneratorVisuals.Running:
+          enum.GeneratorVisualLayers.Body:
+            True: { state: portgen4on }
+            False: { state: portgen4 }
+
+    - type: Machine
+      board: PortableGeneratorOldmanMachineCircuitboard
+    - type: FuelGenerator
+      minTargetPower: 8000
+      maxTargetPower: 15000
+      targetPower: 15000
+      optimalPower: 15000
+      # 34 minutes at max output
+      optimalBurnRate: 0.015
+      # 54 minutes of burntime if it's at 8kw.
+      fuelEfficiencyConstant: 0.75
+    - type: SolidFuelGeneratorAdapter
+      fuelMaterial: Coal
+      multiplier: 0.01
+    - type: MaterialStorage
+      storageLimit: 3000
+      materialWhiteList: [Coal]
+    - type: PortableGenerator
+      startChance: 0.5
+    - type: GeneratorExhaustGas
+      gasType: CarbonDioxide
+      # 8 moles of gas for every piece of coal.
+      moleRatio: 10
+    - type: PowerMonitoringDevice
+      group: Generator
+      loadNodes:
+        - output_lv
+      sprite: Structures/Power/Generation/portable_generator.rsi
+      state: portgen0
+    - type: NodeContainer
+      examinable: true
+      nodes:
+        output:
+          !type:CableDeviceNode
+          nodeGroupID: Apc
+    - type: PowerSupplier
+      voltage: Apc
+      supplyRampRate: 5000
+      supplyRampTolerance: 1500
+
+- type: entity
+  name: M.E.G.A.M.A.N.-type portable generator
+  description: |-
+    A top-of-the-line generator for extreme power demands.
+    Runs off exotic Phoron sheets and is rated for up to 75 kW.
+    WARNING: Significantly higher fuel consumption. Use only when necessary.
+  parent: PortableGeneratorBase
+  id: PortableGeneratorMegaman
+  suffix: Phoron, 75 kW
+  components:
+    - type: Sprite
+      layers:
+        - state: portgen2
+          map: [ "enum.GeneratorVisualLayers.Body" ]
+        - state: portgen_on_unlit
+          map: [ "enum.GeneratorVisualLayers.Unlit" ]
+          shader: unshaded
+          visible: false
+    - type: GenericVisualizer
+      visuals:
+        enum.GeneratorVisuals.Running:
+          enum.GeneratorVisualLayers.Body:
+            True: { state: portgen2on }
+            False: { state: portgen2 }
+          enum.GeneratorVisualLayers.Unlit:
+            True: { visible: true }
+            False: { visible: false }
+
+    - type: Machine
+      board: PortableGeneratorMegamanMachineCircuitboard
+    - type: FuelGenerator
+      minTargetPower: 20000
+      maxTargetPower: 75000
+      targetPower: 75000
+      optimalPower: 75000
+      # 20 minutes at max output (1.5x S.U.P.E.R.P.A.C.M.A.N. depletion rate)
+      optimalBurnRate: 0.025
+      # Reasonable efficiency curve
+      fuelEfficiencyConstant: 0.5
+    - type: SolidFuelGeneratorAdapter
+      fuelMaterial: Phoron
+      multiplier: 0.01
+    - type: MaterialStorage
+      storageLimit: 3000
+      materialWhiteList: [Phoron]
+    - type: PortableGenerator
+      startChance: 0.95
+    - type: PowerMonitoringDevice
+      group: Generator
+      loadNode: output
+      sprite: Structures/Power/Generation/portable_generator.rsi
+      state: portgen2
+    - type: PowerSupplier
+      supplyRampRate: 10000
+      supplyRampTolerance: 3000
+    - type: GeneratorExhaustGas
+      gasType: Plasma
+      # 25 moles of plasma for every sheet of Phoron
+      moleRatio: 25

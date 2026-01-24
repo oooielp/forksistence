@@ -4,6 +4,9 @@
   id: MaterialsStatic
   recipes:
   - SheetRGlass
+  - SheetRPGlassAlloy
+  - SheetRPhoronGlassAlloy
+  - SheetRUGlassAlloy
   - MaterialDurathread
 
 - type: latheRecipePack
@@ -13,6 +16,7 @@
   - ModularReceiver
   - MicroManipulatorStockPart
   - ConveyorBeltAssembly
+  - IgniterCopper
 
 - type: latheRecipePack
   id: LightsStatic
@@ -38,17 +42,27 @@
   - CableStack
   - CableMVStack
   - CableHVStack
+  - CableCopperStack
+  - CableMVCopperStack
+  - CableHVCopperStack
 
 - type: latheRecipePack
   id: PaperworkStatic
   recipes:
   - BoxFolderClipboardEmpty
   - BoxFolderPlasticClipboardEmpty
+  - BlankPaper
 
 - type: latheRecipePack
   id: TowelsStatic # This is used for both the autolathe and the uniform printer, so "unique" towels that only HoP can print shouldn't be included!
   recipes:
   - TowelColorWhite
+
+- type: latheRecipePack
+  id: CassetteTape
+  recipes:
+  - CassetteTape
+  - TapeRecorder
 
 ## Dynamic
 

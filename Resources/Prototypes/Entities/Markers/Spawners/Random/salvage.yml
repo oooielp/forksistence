@@ -1,3 +1,4 @@
+
 # NOTE! All mobs that come out of this should have Salvage rulesets.
 # These rulesets exist because Salvage mobs kept harassing the station and going out of control.
 
@@ -12,7 +13,7 @@
         - sprite: Structures/Storage/Crates/generic.rsi
           state: icon
     - type: RandomSpawner
-      rarePrototypes:
+      prototypes:
         - SalvageHumanCorpse
         - CrateMaterialPlasteel
         - CrateMaterialWood
@@ -33,10 +34,11 @@
         - CrateTrashCartFilled
         - ClosetMaintenanceFilledRandom
         - ClosetEmergencyFilledRandom
-      rareChance: 0.4
-      prototypes:
+
+      rarePrototypes:
         - CrateSalvageAssortedGoodies
-      chance: 0.9
+      rareChance: 0.1
+      chance: 0.5
       offset: 0.0
 
 - type: entity
@@ -74,13 +76,13 @@
       rareChance: 0.2
       prototypes:
         - MobCarpSalvage
-        - MobCarpSalvage
-        - MobCarpSalvage
+        - MobCobraSpaceSalvage
+        - MobBearSpaceSalvage
+        - MobKangarooSpaceSalvage
         - MobCarpSalvage
         - MobCarpSalvage
         - MobTickSalvage
-        - MobTickSalvage
-        - MobTickSalvage
+        - MobSpiderSpaceSalvage
         - PlushieCarp
         - DehydratedSpaceCarp
       chance: 0.25

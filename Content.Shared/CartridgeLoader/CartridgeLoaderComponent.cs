@@ -1,4 +1,4 @@
-﻿using Content.Shared.Containers.ItemSlots;
+using Content.Shared.Containers.ItemSlots;
 using Robust.Shared.GameStates;
 
 namespace Content.Shared.CartridgeLoader;
@@ -20,7 +20,7 @@ public sealed partial class CartridgeLoaderComponent : Component
     /// <summary>
     /// The currently running program that has its ui showing
     /// </summary>
-    [ViewVariables(VVAccess.ReadWrite)]
+    [DataField]
     public EntityUid? ActiveProgram = default;
 
     /// <summary>

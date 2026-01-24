@@ -8,13 +8,25 @@ stack-silver = silver
 stack-gold = gold
 stack-reinforced-glass = reinforced glass
 stack-plasma-glass = plasma glass
+stack-phoron = phoron
 stack-uranium = uranium
 stack-uranium-glass = uranium glass
 stack-clockwork-glass = clockwork glass
 stack-reinforced-plasma-glass = reinforced plasma glass
+stack-phoron-glass = phoron glass
+stack-reinforced-phoron-glass = reinforced phoron glass
 stack-reinforced-uranium-glass = reinforced uranium glass
 stack-gunpowder = gunpowder
 stack-cardboard = cardboard
+stack-titanium = titanium
+stack-aluminium = aluminum
+stack-copper-ore = copper ore
+stack-tin-ore = tin ore
+stack-aluminum-ore = aluminum ore
+stack-titanium-ore = titanium ore
+stack-copper = copper
+stack-tin = tin
+stack-bronze = bronze
 
 stack-bones = {$amount ->
     [1] bone
@@ -253,3 +265,25 @@ stack-plasma-marble-floor = plasmarble floor
 stack-uranium-marble-floor = uranium marble floor
 stack-astro-ironsand-floor = astro-ironsand floor
 stack-astro-ironsand-floor-borderless = borderless astro-ironsand floor
+
+# salvage treasure coins
+stack-iron-coin = iron {$amount ->
+    [1] coin
+    *[other] coins
+}
+stack-silver-coin = silver {$amount ->
+    [1] coin
+    *[other] coins
+}
+stack-gold-coin = gold {$amount ->
+    [1] coin
+    *[other] coins
+}
+stack-adamantine-coin = adamantine {$amount ->
+    [1] coin
+    *[other] coins
+}
+stack-diamond-coin = diamond {$amount ->
+    [1] coin
+    *[other] coins
+}

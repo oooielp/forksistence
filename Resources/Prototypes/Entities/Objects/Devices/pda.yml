@@ -1,10 +1,12 @@
 - type: entity
   abstract: true
-  parent: [ BaseItem, StorePresetUplink ] #PDA's have uplinks so they have to inherit the data.
+  parent: BaseItem # Persistence: removed StorePresetUplink
   id: BasePDA
   name: PDA
   description: Personal Data Assistant.
   components:
+  - type: Paintable
+    group: ItemPDAs
   - type: Appearance
     appearanceDataInit:
      enum.PdaVisuals.PdaType:
@@ -69,7 +71,7 @@
     softness: 5
     autoRot: true
   - type: Ringer
-  - type: RingerUplink
+#  - type: RingerUplink
   - type: DeviceNetwork
     deviceNetId: Wireless
     receiveFrequencyId: PDA
@@ -99,8 +101,8 @@
     interfaces:
       enum.PdaUiKey.Key:
         type: PdaBoundUserInterface
-      enum.StoreUiKey.Key:
-        type: StoreBoundUserInterface
+#      enum.StoreUiKey.Key:
+#        type: StoreBoundUserInterface
       enum.RingerUiKey.Key:
         type: RingerBoundUserInterface
       enum.InstrumentUiKey.Key:
@@ -1552,8 +1554,8 @@
     interfaces:
       enum.PdaUiKey.Key:
         type: PdaBoundUserInterface
-      enum.StoreUiKey.Key:
-        type: StoreBoundUserInterface
+#      enum.StoreUiKey.Key:
+#        type: StoreBoundUserInterface
       enum.RingerUiKey.Key:
         type: RingerBoundUserInterface
       enum.InstrumentUiKey.Key:

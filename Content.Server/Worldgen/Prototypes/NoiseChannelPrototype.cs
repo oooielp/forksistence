@@ -17,17 +17,44 @@ public class NoiseChannelConfig
     [DataField("noiseType")]
     public FastNoiseLite.NoiseType NoiseType { get; private set; } = FastNoiseLite.NoiseType.Cellular;
 
+    [DataField("frequency")]
+    public float Frequency { get; private set; } = 0.1f;
+
     /// <summary>
     ///     The fractal type used by the noise generator.
     /// </summary>
     [DataField("fractalType")]
     public FastNoiseLite.FractalType FractalType { get; private set; } = FastNoiseLite.FractalType.FBm;
 
+    [DataField("cellularDistanceFunction")]
+    public FastNoiseLite.CellularDistanceFunction CellularDistanceFunction { get; private set; } = FastNoiseLite.CellularDistanceFunction.Hybrid;
+
+    [DataField("cellularReturnType")]
+    public FastNoiseLite.CellularReturnType CellularReturnType { get; private set; } = FastNoiseLite.CellularReturnType.CellValue;
+
+    [DataField("cellularJitter")]
+    public float CellularJitter { get; private set; } = 1f;
+
+    [DataField("domainWarpType")]
+    public FastNoiseLite.DomainWarpType? DomainWarpType { get; private set; } = null;
+
+    [DataField("domainWarpAmp")]
+    public float DomainWarpAmp { get; private set; } = 100;
+
+    [DataField("domainWarpFractalType")]
+    public FastNoiseLite.FractalType DomainWarpFractalType { get; private set; } = FastNoiseLite.FractalType.DomainWarpIndependent;
+
     /// <summary>
     ///     Multiplied by pi in code when used.
     /// </summary>
     [DataField("fractalLacunarityByPi")]
     public float FractalLacunarityByPi { get; private set; } = 2.0f / 3.0f;
+
+    [DataField("fractalOctaves")]
+    public int FractalOctaves { get; private set; } = 10;
+
+    [DataField("fractalGain")]
+    public float FractalGain { get; private set; } = 0.5f;
 
     /// <summary>
     ///     Ranges of values that get clamped down to the "clipped" value.
@@ -115,6 +142,18 @@ public struct NoiseGenerator
         _noise.SetNoiseType(_config.NoiseType);
         _noise.SetFractalType(_config.FractalType);
         _noise.SetFractalLacunarity(_config.FractalLacunarityByPi * MathF.PI);
+
+        _noise.SetFrequency(_config.Frequency);
+        _noise.SetFractalOctaves(_config.FractalOctaves);
+        _noise.SetFractalGain(_config.FractalGain);
+        _noise.SetCellularDistanceFunction(_config.CellularDistanceFunction);
+        _noise.SetCellularReturnType(_config.CellularReturnType);
+        _noise.SetCellularJitter(_config.CellularJitter);
+
+        // Domain Warp
+        if (_config.DomainWarpType != null)
+            _noise.SetDomainWarpType(_config.DomainWarpType.Value);
+        _noise.SetDomainWarpAmp(_config.DomainWarpAmp);
     }
 
     /// <summary>
@@ -128,6 +167,13 @@ public struct NoiseGenerator
 
         if (_config.NoiseCoordinateProcess is not null)
             finCoords = _config.NoiseCoordinateProcess.Process(finCoords);
+        else if (_config.DomainWarpType is not null)
+        {
+            var x = finCoords.X;
+            var y = finCoords.Y;
+            _noise.DomainWarp(ref x, ref y);
+            finCoords = new Vector2(x, y);
+        }
 
         var value = _noise.GetNoise(finCoords.X, finCoords.Y);
 

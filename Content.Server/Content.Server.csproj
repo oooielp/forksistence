@@ -10,6 +10,11 @@
   </PropertyGroup>
   <Import Project="../MSBuild/Content.props" />
   <ItemGroup>
+    <Compile Remove="_NF\Bank\BankSystem.Ledger.cs" />
+    <Compile Remove="_NF\Bank\BankSystem.Sector.cs" />
+    <Compile Remove="_NF\Bank\StationATMSystem.cs" />
+  </ItemGroup>
+  <ItemGroup>
     <PackageReference Include="JetBrains.Annotations" PrivateAssets="All" />
     <PackageReference Include="NetCord" />
     <PackageReference Include="prometheus-net" />

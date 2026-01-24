@@ -49,6 +49,8 @@ public sealed partial class SmartFridgeComponent : Component
     [Access(typeof(SharedSmartFridgeSystem), Other = AccessPermissions.ReadExecute)]
     public Dictionary<SmartFridgeEntry, HashSet<NetEntity>> ContainedEntries = new();
 
+    [DataField]
+    public Dictionary<string, HashSet<NetEntity>> ContainedEntriesCopy = new();
     /// <summary>
     /// The flavour text displayed at the bottom of the SmartFridge's UI
     /// </summary>

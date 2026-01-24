@@ -7,6 +7,8 @@ namespace Content.Server.Atmos.Piping.Trinary.Components
     {
         [DataField]
         public bool Enabled = true;
+        [DataField]
+        public bool DesiredEnabled = false;
 
         [DataField("inlet")]
         public string InletName = "inlet";

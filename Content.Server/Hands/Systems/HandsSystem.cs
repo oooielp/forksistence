@@ -1,4 +1,4 @@
-using System.Numerics;
+using Content.Server.Body.Components;
 using Content.Server.Stack;
 using Content.Server.Stunnable;
 using Content.Shared.ActionBlocker;
@@ -20,6 +20,7 @@ using Robust.Shared.Physics.Components;
 using Robust.Shared.Player;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
+using System.Numerics;
 
 namespace Content.Server.Hands.Systems
 {
@@ -53,6 +54,7 @@ namespace Content.Server.Hands.Systems
             SubscribeLocalEvent<HandsComponent, BeforeExplodeEvent>(OnExploded);
 
             SubscribeLocalEvent<HandsComponent, DropHandItemsEvent>(OnDropHandItems);
+
 
             CommandBinds.Builder
                 .Bind(ContentKeyFunctions.ThrowItemInHand, new PointerInputCmdHandler(HandleThrowItem))

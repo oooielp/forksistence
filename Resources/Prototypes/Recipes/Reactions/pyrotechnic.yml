@@ -73,3 +73,16 @@
     Ethanol: 5
     Hydrogen: 3
     Sulfur: 2
+
+- type: reaction
+  id: WeldingFuelCreation
+  minTemp: 420
+  reactants:
+    Hydrogen:
+      amount: 3
+    Sulfur:
+      amount: 2
+    Ethanol:
+      amount: 5
+  products:
+    WeldingFuel: 10

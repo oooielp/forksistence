@@ -43,11 +43,15 @@ namespace Content.Client.Info
 
         private void PopulateTutorial(Info tutorialList)
         {
-            AddSection(tutorialList, Loc.GetString("ui-info-header-intro"), "Intro.txt");
+            // AddSection(tutorialList, Loc.GetString("ui-info-header-intro"), "Intro.txt", true);
+            AddSection(tutorialList, Loc.GetString("ui-info-header-intro-persist"), "PersistInfo/Intro.txt", true);
+            AddSection(tutorialList, Loc.GetString("ui-info-header-intro-persist-basics"), "PersistInfo/Basics.txt", true);
+            AddSection(tutorialList, Loc.GetString("ui-info-header-intro-persist-ins-outs"), "PersistInfo/InsOuts.txt", true);
+            AddSection(tutorialList, Loc.GetString("ui-info-header-intro-persist-independence-interdependence"), "PersistInfo/IndependenceInterdependence.txt", true);
             var infoControlSection = new InfoControlsSection();
             tutorialList.InfoContainer.AddChild(infoControlSection);
-            AddSection(tutorialList, Loc.GetString("ui-info-header-gameplay"), "Gameplay.txt", true);
-            AddSection(tutorialList, Loc.GetString("ui-info-header-sandbox"), "Sandbox.txt", true);
+            // AddSection(tutorialList, Loc.GetString("ui-info-header-gameplay"), "Gameplay.txt", true);
+            // AddSection(tutorialList, Loc.GetString("ui-info-header-sandbox"), "Sandbox.txt", true);
 
             infoControlSection.ControlsButton.OnPressed += _ => UserInterfaceManager.GetUIController<OptionsUIController>().OpenWindow();
         }

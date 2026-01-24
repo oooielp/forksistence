@@ -1,4 +1,5 @@
 using System.Numerics;
+using Content.Shared.Movement.Components;
 using Content.Shared.Shuttles.BUIStates;
 using Content.Shared.Shuttles.Components;
 using Content.Shared.Shuttles.Systems;
@@ -141,6 +142,7 @@ public sealed partial class ShuttleNavControl : BaseShuttleControl
         var xformQuery = EntManager.GetEntityQuery<TransformComponent>();
         var fixturesQuery = EntManager.GetEntityQuery<FixturesComponent>();
         var bodyQuery = EntManager.GetEntityQuery<PhysicsComponent>();
+        var mapBoundsQuery = EntManager.GetEntityQuery<MapBoundsComponent>();
 
         if (!xformQuery.TryGetComponent(_coordinates.Value.EntityId, out var xform)
             || xform.MapID == MapId.Nullspace)
@@ -152,9 +154,23 @@ public sealed partial class ShuttleNavControl : BaseShuttleControl
         var posMatrix = Matrix3Helpers.CreateTransform(_coordinates.Value.Position, _rotation.Value);
         var ourEntRot = RotateWithEntity ? _transform.GetWorldRotation(xform) : _rotation.Value;
         var ourEntMatrix = Matrix3Helpers.CreateTransform(_transform.GetWorldPosition(xform), ourEntRot);
+
+        // Update NorthRotation to the world rotation of the grid plus the relative angle of the viewed dock
+        // to ensure it points to world North correctly in the Nav view.
+        NorthRotation = ourEntRot;
+
         var shuttleToWorld = Matrix3x2.Multiply(posMatrix, ourEntMatrix);
         Matrix3x2.Invert(shuttleToWorld, out var worldToShuttle);
         var shuttleToView = Matrix3x2.CreateScale(new Vector2(MinimapScale, -MinimapScale)) * Matrix3x2.CreateTranslation(MidPointVector);
+
+        var map = _transform.GetMap(xform.Coordinates);
+        if (map != null && mapBoundsQuery.TryGetComponent(map, out var mapBounds) && mapBounds != null)
+        {
+            var mapBoundsToWorld = Matrix3Helpers.CreateTransform(Vector2.Zero, Angle.Zero);
+            var mapBoundsToView = mapBoundsToWorld * worldToShuttle * shuttleToView;
+            var gridCentre = Vector2.Transform(Vector2.Zero, mapBoundsToView);
+            handle.DrawCircle(gridCentre, MinimapScale * mapBounds.Radius, Color.Red, false);
+        }
 
         // Draw our grid in detail
         var ourGridId = xform.GridUid;
@@ -218,14 +234,13 @@ public sealed partial class ShuttleNavControl : BaseShuttleControl
             {
                 var gridBounds = grid.Comp.LocalAABB;
 
-                var gridCentre = Vector2.Transform(gridBody.LocalCenter, curGridToView);
-
-                var gridDistance = (gridBody.LocalCenter - xform.LocalPosition).Length();
+                var gridCentreInView = Vector2.Transform(gridBody.LocalCenter, curGridToView);
+                var gridCenterInWorld = Vector2.Transform(gridBody.LocalCenter, curGridToWorld);
+                var gridDistance = (gridCenterInWorld - _transform.GetMapCoordinates(xform).Position).Length();
                 var labelText = Loc.GetString("shuttle-console-iff-label", ("name", labelName),
                     ("distance", $"{gridDistance:0.0}"));
 
-                var mapCoords = _transform.GetWorldPosition(gUid);
-                var coordsText = $"({mapCoords.X:0.0}, {mapCoords.Y:0.0})";
+                var coordsText = $"({gridCenterInWorld.X:0.0}, {gridCenterInWorld.Y:0.0})";
 
                 // yes 1.0 scale is intended here.
                 var labelDimensions = handle.GetDimensions(Font, labelText, 1f);
@@ -235,7 +250,7 @@ public sealed partial class ShuttleNavControl : BaseShuttleControl
                 var yOffset = Math.Max(gridBounds.Height, gridBounds.Width) * MinimapScale / 1.8f;
 
                 // The actual position in the UI.
-                var gridScaledPosition = gridCentre - new Vector2(0, -yOffset);
+                var gridScaledPosition = gridCentreInView - new Vector2(0, -yOffset);
 
                 // Normalize the grid position if it exceeds the viewport bounds
                 // normalizing it instead of clamping it preserves the direction of the vector and prevents corner-hugging

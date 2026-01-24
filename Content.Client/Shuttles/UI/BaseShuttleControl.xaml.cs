@@ -30,6 +30,8 @@ public partial class BaseShuttleControl : MapGridControl
     // Cache grid drawing data as it can be expensive to build
     public readonly Dictionary<EntityUid, GridDrawData> GridData = new();
 
+    public Angle NorthRotation = Angle.Zero;
+
     // Per-draw caching
     private readonly List<Vector2i> _gridTileList = new();
     private readonly HashSet<Vector2i> _gridNeighborSet = new();
@@ -113,6 +115,12 @@ public partial class BaseShuttleControl : MapGridControl
             var lineColor = Color.MediumSpringGreen.WithAlpha(0.02f);
             handle.DrawLine(origin - aExtent, origin + aExtent, lineColor);
         }
+
+        // Draw North pointer
+        var northVec = (Angle.FromDegrees(90) - NorthRotation).ToVec();
+        // Using ScaledMinimapRadius directly ensures the line always hits the UI edge regardless of zoom.
+        var endPos = MidPointVector + new Vector2(northVec.X, -northVec.Y) * Math.Max(ScaledMinimapRadius, 2000f);
+        handle.DrawLine(MidPointVector, endPos, Color.Red.WithAlpha(0.5f));
     }
 
     protected void DrawGrid(DrawingHandleScreen handle, Matrix3x2 gridToView, Entity<MapGridComponent> grid, Color color, float alpha = 0.01f)

@@ -1,6 +1,6 @@
 - type: construction
   id: DefibrillatorCabinet
-  graph: DefibrillatorCabinet
+  graph: DefibrillatorCabinetGraph
   startNode: start
   targetNode: done
   category: construction-category-storage

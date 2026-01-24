@@ -6,6 +6,120 @@
   - ClothingUniformJumpsuitColorGrey
   - ClothingUniformJumpskirtColorGrey
   - ClothingUniformJumpsuitLoungewear
+  - ClothingUniformGenericTurtleNeckAndJeans
+  - ClothingUniformGenericBusinessCasual
+  - ClothingUniformGenericTunicAndJeans
+  - ClothingUniformGenericOldManSweater
+  - ClothingUniformJumpsuitFlannel
+  - ClothingUniformJumpsuitHawaiBlue
+  - ClothingUniformJumpsuitHawaiBlack
+  - ClothingUniformJumpsuitHawaiYellow
+  - ClothingUniformJumpsuitHawaiRed
+  - ClothingUniformGenericFudd
+  - ClothingUniformGenericShirtAndJeansBrown
+  - ClothingUniformGenericShirtAndJeansGreen
+  - ClothingUniformGenericShirtAndJeansRed
+  - ClothingUniformGenericKilt
+  - ClothingUniformGenericSweaterAndSlacks
+  - ClothingUniformGenericCollaredShirtAndSlacksBlack
+  - ClothingUniformGenericCollaredShirtAndSlacksBlackAlt
+  - ClothingUniformGenericCollaredShirtAndSlacksBrown
+  - ClothingUniformGenericCollaredShirtAndSlacksBrownAlt
+  - ClothingUniformGenericCollaredShirtAndSlacksWhite
+  - ClothingUniformGenericCollaredShirtAndSlacksWhiteAlt
+  - ClothingUniformJumpsuitCossack
+  - ClothingUniformJumpsuitDameDane
+  - ClothingUniformJumpsuitKimono
+  - ClothingUniformJumpsuitMonasticRobeLight
+  - ClothingUniformJumpsuitMonasticRobeDark
+  - ClothingUniformJumpsuitSafari
+  - ClothingUniformJumpskirtBlackElegantDress
+  - ClothingUniformJumpskirtBlueElegantDress
+  - ClothingUniformJumpskirtBlueTurtleneckDress
+  - ClothingUniformJumpskirtCyanStripedDress
+  - ClothingUniformJumpskirtGreenElegantDress
+  - ClothingUniformJumpskirtGreenStripedDress
+  - ClothingUniformJumpskirtGreenTurtleneckDress
+  - ClothingUniformJumpskirtPinkStripedDress
+  - ClothingUniformJumpskirtOrangeStripedDress
+  - ClothingUniformJumpskirtPurpleElegantDress
+  - ClothingUniformJumpskirtRedElegantDress
+  - ClothingUniformJumpskirtRedStripedDress
+
+- type: latheRecipePack
+  id: ClothingAssortedOversuits
+  recipes:
+  - ClothingOuterCoatDetective
+  - ClothingOuterCoatTrench
+  - ClothingOuterCoatDetectiveLoadoutGrey
+  - ClothingOuterCoatBomber
+  - ClothingOuterCoatJensen
+  - ClothingOuterCoatPirate
+  - ClothingOuterDogi
+  - ClothingOuterCoatSpaceAsshole
+  - ClothingOuterCoatExpensive
+  - ClothingOuterSuitShrineMaiden
+  - ClothingOuterSuitWitchRobes
+  - ClothingOuterRobesJudge
+  - ClothingOuterPonchoClassic
+  - ClothingOuterPoncho
+  - ClothingOuterHoodieChaplain
+  - ClothingOuterJacketChef
+  - ClothingOuterNunRobe
+  - ClothingOuterApronBar
+  - ClothingOuterApron
+  - ClothingOuterApronBotanist
+  - ClothingOuterApronChef
+
+- type: latheRecipePack
+  id: ClothingAssortedHats
+  recipes:
+  - ClothingHeadHatHoodNunHood
+  - ClothingHeadSafari
+  - ClothingHeadHatCanadaBeanie
+  - ClothingHeadHatBeaverHat
+  - ClothingHeadHatBowlerHat
+  - ClothingHeadHatFedoraBrown
+  - ClothingHeadHatFedoraGrey
+  - ClothingHeadHatCasa
+  - ClothingHeadHatChef
+  - ClothingHeadHatCowboyBlack
+  - ClothingHeadHatCowboyBountyHunter
+  - ClothingHeadHatCowboyBrown
+  - ClothingHeadHatCowboyGrey
+  - ClothingHeadHatCowboyRed
+  - ClothingHeadHatFez
+  - ClothingHeadFishCap
+  - ClothingHeadHatBrownFlatcap
+  - ClothingHeadHatGreyFlatcap
+  - ClothingHeadHatMagician
+  - ClothingHeadNurseHat
+  - ClothingHeadHatPirateTricord
+  - ClothingHeadHatPirate
+  - ClothingHeadRastaHat
+  - ClothingHeadHatSombrero
+  - ClothingHeadHatStrawHat
+  - ClothingHeadHatSurgcapBlue
+  - ClothingHeadHatSurgcapGreen
+  - ClothingHeadHatSurgcapPurple
+  - ClothingHeadHatTophat
+  - ClothingHeadHatUshanka
+  - ClothingHeadHatWitch1
+  - ClothingHeadHatWitch
+
+- type: latheRecipePack
+  id: ClothingLabCoats
+  recipes:
+  - ClothingOuterCoatLabChem
+  - ClothingOuterCoatLabCmo
+  - ClothingOuterCoatLabGene
+  - ClothingOuterCoatLab
+  - ClothingOuterCoatLabSeniorPhysician
+  - ClothingOuterCoatRnd
+  - ClothingOuterCoatRobo
+  - ClothingOuterCoatRD
+  - ClothingOuterCoatLabSeniorResearcher
+  - ClothingOuterCoatLabViro
 
 - type: latheRecipePack
   id: ClothingCargo
@@ -51,6 +165,7 @@
   - ClothingUniformJumpskirtChiefEngineerTurtle
   - ClothingUniformJumpsuitEngineering
   - ClothingUniformJumpskirtEngineering
+  - ClothingUniformJumpsuitEngineeringHazard
   - ClothingUniformJumpsuitSeniorEngineer
   - ClothingUniformJumpskirtSeniorEngineer
 
@@ -67,6 +182,11 @@
   - ClothingHeadHatBeretSeniorPhysician
   - ClothingUniformJumpsuitMedicalDoctor
   - ClothingUniformJumpskirtMedicalDoctor
+  - ClothingUniformJumpsuitPsychologist
+  - ClothingUniformJumpskirtPsychologist
+  - UniformScrubsColorBlue
+  - UniformScrubsColorGreen
+  - UniformScrubsColorPurple
   - ClothingUniformJumpsuitSeniorPhysician
   - ClothingUniformJumpskirtSeniorPhysician
   - ClothingUniformJumpsuitParamedic
@@ -81,6 +201,9 @@
   - ClothingUniformJumpskirtResearchDirector
   - ClothingUniformJumpsuitScientist
   - ClothingUniformJumpskirtScientist
+  - ClothingUniformJumpsuitScientistFormal
+  - ClothingUniformJumpsuitRoboticist
+  - ClothingUniformJumpskirtRoboticist
   - ClothingUniformJumpsuitSeniorResearcher
   - ClothingUniformJumpskirtSeniorResearcher
 
@@ -89,6 +212,10 @@
   recipes:
   - ClothingUniformJumpsuitDetective
   - ClothingUniformJumpskirtDetective
+  - ClothingUniformJumpsuitSecDetectiveBlue
+  - ClothingUniformJumpsuitSecDetectiveBlack
+  - ClothingUniformJumpsuitDetectiveGrey
+  - ClothingUniformJumpskirtDetectiveGrey
   - ClothingHeadHatBeretHoS
   - ClothingHeadHatHoshat
   - ClothingUniformJumpsuitHoS
@@ -103,24 +230,39 @@
   - ClothingUniformJumpskirtHoSParadeMale
   - ClothingUniformJumpsuitSeniorOfficer
   - ClothingUniformJumpskirtSeniorOfficer
+  - ClothingUniformSecurityTrooper
+  - ClothingUniformSecurityTrooperSenior
   - ClothingUniformJumpsuitPrisoner
   - ClothingUniformJumpskirtPrisoner
   - ClothingHeadHatBeretSecurity
   - ClothingUniformJumpsuitSec
   - ClothingUniformJumpskirtSec
+  - ClothingUniformJumpsuitSecGrey
+  - ClothingUniformJumpskirtSecGrey
+  - ClothingUniformJumpsuitSecAlt
+  - ClothingUniformJumpsuitSecBlueAlt
+  - ClothingUniformJumpsuitSecGreyAlt
   - ClothingHeadHatBeretBrigmedic
   - ClothingUniformJumpsuitBrigmedic
   - ClothingUniformJumpskirtBrigmedic
   - ClothingHeadHatBeretWarden
+  - ClothingHeadHatBeretSecurityDarkRed
+  - ClothingHeadHatBeretSecurityLightBlue
+  - ClothingHeadHatBeretSecurityBlack
+  - ClothingHeadHatBeretSecurityLightRed
+  - ClothingHeadHatBeretSecurityDarkBlue
   - ClothingHeadHatWarden
   - ClothingUniformJumpsuitWarden
   - ClothingUniformJumpskirtWarden
+  - ClothingUniformJumpsuitSecCorpsmanBlue
+  - ClothingUniformJumpsuitSecCorpsmanBlack
 
 - type: latheRecipePack
   id: ClothingService
   recipes:
   - ClothingUniformJumpsuitBartender
   - ClothingUniformJumpskirtBartender
+  - ClothingUniformJumpsuitBartenderPurple
   - ClothingUniformJumpsuitChaplain
   - ClothingUniformJumpskirtChaplain
   - ClothingUniformJumpsuitChef
@@ -133,7 +275,20 @@
   - ClothingUniformJumpskirtJanitor
   - ClothingUniformJumpsuitLawyerBlack
   - ClothingUniformJumpskirtLawyerBlack
+  - ClothingUniformJumpsuitLawyerBlue
+  - ClothingUniformJumpskirtLawyerBlue
+  - ClothingUniformJumpsuitLawyerGood
+  - ClothingUniformJumpskirtLawyerGood
+  - ClothingUniformJumpsuitLawyerPurple
+  - ClothingUniformJumpskirtLawyerPurple
+  - ClothingUniformJumpsuitLawyerRed
+  - ClothingUniformJumpskirtLawyerRed
   - ClothingUniformJumpsuitLibrarian
+  - ClothingUniformJumpskirtLibrarian
+  - ClothingUniformJumpsuitJournalist
+  - ClothingUniformJumpsuitReporter
+  - ClothingUniformJumpskirtCurator
+  - ClothingUniformJumpsuitCurator
   - ClothingUniformJumpskirtColorLightBrown
   - ClothingUniformJumpsuitMime
   - ClothingUniformJumpskirtMime
@@ -170,6 +325,17 @@
   - ClothingOuterWinterSci
   - ClothingOuterWinterRobo
   - ClothingOuterWinterSec
+  - ClothingOuterWinterColorBlue
+  - ClothingOuterWinterColorBlack
+  - ClothingOuterWinterColorGreen
+  - ClothingOuterWinterColorLightBrown
+  - ClothingOuterWinterColorOrange
+  - ClothingOuterWinterColorPurple
+  - ClothingOuterWinterColorRed
+  - ClothingOuterWinterColorWhite
+  - ClothingOuterWinterColorYellow
+  - ClothingOuterHoodieBlack
+  - ClothingOuterHoodieGrey
 
 - type: latheRecipePack
   id: Ties
@@ -189,6 +355,30 @@
   - ClothingNeckScarfStripedOrange
   - ClothingNeckScarfStripedBlack
   - ClothingNeckScarfStripedPurple
+
+- type: latheRecipePack
+  id: Cloaks
+  recipes:
+  - ClothingNeckCloakCap
+  - ClothingNeckCloakCapFormal
+  - ClothingNeckCloakCentcom
+  - ClothingNeckCloakHos
+  - ClothingNeckCloakQm
+  - ClothingNeckCloakPirateCap
+  - ClothingNeckCloakCe
+  - ClothingCloakCmo
+  - ClothingNeckCloakHop
+
+- type: latheRecipePack
+  id: Mantles
+  recipes:
+  - ClothingNeckMantleCap
+  - ClothingNeckMantleCE
+  - ClothingNeckMantleHOP
+  - ClothingNeckMantleCMO
+  - ClothingNeckMantle
+  - ClothingNeckMantleQM
+  - ClothingNeckMantleRD
 
 - type: latheRecipePack
   id: Carpets
@@ -234,3 +424,19 @@
   - ClothingOuterWinterSyndie
   - ClothingOuterWinterSyndieCap
   - BedsheetSyndie
+  - ClothingOuterCoatSyndieCap
+  - ClothingUniformJumpsuitChiefEngineerSyndie
+
+- type: latheRecipePack
+  id: ClothingMilitary
+  recipes:
+  - ClothingUniformJumpsuitBattleDressUniformWoodland
+  - ClothingUniformJumpsuitBattleDressUniformWoodlandShortSleeve
+  - ClothingUniformJumpsuitBattleDressUniformWoodlandTShirt
+  - ClothingUniformJumpsuitBattleDressUniformDesert
+  - ClothingUniformJumpsuitBattleDressUniformDesertShortSleeve
+  - ClothingUniformJumpsuitBattleDressUniformDesertTShirt
+  - ClothingUniformJumpsuitBattleDressUniformArctic
+  - ClothingUniformJumpsuitBattleDressUniformArcticShortSleeve
+  - ClothingUniformJumpsuitBattleDressUniformArcticTShirt
+  - ClothingUniformGenericTacticalTurtleNeck

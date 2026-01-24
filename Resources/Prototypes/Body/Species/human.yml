@@ -93,6 +93,7 @@
     spawned:
     - id: FoodMeatHuman
       amount: 5
+  save: true
 
 - type: entity
   parent: OrganBase

@@ -34,6 +34,15 @@
               doAfter: 0.5
           completed:
             - !type:SnapToGrid
+        - to: solarpanelphoron
+          conditions:
+            - !type:EntityAnchored
+          steps:
+            - material: PhoronGlass
+              amount: 2
+              doAfter: 0.5
+          completed:
+            - !type:SnapToGrid
         - to: solarpaneluranium
           conditions:
             - !type:EntityAnchored
@@ -77,6 +86,23 @@
               southRotation: true
             - !type:SpawnPrototype
               prototype: SheetPGlass1
+              amount: 2
+          conditions:
+            - !type:EntityAnchored
+              anchored: true
+          steps:
+            - tool: Prying
+              doAfter: 0.5
+
+    - node: solarpanelphoron
+      entity: SolarPanelPhoron
+      edges:
+        - to: solarassembly
+          completed:
+            - !type:SnapToGrid
+              southRotation: true
+            - !type:SpawnPrototype
+              prototype: SheetPhoronGlass1
               amount: 2
           conditions:
             - !type:EntityAnchored
@@ -138,6 +164,23 @@
 
     - node: solarpanelplasma_broken
       entity: SolarPanelPlasmaBroken
+      edges:
+      - to: solarassembly
+        completed:
+        - !type:SnapToGrid
+          southRotation: true
+        - !type:SpawnPrototype
+          prototype: ShardGlassPlasma
+          amount: 2
+        conditions:
+        - !type:EntityAnchored
+          anchored: true
+        steps:
+        - tool: Prying
+          doAfter: 0.5
+
+    - node: solarpanelphoron_broken
+      entity: SolarPanelPhoronBroken
       edges:
       - to: solarassembly
         completed:

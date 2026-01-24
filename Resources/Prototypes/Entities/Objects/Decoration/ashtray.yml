@@ -42,7 +42,15 @@
     size: Small
   - type: PhysicalComposition
     materialComposition:
-      Steel: 10
+      Aluminium: 10
+  - type: Extractable
+    grindableSolutionName: grindable
+  - type: SolutionContainerManager
+    solutions:
+      grindable:
+        reagents:
+        - ReagentId: Aluminium
+          Quantity: 3
   - type: Storage
     whitelist:
       tags:

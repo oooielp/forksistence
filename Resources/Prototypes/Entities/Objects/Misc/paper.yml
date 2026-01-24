@@ -44,9 +44,6 @@
             max: 1
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
-  - type: Edible
-    delay: 7
-    forceFeedDelay: 7
   - type: FlavorProfile
     flavors:
     - paper
@@ -467,3 +464,8 @@
       - !type:EmptyAllContainersBehaviour
       - !type:DoActsBehavior
         acts: [ "Destruction" ]
+
+- type: entity
+  parent: Paper
+  id: TapeRecorderTranscript
+  name: record transcript

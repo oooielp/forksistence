@@ -410,13 +410,20 @@
       weight: 95
       children:
       - id: MobCarpSalvage
+      - id: MobCobraSpaceSalvage
+      - id: MobBearSpaceSalvage
+      - id: MobKangarooSpaceSalvage
+      - id: MobTickSalvage
+      - id: MobSpiderSpaceSalvage
+      - id: PlushieCarp
+      - id: DehydratedSpaceCarp
         weight: 2
       - !type:AllSelector
         weight: 1
         children:
         - id: LandMineExplosive
         - !type:NestedSelector # what's that thing underneath the scrap?
-          prob: 0.33
+          prob: 0.1
           tableId: SalvageScrapSpawnerCommon
     - !type:GroupSelector # scary monsters
       weight: 5

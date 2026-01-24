@@ -33,6 +33,7 @@
   completetime: 3
   materials:
     Plastic: 250
+  unlockUses: 3
 
 - type: latheRecipe
   id: SprayBottle
@@ -80,6 +81,7 @@
     Plastic: 400
     Steel: 100
     Glass: 100
+  unlockUses: 3
 
 - type: latheRecipe
   id: Plunger
@@ -96,6 +98,7 @@
   materials:
     Steel: 1500
     Glass: 500
+  unlockUses: 3
 
 - type: latheRecipe
   id: ClothingBackpackWaterTank
@@ -104,6 +107,7 @@
   materials:
     Steel: 250
     Glass: 1000
+  unlockUses: 3
 
 - type: latheRecipe
   id: WireBrush

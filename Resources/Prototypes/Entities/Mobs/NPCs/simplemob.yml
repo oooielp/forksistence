@@ -1,5 +1,5 @@
 - type: entity
-  save: false
+  save: true
   parent:
   - BaseMob
   - MobDamageable
@@ -64,6 +64,7 @@
   - type: MobPrice
     price: 1000 # Living critters are valuable in space.
   - type: Perishable
+  - type: MovementIgnoreGravity
 
 - type: entity
   parent:

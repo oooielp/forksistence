@@ -91,6 +91,23 @@
     {
       "name": "titanium-inhand-right",
       "directions": 4
+    },
+    {
+      "name": "bronze"
+    },
+    {
+      "name": "bronze_2"
+    },
+    {
+      "name": "bronze_3"
+    },
+    {
+      "name": "bronze-inhand-left",
+      "directions": 4
+    },
+    {
+      "name": "bronze-inhand-right",
+      "directions": 4
     }
   ]
 }

@@ -45,6 +45,7 @@ public sealed class JointVisualsOverlay : Overlay
                 continue;
 
             var texture = spriteSystem.Frame0(visuals.Sprite);
+
             var width = texture.Width / (float)EyeManager.PixelsPerMeter;
 
             var coordsA = xform.Coordinates;
@@ -52,6 +53,18 @@ public sealed class JointVisualsOverlay : Overlay
 
             var rotA = xform.LocalRotation;
             var rotB = otherXform.LocalRotation;
+
+            switch (visuals.OffsetRotationMode)
+            {
+                case JointOffsetRotationMode.TowardsTarget:
+                    {
+                        var originalPosA = xformSystem.ToMapCoordinates(coordsA).Position;
+                        var originalPosB = xformSystem.ToMapCoordinates(coordsB).Position;
+                        rotA = Angle.FromWorldVec(originalPosB - originalPosA) + Angle.FromDegrees(90);
+                        rotB = rotA.Opposite() + Angle.FromDegrees(90);
+                        break;
+                    }
+            }
 
             coordsA = coordsA.Offset(rotA.RotateVec(visuals.OffsetA));
             coordsB = coordsB.Offset(rotB.RotateVec(visuals.OffsetB));
@@ -66,7 +79,13 @@ public sealed class JointVisualsOverlay : Overlay
             var box = new Box2(-width / 2f, -length / 2f, width / 2f, length / 2f);
             var rotate = new Box2Rotated(box.Translated(midPoint), angle, midPoint);
 
-            worldHandle.DrawTextureRect(texture, rotate);
+            worldHandle.DrawTextureRect(texture, rotate, visuals.Modulate);
+
+            if (visuals.SpriteOverlay != null)
+            {
+                var textureOverlay = spriteSystem.Frame0(visuals.SpriteOverlay);
+                worldHandle.DrawTextureRect(textureOverlay, rotate, visuals.ModulateOverlay);
+            }
         }
     }
 }

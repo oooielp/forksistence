@@ -19,7 +19,7 @@
     containers:
       storagebase: !type:AllSelector
         children:
-        - id: CargoRequestEngineeringComputerCircuitboard
+#        - id: CargoRequestEngineeringComputerCircuitboard
         - id: AlertsComputerCircuitboard
         - id: AtmosMonitoringComputerCircuitboard
         - id: PowerComputerCircuitboard
@@ -35,7 +35,7 @@
       storagebase: !type:AllSelector
         children:
         - id: MedicalTechFabCircuitboard
-        - id: CargoRequestMedicalComputerCircuitboard
+#        - id: CargoRequestMedicalComputerCircuitboard
 
 - type: entity
   parent: ToteBase
@@ -47,8 +47,8 @@
       storagebase: !type:AllSelector
         children:
         - id: IDComputerCircuitboard
-        - id: FundingAllocationComputerCircuitboard
-        - id: CargoRequestServiceComputerCircuitboard
+#        - id: FundingAllocationComputerCircuitboard
+#        - id: CargoRequestServiceComputerCircuitboard
 
 - type: entity
   parent: BoxStamps
@@ -73,7 +73,7 @@
       storagebase: !type:AllSelector
         children:
         - id: SecurityTechFabCircuitboard
-        - id: CargoRequestSecurityComputerCircuitboard
+#        - id: CargoRequestSecurityComputerCircuitboard
 
 - type: entity
   parent: ToteBase
@@ -85,7 +85,7 @@
       storagebase: !type:AllSelector
         children:
         - id: CargoBountyComputerCircuitboard
-        - id: CargoRequestComputerCircuitboard
+#        - id: CargoRequestComputerCircuitboard
         - id: CargoSaleComputerCircuitboard
         - id: CargoShuttleConsoleCircuitboard
         - id: SalvageMagnetMachineCircuitboard
@@ -117,7 +117,7 @@
         - id: CircuitImprinterMachineCircuitboard
         - id: ProtolatheMachineCircuitboard
         - id: ResearchComputerCircuitboard
-        - id: CargoRequestScienceComputerCircuitboard
+#        - id: CargoRequestScienceComputerCircuitboard
         - id: RoboticsConsoleCircuitboard
         - id: AnalysisComputerCircuitboard #Because sometimes round start artis just fucking explode on the pad.
         - id: ArtifactAnalyzerMachineCircuitboard

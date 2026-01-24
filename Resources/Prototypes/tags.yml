@@ -60,6 +60,9 @@
   id: Bandana # CargoBounty: BountyBandana
 
 - type: Tag
+  id: BarSignElectronics #
+
+- type: Tag
   id: BaseballBat # CargoBounty: BountyBaseballBat
 
 - type: Tag
@@ -88,6 +91,9 @@
 
 - type: Tag
   id: Boll # MaterialStorage whitelist: Sheetifier
+
+- type: Tag
+  id: Bone # Entity: MaterialBones
 
 - type: Tag
   id: Book # Storage whitelist: BorgModuleService, BooksBag, Bookshelf. Blacklisting on various entities whitelisting PaperComponent
@@ -410,6 +416,9 @@
 
 - type: Tag
   id: Creamsicle # Blacklist on BountyFruit
+
+- type: Tag
+  id: CrematoriumElectronics # Blacklist on BountyFruit
 
 - type: Tag
   id: Crowbar # Storage whitelist: BaseClothingBeltEngineering, ClothingBeltChiefEngineer. ItemMapper: BaseClothingBeltEngineering, ClothingBeltChiefEngineer
@@ -906,6 +915,9 @@
 - type: Tag
   id: MagazineShotgun # WeaponShotgunBulldog
 
+- type: Tag
+  id: MorgueElectronics # MorgueElectronics
+
 #endregion
 
 - type: Tag
@@ -1020,6 +1032,12 @@
   id: OreBananium # CargoBounty: BountySalvageOreBananium
 
 - type: Tag
+  id: OreAluminum # CargoBounty: BountySalvageOreAluminum
+
+- type: Tag
+  id: OreCopper # CargoBounty: BountySalvageOreCopper
+
+- type: Tag
   id: OreGold # CargoBounty: BountySalvageOreGold
 
 - type: Tag
@@ -1027,6 +1045,12 @@
 
 - type: Tag
   id: OreSilver # CargoBounty: BountySalvageOreSilver
+
+- type: Tag
+  id: OreTin # CargoBounty: BountySalvageOreTin
+
+- type: Tag
+  id: OreTitanium # CargoBounty: BountySalvageOreTitanium
 
 - type: Tag
   id: OreUranium # CargoBounty: BountySalvageOreUranium
@@ -1047,6 +1071,9 @@
 
 - type: Tag
   id: ParadoxCloneObjectiveBlacklist # objective entities with this tag don't get copied to paradox clones
+
+- type: Tag
+  id: Phoron # Material tag for Phoron
 
 - type: Tag
   id: ParcelWrapBlacklist # Tagged entities can't be wrapped in ParcelWrap.
@@ -1204,22 +1231,22 @@
   id: Ring # CargoBounty: BountyRing
 
 - type: Tag
-  id: RipleyCentralControlModule # ConstructionGraph: Ripley
+  id: RipleyCentralControlModule # ConstructionGraph: Ripley Bounty: BountyRipley
 
 - type: Tag
-  id: RipleyLArm # PartAssembly: RipleyHarness. ItemMapper: RipleyHarness
+  id: RipleyLArm # PartAssembly: RipleyHarness. ItemMapper: RipleyHarness Bounty: BountyRipley
 
 - type: Tag
-  id: RipleyLLeg # PartAssembly: RipleyHarness. ItemMapper: RipleyHarness
+  id: RipleyLLeg # PartAssembly: RipleyHarness. ItemMapper: RipleyHarness Bounty: BountyRipley
 
 - type: Tag
-  id: RipleyPeripheralsControlModule # ConstructionGraph: Ripley
+  id: RipleyPeripheralsControlModule # ConstructionGraph: Ripley Bounty: BountyRipley
 
 - type: Tag
-  id: RipleyRArm # PartAssembly: RipleyHarness. ItemMapper: RipleyHarness
+  id: RipleyRArm # PartAssembly: RipleyHarness. ItemMapper: RipleyHarness Bounty: BountyRipley
 
 - type: Tag
-  id: RipleyRLeg # PartAssembly: RipleyHarness. ItemMapper: RipleyHarness
+  id: RipleyRLeg # PartAssembly: RipleyHarness. ItemMapper: RipleyHarness Bounty: BountyRipley
 
 - type: Tag
   id: RollingPaper # Storage whitelist: PackPaperRolling, PackPaperRollingFilters
@@ -1267,6 +1294,9 @@
 
 - type: Tag
   id: Sheet # MaterialStorage whitelist for many machines and lathes. Storage whitelist: MaterialBag
+
+- type: Tag
+  id: SheetPaper # MaterialStorage whitelist for many machines and lathes. Applied to SheetPaper, but not wrtitten/writable papers
 
 - type: Tag
   id: ShellShotgun # Ammo: AmmoProviderShotgunShell, ClothingBeltBandolier, BaseMagazineShotgun, BaseWeaponShotgun, WeaponFlareGunSecurity
@@ -1584,3 +1614,105 @@
 ## Y ##
 ## Z ##
 # ALPHABETICAL
+
+##Persistence Materials
+
+- type: Tag
+  id: Silver
+
+- type: Tag
+  id: Gold
+
+- type: Tag
+  id: Steel
+
+- type: Tag
+  id: Wood
+
+- type: Tag
+  id: Brass
+
+- type: Tag
+  id: Bronze
+
+- type: Tag
+  id: Plasma
+
+- type: Tag
+  id: Uranium
+
+- type: Tag
+  id: Bananium
+
+- type: Tag
+  id: Coal
+
+- type: Tag
+  id: Plasteel
+
+- type: Tag
+  id: Titanium
+
+- type: Tag
+  id: Copper
+
+- type: Tag
+  id: Aluminum
+
+- type: Tag
+  id: Tin
+
+##Persistence Bounty Tags
+
+# Explorer
+
+- type: Tag
+  id: TreasureOldComputer # CargoBounty: TreasureOldComputer: Hard drive, floppy drive, CD drive
+
+- type: Tag
+  id: TreasureOldCPU # CargoBounty: TreasureOldCPU: Supercharged CPU
+
+
+# Science
+
+- type: Tag
+  id: ApeCircuitboard
+
+- type: Tag
+  id: AnomalyScanner
+
+- type: Tag
+  id: AnomalyLocator
+
+- type: Tag # CargoBounty: BountyRipley
+  id: PartRodMetal
+
+- type: Tag
+  id: TreasureSampleTube # CargoBounty: TreasureSampleTube: Sample tube (unbroken)
+
+- type: Tag
+  id: TreasureDataDisk # CargoBounty: TreasureDataDisk: Data disk
+
+
+# Hunter
+
+- type: Tag
+  id: BearHide
+
+- type: Tag
+  id: BearMeat
+
+- type: Tag
+  id: GoliathMeat
+
+- type: Tag
+  id: SpiderMeat
+
+- type: Tag
+  id: SnakeMeat
+
+- type: Tag
+  id: SnakeBoots
+
+- type: Tag
+  id: XenoMeat

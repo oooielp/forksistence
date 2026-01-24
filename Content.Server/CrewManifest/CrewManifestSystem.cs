@@ -1,4 +1,3 @@
-using System.Linq;
 using Content.Server.Administration;
 using Content.Server.EUI;
 using Content.Server.Station.Systems;
@@ -6,15 +5,19 @@ using Content.Server.StationRecords;
 using Content.Server.StationRecords.Systems;
 using Content.Shared.Administration;
 using Content.Shared.CCVar;
+using Content.Shared.CrewAssignments.Components;
 using Content.Shared.CrewManifest;
+using Content.Shared.CrewRecords.Components;
 using Content.Shared.GameTicking;
 using Content.Shared.Roles;
 using Content.Shared.Station.Components;
 using Content.Shared.StationRecords;
+using NetCord;
 using Robust.Shared.Configuration;
 using Robust.Shared.Console;
 using Robust.Shared.Player;
 using Robust.Shared.Prototypes;
+using System.Linq;
 
 namespace Content.Server.CrewManifest;
 
@@ -49,13 +52,6 @@ public sealed class CrewManifestSystem : EntitySystem
 
     private void OnRoundRestart(RoundRestartCleanupEvent ev)
     {
-        foreach (var (_, euis) in _openEuis)
-        {
-            foreach (var (_, eui) in euis)
-            {
-                eui.Close();
-            }
-        }
 
         _openEuis.Clear();
         _cachedEntries.Clear();
@@ -161,10 +157,6 @@ public sealed class CrewManifestSystem : EntitySystem
     /// <param name="owner">If this EUI should be 'owned' by an entity.</param>
     public void OpenEui(EntityUid station, ICommonSession session, EntityUid? owner = null)
     {
-        if (!HasComp<StationRecordsComponent>(station))
-        {
-            return;
-        }
 
         if (!_openEuis.TryGetValue(station, out var euis))
         {
@@ -174,6 +166,10 @@ public sealed class CrewManifestSystem : EntitySystem
 
         if (euis.ContainsKey(session))
         {
+            var eui2 = new CrewManifestEui(station, owner, this);
+            euis[session] = eui2;
+            _euiManager.OpenEui(eui2, session);
+            eui2.StateDirty();
             return;
         }
 
@@ -219,19 +215,38 @@ public sealed class CrewManifestSystem : EntitySystem
     ///     Builds the crew manifest for a station. Stores it in the cache afterwards.
     /// </summary>
     /// <param name="station"></param>
-    private void BuildCrewManifest(EntityUid station)
+    public void BuildCrewManifest(EntityUid station)
     {
-        var iter = _recordsSystem.GetRecordsOfType<GeneralStationRecord>(station);
-
+        if (!TryComp<StationDataComponent>(station, out var sD) || sD == null) return;
+        if (!TryComp<CrewRecordsComponent>(station, out var crewRecords) || crewRecords == null) return;
+        if (!TryComp<CrewAssignmentsComponent>(station, out var crewAssignments) || crewAssignments == null) return;
+        List<EntityUid> activeWorkers = new();
+        var query = EntityQueryEnumerator<JobNetComponent>();
+        while (query.MoveNext(out var uid, out var comp))
+        {
+            if (comp.WorkingFor != null && comp.WorkingFor == sD.UID)
+            {
+                activeWorkers.Add(comp.Owner);
+            }
+        }
         var entries = new CrewManifestEntries();
 
         var entriesSort = new List<(JobPrototype? job, CrewManifestEntry entry)>();
-        foreach (var recordObject in iter)
+        foreach (var employee in activeWorkers)
         {
-            var record = recordObject.Item2;
-            var entry = new CrewManifestEntry(record.Name, record.JobTitle, record.JobIcon, record.JobPrototype);
+            EntityUid? player = null;
+            if (TryComp<TransformComponent>(employee, out var comp) && comp != null)
+            {
+                player = comp.ParentUid;
+            }
+            if (player == null) continue;
+            var name = Name(player.Value);
+            if (!crewRecords.TryGetRecord(name, out var record) || record == null) continue;
+            if (!crewAssignments.TryGetAssignment(record.AssignmentID, out var assignment) || assignment == null) continue;
 
-            _prototypeManager.TryIndex(record.JobPrototype, out JobPrototype? job);
+            var entry = new CrewManifestEntry(name, assignment.Name, "JobIconUnknown", "Passenger");
+            
+            _prototypeManager.TryIndex("Passenger", out JobPrototype? job);
             entriesSort.Add((job, entry));
         }
 

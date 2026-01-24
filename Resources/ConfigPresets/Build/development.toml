@@ -2,10 +2,11 @@
 # Straight in-game baby
 lobbyenabled = false
 # Dev map for faster loading & convenience
-map = "Dev"
+map = "PersistDev"
 role_timers = false
 admin_job_tracking = true
 role_loadout_timers = false
+autosaveenabled = false # only save when asked
 
 [events]
 enabled = false

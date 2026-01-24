@@ -20,3 +20,17 @@
     layers:
       - state: box
       - state: beaker
+
+- type: entity
+  parent: ToteBase
+  id: BoxMaufacturingCircuitboards
+  name: manufacturing starter kit tote
+  components:
+  - type: EntityTableContainerFill
+    containers:
+      storagebase: !type:AllSelector
+        children:
+        - id: CircuitImprinterMachineCircuitboard
+        - id: AutolatheMachineCircuitboard
+        - id: OreProcessorMachineCircuitboard
+        - id: RecyclerMachineCircuitboard

@@ -1,5 +1,6 @@
 meta:
   format: 6
+  category: Grid
   postmapinit: false
 tilemap:
   0: Space

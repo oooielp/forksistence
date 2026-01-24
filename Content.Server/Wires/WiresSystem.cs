@@ -52,6 +52,7 @@ public sealed class WiresSystem : SharedWiresSystem
         SubscribeLocalEvent<WiresComponent, WiresActionMessage>(OnWiresActionMessage);
         SubscribeLocalEvent<WiresComponent, InteractUsingEvent>(OnInteractUsing);
         SubscribeLocalEvent<WiresComponent, MapInitEvent>(OnMapInit);
+        SubscribeLocalEvent<WiresComponent, ComponentInit>(OnCompInit);
         SubscribeLocalEvent<WiresComponent, TimedWireEvent>(OnTimedWire);
         SubscribeLocalEvent<WiresComponent, PowerChangedEvent>(OnWiresPowered);
         SubscribeLocalEvent<WiresComponent, WireDoAfterEvent>(OnDoAfter);
@@ -462,13 +463,36 @@ public sealed class WiresSystem : SharedWiresSystem
         _uiSystem.CloseUi(ent.Owner, WiresUiKey.Key);
     }
 
-    private void OnMapInit(EntityUid uid, WiresComponent component, MapInitEvent args)
+    private void OnCompInit(EntityUid uid, WiresComponent component, ComponentInit args)
     {
         if (!string.IsNullOrEmpty(component.LayoutId))
             SetOrCreateWireLayout(uid, component);
 
         if (component.SerialNumber == null)
             GenerateSerialNumber(uid, component);
+
+        if (component.WireSeed == 0)
+            component.WireSeed = _random.Next(1, int.MaxValue);
+
+        // Update the construction graph to make sure that it starts on the node specified by WiresPanelSecurityComponent
+        if (TryComp<WiresPanelSecurityComponent>(uid, out var wiresPanelSecurity) &&
+            !string.IsNullOrEmpty(wiresPanelSecurity.SecurityLevel) &&
+            TryComp<ConstructionComponent>(uid, out var construction))
+        {
+            _construction.ChangeNode(uid, null, wiresPanelSecurity.SecurityLevel, true, construction);
+        }
+
+        UpdateUserInterface(uid);
+    }
+
+    private void OnMapInit(EntityUid uid, WiresComponent component, MapInitEvent args)
+    {
+        if (component.SerialNumber == null)
+            GenerateSerialNumber(uid, component);
+        else
+            return;
+        if (!string.IsNullOrEmpty(component.LayoutId))
+            SetOrCreateWireLayout(uid, component);
 
         if (component.WireSeed == 0)
             component.WireSeed = _random.Next(1, int.MaxValue);

@@ -345,6 +345,9 @@
         Manipulator: 2
         Cable: 1
         Glass: 1
+    - type: Tag
+      tags:
+      - ApeCircuitboard
 
 - type: entity
   id: ThermomachineFreezerMachineCircuitBoard
@@ -831,6 +834,26 @@
       price: 40
 
 - type: entity
+  id: PortableGeneratorMegamanMachineCircuitboard
+  parent: BaseMachineCircuitboard
+  name: M.E.G.A.M.A.N.-type portable generator machine board
+  components:
+    - type: Sprite
+      state: engineering
+    - type: MachineBoard
+      prototype: PortableGeneratorMegaman
+      stackRequirements:
+        Manipulator: 2
+        CableHV: 8
+    - type: PhysicalComposition
+      materialComposition:
+        Glass: 300
+      chemicalComposition:
+        Silicon: 30
+    - type: StaticPrice
+      price: 60
+
+- type: entity
   id: ThrusterMachineCircuitboard
   parent: BaseMachineCircuitboard
   name: thruster machine board
@@ -868,6 +891,26 @@
       stackRequirements:
         Manipulator: 2
         CableHV: 10
+    - type: PhysicalComposition
+      materialComposition:
+        Glass: 200
+      chemicalComposition:
+        Silicon: 20
+    - type: StaticPrice
+      price: 40
+
+- type: entity
+  id: PortableGeneratorOldmanMachineCircuitboard
+  parent: BaseMachineCircuitboard
+  name: O.L.D.M.A.N.-type portable generator machine board
+  components:
+    - type: Sprite
+      state: engineering
+    - type: MachineBoard
+      prototype: PortableGeneratorOldman
+      stackRequirements:
+        Manipulator: 2
+        Cable: 10
     - type: PhysicalComposition
       materialComposition:
         Glass: 200
@@ -1007,6 +1050,62 @@
       stackRequirements:
         Manipulator: 4
         Glass: 1
+
+- type: entity
+  id: RecyclerMachineCircuitboard
+  parent: BaseMachineCircuitboard
+  name: recycler machine board
+  components:
+    - type: Sprite
+      state: supply
+    - type: MachineBoard
+      prototype: Recycler
+      stackRequirements:
+        Manipulator: 3
+        Steel: 6
+
+- type: entity
+  id: ShredderMachineCircuitboard
+  parent: BaseMachineCircuitboard
+  name: shredder machine board
+  components:
+  - type: Sprite
+    state: supply
+  - type: MachineBoard
+    prototype: Shredder
+    stackRequirements:
+      Manipulator: 2
+      Steel: 4
+
+- type: entity
+  id: MCTNMachineCircuitboard
+  parent: BaseMachineCircuitboard
+  name: multi-channel transfer node machine board
+  components:
+    - type: Sprite
+      state: engineering
+    - type: MachineBoard
+      prototype: MCTNodeMachine
+      stackRequirements:
+        Cable: 5
+        CableMV: 5
+        CableHV: 5
+        Manipulator: 2
+        Steel: 10
+
+- type: entity
+  id: TrappedFluidExtractorMachineCircuitboard
+  parent: BaseMachineCircuitboard
+  name: gas miner machine board
+  components:
+    - type: Sprite
+      state: engineering
+    - type: MachineBoard
+      prototype: TrappedFluidExtractor
+      stackRequirements:
+        CableMV: 5
+        Manipulator: 2
+        Plasteel: 5
 
 - type: entity
   parent: BaseMachineCircuitboard
@@ -1260,6 +1359,20 @@
     state: engineering
   - type: MachineBoard
     prototype: TelecomServer
+    stackRequirements:
+      Steel: 1
+      Cable: 2
+
+- type: entity
+  id: TelecomServer1kCircuitboard
+  parent: BaseMachineCircuitboard
+  name: high tech telecommunication server machine board
+  description: A machine printed circuit board for an high tech telecommunication server.
+  components:
+  - type: Sprite
+    state: engineering
+  - type: MachineBoard
+    prototype: TelecomServer1k
     stackRequirements:
       Steel: 1
       Cable: 2

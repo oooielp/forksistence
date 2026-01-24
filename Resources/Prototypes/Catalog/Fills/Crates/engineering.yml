@@ -149,7 +149,7 @@
   - type: EntityTableContainerFill
     containers:
       entity_storage:
-        id: JetpackBlue
+        id: JetpackBlueFilled
         amount: 2
 
 - type: entity
@@ -161,7 +161,7 @@
   - type: EntityTableContainerFill
     containers:
       entity_storage:
-        id: JetpackMini
+        id: JetpackMiniFilled
         amount: 2
 
 - type: entity

@@ -1,13 +1,25 @@
-using System.Linq;
 using Content.Server.Cargo.Components;
+using Content.Server.Database;
+using Content.Server.Hands.Systems;
+using Content.Server.Stack;
+using Content.Server.Station.Commands;
 using Content.Shared.Cargo;
 using Content.Shared.Cargo.BUI;
 using Content.Shared.Cargo.Components;
 using Content.Shared.Cargo.Events;
 using Content.Shared.Cargo.Prototypes;
 using Content.Shared.CCVar;
+using Content.Shared.Coordinates;
+using Content.Shared.Hands.Components;
+using Content.Shared.Invoices.Components;
+using Content.Shared.Stacks;
+using Content.Shared.Station.Components;
+using Robust.Server.GameObjects;
 using Robust.Shared.Audio;
+using Robust.Shared.Physics;
 using Robust.Shared.Prototypes;
+using System.Linq;
+using YamlDotNet.Core.Tokens;
 
 namespace Content.Server.Cargo.Systems;
 
@@ -17,6 +29,9 @@ public sealed partial class CargoSystem
      * Handles cargo shuttle / trade mechanics.
      */
 
+    [Dependency] private readonly HandsSystem _hands = default!;
+    [Dependency] private readonly TransformSystem _transform = default!;
+    [Dependency] private readonly IEntityManager _entityManager = default!;
     private static readonly SoundPathSpecifier ApproveSound = new("/Audio/Effects/Cargo/ping.ogg");
     private bool _lockboxCutEnabled;
 
@@ -24,33 +39,85 @@ public sealed partial class CargoSystem
     {
         SubscribeLocalEvent<TradeStationComponent, GridSplitEvent>(OnTradeSplit);
 
+        SubscribeLocalEvent<CargoPalletConsoleComponent, CargoPalletStationSelectMessage>(OnStationSelect);
         SubscribeLocalEvent<CargoPalletConsoleComponent, CargoPalletSellMessage>(OnPalletSale);
         SubscribeLocalEvent<CargoPalletConsoleComponent, CargoPalletAppraiseMessage>(OnPalletAppraise);
+        SubscribeLocalEvent<CargoPalletConsoleComponent, CargoPalletChangeMoneyMode>(OnChangeMoneyMode);
         SubscribeLocalEvent<CargoPalletConsoleComponent, BoundUIOpenedEvent>(OnPalletUIOpen);
 
         _cfg.OnValueChanged(CCVars.LockboxCutEnabled, (enabled) => { _lockboxCutEnabled = enabled; }, true);
     }
 
     #region Console
-    private void UpdatePalletConsoleInterface(EntityUid uid)
+    private void UpdatePalletConsoleInterface(EntityUid uid, CargoPalletConsoleComponent comp, EntityUid? player)
     {
+        List<EntityUid> possibleStations = new();
+        Dictionary<int, string> formattedStations = new();
+        string selectedName = "No Faction Selected";
+        var selectedStation = _station.GetStationByID(comp.SelectedStation);
+        if (selectedStation != null)
+        {
+            if (TryComp<StationDataComponent>(selectedStation, out var sD) && sD != null)
+            {
+                if(sD.StationName != null) selectedName = sD.StationName;
+            }
+        }
+        int taxingStation = 0;
+        var name = "Unknown";
+        if (player != null)
+        {
+            possibleStations = _station.GetStationsAvailableTo(Name(player.Value));
+        }
+        foreach (var station in possibleStations)
+        {
+            if (TryComp<StationDataComponent>(station, out var data) && data != null)
+            {
+                if(data.StationName != null)
+                {
+                    formattedStations.Add(data.UID, data.StationName);
+                }
+            }
+        }
         if (Transform(uid).GridUid is not { } gridUid)
         {
             _uiSystem.SetUiState(uid,
                 CargoPalletConsoleUiKey.Sale,
-                new CargoPalletConsoleInterfaceState(0, 0, false));
+                new CargoPalletConsoleInterfaceState(0, 0, false, comp.CashMode, 0, 0, name, formattedStations, comp.SelectedStation, selectedName));
             return;
+        }
+        if (!TryComp<TradeStationComponent>(gridUid, out var tS) || tS == null)
+        {
+            _uiSystem.SetUiState(uid,
+                CargoPalletConsoleUiKey.Sale,
+                new CargoPalletConsoleInterfaceState(0, 0, false, comp.CashMode, 0, 0, name, formattedStations, comp.SelectedStation, selectedName));
+            return;
+        }
+        var tax = 25;
+        var owningStation = _station.GetOwningStation(uid, null, true);
+        if(owningStation != null)
+        {
+            if (TryComp<StationDataComponent>(owningStation, out var sD) && sD != null)
+            {
+                tax = sD.ExportTax;
+                taxingStation = sD.UID;
+                if(sD.StationName != null)
+                {
+                    name = sD.StationName;
+                }
+            }
         }
         GetPalletGoods(gridUid, out var toSell, out var goods);
         var totalAmount = goods.Sum(t => t.Item3);
+        
+        
         _uiSystem.SetUiState(uid,
             CargoPalletConsoleUiKey.Sale,
-            new CargoPalletConsoleInterfaceState((int) totalAmount, toSell.Count, true));
+            new CargoPalletConsoleInterfaceState((int)totalAmount, toSell.Count, true, comp.CashMode, tax, taxingStation, name, formattedStations, comp.SelectedStation, selectedName));
     }
 
     private void OnPalletUIOpen(EntityUid uid, CargoPalletConsoleComponent component, BoundUIOpenedEvent args)
     {
-        UpdatePalletConsoleInterface(uid);
+        UpdatePalletConsoleInterface(uid, component, args.Actor);
     }
 
     /// <summary>
@@ -63,8 +130,26 @@ public sealed partial class CargoSystem
 
     private void OnPalletAppraise(EntityUid uid, CargoPalletConsoleComponent component, CargoPalletAppraiseMessage args)
     {
-        UpdatePalletConsoleInterface(uid);
+        UpdatePalletConsoleInterface(uid, component, args.Actor);
     }
+
+    private void OnChangeMoneyMode(EntityUid uid, CargoPalletConsoleComponent component, CargoPalletChangeMoneyMode args)
+    {
+        if(component.CashMode == CargoSaleMode.Cash)
+        {
+            component.CashMode = CargoSaleMode.Deposit;
+        }
+        else if (component.CashMode == CargoSaleMode.Deposit)
+        {
+            component.CashMode = CargoSaleMode.Payslip;
+        }
+        else if (component.CashMode == CargoSaleMode.Payslip)
+        {
+            component.CashMode = CargoSaleMode.Cash;
+        }
+        UpdatePalletConsoleInterface(uid, component, args.Actor);
+    }
+
 
     #endregion
 
@@ -131,7 +216,7 @@ public sealed partial class CargoSystem
 
     #region Station
 
-    private bool SellPallets(EntityUid gridUid, EntityUid station, out HashSet<(EntityUid, OverrideSellComponent?, double)> goods)
+    private bool SellPallets(EntityUid gridUid, EntityUid? station, out HashSet<(EntityUid, OverrideSellComponent?, double)> goods)
     {
         GetPalletGoods(gridUid, out var toSell, out goods);
 
@@ -212,51 +297,146 @@ public sealed partial class CargoSystem
         return true;
     }
 
+    private void OnStationSelect(EntityUid uid, CargoPalletConsoleComponent component, CargoPalletStationSelectMessage args)
+    {
+        component.SelectedStation = args.Target;
+        UpdatePalletConsoleInterface(uid, component, args.Actor);
+    }
+
+    private int GetTaxRate(EntityUid uid, CargoPalletConsoleComponent component, bool personal = false)
+    {
+        if (_station.GetOwningStation(uid, null, true) is not { } station ||
+            !TryComp<StationBankAccountComponent>(station, out var bankAccount))
+        {
+            return 25;
+        }
+        TryComp<StationDataComponent>(station, out var sD);
+        if(sD == null)
+        {
+            return 25;
+        }
+        if (!personal && sD.UID == component.SelectedStation)
+        {
+            return 0;
+        }
+        return sD.ExportTax;
+    }
     private void OnPalletSale(EntityUid uid, CargoPalletConsoleComponent component, CargoPalletSellMessage args)
     {
         var xform = Transform(uid);
 
-        if (_station.GetOwningStation(uid) is not { } station ||
-            !TryComp<StationBankAccountComponent>(station, out var bankAccount))
-        {
-            return;
-        }
+        var station = _station.GetStationByID(component.SelectedStation);
+        var taxingStation = _station.GetOwningStation(uid, null, true);
 
         if (xform.GridUid is not { } gridUid)
         {
-            _uiSystem.SetUiState(uid,
-                CargoPalletConsoleUiKey.Sale,
-                new CargoPalletConsoleInterfaceState(0, 0, false));
+            UpdatePalletConsoleInterface(uid, component, args.Actor);
             return;
         }
+        if (component.CashMode == CargoSaleMode.Deposit && station == null) return;
 
         if (!SellPallets(gridUid, station, out var goods))
             return;
-
-        var baseDistribution = CreateAccountDistribution((station, bankAccount));
-        foreach (var (_, sellComponent, value) in goods)
+        if(component.CashMode == CargoSaleMode.Cash)
         {
-            Dictionary<ProtoId<CargoAccountPrototype>, double> distribution;
-            if (sellComponent != null)
+            var tax = GetTaxRate(uid, component);
+            var player = args.Actor;
+            //spawn the cash stack of whatever cash type the ATM is configured to.
+            double total = 0;
+            foreach (var (_, sellComponent, value) in goods)
             {
-                var cut = _lockboxCutEnabled ? bankAccount.LockboxCut : bankAccount.PrimaryCut;
-                distribution = new Dictionary<ProtoId<CargoAccountPrototype>, double>
-                {
-                    { sellComponent.OverrideAccount, cut },
-                    { bankAccount.PrimaryAccount, 1.0 - cut },
-                };
+                total += value;
             }
-            else
+            float taxmult = (float)tax / 100f;
+            var taxpaid = (float)total * taxmult;
+            var taxPaidInt = (int)Math.Round(taxpaid);
+            total -= taxPaidInt;
+
+            var stackPrototype = _protoMan.Index<StackPrototype>("Credit");
+            var cashStack = _stack.SpawnAtPosition((int)Math.Round(total), stackPrototype, player.ToCoordinates());
+            if (!_hands.TryPickupAnyHand(player, cashStack))
+                _transform.SetLocalRotation(cashStack, Angle.Zero); // Orient these to grid north instead of map north
+            if(taxPaidInt > 0)
             {
-                distribution = baseDistribution;
+                if(taxingStation != null)
+                {
+                    if(TryComp<StationBankAccountComponent>(taxingStation, out var taxBankAccount) && taxBankAccount != null)
+                    {
+                        UpdateBankAccount((taxingStation.Value, taxBankAccount), taxPaidInt, "Cargo");
+                    }
+                }
+            }
+        }
+        else if (component.CashMode == CargoSaleMode.Payslip)
+        {
+            var tax = GetTaxRate(uid, component);
+            var player = args.Actor;
+            //spawn the cash stack of whatever cash type the ATM is configured to.
+            double total = 0;
+            foreach (var (_, sellComponent, value) in goods)
+            {
+                total += value;
+            }
+            float taxmult = (float)tax / 100f;
+            var taxpaid = (float)total * taxmult;
+            var taxPaidInt = (int)Math.Round(taxpaid);
+            total -= taxPaidInt;
+            var invoice = _entityManager.SpawnAtPosition("Invoice", player.ToCoordinates());
+            if (!_hands.TryPickupAnyHand(player, invoice))
+                _transform.SetLocalRotation(invoice, Angle.Zero); // Orient these to grid north instead of map north
+            if (TryComp<InvoiceComponent>(invoice, out var invoiceComp) && invoiceComp != null)
+            {
+                invoiceComp.TargetStation = 0;
+                invoiceComp.InvoiceCost = (int)Math.Round(total);
+                invoiceComp.InvoiceReason = $"Paid for exporting cargo.";
+                invoiceComp.PayslipMode = true;
+                _metaSystem.SetEntityName(invoice, $"payslip ${(int)Math.Round(total)} Cargo Export");
+                Dirty(invoice, invoiceComp);
             }
 
-            UpdateBankAccount((station, bankAccount), (int) Math.Round(value), distribution, false);
+
+
+            if (taxPaidInt > 0)
+            {
+                if (taxingStation != null)
+                {
+                    if (TryComp<StationBankAccountComponent>(taxingStation, out var taxBankAccount) && taxBankAccount != null)
+                    {
+                        UpdateBankAccount((taxingStation.Value, taxBankAccount), taxPaidInt, "Cargo");
+                    }
+                }
+            }
+        }
+        else
+        {
+            if (station == null) return;
+            var tax = GetTaxRate(uid, component);
+            var player = args.Actor;
+            //spawn the cash stack of whatever cash type the ATM is configured to.
+            double total = 0;
+            foreach (var (_, sellComponent, value) in goods)
+            {
+                total += value;
+            }
+            float taxmult = (float)tax / 100f;
+            var taxpaid = (float)total * taxmult;
+            var taxPaidInt = (int)Math.Round(taxpaid);
+            total -= taxPaidInt;
+            UpdateBankAccount(station.Value, (int)total, "Cargo");
+            if (taxPaidInt > 0)
+            {
+                if (taxingStation != null)
+                {
+                    if (TryComp<StationBankAccountComponent>(taxingStation, out var taxBankAccount) && taxBankAccount != null)
+                    {
+                        UpdateBankAccount((taxingStation.Value, taxBankAccount), taxPaidInt, "Cargo");
+                    }
+                }
+            }
         }
 
-        Dirty(station, bankAccount);
         _audio.PlayPvs(ApproveSound, uid);
-        UpdatePalletConsoleInterface(uid);
+        UpdatePalletConsoleInterface(uid, component, args.Actor);
     }
 
     #endregion
@@ -267,4 +447,4 @@ public sealed partial class CargoSystem
 /// deleted but after the price has been calculated.
 /// </summary>
 [ByRefEvent]
-public readonly record struct EntitySoldEvent(HashSet<EntityUid> Sold, EntityUid Station);
+public readonly record struct EntitySoldEvent(HashSet<EntityUid> Sold, EntityUid? Station);

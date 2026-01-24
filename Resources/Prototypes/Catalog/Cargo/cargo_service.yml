@@ -119,6 +119,16 @@
   group: market
 
 - type: cargoProduct
+  id: ServiceEncryptionKeys
+  icon:
+    sprite: Clothing/Ears/Headsets/base.rsi
+    state: icon
+  product: CrateServiceEncryptionKeys
+  cost: 2000
+  category: cargoproduct-category-name-service
+  group: market
+
+- type: cargoProduct
   id: ServiceBooks
   icon:
     sprite: Objects/Misc/books.rsi
@@ -235,5 +245,35 @@
     state: candle-big
   product: CrateCandles
   cost: 500
+  category: cargoproduct-category-name-service
+  group: market
+
+- type: cargoProduct
+  id: JanitorLocker
+  icon:
+    sprite: Clothing/Head/Soft/purplesoft.rsi
+    state: icon
+  product: ClosetJanitorFilled
+  cost: 2500
+  category: cargoproduct-category-name-service
+  group: market
+
+- type: cargoProduct
+  id: ChefLocker
+  icon:
+    sprite: Clothing/Head/Hats/chefhat.rsi
+    state: icon
+  product: ClosetChefFilled
+  cost: 2500
+  category: cargoproduct-category-name-service
+  group: market
+
+- type: cargoProduct
+  id: BartenderLocker
+  icon:
+    sprite: Clothing/Uniforms/Jumpsuit/bartender.rsi
+    state: icon
+  product: LockerBoozeFilled
+  cost: 2500
   category: cargoproduct-category-name-service
   group: market

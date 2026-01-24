@@ -15,9 +15,12 @@ namespace Content.Shared.Preferences
     {
         private Dictionary<int, ICharacterProfile> _characters;
 
-        public PlayerPreferences(IEnumerable<KeyValuePair<int, ICharacterProfile>> characters, int selectedCharacterIndex, Color adminOOCColor, List<ProtoId<ConstructionPrototype>> constructionFavorites)
+        public PlayerPreferences(IEnumerable<KeyValuePair<int, ICharacterProfile>>? characters, int selectedCharacterIndex, Color adminOOCColor, List<ProtoId<ConstructionPrototype>> constructionFavorites)
         {
-            _characters = new Dictionary<int, ICharacterProfile>(characters);
+            if(characters != null)
+                _characters = new Dictionary<int, ICharacterProfile>(characters);
+            else
+                _characters = new Dictionary<int, ICharacterProfile>();
             SelectedCharacterIndex = selectedCharacterIndex;
             AdminOOCColor = adminOOCColor;
             ConstructionFavorites = constructionFavorites;
@@ -41,8 +44,8 @@ namespace Content.Shared.Preferences
         /// <summary>
         ///     The currently selected character.
         /// </summary>
-        public ICharacterProfile SelectedCharacter => Characters[SelectedCharacterIndex];
-
+        public ICharacterProfile? SelectedCharacter => Characters.TryGetValue(SelectedCharacterIndex, out var Sel) ? Sel : null;
+        
         public Color AdminOOCColor { get; set; }
 
         /// <summary>

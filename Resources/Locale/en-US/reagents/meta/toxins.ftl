@@ -49,6 +49,9 @@ reagent-desc-amatoxin = A deadly toxin found in some mushrooms, primarily fly am
 reagent-name-vent-crud = vent crud
 reagent-desc-vent-crud = A jet black substance found in poorly maintained ventilation systems. Can cause vent cough.
 
+reagent-name-phoron = phoron
+reagent-desc-phoron = A radioactive alien compound with extraordinary properties. Highly toxic and sought after.
+
 reagent-name-romerol = romerol
 reagent-desc-romerol = An otherworldly concoction able to bring the undead to life. If untreated, the effects are irreversible and will bring certain doom upon the station. Handle with care.
 
@@ -87,3 +90,6 @@ reagent-desc-toxintrash = An awful-smelling slurry efficiently refined from disc
 
 reagent-name-hemorrhinol = hemorrhinol
 reagent-desc-hemorrhinol = A toxin that causes severe damage to blood vessels, causing rapid bleeding.
+
+reagent-name-tartaric-acid = tartaric acid
+reagent-desc-tartaric-acid = An acid frequently found in certain fruits such as grapes.

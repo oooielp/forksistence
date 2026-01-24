@@ -16,7 +16,7 @@ namespace Content.Shared.Chemistry.Components;
 public sealed partial class SolutionContainerMixerComponent : Component
 {
     [DataField, ViewVariables(VVAccess.ReadWrite)]
-    public string ContainerId = "mixer";
+    public List<string> ContainerIds = new() { "mixer" };
 
     [DataField, AutoNetworkedField]
     public bool Mixing;

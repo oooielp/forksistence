@@ -1,3 +1,4 @@
+using System.Linq;
 using Content.Server.Atmos.EntitySystems;
 using Content.Server.Atmos.Piping.Binary.Components;
 using Content.Server.Atmos.Piping.Components;
@@ -6,21 +7,33 @@ using Content.Server.NodeContainer.EntitySystems;
 using Content.Server.NodeContainer.Nodes;
 using Content.Shared.Atmos;
 using Content.Shared.Atmos.Piping;
+using Content.Shared.Atmos.Piping.Binary;
 using Content.Shared.Atmos.Piping.Components;
 using Content.Shared.Audio;
+using Content.Shared.Chemistry.Components;
+using Content.Shared.Chemistry.Components.SolutionManager;
+using Content.Shared.Chemistry.EntitySystems;
+using Content.Shared.Chemistry.Reagent;
+using Content.Shared.Containers;
+using Content.Shared.Containers.ItemSlots;
 using Content.Shared.Examine;
 using JetBrains.Annotations;
 using Robust.Server.GameObjects;
+using Robust.Shared.Containers;
+using Robust.Shared.Prototypes;
 
 namespace Content.Server.Atmos.Piping.Binary.EntitySystems
 {
     [UsedImplicitly]
-    public sealed class GasReyclerSystem : EntitySystem
+    public sealed class GasRecyclerSystem : EntitySystem
     {
         [Dependency] private readonly AppearanceSystem _appearance = default!;
         [Dependency] private readonly AtmosphereSystem _atmosphereSystem = default!;
         [Dependency] private readonly SharedAmbientSoundSystem _ambientSoundSystem = default!;
         [Dependency] private readonly NodeContainerSystem _nodeContainer = default!;
+        [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
+        [Dependency] private readonly ItemSlotsSystem _itemSlots = default!;
+        [Dependency] private readonly SharedSolutionContainerSystem _solutionContainer = default!;
 
         public override void Initialize()
         {
@@ -29,6 +42,7 @@ namespace Content.Server.Atmos.Piping.Binary.EntitySystems
             SubscribeLocalEvent<GasRecyclerComponent, AtmosDeviceUpdateEvent>(OnUpdate);
             SubscribeLocalEvent<GasRecyclerComponent, AtmosDeviceDisabledEvent>(OnDisabled);
             SubscribeLocalEvent<GasRecyclerComponent, ExaminedEvent>(OnExamined);
+            SubscribeLocalEvent<GasRecyclerComponent, EntRemovedFromContainerMessage>(OnContainerRemoved);
         }
 
         private void OnEnabled(EntityUid uid, GasRecyclerComponent comp, ref AtmosDeviceEnabledEvent args)
@@ -39,7 +53,7 @@ namespace Content.Server.Atmos.Piping.Binary.EntitySystems
         private void OnExamined(Entity<GasRecyclerComponent> ent, ref ExaminedEvent args)
         {
             var comp = ent.Comp;
-            if (!Comp<TransformComponent>(ent).Anchored || !args.IsInDetailsRange) // Not anchored? Out of range? No status.
+            if (!Comp<TransformComponent>(ent).Anchored || !args.IsInDetailsRange)
                 return;
 
             if (!_nodeContainer.TryGetNode(ent.Owner, comp.InletName, out PipeNode? inlet))
@@ -47,20 +61,48 @@ namespace Content.Server.Atmos.Piping.Binary.EntitySystems
 
             using (args.PushGroup(nameof(GasRecyclerComponent)))
             {
+                EntityUid? container = null;
+                if (_itemSlots.TryGetSlot(ent.Owner, comp.ContainerSlotId, out var slot) && slot.Item != null)
+                {
+                    container = slot.Item;
+                    args.PushMarkup(Loc.GetString("gas-recycler-container-loaded"));
+                }
+                else
+                {
+                    args.PushMarkup(Loc.GetString("gas-recycler-no-container"));
+                }
+
                 if (comp.Reacting)
                 {
                     args.PushMarkup(Loc.GetString("gas-recycler-reacting"));
                 }
                 else
                 {
-                    if (inlet.Air.Pressure < comp.MinPressure)
+                    var recipes = GetApplicableRecipes(comp);
+                    var canReact = false;
+                    foreach (var recipe in recipes)
                     {
-                        args.PushMarkup(Loc.GetString("gas-recycler-low-pressure"));
+                        if (inlet.Air.GetMoles(recipe.InputGas) > 0 &&
+                            inlet.Air.Temperature >= recipe.MinimumTemperature &&
+                            inlet.Air.Pressure >= recipe.MinimumPressure)
+                        {
+                            canReact = true;
+                            break;
+                        }
                     }
 
-                    if (inlet.Air.Temperature < comp.MinTemp)
+                    if (!canReact && recipes.Any())
                     {
-                        args.PushMarkup(Loc.GetString("gas-recycler-low-temperature"));
+                        var anyRecipe = recipes.First();
+                        if (inlet.Air.Pressure < anyRecipe.MinimumPressure)
+                        {
+                            args.PushMarkup(Loc.GetString("gas-recycler-low-pressure"));
+                        }
+
+                        if (inlet.Air.Temperature < anyRecipe.MinimumTemperature)
+                        {
+                            args.PushMarkup(Loc.GetString("gas-recycler-low-temperature"));
+                        }
                     }
                 }
             }
@@ -75,22 +117,72 @@ namespace Content.Server.Atmos.Piping.Binary.EntitySystems
                 return;
             }
 
-            // The gas recycler is a passive device, so it permits gas flow even if nothing is being reacted.
-            comp.Reacting = inlet.Air.Temperature >= comp.MinTemp && inlet.Air.Pressure >= comp.MinPressure;
-            var removed = inlet.Air.RemoveVolume(PassiveTransferVol(inlet.Air, outlet.Air));
-            if (comp.Reacting)
+            var recipes = GetApplicableRecipes(comp);
+
+            var canReact = false;
+            foreach (var recipe in recipes)
             {
-                var nCO2 = removed.GetMoles(Gas.CarbonDioxide);
-                removed.AdjustMoles(Gas.CarbonDioxide, -nCO2);
-                removed.AdjustMoles(Gas.Oxygen, nCO2);
-                var nN2O = removed.GetMoles(Gas.NitrousOxide);
-                removed.AdjustMoles(Gas.NitrousOxide, -nN2O);
-                removed.AdjustMoles(Gas.Nitrogen, nN2O);
+                if (recipe.Enabled &&
+                    inlet.Air.Temperature >= recipe.MinimumTemperature &&
+                    inlet.Air.Pressure >= recipe.MinimumPressure)
+                {
+                    canReact = true;
+                    break;
+                }
+            }
+
+            var removed = inlet.Air.RemoveVolume(PassiveTransferVol(inlet.Air, outlet.Air));
+
+            comp.Reacting = false;
+
+            if (canReact)
+            {
+                EntityUid? container = null;
+                Entity<SolutionComponent>? containerSolution = null;
+
+                if (_itemSlots.TryGetSlot(ent.Owner, comp.ContainerSlotId, out var slot))
+                {
+                    container = slot.Item;
+                    if (container != null && _solutionContainer.TryGetFitsInDispenser(container.Value, out var solution, out _))
+                    {
+                        containerSolution = (container.Value, solution);
+                    }
+                }
+
+                foreach (var recipe in recipes)
+                {
+                    if (!recipe.Enabled)
+                        continue;
+
+                    var inputMoles = removed.GetMoles(recipe.InputGas);
+                    if (inputMoles <= 0)
+                        continue;
+
+                    // Perform the conversion
+                    removed.AdjustMoles(recipe.InputGas, -inputMoles);
+                    removed.AdjustMoles(recipe.OutputGas, inputMoles * recipe.ConversionRatio);
+                    comp.Reacting = true;
+
+                    // Collect scrubbed reagents if container is present
+                    if (containerSolution != null && recipe.ScrubbedReagents.Count > 0)
+                    {
+                        foreach (var (reagentId, ratio) in recipe.ScrubbedReagents)
+                        {
+                            var reagentAmount = inputMoles * ratio;
+                            if (reagentAmount > 0)
+                            {
+                                var solution = new Solution(reagentId, reagentAmount);
+                                _solutionContainer.TryAddSolution(containerSolution.Value, solution);
+                            }
+                        }
+                        _solutionContainer.UpdateChemicals(containerSolution.Value);
+                    }
+                }
             }
 
             _atmosphereSystem.Merge(outlet.Air, removed);
             UpdateAppearance(ent, comp);
-            _ambientSoundSystem.SetAmbience(ent, true);
+            _ambientSoundSystem.SetAmbience(ent, comp.Reacting || removed.TotalMoles > 0);
         }
 
         public float PassiveTransferVol(GasMixture inlet, GasMixture outlet)
@@ -116,6 +208,44 @@ namespace Content.Server.Atmos.Piping.Binary.EntitySystems
                 return;
 
             _appearance.SetData(uid, PumpVisuals.Enabled, comp.Reacting);
+        }
+
+        private IEnumerable<GasRecyclingRecipePrototype> GetApplicableRecipes(GasRecyclerComponent comp)
+        {
+            var allRecipes = _prototypeManager.EnumeratePrototypes<GasRecyclingRecipePrototype>();
+
+            if (comp.EnabledRecipes.Count > 0)
+            {
+                // Return only specified recipes
+                foreach (var recipeId in comp.EnabledRecipes)
+                {
+                    if (_prototypeManager.TryIndex<GasRecyclingRecipePrototype>(recipeId, out var recipe))
+                        yield return recipe;
+                }
+            }
+            else
+            {
+                // Return all enabled recipes
+                foreach (var recipe in allRecipes)
+                {
+                    if (recipe.Enabled)
+                        yield return recipe;
+                }
+            }
+        }
+
+        private void OnContainerRemoved(Entity<GasRecyclerComponent> ent, ref EntRemovedFromContainerMessage args)
+        {
+            if (TryComp<SolutionContainerManagerComponent>(args.Entity, out var solMgr))
+            {
+                foreach (var solutionName in solMgr.Containers)
+                {
+                    if (_solutionContainer.TryGetSolution((args.Entity, solMgr), solutionName, out var solutionEnt, out var solution))
+                    {
+                        Dirty(solutionEnt.Value);
+                    }
+                }
+            }
         }
     }
 }

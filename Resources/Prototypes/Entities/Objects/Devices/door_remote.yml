@@ -11,6 +11,7 @@
     storedRotation: -90
   - type: Access
   - type: DoorRemote
+    includeUserAccess: true
     options:
     - mode: OpenClose
       tooltip: &TextOpenClose door-remote-open-close-text

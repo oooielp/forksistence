@@ -1,4 +1,5 @@
 ﻿using System.Numerics;
+using Content.Shared.EntityTable;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.Manager;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype.Array;
@@ -30,6 +31,18 @@ public sealed partial class BiomePrototype : IPrototype, IInheritingPrototype
     /// </summary>
     [DataField("noiseRanges", required: true)]
     public Dictionary<string, List<Vector2>> NoiseRanges = default!;
+
+    /// <summary>
+    /// Entity table to spawn near/inside debris. (Mostly used to spawn AI)
+    /// </summary>
+    [DataField("debrisEntityTable")]
+    public ProtoId<EntityTablePrototype>? DebrisEntityTable;
+
+    /// <summary>
+    /// Entity table to spawn randomly within a chunk with this biome. (Mostly used to spawn AI)
+    /// </summary>
+    [DataField("chunkEntityTable")]
+    public ProtoId<EntityTablePrototype>? ChunkEntityTable;
 
     /// <summary>
     ///     Higher priority biomes get picked before lower priority ones.

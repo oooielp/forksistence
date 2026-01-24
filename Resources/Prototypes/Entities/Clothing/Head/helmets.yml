@@ -590,3 +590,41 @@
   - type: Construction
     graph: cardHelmet
     node: cardhelmet
+
+#military helmets
+- type: entity
+  parent: [ClothingHeadHelmetArmoredBase, BaseSecurityContraband]
+  id: ClothingHeadHelmetMilitaryWoodland
+  name: woodland fragmentation helmet
+  description: A military standard helmet designed to protect you from bumps and fragmentation.
+  components:
+  - type: Sprite
+    sprite: Clothing/Head/Helmets/Camoflauge/woodland.rsi
+  - type: Clothing
+    sprite: Clothing/Head/Helmets/Camoflauge/woodland.rsi
+  - type: Armor
+    modifiers:
+      coefficients: #basically a security helmet without heat protection and slightly better at blunt/piercing
+        Blunt: 0.8
+        Slash: 0.9
+        Piercing: 0.8
+
+- type: entity
+  parent: ClothingHeadHelmetMilitaryWoodland
+  id: ClothingHeadHelmetMilitaryArctic
+  name: arctic fragmentation helmet
+  components:
+  - type: Sprite
+    sprite: Clothing/Head/Helmets/Camoflauge/arctic.rsi
+  - type: Clothing
+    sprite: Clothing/Head/Helmets/Camoflauge/arctic.rsi
+
+- type: entity
+  parent: ClothingHeadHelmetMilitaryWoodland
+  id: ClothingHeadHelmetMilitaryDesert
+  name: desert fragmentation helmet
+  components:
+  - type: Sprite
+    sprite: Clothing/Head/Helmets/Camoflauge/desert.rsi
+  - type: Clothing
+    sprite: Clothing/Head/Helmets/Camoflauge/desert.rsi

@@ -31,17 +31,17 @@
   acquisitionSlip: PaperAcquisitionSlipScience
 
 - type: cargoAccount
-  id: Security
-  name: cargo-account-security-name
-  code: cargo-account-security-code
-  color: "#ff4242"
-  radioChannel: Security
-  acquisitionSlip: PaperAcquisitionSlipSecurity
-
-- type: cargoAccount
   id: Service
   name: cargo-account-service-name
   code: cargo-account-service-code
   color: "#539c00"
   radioChannel: Service
+  acquisitionSlip: PaperAcquisitionSlipService
+
+- type: cargoAccount
+  id: Security
+  name: cargo-account-security-name
+  code: cargo-account-security-code
+  color: "#ff4242"
+  radioChannel: Security
   acquisitionSlip: PaperAcquisitionSlipService

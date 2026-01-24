@@ -54,13 +54,19 @@ namespace Content.Shared.Cargo
         [DataField]
         public string? Approver;
 
+        [DataField]
+        public int TradeStation = 0;
+
+        [DataField]
+        public int Tax = 0;
+
         /// <summary>
         /// Which account to deduct funds from when ordering
         /// </summary>
         [DataField]
         public ProtoId<CargoAccountPrototype> Account;
 
-        public CargoOrderData(int orderId, string productId, string productName, int price, int amount, string requester, string reason, ProtoId<CargoAccountPrototype> account)
+        public CargoOrderData(int orderId, string productId, string productName, int price, int amount, string requester, string reason, ProtoId<CargoAccountPrototype> account, int tradestation = 0, int tax = 0)
         {
             OrderId = orderId;
             ProductId = productId;
@@ -70,6 +76,8 @@ namespace Content.Shared.Cargo
             Requester = requester;
             Reason = reason;
             Account = account;
+            TradeStation = tradestation;
+            Tax = tax;
         }
 
         public void SetApproverData(string? approver)

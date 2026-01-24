@@ -1,9 +1,13 @@
-﻿- type: worldgenConfig
+- type: worldgenConfig
   id: Default
   components:
     - type: WorldController
     - type: BiomeSelection
       biomes:
-        - AsteroidsFallback
-        - Failsafe
-        - AsteroidsStandard
+        - FrozenCrystalBiome
+        - IronrockBiome
+        - RockyWastesBiome
+        - VolcanicBiome
+        - WeirdmetalBiome
+        - VoidBiome
+        - BaseBiome

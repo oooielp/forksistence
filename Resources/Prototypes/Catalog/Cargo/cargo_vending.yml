@@ -36,15 +36,15 @@
   category: cargoproduct-category-name-service
   group: market
 
-- type: cargoProduct
-  id: CrateVendingMachineRestockAutoDrobe
-  icon:
-    sprite: Objects/Specific/Service/vending_machine_restock.rsi
-    state: base
-  product: CrateVendingMachineRestockAutoDrobeFilled
-  cost: 2500
-  category: cargoproduct-category-name-service
-  group: market
+#- type: cargoProduct # Persistence: merged with clothing restock to avoid confusion
+#  id: CrateVendingMachineRestockAutoDrobe
+#  icon:
+#    sprite: Objects/Specific/Service/vending_machine_restock.rsi
+#    state: base
+#  product: CrateVendingMachineRestockAutoDrobeFilled
+#  cost: 2500
+#  category: cargoproduct-category-name-service
+#  group: market
 
 - type: cargoProduct
   id: CrateVendingMachineRestockDinnerware

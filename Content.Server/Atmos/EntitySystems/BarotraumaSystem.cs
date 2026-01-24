@@ -33,6 +33,7 @@ namespace Content.Server.Atmos.EntitySystems
 
             SubscribeLocalEvent<PressureImmunityComponent, ComponentInit>(OnPressureImmuneInit);
             SubscribeLocalEvent<PressureImmunityComponent, ComponentRemove>(OnPressureImmuneRemove);
+            SubscribeLocalEvent<BarotraumaComponent, ComponentStartup>(OnBaroComponentStartup);
         }
 
         private void OnPressureImmuneInit(EntityUid uid, PressureImmunityComponent pressureImmunity, ComponentInit args)
@@ -54,6 +55,15 @@ namespace Content.Server.Atmos.EntitySystems
         /// <summary>
         /// Generic method for updating resistance on component Lifestage events
         /// </summary>
+        private void OnBaroComponentStartup(EntityUid uid, BarotraumaComponent barotrauma, EntityEventArgs args)
+        {
+
+            UpdateCachedResistances(uid, barotrauma);
+            
+        }
+        /// <summary>
+        /// Generic method for updating resistance on component Lifestage events
+        /// </summary>
         private void OnUpdateResistance(EntityUid uid, PressureProtectionComponent pressureProtection, EntityEventArgs args)
         {
             if (TryComp<BarotraumaComponent>(uid, out var barotrauma))
@@ -61,7 +71,6 @@ namespace Content.Server.Atmos.EntitySystems
                 UpdateCachedResistances(uid, barotrauma);
             }
         }
-
         private void OnPressureProtectionEquipped(EntityUid uid, PressureProtectionComponent pressureProtection, GotEquippedEvent args)
         {
             if (TryComp<BarotraumaComponent>(args.Equipee, out var barotrauma) && barotrauma.ProtectionSlots.Contains(args.Slot))

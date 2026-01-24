@@ -25,8 +25,9 @@ public sealed partial class MindContainerComponent : Component
     /// <summary>
     ///     Whether the mind will be put on a ghost after this component is shutdown.
     /// </summary>
-    [DataField]
-    public bool GhostOnShutdown = true;
+    [ViewVariables(VVAccess.ReadWrite)]
+    [DataField("ghostOnShutdown")]
+    public bool GhostOnShutdown { get; set; } = false;
 }
 
 public abstract class MindEvent : EntityEventArgs

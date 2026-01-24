@@ -23,4 +23,10 @@ public sealed partial class CCVars
     /// </summary>
     public static readonly CVarDef<bool> LockboxCutEnabled =
         CVarDef.Create("cargo.enable_lockbox_cut", true, CVar.REPLICATED);
+
+    /// <summary>
+    ///     Whether or not the separate lockbox cut is enabled
+    /// </summary>
+    public static readonly CVarDef<float> PriceMult =
+        CVarDef.Create("cargo.price_mult", 0.5f, CVar.REPLICATED);
 }

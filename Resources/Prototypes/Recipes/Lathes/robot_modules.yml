@@ -53,6 +53,7 @@
   parent: BaseGoldBorgModuleRecipe
   id: BorgModuleAdvancedMining
   result: BorgModuleAdvancedMining
+  unlockUses: 2
 
 # Engineering Modules
 
@@ -60,6 +61,7 @@
   parent: BaseGoldBorgModuleRecipe
   id: BorgModuleAdvancedTool
   result: BorgModuleAdvancedTool
+  unlockUses: 2
 
 # Janitor Modules
 
@@ -67,6 +69,7 @@
   parent: BaseGoldBorgModuleRecipe
   id: BorgModuleAdvancedCleaning
   result: BorgModuleAdvancedCleaning
+  unlockUses: 2
 
 # Medical Modules
 
@@ -74,6 +77,7 @@
   parent: BaseGoldBorgModuleRecipe
   id: BorgModuleAdvancedTopical
   result: BorgModuleAdvancedTopical
+  unlockUses: 2
 
 # Science Modules
 
@@ -88,3 +92,4 @@
     Glass: 500
     Plastic: 250
     Bananium: 375
+  unlockUses: 2

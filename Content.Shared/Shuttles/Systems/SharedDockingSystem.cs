@@ -42,7 +42,7 @@ public abstract class SharedDockingSystem : EntitySystem
         return (mapPosA.Position - mapPosB.Position).Length() <= DockRange;
     }
 
-    public bool InAlignment(MapCoordinates mapPosA, Angle worldRotA, MapCoordinates mapPosB, Angle worldRotB)
+    public bool InAlignment(MapCoordinates mapPosA, Angle worldRotA, MapCoordinates mapPosB, Angle worldRotB, double? overrideTolerance = null)
     {
         // Check if the nubs are in line with the two docks.
         var worldRotToB = (mapPosB.Position - mapPosA.Position).ToWorldAngle();
@@ -51,10 +51,12 @@ public abstract class SharedDockingSystem : EntitySystem
         var aDiff = Angle.ShortestDistance((worldRotA - worldRotToB).Reduced(), Angle.Zero);
         var bDiff = Angle.ShortestDistance((worldRotB - worldRotToA).Reduced(), Angle.Zero);
 
-        if (Math.Abs(aDiff.Theta) > AlignmentTolerance)
+        overrideTolerance ??= AlignmentTolerance;
+
+        if (Math.Abs(aDiff.Theta) > overrideTolerance)
             return false;
 
-        if (Math.Abs(bDiff.Theta) > AlignmentTolerance)
+        if (Math.Abs(bDiff.Theta) > overrideTolerance)
             return false;
 
         return true;

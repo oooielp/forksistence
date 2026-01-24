@@ -37,6 +37,11 @@
   - type: ContainerContainer
     containers:
       bin-container: !type:Container
+  - type: Construction
+    graph: PaperBin
+    node: paperbin
+    containers:
+    - bin-container
 
 - type: entity
   parent: PaperBin
