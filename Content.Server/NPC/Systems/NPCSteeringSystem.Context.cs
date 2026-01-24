@@ -1,17 +1,14 @@
 using System.Linq;
 using System.Numerics;
-using Content.Server.Destructible;
 using Content.Server.Examine;
 using Content.Server.NPC.Components;
 using Content.Server.NPC.Pathfinding;
 using Content.Shared.Climbing;
-using Content.Shared.CombatMode;
 using Content.Shared.Interaction;
 using Content.Shared.Movement.Components;
 using Content.Shared.NPC;
 using Content.Shared.Physics;
 using Robust.Shared.Map;
-using Robust.Shared.Map.Components;
 using Robust.Shared.Physics;
 using Robust.Shared.Physics.Components;
 using ClimbingComponent = Content.Shared.Climbing.Components.ClimbingComponent;
@@ -299,50 +296,6 @@ public sealed partial class NPCSteeringSystem
                 // and I don't want to spam grafana even harder than it gets spammed rn.
                 Log.Debug($"NPC {ToPrettyString(uid)} found stuck at {ourCoordinates}");
                 needsPath = true;
-
-                // If there's something in the way, clear it.
-                if ((steering.Flags & PathFlags.Smashing) != 0x0)
-                {
-                    if (_melee.TryGetWeapon(uid, out _, out var meleeWeapon) && meleeWeapon.NextAttack <= _timing.CurTime && TryComp<CombatModeComponent>(uid, out var combatMode))
-                    {
-                        _combat.SetInCombatMode(uid, true, combatMode);
-                        var destructibleQuery = GetEntityQuery<DestructibleComponent>();
-                        var obstacleEnts = new List<EntityUid>();
-                        var obstaclePos = ourMap.Position + direction.Normalized();
-                        var box = Box2.FromTwoPoints(ourMap.Position, obstaclePos);
-                        var grids = new List<Entity<MapGridComponent>>();
-                        _mapManager.FindGridsIntersecting(ourMap.MapId, box, ref grids);
-
-                        foreach (var foundGrid in grids)
-                        {
-                            var tilePos = _mapSystem.WorldToTile(foundGrid, foundGrid, obstaclePos);
-                            foreach (var ent in _mapSystem.GetAnchoredEntities(foundGrid, foundGrid, box))
-                            {
-                                if (!_physicsQuery.TryGetComponent(ent, out var b) ||
-                                    !b.Hard ||
-                                    !b.CanCollide)
-                                {
-                                    continue;
-                                }
-
-                                obstacleEnts.Add(ent);
-                            }
-                        }
-
-                        _random.Shuffle(obstacleEnts);
-
-                        foreach (var ent in obstacleEnts)
-                        {
-                            if (destructibleQuery.HasComponent(ent))
-                            {
-                                _melee.AttemptLightAttack(uid, uid, meleeWeapon, ent);
-                                break;
-                            }
-                        }
-
-                        _combat.SetInCombatMode(uid, false, combatMode);
-                    }
-                }
 
                 if (stuckTime.TotalSeconds > maxStuckTime * 3)
                 {
