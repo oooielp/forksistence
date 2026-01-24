@@ -1,4 +1,3 @@
-using System.Numerics;
 using Content.Shared.NPC;
 using Robust.Shared.Map;
 using Robust.Shared.Utility;
@@ -59,9 +58,7 @@ public sealed partial class PathfindingSystem
 
         if (startNode == null || endNode == null)
         {
-            var targetVector = request.End.Position - request.Start.Position;
-            request.Polys = new() { new PathPoly(request.End.EntityId, new Vector2i((int)targetVector.X, (int)targetVector.Y), 0, Box2.Empty, new(), new()) };
-            return PathResult.Path;
+            return PathResult.NoPath;
         }
 
         currentNode = startNode;
