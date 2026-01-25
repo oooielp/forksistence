@@ -593,8 +593,8 @@
   packetPrototype: BloodTomatoSeeds
   productPrototypes:
     - FoodBloodTomato
-  mutationPrototypes:
-    - killerTomato
+#  mutationPrototypes:
+#    - killerTomato # Persistence: massive performance risk & no real gameplay benefit
   harvestRepeat: Repeat
   lifespan: 60
   maturation: 8
