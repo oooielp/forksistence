@@ -41,6 +41,9 @@
   # - Virology (when it's back)
     - Botany
     - Chemicals
+  - type: Tag
+    tags:
+    - Recyclable
 
 - type: entity
   parent: BaseItem

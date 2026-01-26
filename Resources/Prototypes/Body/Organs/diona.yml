@@ -23,6 +23,9 @@
   - type: FlavorProfile
     flavors:
       - people
+  - type: Tag
+    tags:
+    - Recyclable
 
 - type: entity
   id: OrganDionaBrain
@@ -50,6 +53,8 @@
         reagents:
         - ReagentId: GreyMatter
           Quantity: 5
+  - type: Tag
+    tags: [] # don't inherit recyclable for brains
 
 - type: entity
   id: OrganDionaEyes

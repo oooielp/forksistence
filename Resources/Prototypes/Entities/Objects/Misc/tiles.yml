@@ -43,6 +43,9 @@
   - type: GuideHelp
     guides:
     - ExpandingRepairingStation
+  - type: Tag
+    tags:
+    - Recyclable
 
 - type: entity
   name: steel dark checker tile

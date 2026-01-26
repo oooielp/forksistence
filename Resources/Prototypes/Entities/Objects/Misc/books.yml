@@ -190,6 +190,9 @@
   - type: GuideHelp
     guides:
     - Threshold
+  - type: Tag
+    tags:
+    - Recyclable
 
 - type: entity
   id: BookFactionHandbook

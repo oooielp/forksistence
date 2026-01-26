@@ -24,6 +24,7 @@
   - type: Tag
     tags:
       - Meat
+      - Recyclable
 
 - type: entity
   id: OrganArachnidStomach
