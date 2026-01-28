@@ -14,7 +14,7 @@ public sealed partial class MetabolizerComponent : Component
     /// <summary>
     ///     The next time that reagents will be metabolized.
     /// </summary>
-    [DataField, AutoPausedField]
+    [AutoPausedField] // Persistence: Removed DataField, was saving & causing metabolism to freeze
     public TimeSpan NextUpdate;
 
     /// <summary>
